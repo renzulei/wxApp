@@ -1,0 +1,47 @@
+<view class="container">
+
+  <!-- 头部============================== -->
+  <view class='w_logo'>
+    <view class='logo'>
+      <image src='/images/logo.png'></image>
+    </view>
+  </view>
+
+  <!-- 登陆框================================ -->
+  <view class='loginBox'>
+    <view class='w_user'>
+      <view class='user'>
+        <view class='w_icon clearfix'>
+          <image src='/images/user.png'></image>
+        </view>
+        <input placeholder-class="phcolor" class='w_input' placeholder='请输入您的账号...'></input>
+      </view>
+    </view>
+
+    <view class='w_user'>
+      <view class='user'>
+        <view class='w_icon clearfix'>
+          <image src='/images/password.png'></image>
+        </view>
+        <input placeholder-class="phcolor" class='w_input' placeholder='请输入您的密码...'></input>
+      </view>
+    </view>
+  </view>
+
+  <!-- 登录按钮================================= -->
+  <view class='loginBtn'>
+    <view class='btn' catchtap='changeColor' style="background-color:{{ Color }}">
+      <text>点击登录</text>
+    </view>
+  </view>
+
+  <!-- 底部================================ -->
+
+  <view class='footer'>
+    <view class='footer_content'>
+      <text>原纸商城</text>
+      <view class='footer_left clearfix'></view>
+      <view class='footer_right clearfix'></view>
+    </view>
+  </view>
+</view>

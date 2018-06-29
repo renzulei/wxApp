@@ -1,2 +1,35 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<view class='container'>
+
+  <!-- 头部============================================== -->
+  <view class='header'>
+    <view class='header_content'>
+      <view class='header_user'>
+        <view class='headerUser'>
+          <image src='/images/user1.png'></image>
+        </view>
+      </view>
+      <view class='header_border'>
+        <view class='headerBorder'></view>
+      </view>
+      <view class='header_text'>
+        <text>上海王的网实业</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导航栏========================================== -->
+  <view class='nav'>
+    <view class='nav_bar'>
+      <view>
+        <view class='nav_icon'></view>
+      </view>
+      <view>
+        <view class='nav_icon'></view>
+      </view>
+      <view>
+        <view class='nav_icon'></view>
+      </view>
+    </view>
+  </view>
+
+</view>
