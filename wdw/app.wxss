@@ -8,3 +8,17 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.clearfix:after{
+  display: block;
+  content: '';
+  clear: both;
+  zoom: 1;
+}
+page,view,text{
+  box-sizing: border-box;
+}
+
+page {
+  padding: 0;
+  margin: 0;
+}

@@ -1,26 +1,38 @@
 {
-  "pages":[
-    "pages/switch/switch",
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
-    
+    "pages/logs/logs",
+    "pages/proList/proList",
+    "pages/home/home"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "游泳健身",
-    "navigationBarTextStyle":"black",
-    "backgroundColor":"#000"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#000"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "color": "#161210",
+        "selectedColor": "#FA530A",
+        "iconPath": "/images/index1.png",
+        "selectedIconPath": "/images/index.png"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "日志"
+        "pagePath": "pages/proList/proList",
+        "text": "产品列表",
+        "iconPath": "/images/shopping.png",
+        "selectedIconPath": "/images/shopping1.png"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "text": "会员中心",
+        "iconPath": "/images/vip.png",
+        "selectedIconPath": "/images/vip.png"
       }
     ]
   },

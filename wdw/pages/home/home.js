@@ -1,4 +1,4 @@
-// pages/index/index.js
+// pages/home/home.js
 Page({
 
   /**
@@ -6,8 +6,6 @@ Page({
    */
   data: {
   
-  img: "/images/search.png",
-  bgc: "/images/bgc.png"
   },
 
   /**

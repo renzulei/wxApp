@@ -1,4 +1,0 @@
-/* pages/switch/switch.wxss */
-.smsize{
-  font-size: 28rpx;
-}

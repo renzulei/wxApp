@@ -1,13 +1,105 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class='contenter'>
+
+  <view class='w_search'>
+    <view class='input-wrap'>
+      <view class='w_icon'>
+        <image src='{{ img }}'></image>
+      </view>
+      <input class='w_input'></input>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <view class='w_bgc'>
+    <image src='{{ bgc }}'></image>
+  </view>
+
+  <view class='content'>
+    <view class='w_title'>
+      <view class='w_borderLeft'>
+        <text>促销商品/主营商品</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- =========================== -->
+  <view class='w_contentShow'>
+    <view class='smbox'>
+      <image src='/images/bgc1.png'></image>
+      <view class='w_titleContent'>
+        <view class='title_one'>
+          <text>万国纸业</text>
+          <text>骄阳白卡纸</text>
+          <text>印刷纸</text>
+          <text>300g</text>
+          <text>卷筒</text>
+        </view>
+        <view class='w_border clearfix'>
+          <text>卷筒</text>
+          <text>印刷纸</text>
+          <text>骄阳白卡纸</text>
+        </view>
+        <view class='w_price'>
+          <text>￥13456.00</text>
+        </view>
+      </view>
+    </view>
+    <view class='smbox'>
+      <image src='/images/bgc1.png'></image>
+      <view class='w_titleContent'>
+        <view class='title_one'>
+          <text>万国纸业</text>
+          <text>骄阳白卡纸</text>
+          <text>印刷纸</text>
+          <text>300g</text>
+          <text>卷筒</text>
+        </view>
+        <view class='w_border clearfix'>
+          <text>卷筒</text>
+          <text>印刷纸</text>
+          <text>骄阳白卡纸</text>
+        </view>
+        <view class='w_price'>
+          <text>￥13456.00</text>
+        </view>
+      </view>
+    </view>
+    <view class='smbox'>
+      <image src='/images/bgc1.png'></image>
+      <view class='w_titleContent'>
+        <view class='title_one'>
+          <text>万国纸业</text>
+          <text>骄阳白卡纸</text>
+          <text>印刷纸</text>
+          <text>300g</text>
+          <text>卷筒</text>
+        </view>
+        <view class='w_border clearfix'>
+          <text>卷筒</text>
+          <text>印刷纸</text>
+          <text>骄阳白卡纸</text>
+        </view>
+        <view class='w_price'>
+          <text>￥13456.00</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- ================ -->
+  <view class='w_footer'>
+    <view class='content'>
+      <view class='w_title'>
+        <view class='w_borderLeft'>
+          <text>供应链金融服务产品</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='w_nav'>
+    <view class='nav'>
+      <image src='/images/btfw.png'></image>
+      <image src='/images/btfw.png'></image>
+      <image src='/images/btfw.png'></image>
+    </view>
   </view>
 </view>
