@@ -1,0 +1,10 @@
+
+<RadioGroupComponent  name="country">
+  <RadioComponent 
+    bindradiochange="radioChange" 
+    wx:for="{{items}}"
+    wx:key="{{item.name}}"
+    value="{{item.value}}"
+    checked="{{item.checked}}"
+  />
+</RadioGroupComponent>

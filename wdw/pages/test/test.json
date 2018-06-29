@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "RadioGroupComponent": "/components/radio-group/radio-group",
+    "RadioComponent": "/components/radio/radio"
+  }
+}
