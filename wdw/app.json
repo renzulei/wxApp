@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/login/login",
     "pages/index/index",
     "pages/logs/logs",
     "pages/proList/proList",
@@ -9,7 +11,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "游泳健身",
+    "navigationBarTitleText": "王的网",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#000"
   },

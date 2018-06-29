@@ -5,7 +5,7 @@
       <view class='w_icon'>
         <image src='{{ img }}'></image>
       </view>
-      <input class='w_input'></input>
+      <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'></input>
     </view>
   </view>
 
