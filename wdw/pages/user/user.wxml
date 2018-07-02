@@ -1,0 +1,27 @@
+<view class="container">
+  <view class='content'>
+    <view class='content_text'>
+      <text class='left'>用户名：</text>
+      <text class='right'>11111111111111</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>姓名：</text>
+      <text class='right'>上海王的网</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>手机号：</text>
+      <text class='right'>12345678910</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>邮箱账号：</text>
+      <text class='right'>www.baidu.com</text>
+    </view>
+    <view class='hint'>
+      <view class='icon'><image src='/images/bulb.png'></image></view>
+      <view class='hint_text'>
+        <text class='left'>提示：</text>
+        <text class='right'>本页面仅支持查询功能，如需修改请前往PC端进行操作</text>
+      </view>
+    </view>
+  </view>
+</view>

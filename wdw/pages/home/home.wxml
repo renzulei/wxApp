@@ -21,15 +21,136 @@
   <view class='nav'>
     <view class='nav_bar'>
       <view>
-        <view class='nav_icon'></view>
+        <view class='nav_icon'>
+          <image src='/images/gouwuche.png'></image>
+        </view>
       </view>
       <view>
-        <view class='nav_icon'></view>
+        <view class='nav_icon'>
+          <image src='/images/chaxun.png'></image>
+        </view>
       </view>
       <view>
-        <view class='nav_icon'></view>
+        <view class='nav_icon'>
+          <image src='/images/xiaoche.png'></image>
+        </view>
       </view>
     </view>
   </view>
 
+  <view class='nav_text'>
+    <view class='title clearfix'>
+      <text>购物车</text>
+    </view>
+    <view class='title clearfix'>
+      <text>意向订单</text>
+    </view>
+    <view class='title clearfix'>
+      <text>客户收货管理</text>
+    </view>
+  </view>
+
+  <view class='border'></view>
+
+
+  <view class='content'>
+    <view class='content_text'>
+      <view class='list'>
+        <view class='icon_left clearfix'>
+          <image src='/images/shouhuo.png'></image>
+        </view>
+        <view class='content_title'>
+          <text>收货地址管理</text>
+        </view>
+        <view class='icon_right clearfix'>
+          <image src='/images/right.png'></image>
+        </view>
+      </view>
+
+
+      <view class='list'>
+        <view class='icon_left clearfix'>
+          <image src='/images/guanzhu.png'></image>
+        </view>
+        <view class='content_title'>
+          <text>我的关注</text>
+        </view>
+        <view class='icon_right clearfix'>
+          <image src='/images/right.png'></image>
+        </view>
+      </view>
+
+
+      <view class='list' bindtap='onClick'>
+        <view class='icon_left clearfix'>
+          <image src='/images/qiyeguanli.png'></image>
+        </view>
+        <view class='content_title'>
+          <text>企业管理</text>
+        </view>
+        <view class='icon_right clearfix' animation="{{animationData}}">
+          <image src='/images/right.png'></image>
+        </view>
+      </view>
+
+      <!-- 企业管理子元素 -->
+      <view class="list_item {{ showHide?'hide':'show' }}">
+        <view class='item'>
+          <view class='item_icon_left'>
+            <image src='/images/renzhen.png'></image>
+          </view>
+          <view class='item_text'>
+            <text>企业认证</text>
+          </view>
+          <view class='item_icon_right'>
+            <image src='/images/right.png'></image>
+          </view>
+        </view>
+
+
+        <view class='item'>
+          <view class='item_icon_left'>
+            <image src='/images/dizhi.png'></image>
+          </view>
+          <view class='item_text'>
+            <text>企业认证</text>
+          </view>
+          <view class='item_icon_right'>
+            <image src='/images/right.png'></image>
+          </view>
+        </view>
+
+      </view>
+
+
+
+
+      <view class='list'>
+        <view class='icon_left clearfix'>
+          <image src='/images/shuju.png'></image>
+        </view>
+        <view class='content_title'>
+          <text>数据汇总</text>
+        </view>
+        <view class='icon_right clearfix'>
+          <image src='/images/right.png'></image>
+        </view>
+      </view>
+
+      <view class='list' bindtap='userTap'>
+        <view class='icon_left clearfix'>
+          <image src='/images/xinxi.png'></image>
+        </view>
+        <view class='content_title'>
+          <text>个人信息</text>
+        </view>
+        <view class='icon_right clearfix'>
+          <image src='/images/right.png'></image>
+        </view>
+      </view>
+
+
+
+    </view>
+  </view>
 </view>

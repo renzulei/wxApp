@@ -5,6 +5,7 @@
     "pages/logs/logs",
     "pages/proList/proList",
     "pages/home/home",
+    "pages/user/user",
     "pages/test/test"
   ],
   "window": {
