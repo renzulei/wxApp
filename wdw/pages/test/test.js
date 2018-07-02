@@ -15,7 +15,8 @@ Page({
     ],
     country:""
   },
-  radioChange: function (e) {
+  // 调用模板/组件方法，用_ 定义方法，以示区分
+  _radioChange: function (e) {
     // console.log(e.detail.value)
     this.data.items.map(function (item, index) {
       item.checked = item.value == e.detail.value ? true : false
@@ -24,6 +25,10 @@ Page({
       items: this.data.items,
       country:e.detail.value
     })
+  },
+  // 表单提交
+  formSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
   },
   /**
    * 生命周期函数--监听页面加载

@@ -1,0 +1,18 @@
+<template name="radioGroup">
+  <radio-group class="radio-group" name="{{name}}" bindchange="_radioChange">
+    <label 
+      class="radio" 
+      data-value="{{value}}" 
+      wx:for="{{radioList}}"
+      wx:key="{{item.name}}"
+      value="{{item.value}}"
+      checked="{{item.checked}}"
+    >
+      <view class='radio-wrap {{item.checked?"radio-checked":""}}'>
+        <radio value='{{item.value}}' checked="{{item.checked}}"/>
+        <view class='radio-inner'></view>
+      </view>
+      {{item.value}}
+    </label>
+  </radio-group>  
+</template>
