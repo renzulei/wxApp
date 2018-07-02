@@ -1,10 +1,20 @@
-
-<RadioGroupComponent  name="country">
+<!-- 组件写法(比较复杂) -->
+<!-- <RadioGroupComponent  name="country">
   <RadioComponent 
-    bindradiochange="radioChange" 
+    bindradiochange="_radioChange" 
     wx:for="{{items}}"
     wx:key="{{item.name}}"
     value="{{item.value}}"
     checked="{{item.checked}}"
   />
-</RadioGroupComponent>
+</RadioGroupComponent> -->
+
+<!--模板写法 （推荐） -->
+<import src="../../template/radio-group/radio-group.wxml"/>
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <template is="radioGroup" data="{{radioList: items,name:'country'}}"/>
+  <view class="btn-area">
+    <button formType="submit">Submit</button>
+    <button formType="reset">Reset</button>
+  </view>
+</form>

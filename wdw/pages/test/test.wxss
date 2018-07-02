@@ -1,1 +1,2 @@
 /* test/test.wxss */
+@import '../../template/radio-group/radio-group.wxss';
