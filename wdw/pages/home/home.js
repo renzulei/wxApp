@@ -41,6 +41,12 @@ Page({
     })
   },
 
+  enterpriseTap: function() {
+    wx.navigateTo({
+      url: '/pages/enterprise/enterprise',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
