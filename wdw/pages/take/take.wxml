@@ -1,0 +1,20 @@
+<view class='container'>
+  <view class='content'>
+    <view class='content_text'>
+      <view class='title clearfix'>
+        <view class='left'>
+          <text class='left_color'>收货人：</text>
+          <text>王的网</text>
+        </view>
+        <view class='right'>
+          <text class='left_color'>联系方式：</text>
+          <text>12345678999</text>
+        </view>
+      </view>
+
+      <view class='bottom'><text class='bom_left'>收货地址：</text><text>育昌路369号，山东省潍坊市昌乐县</text></view>
+    </view>
+    <view class='content_bom'></view>
+  </view>
+
+</view>

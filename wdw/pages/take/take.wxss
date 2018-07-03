@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+}
+
+.content {
+  width: 708rpx;
+  height: 250rpx;
+  margin: 0 auto;
+}
+
+.content_text {
+  height: 156rpx;
+  background-color: #9fb9ef;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.left_color {
+  color: #fff3d0;
+}
+
+.title {
+  /* height: 40rpx; */
+  margin-top: 10rpx;
+  font-size: 26rpx;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+  margin-right: 100rpx;
+}
+
+.content_bom {
+  height: 94rpx;
+  background-color: gold;
+}
+
+.bottom {
+  margin-top: 34rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.bom_left {
+  color: #fff3d0;
+}

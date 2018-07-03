@@ -1,13 +1,16 @@
 {
   "pages": [
+    "pages/take/take",
+    "pages/attention/attention",
     "pages/home/home",
+    "pages/test/test",
     "pages/index/index",
     "pages/login/login",
     "pages/logs/logs",
     "pages/proList/proList",
     "pages/user/user",
-    "pages/test/test",
-    "pages/enterprise/enterprise"
+    "pages/enterpriseOne/enterpriseOne",
+    "pages/enterpriseTow/enterpriseTow"
   ],
   "window": {
     "backgroundTextStyle": "light",

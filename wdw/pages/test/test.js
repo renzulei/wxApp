@@ -17,7 +17,7 @@ Page({
   },
   // 调用模板/组件方法，用_ 定义方法，以示区分
   _radioChange: function (e) {
-    // console.log(e.detail.value)
+    console.log(e)
     this.data.items.map(function (item, index) {
       item.checked = item.value == e.detail.value ? true : false
     });

@@ -9,7 +9,7 @@
       checked="{{item.checked}}"
     >
       <view class='radio-wrap {{item.checked?"radio-checked":""}}'>
-        <radio value='{{item.value}}' checked="{{item.checked}}"/>
+        <radio value='{{ item.value }}' checked="{{item.checked}}"/>
         <view class='radio-inner'></view>
       </view>
       {{item.value}}

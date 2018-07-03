@@ -1,3 +1,5 @@
+/* pages/enterpriseOne/enterpriseOne.wxss */
+/* pages/enterprise/enterprise.wxss */
 
 
 .content {
@@ -22,7 +24,12 @@
   color: #8E8E8E;
 }
 
-.right 
+.right_list {
+  color: red;
+  display: block;
+  float: right;
+  margin-right: 390rpx;
+}
 
 .hint {
   width: 100%;
@@ -31,8 +38,8 @@
 }
 
 .hint image {
-  width: 100%;
-  height: 100%;
+  width: 50rpx;
+  height: 50rpx;
 }
 
 .hint_text {

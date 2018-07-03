@@ -1,3 +1,4 @@
+/* pages/enterprise/enterprise.wxss */
 
 
 .content {
@@ -22,7 +23,9 @@
   color: #8E8E8E;
 }
 
-.right 
+.right_list {
+  color: red;
+}
 
 .hint {
   width: 100%;

@@ -11,8 +11,9 @@
 
 <!--模板写法 （推荐） -->
 <import src="../../template/radio-group/radio-group.wxml"/>
+
 <form bindsubmit="formSubmit" bindreset="formReset">
-  <template is="radioGroup" data="{{radioList: items,name:'country'}}"/>
+   <template is="radioGroup" data="{{radioList: items,name:'country'}}"/> 
   <view class="btn-area">
     <button formType="submit">Submit</button>
     <button formType="reset">Reset</button>

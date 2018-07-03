@@ -21,29 +21,38 @@ Page({
       showHide: (!that.data.showHide)
     })
 
-    // 箭头动画
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease',
-    });
-    this.animation = animation
-    animation.rotate(90).step();
-    this.setData({
-      animationData: animation.export()
-    })
-
-
   },
 
+  // 跳转到收货地址页面
+  takeTap: function() {
+      wx.navigateTo({
+        url: '/pages/take/take',
+      })
+  },
+
+  // 跳转到关注页面
+  attentionTap: function () {
+    wx.navigateTo({
+      url: '/pages/attention/attention'
+    })
+  },
+
+//  跳转到个人信息页面
   userTap: function() {
     wx.navigateTo({
       url: '/pages/user/user'
     })
   },
-
-  enterpriseTap: function() {
+  // 跳转到企业认证页面
+  enterpriseTapOne: function() {
+  wx.navigateTo({
+    url: '/pages/enterpriseOne/enterpriseOne',
+  })
+  },
+// 跳转到企业地址认证页面
+  enterpriseTapTow: function() {
     wx.navigateTo({
-      url: '/pages/enterprise/enterprise',
+      url: '/pages/enterpriseTow/enterpriseTow',
     })
   },
 

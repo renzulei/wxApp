@@ -45,52 +45,52 @@
 
 
   <view class='content'>
-    <view class='content_text'>
-      <view class='list'>
-        <view class='icon_left clearfix'>
+    <view class='content_text clearfix'>
+      <view class='list' bindtap= "takeTap">
+        <view class='icon_left'>
           <image src='/images/shouhuo.png'></image>
         </view>
         <view class='content_title'>
           <text>收货地址管理</text>
         </view>
-        <view class='icon_right clearfix'>
+        <view class='icon_right'>
           <image src='/images/right.png'></image>
         </view>
       </view>
 
 
-      <view class='list'>
-        <view class='icon_left clearfix'>
+      <view class='list clearfix' bindtap= "attentionTap">
+        <view class='icon_left'>
           <image src='/images/guanzhu.png'></image>
         </view>
         <view class='content_title'>
           <text>我的关注</text>
         </view>
-        <view class='icon_right clearfix'>
+        <view class='icon_right'>
           <image src='/images/right.png'></image>
         </view>
       </view>
 
 
-      <view class='list' bindtap='onClick'>
-        <view class='icon_left clearfix'>
+      <view class='list clearfix' bindtap='onClick'>
+        <view class='icon_left'>
           <image src='/images/qiyeguanli.png'></image>
         </view>
         <view class='content_title'>
           <text>企业管理</text>
         </view>
-        <view class='icon_right clearfix' animation="{{animationData}}">
+        <view class="icon_right {{ showHide?'show':'' }}">
           <image src='/images/right.png'></image>
         </view>
       </view>
 
       <!-- 企业管理子元素 -->
-      <view class="list_item {{ showHide?'hide':'show' }}">
-        <view class='item'>
+       <view class="list_item {{ showHide?'hide':'show' }}"> 
+        <view class='item' bindtap='enterpriseTapOne'>
           <view class='item_icon_left'>
             <image src='/images/renzhen.png'></image>
           </view>
-          <view class='item_text'>
+          <view class='item_text' >
             <text>企业认证</text>
           </view>
           <view class='item_icon_right'>
@@ -99,11 +99,11 @@
         </view>
 
 
-        <view class='item'>
+        <view class='item' bindtap='enterpriseTapTow'>
           <view class='item_icon_left'>
             <image src='/images/dizhi.png'></image>
           </view>
-          <view class='item_text' bindtap='enterpriseTap'>
+          <view class='item_text'>
             <text>企业地址认证</text>
           </view>
           <view class='item_icon_right'>
