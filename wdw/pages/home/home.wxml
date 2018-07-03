@@ -47,7 +47,7 @@
 
   <view class='content'>
     <view class='content_text'>
-      <view class='list clearfix'>
+      <view class='list clearfix' bindtap='takeTap'>
         <view class='icon_left'>
           <image src='/images/shouhuo.png'></image>
         </view>
@@ -60,7 +60,7 @@
       </view>
 
 
-      <view class='list clearfix'>
+      <view class='list clearfix' bindtap='attentionTap'>
         <view class='icon_left'>
           <image src='/images/guanzhu.png'></image>
         </view>
