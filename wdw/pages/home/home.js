@@ -13,13 +13,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    showHide: (options.showHide == "true" ? true : false)
+    
   },
   onClick: function() {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)
     })
+<<<<<<< HEAD
 
   },
 
@@ -35,6 +36,8 @@ Page({
     wx.navigateTo({
       url: '/pages/attention/attention'
     })
+=======
+>>>>>>> 16dee02791d4a20143b982297fbeb5baf0f0a14c
   },
 
 //  跳转到个人信息页面

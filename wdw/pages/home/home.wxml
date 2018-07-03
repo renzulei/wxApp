@@ -45,8 +45,13 @@
 
 
   <view class='content'>
+<<<<<<< HEAD
     <view class='content_text clearfix'>
       <view class='list' bindtap= "takeTap">
+=======
+    <view class='content_text'>
+      <view class='list clearfix'>
+>>>>>>> 16dee02791d4a20143b982297fbeb5baf0f0a14c
         <view class='icon_left'>
           <image src='/images/shouhuo.png'></image>
         </view>
@@ -59,7 +64,11 @@
       </view>
 
 
+<<<<<<< HEAD
       <view class='list clearfix' bindtap= "attentionTap">
+=======
+      <view class='list clearfix'>
+>>>>>>> 16dee02791d4a20143b982297fbeb5baf0f0a14c
         <view class='icon_left'>
           <image src='/images/guanzhu.png'></image>
         </view>
@@ -79,7 +88,11 @@
         <view class='content_title'>
           <text>企业管理</text>
         </view>
+<<<<<<< HEAD
         <view class="icon_right {{ showHide?'show':'' }}">
+=======
+        <view class='icon_right {{showHide?"":"rotate"}}' >
+>>>>>>> 16dee02791d4a20143b982297fbeb5baf0f0a14c
           <image src='/images/right.png'></image>
         </view>
       </view>
