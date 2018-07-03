@@ -37,8 +37,18 @@ function check_storage(key) {
   }
 }
 
+// sort排序函数
+function compare (property) {
+  return function (a, b) {
+    var value1 = a[property];
+    var value2 = b[property];
+    return value1 - value2;
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   checkPhone: checkPhone,
-  check_storage: check_storage
+  check_storage: check_storage,
+  compare: compare
 }
