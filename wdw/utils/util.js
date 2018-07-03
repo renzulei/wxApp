@@ -14,7 +14,7 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-function checkPhone(phone) {//公共手机号合法判断
+function checkPhone(phone) { //公共手机号合法判断
   var phoneReg = /^((\+?86)|(\(\+86\)))?1[3|4|5|7|8][0-9]\d{8}$|^(09)\d{8}$/;
   if (!phoneReg.test(phone) || phone == '' || (typeof phone == "undefined")) {
     wx.showToast({
@@ -38,8 +38,8 @@ function check_storage(key) {
 }
 
 // sort排序函数
-function compare (property) {
-  return function (a, b) {
+function compare(property) {
+  return function(a, b) {
     var value1 = a[property];
     var value2 = b[property];
     return value1 - value2;
