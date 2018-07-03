@@ -23,30 +23,21 @@
       <view>
         <view class='nav_icon'>
           <image src='/images/gouwuche.png'></image>
+        <view>购物车</view>
         </view>
       </view>
       <view>
         <view class='nav_icon'>
           <image src='/images/chaxun.png'></image>
+        <view>意向订单</view>
         </view>
       </view>
       <view>
         <view class='nav_icon'>
           <image src='/images/xiaoche.png'></image>
+        <view>客户收货管理</view>
         </view>
       </view>
-    </view>
-  </view>
-
-  <view class='nav_text'>
-    <view class='title clearfix'>
-      <text>购物车</text>
-    </view>
-    <view class='title clearfix'>
-      <text>意向订单</text>
-    </view>
-    <view class='title clearfix'>
-      <text>客户收货管理</text>
     </view>
   </view>
 
@@ -112,8 +103,8 @@
           <view class='item_icon_left'>
             <image src='/images/dizhi.png'></image>
           </view>
-          <view class='item_text'>
-            <text>企业认证</text>
+          <view class='item_text' bindtap='enterpriseTap'>
+            <text>企业地址认证</text>
           </view>
           <view class='item_icon_right'>
             <image src='/images/right.png'></image>

@@ -57,46 +57,31 @@
 
 .nav {
   width: 100%;
-  height: 90rpx;
   margin-top: 15rpx;
+  font-size: 20rpx;
+  margin-bottom: 20rpx;
 }
 
-.nav_bar {
+ .nav_bar {
   width: 100%;
-  height: 100%;
-}
+  height: 90rpx;
+} 
 
-.nav_bar view {
+.nav_bar>view {
   width: 33.33%;
   height: 100%;
   display: inline-block;
   text-align: center;
 }
 
-.nav_icon {
+
+.nav_icon image {
   width: 66rpx;
   height: 66rpx;
 }
 
-.nav_icon image {
-  width: 100%;
-  height: 100%;
-}
-
-.nav_text {
-  width: 100%;
-  height: 50rpx;
-}
-
-.title {
-  width: 33.33%;
+.nav_icon text {
   text-align: center;
-  float: left;
-}
-
-.title text {
-  display: block;
-  font-size: 22rpx;
 }
 
 .border {
@@ -143,7 +128,6 @@
 }
 
 .content_title {
-  width: 172rpx;
   height: 28rpx;
   float: left;
   margin-top: 35rpx;
@@ -198,7 +182,6 @@
 }
 
 .item_text {
-  width: 200rpx;
   height: 28rpx;
   float: left;
   margin-top: 35rpx;
