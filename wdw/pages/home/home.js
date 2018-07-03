@@ -13,26 +13,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    showHide: (options.showHide == "true" ? true : false)
+    
   },
   onClick: function() {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)
     })
-
-    // 箭头动画
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease',
-    });
-    this.animation = animation
-    animation.rotate(90).step();
-    this.setData({
-      animationData: animation.export()
-    })
-
-
   },
 
   userTap: function() {

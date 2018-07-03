@@ -64,7 +64,7 @@
 
  .nav_bar {
   width: 100%;
-  height: 90rpx;
+  /* height: 90rpx; */
 } 
 
 .nav_bar>view {
@@ -125,6 +125,7 @@
   float: right;
   margin-top: 28rpx;
   margin-right: 24rpx;
+  transition: all 0.5s;
 }
 
 .content_title {
@@ -142,16 +143,21 @@
 
 .list_item {
   width: 100%;
-  height: 198rpx;
+  transition: all 0.5s;
+  transform-origin: 50% 0;
 }
 
 /* 企业管理的显示和隐藏 */
 .hide {
-  display: none;
+  transform: scaleY(0);
+  overflow: hidden;
+  height: 0;
 }
 
 .show {
-  display: show;
+  transform: scaleY(1);
+  overflow: hidden; 
+  height: 198rpx;
 }
 
 .item {
@@ -195,3 +201,8 @@
   line-height: 28rpx;
 }
 
+/*过度效果  */
+.rotate{
+  transform:rotate(90deg);
+  transition: all 0.5s;
+}

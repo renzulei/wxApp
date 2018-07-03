@@ -46,40 +46,40 @@
 
   <view class='content'>
     <view class='content_text'>
-      <view class='list'>
-        <view class='icon_left clearfix'>
+      <view class='list clearfix'>
+        <view class='icon_left'>
           <image src='/images/shouhuo.png'></image>
         </view>
         <view class='content_title'>
           <text>收货地址管理</text>
         </view>
-        <view class='icon_right clearfix'>
+        <view class='icon_right'>
           <image src='/images/right.png'></image>
         </view>
       </view>
 
 
-      <view class='list'>
-        <view class='icon_left clearfix'>
+      <view class='list clearfix'>
+        <view class='icon_left'>
           <image src='/images/guanzhu.png'></image>
         </view>
         <view class='content_title'>
           <text>我的关注</text>
         </view>
-        <view class='icon_right clearfix'>
+        <view class='icon_right'>
           <image src='/images/right.png'></image>
         </view>
       </view>
 
 
-      <view class='list' bindtap='onClick'>
-        <view class='icon_left clearfix'>
+      <view class='list clearfix' bindtap='onClick'>
+        <view class='icon_left'>
           <image src='/images/qiyeguanli.png'></image>
         </view>
         <view class='content_title'>
           <text>企业管理</text>
         </view>
-        <view class='icon_right clearfix' animation="{{animationData}}">
+        <view class='icon_right {{showHide?"":"rotate"}}' >
           <image src='/images/right.png'></image>
         </view>
       </view>
