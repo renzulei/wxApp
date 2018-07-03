@@ -143,21 +143,6 @@
 
 .list_item {
   width: 100%;
-<<<<<<< HEAD
-  height: 198rpx;
-  transition: all 1s;
-}
-
-/* 企业管理的显示和隐藏 */
- .hide {
- height: 0;
- overflow: hidden;
-}
-
-.show {
- overflow: hidden;
-} 
-=======
   transition: all 0.5s;
   transform-origin: 50% 0;
 }
@@ -174,7 +159,6 @@
   overflow: hidden; 
   height: 198rpx;
 }
->>>>>>> 16dee02791d4a20143b982297fbeb5baf0f0a14c
 
 .item {
   width: 100%;
