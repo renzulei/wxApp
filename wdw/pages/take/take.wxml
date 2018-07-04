@@ -1,0 +1,51 @@
+<view class="contriner">
+  <view class="content">
+    <view class='box'>
+      <view class='title'>
+        <text class='left_color'>收货人：</text>
+        <text class='right_color'>侯亮平</text>
+        <text  class='left_color left'>联系方式：</text>
+        <text class='right_color'>15122176897</text>
+      </view>
+      <view class='bom_text'>
+        <text class='left_color'>收货地址：</text>
+        <text class='right_color'>育昌路369号，山东省潍坊市昌乐县</text>
+      </view>
+      <view class='icon'><image src='/images/del.png'></image></view>
+    </view>
+      <view class='bottom'>
+      <view class='bot clearfix'>
+        <view class='bot_icon'></view>
+        <text class='text'>设置为默认收货地址</text>
+        <view class='del'>删除</view>
+        </view>
+      </view>
+  </view>
+
+   <view class="content">
+    <view class='box'>
+      <view class='title'>
+        <text class='left_color'>收货人：</text>
+        <text class='right_color'>侯亮平</text>
+        <text  class='left_color left'>联系方式：</text>
+        <text class='right_color'>15122176897</text>
+      </view>
+      <view class='bom_text'>
+        <text class='left_color'>收货地址：</text>
+        <text class='right_color'>育昌路369号，山东省潍坊市昌乐县</text>
+      </view>
+      <view class='icon'><image src='/images/del.png'></image></view>
+    </view>
+      <view class='bottom'>
+      <view class='bot clearfix'>
+        <view class='bot_icon'></view>
+        <text class='text'>设置为默认收货地址</text>
+        <view class='del'>删除</view>
+        </view>
+      </view>
+  </view>
+
+  <view class='footer' bindtap='footerTap'>
+    <text>新增收货地址</text>
+  </view>
+</view>

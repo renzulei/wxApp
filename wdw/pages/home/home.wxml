@@ -46,7 +46,7 @@
 
   <view class='content'>
     <view class='content_text'>
-      <view class='list clearfix'>
+      <view class='list clearfix' bindtap='takeTap'>
         <view class='icon_left'>
           <image src='/images/shouhuo.png'></image>
         </view>
@@ -59,7 +59,7 @@
       </view>
 
 
-      <view class='list clearfix'>
+      <view class='list clearfix' bindtap='concernTap'>
         <view class='icon_left'>
           <image src='/images/guanzhu.png'></image>
         </view>
@@ -86,7 +86,7 @@
 
       <!-- 企业管理子元素 -->
       <view class="list_item {{ showHide?'hide':'show' }}">
-        <view class='item'>
+        <view class='item' bindtap='enterpriseTap'>
           <view class='item_icon_left'>
             <image src='/images/renzhen.png'></image>
           </view>
@@ -99,11 +99,11 @@
         </view>
 
 
-        <view class='item'>
+        <view class='item' bindtap='enterprisesTap'>
           <view class='item_icon_left'>
             <image src='/images/dizhi.png'></image>
           </view>
-          <view class='item_text' bindtap='enterpriseTap'>
+          <view class='item_text' bindtap=''>
             <text>企业地址认证</text>
           </view>
           <view class='item_icon_right'>

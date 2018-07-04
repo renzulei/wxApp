@@ -3,7 +3,7 @@
   <view class='w_search'>
     <view class='input-wrap'>
       <view class='w_icon'>
-        <image src='{{ img }}'></image>
+        <image src='/images/search.png'></image>
       </view>
       <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'></input>
     </view>

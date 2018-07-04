@@ -1,2 +1,90 @@
-<!--pages/proList/proList.wxml-->
-<text>pages/proList/proList.wxml</text>
+<view class='container'>
+  <view class='w_search'>
+    <view class='input-wrap'>
+      <view class='w_icon'>
+        <image src='/images/search.png'></image>
+      </view>
+      <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'></input>
+    </view>
+  </view>
+
+  <view class='content_title'>
+    <view class='title'>
+      <text>销量</text>
+      <view class='left'>
+        <view class='arrows_top'></view>
+        <view class='arrows_bottom'></view>
+      </view>
+    </view>
+    <view class='title border'>
+      <text>价格</text>
+      <view class='right'>
+        <view class='arrows_top_tow'></view>
+        <view class='arrows_bottom_tow'></view>
+      </view>
+    </view>
+    <view class='title'>
+      <text>筛选</text>
+    </view>
+    <view class='icon'>
+      <image src='/images/shaixuan.png'></image>
+    </view>
+  </view>
+  <view class='content'>
+  <!-- 1 -->
+    <view class='box clearfix'>
+      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
+      <view class='box_text'>
+        <text class='text'>平张</text>
+        <text class='text'>印刷纸</text>
+        <text class='text'>灰底涂布纸</text>
+        <view class='del'>删除</view>
+      </view>
+      <view class='price'>￥8670.69</view>
+      <view class='shopping'>立即购买</view>
+    </view>
+<!-- 2 -->
+     <view class='box clearfix'>
+      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
+      <view class='box_text'>
+        <text class='text'>平张</text>
+        <text class='text'>印刷纸</text>
+        <text class='text'>灰底涂布纸</text>
+        <view class='del'>删除</view>
+      </view>
+      <view class='price'>￥8670.69</view>
+      <view class='shopping'>立即购买</view>
+    </view>
+<!-- 3 -->
+     <view class='box clearfix'>
+      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
+      <view class='box_text'>
+        <text class='text'>平张</text>
+        <text class='text'>印刷纸</text>
+        <text class='text'>灰底涂布纸</text>
+        <view class='del'>删除</view>
+      </view>
+      <view class='price'>￥8670.69</view>
+      <view class='shopping'>立即购买</view>
+    </view>
+<!-- 4 -->
+     <view class='box clearfix'>
+      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
+      <view class='box_text'>
+        <text class='text'>平张</text>
+        <text class='text'>印刷纸</text>
+        <text class='text'>灰底涂布纸</text>
+        <view class='del'>删除</view>
+      </view>
+      <view class='price'>￥8670.69</view>
+      <view class='shopping'>立即购买</view>
+    </view>
+  </view>
+  <view class='footer'>
+    <view class='footer_box'>
+      <view class='footer_message'></view>
+       <view class='footer_site'></view>
+    </view>
+  </view>
+
+</view>

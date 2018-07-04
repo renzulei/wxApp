@@ -1,11 +1,11 @@
-// pages/index/index.js
+// pages/concern/concern.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  bgc: "/images/bgc.png"
+  
   },
 
   /**

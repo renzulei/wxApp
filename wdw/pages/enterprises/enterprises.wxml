@@ -1,0 +1,59 @@
+<view class="container">
+  <view class='content clearfix'>
+    <view class='content_text'>
+      <text class='left'>所在地区：</text>
+      <text class='right'>上海市静安区</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>详细地址：</text>
+      <text class='right'>上海市静安区万荣路1938弄10楼107</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>收货人姓名：</text>
+      <text class='right'>贝吉塔</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>手机号码：</text>
+      <text class='right'>13246694946</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>邮箱账号：</text>
+      <text class='right'>wangdeshiye@163.com</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>身份证号码：</text>
+      <text class='right'>411091188510673946</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>装运要求：</text>
+      <text class='right'>立装</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>提现银行：</text>
+      <text class='right'>上海工商银行</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>特殊装运：</text>
+      <text class='right'>无</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>卸货时间：</text>
+      <text class='right'>周一到周五--7：00--17：00</text>
+    </view>
+    <view class='content_text'>
+      <text class='left'>货物签收授权书：</text>
+      <text class='right rightColor'>点击查看</text>
+    </view>
+
+
+    <view class='hint'>
+      <view class='icon'>
+        <image src='/images/bulb.png'></image>
+      </view>
+      <view class='hint_text'>
+        <text class='left'>提示：</text>
+        <text class='right'>本页面仅支持查询功能，如需修改请前往PC端进行操作</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -6,7 +6,6 @@ Page({
    */
   data: {
     showHide: true,
-    animationData: {}
   },
 
   /**
@@ -15,6 +14,8 @@ Page({
   onLoad: function(options) {
     
   },
+
+  // 企业管理的点击事件
   onClick: function() {
     var that = this;
     that.setData({
@@ -22,16 +23,37 @@ Page({
     })
   },
 
+  takeTap: function() {
+    wx.navigateTo({
+      url: '/pages/take/take',
+    })
+  },
+
+  // 跳转到用户页面
   userTap: function() {
     wx.navigateTo({
       url: '/pages/user/user'
     })
   },
 
+  // 跳转到我的关注页面
+  concernTap: function() {
+    wx.navigateTo({
+      url: '/pages/concern/concern',
+    })
+  },
+
+// 跳转到企业认证页面
   enterpriseTap: function() {
     wx.navigateTo({
       url: '/pages/enterprise/enterprise',
     })
+  },
+  // 跳转到企业地址认证页面
+  enterprisesTap: function() {
+      wx.navigateTo({
+        url: '/pages/enterprises/enterprises',
+      })
   },
 
   /**

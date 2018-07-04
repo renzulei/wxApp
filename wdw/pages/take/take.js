@@ -1,11 +1,11 @@
-// pages/index/index.js
+// pages/take/take.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  bgc: "/images/bgc.png"
+  
   },
 
   /**
@@ -13,6 +13,10 @@ Page({
    */
   onLoad: function (options) {
   
+  },
+
+  footerTap: function() {
+    console.log(1111)
   },
 
   /**
