@@ -23,7 +23,7 @@
         <view class='arrows_bottom_tow'></view>
       </view>
     </view>
-    <view class='title'>
+    <view class='title' bindtap='screenTap'>
       <text>筛选</text>
     </view>
     <view class='icon'>
@@ -31,7 +31,19 @@
     </view>
   </view>
   <view class='content'>
-  <!-- 1 -->
+    <!-- 1 -->
+    <view class='box clearfix'>
+      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
+      <view class='box_text'>
+        <text class='text'>平张</text>
+        <text class='text'>印刷纸</text>
+        <text class='text'>灰底涂布纸</text>
+        <view class='del'>删除</view>
+      </view>
+      <view class='price'>￥8670.69</view>
+      <view class='shopping' bindtap='shoppingTap'>立即购买</view>
+    </view>
+    <!-- 2 -->
     <view class='box clearfix'>
       <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
       <view class='box_text'>
@@ -43,8 +55,8 @@
       <view class='price'>￥8670.69</view>
       <view class='shopping'>立即购买</view>
     </view>
-<!-- 2 -->
-     <view class='box clearfix'>
+    <!-- 3 -->
+    <view class='box clearfix'>
       <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
       <view class='box_text'>
         <text class='text'>平张</text>
@@ -55,20 +67,9 @@
       <view class='price'>￥8670.69</view>
       <view class='shopping'>立即购买</view>
     </view>
-<!-- 3 -->
-     <view class='box clearfix'>
-      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
-      <view class='box_text'>
-        <text class='text'>平张</text>
-        <text class='text'>印刷纸</text>
-        <text class='text'>灰底涂布纸</text>
-        <view class='del'>删除</view>
-      </view>
-      <view class='price'>￥8670.69</view>
-      <view class='shopping'>立即购买</view>
-    </view>
-<!-- 4 -->
-     <view class='box clearfix'>
+
+    <!-- 4 -->
+    <view class='box clearfix'>
       <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
       <view class='box_text'>
         <text class='text'>平张</text>
@@ -80,11 +81,123 @@
       <view class='shopping'>立即购买</view>
     </view>
   </view>
-  <view class='footer'>
-    <view class='footer_box'>
-      <view class='footer_message'></view>
-       <view class='footer_site'></view>
+  <view class="footer {{ showHide?'hide':'show' }}">
+    <view class='footer_box clearfix'>
+      <view class='footer_message'>
+        <text>您好！您当前的交易主体：</text>
+        <text class='right_color'>辽宁阳光天泽包装有限公司</text>
+      </view>
+      <view class='footer_site'>
+        <text>收货地址：</text>
+        <text class='right_color'>育昌路369号 山东省潍坊市昌乐县</text>
+      </view>
+      <view class='hint'>
+        <text class='hint_color'>(如需修改收货地址请点击右方编辑按钮)</text>
+      </view>
+      <view class='footer_icon'>
+        <image src='/images/del.png'></image>
+      </view>
+    </view>
+
+    <view class='footer_title'>
+      <text>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</text>
+      <view class='footer_price'>￥8670.69</view>
+    </view>
+
+    <view class='footer_bom'>
+      <text class='material'>物料选择：</text>
+      <text class='btn'>进口瓦楞纸</text>
+      <text class='btn btn_color'>进口牛卡纸</text>
+      <view>
+        <text class='btn_bottom'>进口纱管纸</text>
+      </view>
+    </view>
+
+    <view class='bottom clearfix'>
+      <view class='bottom_left'>
+        <text>加入关注</text>
+      </view>
+      <view class='bottom_right'>
+        <text>填写规格</text>
+      </view>
     </view>
   </view>
 
+  <!--模态框  -->
+  <view class="motai {{ showHide?'hide':'show' }}"></view>
+
+  <view class="motai {{ showHides?'hide':'show' }}"></view>
+
+  <!--筛选框  -->
+  <view class="screen {{ showHides?'hide':'show' }}">
+    <view class='screen_content'>
+      <view class='screen_title'>
+        <text>商品大类</text>
+      </view>
+      <view class='screen_text'>
+        <view class='list'>印刷纸</view>
+        <view class='list list_color'>砂管纸</view>
+        <view class='list'>箱板纸</view>
+        <view class='list'>瓦楞纸</view>
+        <view class='list'>进口纸</view>
+        <view class='list'>白板纸</view>
+      </view>
+    </view>
+
+
+    <view class='screen_content'>
+      <view class='screen_title'>
+        <text>存在状态</text>
+      </view>
+      <view class='screen_text'>
+        <view class='list list_color'>平张</view>
+        <view class='list'>卷筒</view>
+      </view>
+    </view>
+
+
+    <view class='screen_content'>
+      <view class='screen_title'>
+        <text>克重</text>
+      </view>
+      <view class='screen_text'>
+        <view class='list'>100g及以下</view>
+        <view class='list'>110g</view>
+        <view class='list'>120g</view>
+        <view class='list'>130g</view>
+        <view class='list'>140g</view>
+        <view class='list list_color'>150g</view>
+        <view class='list'>160g</view>
+        <view class='list'>170g</view>
+        <view class='list'>180g</view>
+        <view class='list'>190g</view>
+        <view class='list'>200g及以上</view>
+      </view>
+    </view>
+
+
+    <view class='screen_content border'>
+      <view class='screen_title'>
+        <text>商品中类</text>
+      </view>
+      <view class='screen_text'>
+        <view class='list'>白卡纸</view>
+        <view class='list'>砂管纸</view>
+        <view class='list'>进口瓦楞纸</view>
+        <view class='list list_color'>进口牛卡纸</view>
+        <view class='list'>白面牛卡纸</view>
+      </view>
+    </view>
+    <view class='screen_btn clearfix'>
+      <view class='button'>
+        <view class='end end_right'>
+          <text>确定</text>
+        </view>
+        <view class='end end_left'>
+          <text>重置</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
 </view>
