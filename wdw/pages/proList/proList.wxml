@@ -117,16 +117,16 @@
       <view class='bottom_left'>
         <text>加入关注</text>
       </view>
-      <view class='bottom_right'>
+      <view class='bottom_right' bindtap='btnTap'>
         <text>填写规格</text>
       </view>
     </view>
   </view>
 
   <!--模态框  -->
-  <view class="motai {{ showHide?'hide':'show' }}"></view>
+  <view class="motai {{ showHide?'hide':'show' }}" bindtap='motaiTap'></view>
 
-  <view class="motai {{ showHides?'hide':'show' }}"></view>
+  <view class="motai {{ showHides?'hide':'show' }}" bindtap='motaiTaps'></view>
 
   <!--筛选框  -->
   <view class="screen {{ showHides?'hide':'show' }}">

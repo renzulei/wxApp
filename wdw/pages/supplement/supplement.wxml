@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="content">
+
+    <view class=''></view>
+
+    <view class='header'>
+      <view class='header_icon'>
+        <image src='/images/checked.png'></image>
+      </view>
+      <view class='header_top'>
+        <text class='left_color'>商品列表(4）</text>
+        <text>江苏富星A级单面涂布灰底白板纸......</text>
+      </view>
+      <view class='header_bom'>
+      <view class='icon'><image src='/images/xia.png'></image></view>
+        <text>点击展开商品列表</text>
+      </view>
+    </view>
+  </view>
+
+
+  <view class='footer'>
+    <!-- 上部分 -->
+    <view class='footer_top'>
+      <text class='footer_left'>总行数：</text>
+      <text class='footer_right'>4</text>
+      <text class='footer_left'>总吨数：</text>
+      <text class='footer_right'>1950</text>
+      <text class='footer_left'>总金额：</text>
+      <text class='footer_right'>2678943.12</text>
+    </view>
+
+    <!-- 下部分 -->
+    <view class='footer_bom'>
+      <view class='bom_left'>
+        <text>取消返回</text>
+      </view>
+      <view class='bom_right' bindtap='shoppingTap'>
+        <text>加入购物车</text>
+      </view>
+    </view>
+  </view>
+</view>

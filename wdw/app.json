@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/specification/specification",
+    "pages/supplement/supplement",
+    "pages/createOrder/createOrder",
     "pages/proList/proList",
     "pages/index/index",
     "pages/home/home",

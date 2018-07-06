@@ -134,7 +134,7 @@
 
 .content {
   width: 100%;
-  padding: 30rpx 20rpx;
+  padding: 0rpx 20rpx;
 }
 
 .box {
@@ -291,7 +291,7 @@
 .btn_bottom {
   display: inline-block;
   margin-top: 50rpx;
-  margin-left: 180rpx;
+  margin-left: 178rpx;
   border-radius: 8rpx;
   padding: 14rpx 30rpx;
   background-color: #f2f2f2;
@@ -374,17 +374,17 @@
 }
 
 .screen_text {
-  background-color: pink;
+   background-color: pink; 
   font-size: 22rpx;
   text-align: left;
+  padding: 10rpx;
 }
 
 .list {
   padding: 14rpx 38rpx;
   display: inline-block;
-  margin: 15rpx 20rpx;
+  margin: 16rpx;
   background-color: #f2f2f2;
-  margin-bottom: 30rpx;
   border-radius: 8rpx;
 }
 

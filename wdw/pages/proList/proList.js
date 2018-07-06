@@ -15,18 +15,43 @@ Page({
   onLoad: function(options) {
 
   },
-  screenTap: function() {
+
+
+    // 筛选的函数
+  screenTap: function(event) {
     var that = this;
     that.setData({
       showHides: (!that.data.showHides)
     })
   },
 
-  // 底部弹窗
+  // 底部弹窗函数
   shoppingTap: function(event) {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)
+    })
+  },
+
+// 点击模态框让下面弹窗消失函数
+  motaiTap: function (event) {
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide)
+    })
+  },
+
+  // 点击模态框让右边的弹窗消失函数
+  motaiTaps: function(event) {
+      var that = this;
+      that.setData({
+        showHides: (!that.data.showHides)
+      })
+  },
+  
+  btnTap: function() {
+    wx.navigateTo({
+      url: '/pages/specification/specification',
     })
   },
 
