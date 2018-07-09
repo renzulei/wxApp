@@ -1,0 +1,136 @@
+.container {
+  width: 100%;
+}
+/* 整个盒子 */
+.content {
+  width: 100%;
+  padding: 24rpx;
+  background-color: #f6f6f6;
+}
+/* 内容框 */
+.table {
+  width: 706rpx;
+  height: 288rpx;
+  background-color: #fff;
+  border-radius: 6rpx;
+  box-shadow: 0px 0px 8px #ccc;
+  margin-bottom: 20rpx;
+}
+
+.text {
+  width: 100%;
+  font-size: 24rpx;
+  color: #5e5e5e;
+  font-weight: 600;
+}
+/* 每个小盒子 */
+.box {
+  width: 44%;
+  height: 66rpx;
+  background-color: #f6f6f6;
+  float: left;
+  margin-left: 27rpx;
+  margin-top: 30rpx;
+  border-radius: 8rpx;
+  box-shadow: 1px 1px 9px #ccc;
+  line-height: 66rpx;
+  padding: 0 20rpx;
+}
+
+.right_color {
+  color: #f75959;
+}
+
+.table_bom {
+  width: 100%;
+  line-height: 50rpx;
+  margin-top: 22rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 0 20rpx;
+}
+
+.left {
+  margin-left: 26rpx;
+}
+
+.table_btn {
+  width: 86rpx;
+  height: 50rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 12rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+/* 复制按钮 */
+.copy {
+  background-color: #576b95;
+  color: #fff;
+}
+/* 删除按钮 */
+.del {
+  border: 1px solid #f75959;
+  color: #f75959;
+}
+/* 加号按钮 */
+.plsu {
+  width: 50rpx;
+  line-height: 50rpx;
+  float: right;
+  margin-right: 11rpx;
+  border-radius: 8rpx;
+  margin-top: 4rpx;
+}
+/* 加号图片 */
+.plsu image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 底部样式 */
+.footer {
+  width: 100%;
+  height: 144rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.footer_top {
+  line-height: 56rpx;
+  background-color: #9fb9ef;
+  text-align: right;
+  padding: 0 60rpx;
+}
+
+.footer_right {
+  color: #fff;
+  margin: 0 10rpx;
+}
+
+.footer_left {
+  color: #fff3d0;
+}
+
+.footer_bom {
+  height: 88rpx;
+  background-color: gold;
+}
+
+.bom_left, .bom_right {
+  width: 50%;
+  float: left;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 88rpx;
+  font-weight: 400;
+}
+
+.bom_left {
+  background-color: #888;
+}
+
+.bom_right {
+  background-color: #f75959;
+}
