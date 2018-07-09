@@ -1,5 +1,5 @@
 /* pages/take/take.wxss */
-
+@import '../../template/radio/radio.wxss';
 .container {
   width: 100%;
   position: relative;

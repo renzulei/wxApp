@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/take/take",
     "pages/proList/proList",
     "pages/home/home",
-    "pages/take/take",
     "pages/concern/concern",
     "pages/enterprise/enterprise",
     "pages/enterprises/enterprises",

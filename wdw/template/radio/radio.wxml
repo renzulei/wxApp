@@ -1,0 +1,14 @@
+<template name="radio">
+<label 
+  class="radio" 
+  data-value="{{value}}" 
+  value="{{value}}"
+  checked="{{checked}}"
+>
+  <view class='radio-wrap {{checked?"radio-checked":""}}'>
+    <radio value='{{value}}' checked="{{checked}}"/>
+    <view class='radio-inner'></view>
+  </view>
+  {{value}}
+</label>
+</template>
