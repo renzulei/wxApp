@@ -165,7 +165,7 @@
 
     <!-- 下部分 -->
     <view class='footer_bom'>
-      <view class='bom_left'>
+      <view class='bom_left' bindtap='cancelTap'>
         <text>取消返回</text>
       </view>
       <view class='bom_right' bindtap='shoppingTap'>

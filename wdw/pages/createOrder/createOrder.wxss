@@ -10,6 +10,10 @@
   background-color: #f6f6f6;
 }
 
+.content_table {
+  width: 100%;
+}
+
 /* 内容框 */
 
 .table {
@@ -128,6 +132,7 @@
 
 .footer_left {
   color: #fff3d0;
+  margin-left: 10rpx;
 }
 
 .footer_bom {

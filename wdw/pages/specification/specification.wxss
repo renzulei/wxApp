@@ -110,6 +110,7 @@
 
 .footer_left {
   color: #fff3d0;
+  margin-left: 20rpx;
 }
 
 .footer_bom {

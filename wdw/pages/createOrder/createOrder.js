@@ -7,7 +7,12 @@ Page({
   data: {
   
   },
-
+//  跳转到补充信息页面
+  shoppingTap: function() {
+    wx.navigateTo({
+      url: '/pages/supplement/supplement',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

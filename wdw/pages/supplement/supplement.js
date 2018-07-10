@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showHide: true
   
   },
 
@@ -13,6 +14,14 @@ Page({
    */
   onLoad: function (options) {
   
+  },
+
+// 点击小图标让商品列表显示和隐藏
+  iconTap: function(event) {
+      var that = this;
+     that.setData({
+        showHide: false
+     })
   },
 
   /**

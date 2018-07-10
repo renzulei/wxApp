@@ -14,11 +14,13 @@ Page({
   onLoad: function (options) {
   
   },
+  // 跳转到创建订单页面
   shoppingTap: function() {
     wx.navigateTo({
       url: '/pages/createOrder/createOrder',
     })
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

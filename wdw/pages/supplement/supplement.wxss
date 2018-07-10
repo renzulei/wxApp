@@ -1,14 +1,117 @@
-.container {
+/* .container {
   width: 100%;
-}
+   background-color: #fff; 
+} */
+
+/* 整个盒子 */
 
 .content {
   width: 100%;
-  padding: 24rpx;
+  /* padding: 24rpx; */
+  background-color: #fff;
+}
+
+.content_table {
+  width: 100%;
+}
+
+/* 内容框 */
+
+.table {
+  width: 706rpx;
+  height: 288rpx;
+  background-color: #fff;
+  border-radius: 6rpx;
+  box-shadow: 0px 0px 8px #ccc;
+  margin-bottom: 20rpx;
+}
+
+.text {
+  width: 100%;
+  font-size: 24rpx;
+  color: #5e5e5e;
+  font-weight: 600;
+}
+
+/* 每个小盒子 */
+
+.box {
+  width: 44%;
+  height: 66rpx;
   background-color: #f6f6f6;
+  float: left;
+  margin-left: 27rpx;
+  margin-top: 30rpx;
+  border-radius: 8rpx;
+  box-shadow: 1px 1px 9px #ccc;
+  line-height: 66rpx;
+  padding: 0 20rpx;
+}
+
+.right_color {
+  color: #f75959;
+}
+
+.table_bom {
+  width: 100%;
+  line-height: 50rpx;
+  margin-top: 22rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 0 20rpx;
+}
+
+.left {
+  margin-left: 26rpx;
+}
+
+.table_btn {
+  width: 86rpx;
+  height: 50rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 14rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+/* 复制按钮 */
+
+/* .copy {
+  background-color: #576b95;
+  color: #fff;
+} */
+
+/* 删除按钮 */
+
+.del {
+  float: right;
+  margin-right: 30rpx;
+  color: #f75959;
+  border: 1px solid #f75959;
+}
+
+/* 加号按钮 */
+
+.plsu {
+  width: 36rpx;
+  height: 36rpx;
+  float: left;
+  background-color: #576b95;
+  margin-right: 10rpx;
+  border-radius: 8rpx;
+  margin-top: 6rpx;
+}
+
+/* 加号图片 */
+
+.plsu image {
+  width: 36rpx;
+  height: 36rpx;
 }
 
 /* 底部样式 */
+
 .footer {
   width: 100%;
   height: 144rpx;
@@ -30,6 +133,7 @@
 
 .footer_left {
   color: #fff3d0;
+  margin-left: 10rpx;
 }
 
 .footer_bom {
@@ -58,13 +162,23 @@
 /* header样式 */
 
 .header {
+  width: 706rpx;
   height: 140rpx;
+  margin: 0 auto;
   background-color: #9fb9ef;
   margin-bottom: 20rpx;
+  margin-top: 30rpx;
   border-radius: 8rpx;
   border-top: 1px solid #9fb9ef;
   font-size: 24rpx;
   position: relative;
+}
+
+.bgc_header {
+  width: 100%;
+  height: 200rpx;
+  background-color: #f6f6f6;
+  border-top: 1rpx solid #f6f6f6;
 }
 
 .header_top, .header_bom {
@@ -73,6 +187,11 @@
   line-height: 30rpx;
   color: #fff;
   font-weight: 600;
+}
+
+.bom_text {
+  font-weight: 400;
+  font-size: 22rpx;
 }
 
 .left_color {
@@ -100,20 +219,153 @@
   height: 36rpx;
 }
 
-.header_bom {
-  margin-left: 230rpx;
-  color: #FFFFFF;
+/*商品列表显示隐藏  */
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
 
 .icon {
-  width: 30rpx;
-  height: 30rpx;
+  width: 32rpx;
+  height: 32rpx;
   float: left;
-  margin-right: 10rpx;
+  margin-left: 240rpx;
+  margin-right: 16rpx;
   border: 1px dashed #888;
 }
 
 .icon image {
-  width: 30rpx;
-  height: 30rpx;
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 头部的样式   ===交易主体  */
+
+.hint {
+  width: 708rpx;
+  height: 202rpx;
+  background-color: #9fb9ef;
+  border-radius: 8rpx;
+  margin-bottom: 30rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  padding: 36rpx 20rpx;
+  margin: 30rpx auto;
+}
+
+.title1 {
+  width: 100%;
+  line-height: 26rpx;
+  margin-bottom: 20rpx;
+}
+
+.title2 {
+  margin-bottom: 20rpx;
+}
+
+.relation {
+  margin-left: 80rpx;
+}
+
+.title_left {
+  color: #fff3d0;
+}
+
+.title_right {
+  color: #fff;
+}
+
+/*订单类型区域的样式  */
+
+.order {
+  width: 100%;
+  padding: 30rpx 20rpx 30rpx 20rpx;
+}
+
+.type {
+  line-height: 48rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #4f4f4f;
+  margin-bottom: 40rpx;
+}
+
+.order_icon, .intention {
+  width: 48rpx;
+  height: 48rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 24rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  margin-top: -6px;
+}
+
+.size {
+  font-size: 28rpx;
+}
+
+.type image {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.order_hint {
+  margin-top: 20rpx;
+  font-size: 20rpx;
+  color: #4f4f4f;
+  margin-bottom: 40rpx;
+}
+
+.hint_color {
+  color: #f75959;
+}
+
+.word_size {
+  font-size: 20rpx;
+}
+
+.account {
+  margin-left: 180rpx;
+  color: #f75959;
+}
+
+.size_color {
+  color: #f75959;
+}
+
+.title {
+  font-size: 28rpx;
+}
+
+/* 到货时间选择框样式 */
+.select {
+  width: 330rpx;
+  height: 66rpx;
+  background-color: #f6f6f6;
+  margin-top: 30rpx;
+  box-shadow: 0px 0px 9px #a3a3a3;
+  font-size: 22rpx;
+  color: #a3a3a3;
+  line-height: 66rpx;
+  padding: 0 20rpx;
+  position: relative;
+}
+
+/* 箭头样式 */
+.arrows {
+  width: 0;
+  height: 0;
+  border-top: 16rpx solid #5f5c5b;
+  border-bottom: 16rpx solid #f6f6f6;
+  border-left: 14rpx solid #f6f6f6;
+  border-right: 14rpx solid #f6f6f6;
+  z-index: 20;
+  position: absolute;
+  top: 26rpx;
+  right: 30rpx;
 }
