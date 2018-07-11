@@ -1,12 +1,11 @@
-// pages/supplement/supplement.js
+// pages/affirm/affirm.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showHide: true
-  
+    showHide: true,
   },
 
   /**
@@ -15,23 +14,20 @@ Page({
   onLoad: function (options) {
   
   },
-
- 
-
-// 点击小图标商品列表显示和隐藏
-  iconTap: function(event) {
-      var that = this;
-     that.setData({
-        showHide: (!that.data.showHide)
-     })
-  },
-
-  succeedTap: function() {
-    wx.navigateTo({
-      url: '/pages/affirm/affirm',
+  // 点击显示和隐藏内容区域
+  iconTap: function (event) {
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide)
     })
   },
 
+  placeTap: function(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/succeed/succeed',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

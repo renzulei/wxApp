@@ -20,93 +20,23 @@
     <!--订单类型  -->
     <view class='order'>
       <view class='type'>
-        <text class='size align'>订单类型：</text>
-        <view class='order_icon'>
-          <image src='/images/show.png'></image>
-        </view>
-        <text class=''>标准订单</text>
-        <view class='intention'>
-          <image src='/images/hide.png'></image>
-        </view>
-        <text>意向订单</text>
+        <text class='size_left'>订单类型：</text>
+        <text class='right_color'>标准订单</text>
+         <text class='size_right'>支付节点：</text>
+        <text class='right_color'>赊销</text>
       </view>
-
-      <view class='order_hint'>
-        <text class='hint_color'>标准订单：</text>
-        <text>下单即生效,到货时间为固定时间,按照要求的到货时间到货。</text>
-      </view>
-      <view class='order_hint'>
-        <text class='hint_color'>意向订单：</text>
-        <text>下单后开始备货，到货时间为预计时间段，按照根据意向订单后续下达的要货计划j进行到货。</text>
-      </view>
-
+     
       <view class='type'>
-        <text class='size align'>支付节点：</text>
-        <view class='order_icon'>
-          <image src='/images/hide.png'></image>
-        </view>
-        <text class=''>下单预付</text>
-        <view class='intention'>
-          <image src='/images/hide.png'></image>
-        </view>
-        <text>发货前预付</text>
-        <view class='intention'>
-          <image src='/images/show.png'></image>
-        </view>
-        <text>赊销</text>
-        <view class='word_size'>
-          <text class='account'>赊销：</text>
-          <text>根据约定好的账期进行付款</text>
-        </view>
-      </view>
-
-
-      <view class='type'>
-        <text class='size align'>账期选择：</text>
-        <view class='order_icon'>
-          <image src='/images/hide.png'></image>
-        </view>
-        <text class=''>30</text>
-        <view class='intention'>
-          <image src='/images/hide.png'></image>
-        </view>
-        <text>60</text>
-        <view class='intention'>
-          <image src='/images/show.png'></image>
-        </view>
-        <text>120</text>
-      </view>
-
-
-      <view class='type'>
-        <text class='size align'>支付方式：</text>
-        <view class='order_icon'>
-          <image src='/images/show.png'></image>
-        </view>
-        <text class=''>现金支付</text>
-        <view class='intention'>
-          <image src='/images/hide.png'></image>
-        </view>
-        <text>白条支付</text>
-        <view class='intention'>
-          <image src='/images/hide.png'></image>
-        </view>
-        <text>票据支付</text>
-        <view class='word_size'>
-          <text class='size_color'>现金支付：</text>总金额
-          <text class='size_color'>21,400 </text>(包含此支付方式对总金额的影响
-          <text class='size_color'>+0</text>元)</view>
-      </view>
-
-      <view class='title'>到货时间：</view>
-      <view class='select'>
-        请选择到货时间
-        <view class='arrows'></view>
+        <text class='size_left'>账期选择：</text>
+        <text class='right_color'>120</text>
+         <text class='size_right right'>支付方式：</text>
+        <text class='right_color'>现金支付</text>
+      <view class='title'>到货时间：<text class='right_color'>2018-6-18</text></view>
       </view>
     </view>
 
     <!--商品列表区域  -->
-    <view class='bgc_header'>
+    <view class="bgc_header">
       <view class='header'>
         <view class='header_icon'>
           <image src='/images/checked.png'></image>
@@ -123,6 +53,7 @@
         </view>
       </view>
     </view>
+    <view class="div {{ showHide? 'show' : 'hide' }}"></view>
 
     <!--需要显示隐藏的区域  -->
     <view class="content_table {{ showHide? 'hide' : 'show' }}">
@@ -287,10 +218,10 @@
     <!-- 下部分 -->
     <view class='footer_bom'>
       <view class='bom_left'>
-        <text>取消返回</text>
+        <text>返回修改</text>
       </view>
-      <view class='bom_right' bindtap='succeedTap'>
-        <text>确认信息</text>
+      <view class='bom_right' bindtap='placeTap'>
+        <text>立即下单</text>
       </view>
     </view>
   </view>

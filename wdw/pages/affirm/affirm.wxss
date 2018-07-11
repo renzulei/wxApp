@@ -1,13 +1,14 @@
 .container {
   width: 100%;
+  background-color: #fff;
 }
 
 /* 整个盒子 */
 
 .content {
   width: 100%;
-  padding: 24rpx;
-  background-color: #f6f6f6;
+  /* padding: 24rpx; */
+  background-color: #fff;
 }
 
 .content_table {
@@ -23,6 +24,7 @@
   border-radius: 6rpx;
   box-shadow: 0px 0px 8px #ccc;
   margin-bottom: 20rpx;
+  margin: 30rpx auto;
 }
 
 .text {
@@ -36,7 +38,6 @@
 
 .box {
   width: 44%;
-  /* height: 66rpx; */
   background-color: #f6f6f6;
   float: left;
   margin-left: 30rpx;
@@ -66,7 +67,7 @@
 
 .table_btn {
   width: 86rpx;
-  /* height: 50rpx; */
+  height: 50rpx;
   display: inline-block;
   vertical-align: middle;
   margin: 0 14rpx;
@@ -90,7 +91,7 @@
   border: 1px solid #f75959;
 }
 
-/* 加号按钮和图片 */
+/* 左边图标 */
 
 .plsu {
   width: 36rpx;
@@ -102,6 +103,8 @@
   margin-top: 6rpx;
 }
 
+/* 左边图标 */
+
 .plsu image {
   width: 36rpx;
   height: 36rpx;
@@ -111,7 +114,6 @@
 
 .footer {
   width: 100%;
-  height: 144rpx;
   font-size: 24rpx;
   font-weight: 600;
 }
@@ -125,16 +127,15 @@
 
 .footer_right {
   color: #fff;
-  margin: 0 10rpx;
+  margin-right: 20rpx;
 }
 
 .footer_left {
   color: #fff3d0;
-  margin-left: 10rpx;
 }
 
 .footer_bom {
-  height: 88rpx;
+  width: 100%;
   background-color: gold;
 }
 
@@ -159,13 +160,23 @@
 /* header样式 */
 
 .header {
+  width: 706rpx;
   height: 140rpx;
+  margin: 0 auto;
   background-color: #9fb9ef;
   margin-bottom: 20rpx;
+  margin-top: 30rpx;
   border-radius: 8rpx;
   border-top: 1px solid #9fb9ef;
   font-size: 24rpx;
   position: relative;
+}
+
+.bgc_header {
+  width: 100%;
+  height: 200rpx;
+  background-color: #f6f6f6;
+  border-top: 1rpx solid #f6f6f6;
 }
 
 .header_top, .header_bom {
@@ -174,6 +185,11 @@
   line-height: 30rpx;
   color: #fff;
   font-weight: 600;
+}
+
+.bom_text {
+  font-weight: 400;
+  font-size: 22rpx;
 }
 
 .left_color {
@@ -199,4 +215,109 @@
 .header_icon image {
   width: 36rpx;
   height: 36rpx;
+}
+
+/*商品列表显示隐藏  */
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.icon {
+  width: 32rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 240rpx;
+  margin-right: 16rpx;
+  /* border: 1px dashed #888; */
+}
+
+.icon image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 头部的样式   ===交易主体  */
+
+.hint {
+  width: 708rpx;
+  height: 202rpx;
+  background-color: #9fb9ef;
+  border-radius: 8rpx;
+  margin-bottom: 30rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  padding: 36rpx 20rpx;
+  margin: 30rpx auto;
+}
+
+.title1 {
+  width: 100%;
+  line-height: 26rpx;
+  margin-bottom: 20rpx;
+}
+
+.title2 {
+  margin-bottom: 20rpx;
+}
+
+.relation {
+  margin-left: 80rpx;
+}
+
+.title_left {
+  color: #fff3d0;
+}
+
+.title_right {
+  color: #fff;
+}
+
+/*订单类型区域的样式  */
+
+.order {
+  width: 100%;
+  padding: 0 60rpx;
+}
+
+.type {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #4f4f4f;
+  margin-bottom: 40rpx;
+}
+
+.title {
+  margin-top: 30rpx;
+}
+
+.right_color {
+  color: #f86d6d;
+}
+
+.size_right {
+  margin-left: 140rpx;
+}
+
+.right {
+  margin-left: 196rpx;
+}
+
+
+.bgc {
+  height: 200rpx;
+}
+
+.bgc1 {
+  height: 754rpx;
+}
+
+.div {
+  width: 100%;
+  height: 554rpx;
+  background-color: #F6F6F6;
 }

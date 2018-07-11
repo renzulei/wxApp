@@ -1,10 +1,12 @@
 {
   "pages": [
-    "pages/supplement/supplement",
-    "pages/createOrder/createOrder",
     "pages/specification/specification",
     "pages/proList/proList",
+    "pages/affirm/affirm",
+    "pages/succeed/succeed",
+    "pages/supplement/supplement",
     "pages/index/index",
+    "pages/createOrder/createOrder",
     "pages/home/home",
     "pages/concern/concern",
     "pages/enterprise/enterprise",
@@ -40,7 +42,7 @@
       {
         "pagePath": "pages/home/home",
         "text": "会员中心",
-        "iconPath": "/images/vip.png",
+        "iconPath": "/images/vip1.png",
         "selectedIconPath": "/images/vip.png"
       }
     ]

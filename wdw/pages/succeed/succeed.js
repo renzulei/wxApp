@@ -1,11 +1,10 @@
-// pages/supplement/supplement.js
+// pages/succeed/succeed.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showHide: true
   
   },
 
@@ -14,22 +13,6 @@ Page({
    */
   onLoad: function (options) {
   
-  },
-
- 
-
-// 点击小图标商品列表显示和隐藏
-  iconTap: function(event) {
-      var that = this;
-     that.setData({
-        showHide: (!that.data.showHide)
-     })
-  },
-
-  succeedTap: function() {
-    wx.navigateTo({
-      url: '/pages/affirm/affirm',
-    })
   },
 
   /**
