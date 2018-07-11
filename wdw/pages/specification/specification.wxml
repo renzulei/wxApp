@@ -6,7 +6,7 @@
         <view class='div'>
           <view class="box box_left">
             <view class='left'>
-              <text>幅宽mm：</text>
+              <text>幅宽mm:</text>
             </view>
             <view class='right'>
               <input class='input'></input>
@@ -14,10 +14,7 @@
           </view>
           <view class="box box_right">
             <view class='left'>
-              <text>切长mm：</text>
-            </view>
-            <view class='right'>
-              <input class='input'></input>
+              <text>切长mm:</text>
             </view>
           </view>
         </view>
@@ -25,7 +22,7 @@
         <view class='div'>
           <view class="box box_left">
             <view class='left'>
-              <text>件数(不含运费)：</text>
+              <text>件数(不含运费):</text>
             </view>
             <view class='right'>
               <input class='input'></input>
@@ -33,7 +30,7 @@
           </view>
           <view class="box box_right">
             <view class='left'>
-              <text>吨数(吨)：</text>
+              <text>吨数(吨):</text>
             </view>
             <view class='right'>
               <input class='input'></input>
@@ -53,9 +50,6 @@
         </view> 
         <view class=' table_btn del'>
           <text>删除</text>
-        </view>
-        <view class='plsu'>
-          <image src='/images/plsu.png'></image>
         </view>
       </view>  
     </view>

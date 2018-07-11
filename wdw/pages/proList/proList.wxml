@@ -6,7 +6,7 @@
       </view>
       <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'></input>
     </view>
-  </view>
+  </view> 
 
   <view class='content_title'>
     <view class='title'>
@@ -67,12 +67,14 @@
       <view class='footer_price'>￥8670.69</view>
     </view>
 
-    <view class='footer_bom'>
-      <text class='material'>物料选择：</text>
-      <text class='btn'>进口瓦楞纸</text>
-      <text class='btn btn_color'>进口牛卡纸</text>
+    <view class='footer_bom clearfix'>
+        <view class='footer_left'>物料选择:</view>
+        <view class='footer_right'>
+          <text class='footer_text'>进口瓦楞纸</text>
+          <text class='footer_text text_color'>进口牛卡纸</text>
+          <text class='footer_text top'>进口砂管纸</text>
+        </view>
       <view>
-        <text class='btn_bottom'>进口纱管纸</text>
       </view>
     </view>
 
