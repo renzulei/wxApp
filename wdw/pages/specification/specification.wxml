@@ -1,155 +1,64 @@
 <view class="container">
   <view class="content">
+
     <view class="table">
       <view class="text clearfix">
-        <view class="box">
-          <text>幅宽mm：</text>
-          <text class='right_color'>137</text>
+        <view class='div'>
+          <view class="box box_left">
+            <view class='left'>
+              <text>幅宽mm：</text>
+            </view>
+            <view class='right'>
+              <input class='input'></input>
+            </view>
+          </view>
+          <view class="box box_right">
+            <view class='left'>
+              <text>切长mm：</text>
+            </view>
+            <view class='right'>
+              <input class='input'></input>
+            </view>
+          </view>
         </view>
-        <view class="box">
-          <text>切长mm：</text>
-          <text class='right_color'>6</text>
+
+        <view class='div'>
+          <view class="box box_left">
+            <view class='left'>
+              <text>件数(不含运费)：</text>
+            </view>
+            <view class='right'>
+              <input class='input'></input>
+            </view>
+          </view>
+          <view class="box box_right">
+            <view class='left'>
+              <text>吨数(吨)：</text>
+            </view>
+            <view class='right'>
+              <input class='input'></input>
+            </view>
+          </view>
         </view>
-        <view class="box">
-          <text>件数（不含运费）：</text>
-          <text class='right_color'>2</text>
-        </view>
-        <view class="box">
-          <text>吨说（吨）：</text>
-          <text class='right_color'>10</text>
-        </view>
+
       </view>
-      <view class='table_bom clearfix'>
-        <text>1.单价：</text>
-        <text class='right_color'>7000</text>
-        <text class='left'>金额：</text>
-        <text class='right_color'>9874983.0</text>
+       <view class='table_bom clearfix'>
+        <text class='danjia'>1.单价：</text>
+        <text class='table_color'>7000</text>
+        <text class='table_left'>金额：</text>
+        <text class='table_color'>9874983.0</text>
 
         <view class=' table_btn copy'>
           <text>复制</text>
-        </view>
+        </view> 
         <view class=' table_btn del'>
           <text>删除</text>
         </view>
         <view class='plsu'>
           <image src='/images/plsu.png'></image>
         </view>
-      </view>
+      </view>  
     </view>
-
-    <view class="table">
-      <view class="text clearfix">
-        <view class="box">
-          <text>幅宽mm：</text>
-          <text class='right_color'>137</text>
-        </view>
-        <view class="box">
-          <text>切长mm：</text>
-          <text class='right_color'>6</text>
-        </view>
-        <view class="box">
-          <text>件数（不含运费）：</text>
-          <text class='right_color'>2</text>
-        </view>
-        <view class="box">
-          <text>吨说（吨）：</text>
-          <text class='right_color'>10</text>
-        </view>
-      </view>
-      <view class='table_bom clearfix'>
-        <text>1.单价：</text>
-        <text class='right_color'>7000</text>
-        <text class='left'>金额：</text>
-        <text class='right_color'>9874983.0</text>
-
-        <view class=' table_btn copy'>
-          <text>复制</text>
-        </view>
-        <view class=' table_btn del'>
-          <text>删除</text>
-        </view>
-        <view class='plsu'>
-          <image src='/images/plsu.png'></image>
-        </view>
-      </view>
-    </view>
-
-
-    <view class="table">
-      <view class="text clearfix">
-        <view class="box">
-          <text>幅宽mm：</text>
-          <text class='right_color'>137</text>
-        </view>
-        <view class="box">
-          <text>切长mm：</text>
-          <text class='right_color'>6</text>
-        </view>
-        <view class="box">
-          <text>件数（不含运费）：</text>
-          <text class='right_color'>2</text>
-        </view>
-        <view class="box">
-          <text>吨说（吨）：</text>
-          <text class='right_color'>10</text>
-        </view>
-      </view>
-      <view class='table_bom clearfix'>
-        <text>1.单价：</text>
-        <text class='right_color'>7000</text>
-        <text class='left'>金额：</text>
-        <text class='right_color'>9874983.0</text>
-
-        <view class=' table_btn copy'>
-          <text>复制</text>
-        </view>
-        <view class=' table_btn del'>
-          <text>删除</text>
-        </view>
-        <view class='plsu'>
-          <image src='/images/plsu.png'></image>
-        </view>
-      </view>
-    </view>
-
-    <view class="table">
-      <view class="text clearfix">
-        <view class="box">
-          <text>幅宽mm：</text>
-          <text class='right_color'>137</text>
-        </view>
-        <view class="box">
-          <text>切长mm：</text>
-          <text class='right_color'>6</text>
-        </view>
-        <view class="box">
-          <text>件数（不含运费）：</text>
-          <text class='right_color'>2</text>
-        </view>
-        <view class="box">
-          <text>吨说（吨）：</text>
-          <text class='right_color'>10</text>
-        </view>
-      </view>
-      <view class='table_bom clearfix'>
-        <text>1.单价：</text>
-        <text class='right_color'>7000</text>
-        <text class='left'>金额：</text>
-        <text class='right_color'>9874983.0</text>
-
-        <view class=' table_btn copy'>
-          <text>复制</text>
-        </view>
-        <view class=' table_btn del'>
-          <text>删除</text>
-        </view>
-        <view class='plsu'>
-          <image src='/images/plsu.png'></image>
-        </view>
-      </view>
-    </view>
-
-
   </view>
 
   <view class='footer'>

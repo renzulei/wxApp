@@ -1,0 +1,21 @@
+<view class='container'>
+  <view class='content'>
+    <view class='img'>
+      <image src='/images/money.png'></image>
+    </view>
+
+    <view class='text'>
+      恭喜您！订单创建成功!您的订单号为
+      <text class='color'>YCD0018652</text>
+      <view class='size'>请等待审核......</view>
+    </view>
+
+    <view class='particulars'>
+      <text>查看详情</text>
+    </view>
+
+    <view class='shopping'>
+      <text>继续购物</text>
+    </view>
+  </view>
+</view>
