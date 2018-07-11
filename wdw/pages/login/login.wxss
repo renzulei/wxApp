@@ -29,8 +29,15 @@
   width: 100%;
   margin-top: 100rpx;
   padding: 0 82rpx;
+  position: relative;
 }
-
+.warning{
+  position: absolute;
+  bottom: -50rpx;
+  left: 152rpx;
+  font-size: 26rpx;
+  color: #F75959;
+}
 .user {
   width: 590rpx;
   height: 72rpx;
@@ -53,7 +60,7 @@
   height: 60rpx;
   margin-top: 8rpx;
   margin-left: 14rpx;
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid #F75959;
   font-size: 26rpx;
 }
 
@@ -68,7 +75,7 @@
 .btn {
   width: 586rpx;
   height: 100%;
-  /* background-color: #888;  */
+  background-color: #888;  
   margin: 0 auto;
   border-radius: 10rpx;
   color: #fff;
@@ -76,7 +83,13 @@
   line-height: 88rpx;
   font-size: 30rpx;
 }
-
+button[disabled].btn{
+  background-color: #888; 
+  color: #fff; 
+}
+.btn.active{
+  background-color: #F75959;
+}
 /* 底部样式================================ */
 
 .footer {
