@@ -1,136 +1,155 @@
 .container {
   width: 100%;
 }
-
 /* 整个盒子 */
-
 .content {
   width: 100%;
   padding: 24rpx;
   background-color: #f6f6f6;
 }
-
-.content_table {
-  width: 100%;
-}
-
 /* 内容框 */
-
-.table {
+.table { 
   width: 706rpx;
   height: 288rpx;
   background-color: #fff;
   border-radius: 6rpx;
   box-shadow: 0px 0px 8px #ccc;
   margin-bottom: 20rpx;
+  padding: 30rpx;
 }
 
 .text {
   width: 100%;
   font-size: 24rpx;
   color: #5e5e5e;
-  font-weight: 600;
 }
 
 /* 每个小盒子 */
-
 .box {
-  width: 44%;
-  /* height: 66rpx; */
+  width: 302rpx;
+  height: 66rpx;
   background-color: #f6f6f6;
-  float: left;
-  margin-left: 30rpx;
-  margin-top: 30rpx;
   border-radius: 8rpx;
   box-shadow: 1px 1px 9px #ccc;
-  line-height: 66rpx;
-  padding: 0 20rpx;
+  padding: 0 10rpx;
 }
 
-.right_color {
+/* .div {
+  width: 302rpx;
+  height: 66rpx;
+} */
+.div {
+width: 100%;
+height: 66rpx;
+margin-bottom: 30rpx;
+}
+
+.box_left {
+  float: left;
+}
+
+.box_right {
+  float: right;
+}
+.left {
+  width: 186rpx;
+  height: 66rpx;
+  float: left;
+  text-align: left;
+  line-height: 66rpx;
+}
+
+.left_text {
+  display: block;
+  width: 186rpx;
+  height: 66rpx;
+}
+
+
+.right {
+   width: 80rpx; 
+  height: 66rpx;
+  float: left;
+  line-height: 66rpx;
   color: #f75959;
+}
+.input {
+  display: block;
+   width: 80rpx;
+  height: 66rpx;
 }
 
 .table_bom {
   width: 100%;
   line-height: 50rpx;
-  margin-top: 22rpx;
   font-size: 24rpx;
   font-weight: 600;
-  padding: 0 20rpx;
+  position: relative;
 }
 
-.left {
+ .table_left {
   margin-left: 26rpx;
+} 
+
+.table_color {
+  color: #f75959;
 }
 
 .table_btn {
   width: 86rpx;
-  /* height: 50rpx; */
   display: inline-block;
   vertical-align: middle;
-  margin: 0 14rpx;
+  margin: 0 12rpx;
   border-radius: 8rpx;
   text-align: center;
 }
-
 /* 复制按钮 */
-
-/* .copy {
+.copy {
+  width: 36rpx;
+  height: 36rpx;
   background-color: #576b95;
-  color: #fff;
-} */
+  position: absolute;
+  left: -14rpx;
+  top: 6rpx;
+}
+
+.copy image {
+  width: 36rpx;
+  height: 36rpx;
+}
 
 /* 删除按钮 */
-
 .del {
-  float: right;
-  margin-right: 30rpx;
-  color: #f75959;
   border: 1px solid #f75959;
-}
-
-/* 加号按钮和图片 */
-
-.plsu {
-  width: 36rpx;
-  height: 36rpx;
-  float: left;
-  background-color: #576b95;
-  margin-right: 10rpx;
-  border-radius: 8rpx;
-  margin-top: 6rpx;
-}
-
-.plsu image {
-  width: 36rpx;
-  height: 36rpx;
+  color: #f75959;
+  margin-left: 100rpx;
 }
 
 /* 底部样式 */
-
 .footer {
   width: 100%;
   height: 144rpx;
   font-size: 24rpx;
   font-weight: 600;
+  position: fixed;
+  bottom: 0;
 }
 
 .footer_top {
   line-height: 56rpx;
   background-color: #9fb9ef;
   text-align: right;
-  padding: 0 60rpx;
+  /* padding: 0 60rpx; */
 }
 
 .footer_right {
   color: #fff;
-  margin: 0 10rpx;
+  margin-right: 30rpx;
 }
 
 .footer_left {
   color: #fff3d0;
-  margin-left: 10rpx;
+  margin-left: 20rpx;
 }
 
 .footer_bom {
@@ -155,6 +174,7 @@
 .bom_right {
   background-color: #f75959;
 }
+
 
 /* header样式 */
 
@@ -199,4 +219,8 @@
 .header_icon image {
   width: 36rpx;
   height: 36rpx;
+}
+
+.danjia {
+  margin-left: 46rpx;
 }
