@@ -49,7 +49,8 @@ Page({
       })
   },
   
-  btnTap: function() {
+  btnTap: function(e) {
+    console.log(e)
     wx.navigateTo({
       url: '/pages/specification/specification',
     })

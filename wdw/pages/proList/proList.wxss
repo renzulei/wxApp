@@ -196,13 +196,12 @@
 
 .footer {
   width: 100%;
-  height: 714rpx;
-  background-color: pink;
+  background-color: #fff;
   position: fixed;
-  bottom: 46rpx;
+  bottom: 0;
   font-size: 26rpx;
   font-weight: 600;
-  /* transition: all 2s linear; */
+  transition: all 0.5s; 
   z-index: 20;
 }
 
@@ -326,15 +325,24 @@
 
 .hide {
   display: none;
-  /* height: 0;
-  overflow: hidden; */
 }
 
 .show {
   display: block;
-  /* height: 714rpx; */
+}
+.right100{
+  right: -100% !important;
 }
 
+.right0{
+  right: 0 !important;
+}
+.bottom100{
+  bottom: -100% !important;
+}
+.bottom0{
+  bottom:0 !important;
+}
 /*模态框样式  */
 
 .motai {
@@ -342,7 +350,7 @@
   height: 100%;
   background-color: #000;
   opacity: 0.2;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 10;
@@ -358,6 +366,7 @@
   top: 0;
   right: 0;
   z-index: 50;
+  transition: all 0.5s;
 }
 
 .screen_content {

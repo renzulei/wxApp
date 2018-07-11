@@ -38,50 +38,13 @@
         <text class='text'>平张</text>
         <text class='text'>印刷纸</text>
         <text class='text'>灰底涂布纸</text>
-        <view class='del'>删除</view>
       </view>
       <view class='price'>￥8670.69</view>
       <view class='shopping' bindtap='shoppingTap'>立即购买</view>
     </view>
-    <!-- 2 -->
-    <view class='box clearfix'>
-      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
-      <view class='box_text'>
-        <text class='text'>平张</text>
-        <text class='text'>印刷纸</text>
-        <text class='text'>灰底涂布纸</text>
-        <view class='del'>删除</view>
-      </view>
-      <view class='price'>￥8670.69</view>
-      <view class='shopping'>立即购买</view>
-    </view>
-    <!-- 3 -->
-    <view class='box clearfix'>
-      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
-      <view class='box_text'>
-        <text class='text'>平张</text>
-        <text class='text'>印刷纸</text>
-        <text class='text'>灰底涂布纸</text>
-        <view class='del'>删除</view>
-      </view>
-      <view class='price'>￥8670.69</view>
-      <view class='shopping'>立即购买</view>
-    </view>
-
-    <!-- 4 -->
-    <view class='box clearfix'>
-      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
-      <view class='box_text'>
-        <text class='text'>平张</text>
-        <text class='text'>印刷纸</text>
-        <text class='text'>灰底涂布纸</text>
-        <view class='del'>删除</view>
-      </view>
-      <view class='price'>￥8670.69</view>
-      <view class='shopping'>立即购买</view>
-    </view>
+    
   </view>
-  <view class="footer {{ showHide?'hide':'show' }}">
+  <view class="footer {{ showHide?'bottom100':'bottom0' }}">
     <view class='footer_box clearfix'>
       <view class='footer_message'>
         <text>您好！您当前的交易主体：</text>
@@ -129,7 +92,7 @@
   <view class="motai {{ showHides?'hide':'show' }}" bindtap='motaiTaps'></view>
 
   <!--筛选框  -->
-  <view class="screen {{ showHides?'hide':'show' }}">
+  <view class="screen {{ showHides?'right100':'right0' }}">
     <view class='screen_content'>
       <view class='screen_title'>
         <text>商品大类</text>
