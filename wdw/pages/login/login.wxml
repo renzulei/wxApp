@@ -10,29 +10,33 @@
   <!-- 登陆框================================ -->
   <view class='loginBox'>
     <view class='w_user'>
-      <view class='user'>
-        <view class='w_icon clearfix'>
+      <view class='user clearfix'>
+        <view class='w_icon'>
           <image src='/images/user.png'></image>
         </view>
-        <input placeholder-class="phcolor" class='w_input' placeholder='请输入您的账号...'></input>
+        <input placeholder-class="phcolor" class='w_input' placeholder='请输入您的账号...' bindblur="setName" value='{{username}}'></input>
       </view>
     </view>
 
     <view class='w_user'>
-      <view class='user'>
-        <view class='w_icon clearfix'>
+      <view class='user clearfix'>
+        <view class='w_icon'>
           <image src='/images/password.png'></image>
         </view>
-        <input placeholder-class="phcolor" class='w_input' placeholder='请输入您的密码...'></input>
+        <input placeholder-class="phcolor" password class='w_input' placeholder='请输入您的密码...' bindblur="setPass" value='{{password}}'></input>
+      </view>
+      <view wx:if="{{wrong}}" class='warning'>
+        您输入的用户名或密码错误.....
       </view>
     </view>
   </view>
-
+<view>
+</view>
   <!-- 登录按钮================================= -->
   <view class='loginBtn'>
-    <view class='btn' catchtap='changeColor' style="background-color:{{ Color }}">
-      <text>点击登录</text>
-    </view>
+    <button disabled='{{validate?false:true}}' class='btn {{validate?"active":""}}' bindtap='login'>
+      点击登录
+    </button>
   </view>
 
   <!-- 底部================================ -->
