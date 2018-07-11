@@ -16,7 +16,7 @@
         <view class='arrows_bottom'></view>
       </view>
     </view>
-    <view class='title border'>
+    <view class='title'>
       <text>价格</text>
       <view class='right'>
         <view class='arrows_top_tow'></view>
@@ -31,16 +31,16 @@
     </view>
   </view>
   <view class='content'>
-    <!-- 1 -->
-    <view class='box clearfix'>
-      <view class='box_title'>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</view>
+    <!-- 商品列表 -->
+    <view class='box clearfix' wx:for="{{shop}}" wx:key="{{item.productId}}">
+      <view class='box_title'>{{item.productName}}</view>
       <view class='box_text'>
-        <text class='text'>平张</text>
-        <text class='text'>印刷纸</text>
-        <text class='text'>灰底涂布纸</text>
+        <text class='text'>{{item.physicalStateName}}</text>
+        <text class='text'>{{item.supperCategoryName}}</text>
+        <text class='text'>{{item.itemCategoryName}}</text>
       </view>
-      <view class='price'>￥8670.69</view>
-      <view class='shopping' bindtap='shoppingTap'>立即购买</view>
+      <view class='price'>￥{{item.unitPrice}}</view>
+      <view class='shopping' data-productid="{{item.productId}}" bindtap='shoppingTap'>立即购买</view>
     </view>
     
   </view>
@@ -63,8 +63,8 @@
     </view>
 
     <view class='footer_title'>
-      <text>江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张</text>
-      <view class='footer_price'>￥8670.69</view>
+      <text>{{productDetail.productName}}</text>
+      <view class='footer_price'>￥{{productDetail.unitPrice}}</view>
     </view>
 
     <view class='footer_bom'>

@@ -54,6 +54,7 @@
   font-size: 28rpx;
   font-weight: 600;
   color: #7e7e7e;
+  border-right:1rpx solid #eee;
 }
 
 .border {
@@ -135,6 +136,7 @@
 .content {
   width: 100%;
   padding: 0rpx 20rpx;
+  margin-top: 20rpx;
 }
 
 .box {

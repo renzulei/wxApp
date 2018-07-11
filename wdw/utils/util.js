@@ -46,9 +46,26 @@ function compare(property) {
   }
 }
 
+const deepCopy = (p, c) => {
+  var copy = c || [];
+  for (var i in p) {
+    if (!p.hasOwnProperty(i)) {
+      continue;
+    }
+    if (typeof p[i] === 'object' && p[i] != null) {
+      copy[i] = (p[i].constructor === Array) ? [] : {};
+      this.deepCopy(p[i], copy[i]);
+    } else {
+      copy[i] = p[i];
+    }
+  }
+  return copy;
+}
+
 module.exports = {
   formatTime: formatTime,
   checkPhone: checkPhone,
   check_storage: check_storage,
-  compare: compare
+  compare: compare,
+  deepCopy: deepCopy
 }
