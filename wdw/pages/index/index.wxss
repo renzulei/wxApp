@@ -71,7 +71,7 @@
   margin-left: 20rpx;
   line-height: 34rpx;
   font-size: 32rpx;
-  font-weight: 600;
+  font-weight: bold;
   color: #5E5E5E;
 }
 
@@ -124,7 +124,7 @@
   color: #fff;
   font-size: 26rpx;
   box-sizing: border-box;
-  font-weight: 600; 
+  font-weight: bold; 
   margin-right: 10rpx;
 }
 
@@ -142,7 +142,7 @@
   text-align: center;
   line-height: 46rpx;
   border: 1px solid #fff;
-  font-weight: 300;
+  font-weight: lighter;
   border-radius: 10rpx;
 }
 

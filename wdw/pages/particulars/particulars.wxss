@@ -1,0 +1,81 @@
+
+/* .container {} */
+
+.content {
+  width: 100%;
+}
+
+/* header 区域样式 */
+.header {
+  width: 708rpx;
+  height: 198rpx;
+  background-color: #9FB9EF;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
+  padding: 30rpx ;
+  margin-bottom: 30rpx;
+}
+
+.odd,
+.state,
+.site {
+  height: 24rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 24rpx;
+}
+
+.state,
+.site  {
+  margin-top: 30rpx;
+}
+
+.odd_left {
+  color: #FFF3D0;
+}
+
+.odd_right {
+  color: #fff;
+  padding-right: 70rpx;
+  padding-left: 10rpx;
+}
+
+/* list 区域样式 */
+
+.list {
+  width: 706rpx;
+  height: 186rpx;
+  margin: 0 auto;
+  border: 1px solid #E8E8E8;
+  padding: 20rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+
+.item {
+  float: left;
+  width: 33.33%;
+  margin-bottom: 20rpx;
+}
+
+.item_left {
+  color: #787878;
+}
+
+.item_right {
+  color: #576B95;
+  padding-left: 10rpx;
+}
+
+.footer {
+  width: 100%;
+  line-height: 90rpx;
+  background-color: #F75959;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+}

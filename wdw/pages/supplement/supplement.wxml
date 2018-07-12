@@ -11,7 +11,7 @@
         <text class='title_right'>侯亮平</text>
         <text class='title_left relation'>联系方式：</text>
         <text class='title_right'>15122176897</text>
-      </view> 
+      </view>
       <view class='title3'>
         <text class='title_left'>收货地址：</text>
         <text class='title_right'>育昌路369号 山东省潍坊市昌乐县</text>
@@ -22,10 +22,12 @@
       <view class='type'>
         <text class='size align'>订单类型：</text>
         <view class='order_icon'>
+          <image src='/images/hide.png'></image>
           <image src='/images/show.png'></image>
         </view>
         <text class=''>标准订单</text>
         <view class='intention'>
+          <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>
         </view>
         <text>意向订单</text>
@@ -43,14 +45,17 @@
       <view class='type'>
         <text class='size align'>支付节点：</text>
         <view class='order_icon'>
+          <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>
         </view>
         <text class=''>下单预付</text>
         <view class='intention'>
+          <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>
         </view>
         <text>发货前预付</text>
         <view class='intention'>
+          <image src='/images/hide.png'></image>
           <image src='/images/show.png'></image>
         </view>
         <text>赊销</text>
@@ -64,14 +69,17 @@
       <view class='type'>
         <text class='size align'>账期选择：</text>
         <view class='order_icon'>
+          <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>
         </view>
         <text class=''>30</text>
         <view class='intention'>
+          <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>
         </view>
         <text>60</text>
         <view class='intention'>
+          <image src='/images/hide.png'></image>
           <image src='/images/show.png'></image>
         </view>
         <text>120</text>
@@ -81,14 +89,17 @@
       <view class='type'>
         <text class='size align'>支付方式：</text>
         <view class='order_icon'>
+          <image src='/images/hide.png'></image>
           <image src='/images/show.png'></image>
         </view>
         <text class=''>现金支付</text>
         <view class='intention'>
+          <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>
         </view>
         <text>白条支付</text>
         <view class='intention'>
+          <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>
         </view>
         <text>票据支付</text>

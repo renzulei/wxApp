@@ -1,4 +1,4 @@
-// pages/succeed/succeed.js
+// pages/particulars/particulars.js
 Page({
 
   /**
@@ -13,14 +13,6 @@ Page({
    */
   onLoad: function (options) {
   
-  },
-
-  // 点击跳转到产品列表页面
-  succeedTap: function(event) {
-    console.log(111)
-    wx.switchTab({
-      url: '/pages/proList/proList',
-    })
   },
 
   /**

@@ -31,7 +31,7 @@
   width: 100%;
   font-size: 24rpx;
   color: #5e5e5e;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 /* 每个小盒子 */
@@ -57,7 +57,7 @@
   line-height: 50rpx;
   margin-top: 22rpx;
   font-size: 24rpx;
-  font-weight: 600;
+  font-weight: bold;
   padding: 0 20rpx;
 }
 
@@ -115,7 +115,7 @@
 .footer {
   width: 100%;
   font-size: 24rpx;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .footer_top {
@@ -146,7 +146,7 @@
   font-size: 30rpx;
   text-align: center;
   line-height: 88rpx;
-  font-weight: 400;
+  font-weight: normal;
 }
 
 .bom_left {
@@ -184,11 +184,11 @@
   margin-top: 24rpx;
   line-height: 30rpx;
   color: #fff;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .bom_text {
-  font-weight: 400;
+  font-weight: normal;
   font-size: 22rpx;
 }
 
@@ -233,7 +233,6 @@
   float: left;
   margin-left: 240rpx;
   margin-right: 16rpx;
-  /* border: 1px dashed #888; */
 }
 
 .icon image {
@@ -250,7 +249,7 @@
   border-radius: 8rpx;
   margin-bottom: 30rpx;
   font-size: 26rpx;
-  font-weight: 600;
+  font-weight: bold;
   padding: 36rpx 20rpx;
   margin: 30rpx auto;
 }
@@ -286,7 +285,7 @@
 
 .type {
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: bold;
   color: #4f4f4f;
   margin-bottom: 40rpx;
 }

@@ -1,0 +1,87 @@
+<view class="container">
+  <view class='content'>
+
+  <view class='nav clearfix'>
+    <view class='nav_stay'>待收货</view>
+      <view class='nav_already'>已收货</view>
+        <view class='nav_abnormal'>异常收货</view>
+  </view>
+
+  <!-- header区域========================================================== -->
+    <view class='header'>
+      <view class='odd'>
+        <text class='odd_left'>意向订单号:</text>
+        <text class='odd_right'>YCD0018652</text>
+        <text class='odd_left'>订单金额:</text>
+        <text class='odd_right'>￥6178430.0</text>
+      </view>
+      <view class='state'>
+        <text class='odd_left'>订单状态:</text>
+        <text class='odd_right'>待收货</text>
+        <text class='odd_left'>下单时间:</text>
+        <text class='odd_right'>2018-01-26 15:36:21</text>
+      </view>
+      <view class='site' bindtap='particularsTap'>
+        <text>点击查看订单详情(2)</text>
+      </view>
+    </view>
+
+     <view class='header'>
+      <view class='odd'>
+        <text class='odd_left'>意向订单号:</text>
+        <text class='odd_right'>YCD0018652</text>
+        <text class='odd_left'>订单金额:</text>
+        <text class='odd_right'>￥6178430.0</text>
+      </view>
+      <view class='state'>
+        <text class='odd_left'>订单状态:</text>
+        <text class='odd_right'>待收货</text>
+        <text class='odd_left'>下单时间:</text>
+        <text class='odd_right'>2018-01-26 15:36:21</text>
+      </view>
+      <view class='site' bindtap='particularsTap'>
+        <text>点击查看订单详情(2)</text>
+      </view>
+    </view>
+
+     <view class='header'>
+      <view class='odd'>
+        <text class='odd_left'>意向订单号:</text>
+        <text class='odd_right'>YCD0018652</text>
+        <text class='odd_left'>订单金额:</text>
+        <text class='odd_right'>￥6178430.0</text>
+      </view>
+      <view class='state'>
+        <text class='odd_left'>订单状态:</text>
+        <text class='odd_right'>待收货</text>
+        <text class='odd_left'>下单时间:</text>
+        <text class='odd_right'>2018-01-26 15:36:21</text>
+      </view>
+      <view class='site' bindtap='particularsTap'>
+        <text>点击查看订单详情(2)</text>
+      </view>
+    </view>
+
+     <view class='header'>
+      <view class='odd'>
+        <text class='odd_left'>意向订单号:</text>
+        <text class='odd_right'>YCD0018652</text>
+        <text class='odd_left'>订单金额:</text>
+        <text class='odd_right'>￥6178430.0</text>
+      </view>
+      <view class='state'>
+        <text class='odd_left'>订单状态:</text>
+        <text class='odd_right'>待收货</text>
+        <text class='odd_left'>下单时间:</text>
+        <text class='odd_right'>2018-01-26 15:36:21</text>
+      </view>
+      <view class='site' bindtap='particularsTap'>
+        <text>点击查看订单详情(2)</text>
+      </view>
+    </view>
+
+<!--提示信息============================================  -->
+    <view class='hint'>没有更多数据了</view>
+    <view class='footer'>确认收货</view>
+  </view>
+</view>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/compile/compile",
     "pages/login/login",
     "pages/proList/proList",
     "pages/supplement/supplement",

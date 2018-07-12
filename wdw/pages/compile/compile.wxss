@@ -1,0 +1,53 @@
+
+/* .container {
+
+} */
+
+.content {
+  width: 100%;
+}
+
+.list {
+  height: 98rpx;
+  background-color: pink; 
+  border-bottom: 1px solid #eee;
+  position: relative;
+  padding: 0 20rpx;
+}
+
+.left {
+  float: left;
+  line-height: 98rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+
+.section {
+  float: left;
+  line-height: 98rpx;
+  font-size: 24rpx;
+}
+
+.picker {
+  color: red;
+}
+
+.icon {
+  width: 0;
+  height: 0;
+  border-top: 20rpx solid #CCCCCC;
+  border-bottom: 20rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+  position: absolute;
+  top: 38rpx;
+  right: 100rpx;
+}
+
+.input {
+  display: inline-block;
+  margin-top: 22rpx;
+   width: 550rpx; 
+  font-size: 24rpx;
+}

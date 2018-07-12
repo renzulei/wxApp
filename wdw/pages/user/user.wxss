@@ -14,7 +14,7 @@
 }
 
 .left {
-  font-weight: 600; 
+  font-weight: bold; 
 }
 
 .right {

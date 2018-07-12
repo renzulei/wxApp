@@ -14,7 +14,7 @@
       <text>查看详情</text>
     </view>
 
-    <view class='shopping'>
+    <view class='shopping' bindtap='succeedTap'>
       <text>继续购物</text>
     </view>
   </view>

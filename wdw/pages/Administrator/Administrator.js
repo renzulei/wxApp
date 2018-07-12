@@ -1,11 +1,11 @@
-// pages/succeed/succeed.js
+// pages/Administrator/Administrator.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+
   },
 
   /**
@@ -15,11 +15,9 @@ Page({
   
   },
 
-  // 点击跳转到产品列表页面
-  succeedTap: function(event) {
-    console.log(111)
-    wx.switchTab({
-      url: '/pages/proList/proList',
+  particularsTap: function(event) {
+    wx.navigateTo({
+      url: '/pages/particulars/particulars',
     })
   },
 

@@ -1,0 +1,23 @@
+<view class="container">
+  <view class='content'>
+    <view class='list'>
+      <text class='left'>所在地区:</text>
+      <view class="section">
+        <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+          <view class="picker">
+            <text>请选择所在区域</text>
+
+            <view class='icon'></view>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class='list'>
+      <text class='left'>详细地址:</text><input class='input' placeholder='请填写您所在的详细地址'></input>
+    </view>
+      <view class='list'>
+      <text class='left'>邮政编码:</text><input class='input' placeholder='请填写所在地区的邮政编码'></input>
+    </view>
+  </view>
+</view>

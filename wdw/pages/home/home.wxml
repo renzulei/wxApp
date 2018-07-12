@@ -33,7 +33,7 @@
         </view>
       </view>
       <view>
-        <view class='nav_icon'>
+        <view class='nav_icon' bindtap='AdministratorTap'>
           <image src='/images/xiaoche.png'></image>
         <view>客户收货管理</view>
         </view>

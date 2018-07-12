@@ -24,7 +24,7 @@ page {
   margin-bottom: 24rpx;
 }
 .box_title {
-  font-weight: 600;
+  font-weight: bold;
   color: #5E5E5E;
 }
 
@@ -50,7 +50,7 @@ page {
 
 .price {
   margin-top: 30rpx;
-  font-weight: 600;
+  font-weight: bold;
   color: #F75959;
 }
 
@@ -64,5 +64,5 @@ page {
   border: 1px solid #F75959;
   border-radius: 10rpx;
   color: #F75959;
-  font-weight: 600;
+  font-weight: bold;
 }
