@@ -1,0 +1,11 @@
+<template name="emptyfill">
+  <view class='empty-template'>
+    <view class='imgwrap'>
+      <image src='/images/emptyfill.png' mode='widthFix'></image>
+    </view>
+      <view class='tis'>
+        <text>这里还没有数据，</text>
+        <text>请到别处逛逛吧(〃’▽’〃)</text>
+      </view>
+  </view>
+</template>

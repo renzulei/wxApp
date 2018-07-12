@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/login/login",
+    "pages/proList/proList",
     "pages/supplement/supplement",
     "pages/specification/specification",
-    "pages/proList/proList",
     "pages/createOrder/createOrder",
     "pages/affirm/affirm",
     "pages/succeed/succeed",
@@ -11,7 +12,6 @@
     "pages/concern/concern",
     "pages/enterprise/enterprise",
     "pages/enterprises/enterprises",
-    "pages/login/login",
     "pages/logs/logs",
     "pages/user/user",
     "pages/test/test"
@@ -24,12 +24,12 @@
     "backgroundColor": "#000"
   },
   "tabBar": {
+    "color": "#636363",
+    "selectedColor": "#F75959",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "color": "#161210",
-        "selectedColor": "#FA530A",
         "iconPath": "/images/index1.png",
         "selectedIconPath": "/images/index.png"
       },

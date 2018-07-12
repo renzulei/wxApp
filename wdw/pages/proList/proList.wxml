@@ -1,3 +1,4 @@
+<import src="../../template/empty/empty.wxml"/>
 <view class='container'>
   <view class='w_search'>
     <view class='input-wrap'>
@@ -42,7 +43,7 @@
       <view class='price'>￥{{item.unitPrice}}</view>
       <view class='shopping' data-productid="{{item.productId}}" bindtap='shoppingTap'>立即购买</view>
     </view>
-
+    <template is="emptyfill" wx:if="{{shop.length==0}}"/>
   </view>
   <view class="footer {{ showHide?'bottom100':'bottom0' }}">
     <view class='footer_box clearfix'>

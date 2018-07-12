@@ -1,0 +1,21 @@
+/*没有数据的时候展示  */
+.empty-template{
+  padding: 100rpx 0;
+  text-align: center;
+}
+.empty-template .imgwrap{
+  width: 188rpx;
+  margin: 0 auto;
+}
+.empty-template .imgwrap image{
+  width: 100%;
+}
+.empty-template .tis{
+  margin-top: 36rpx;
+  font-size: 28rpx;
+  color: #777;
+  line-height: 44rpx;
+}
+.empty-template .tis text{
+  display: block;
+}
