@@ -52,7 +52,7 @@
   line-height: 80rpx;
   text-align: center;
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: bold;
   color: #7e7e7e;
   border-right:1rpx solid #eee;
 }
@@ -151,7 +151,7 @@
 }
 
 .box_title {
-  font-weight: 600;
+  font-weight: bold;
   color: #5e5e5e;
 }
 
@@ -177,7 +177,7 @@
 
 .price {
   margin-top: 30rpx;
-  font-weight: 600;
+  font-weight: bold;
   color: #f75959;
 }
 
@@ -191,7 +191,7 @@
   border: 1px solid #f75959;
   border-radius: 10rpx;
   color: #f75959;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 /* footer底部样式 */
@@ -202,7 +202,6 @@
   position: fixed;
   bottom: 0;
   font-size: 26rpx;
-  font-weight: 600;
   transition: all 0.5s;
   z-index: 20;
 }
@@ -217,7 +216,9 @@
   background-color: #9fb9ef;
   margin-top: 34rpx;
 }
-
+.footer_message,.footer_site{
+  font-weight: bold;
+}
 .right_color {
   color: #fff;
 }
@@ -248,21 +249,22 @@
 }
 
 .footer_title {
-  height: 30rpx;
   margin-top: 30rpx;
   color: #5e5e5e;
   margin-left: 20rpx;
+  font-weight: bold;
 }
 
 .footer_price {
   color: #f75959;
   margin-top: 30rpx;
+  font-weight: bold;
 }
 
 .footer_bom {
   width: 100%;
   height: 200rpx;
-  margin-top: 130rpx;
+  margin-top: 50rpx;
   padding: 0 30rpx;
 }
 
@@ -280,7 +282,7 @@
 
 .footer_text {
   display: inline-block;
-  width: 182rpx;
+  padding:0 20rpx;
   background-color: #f2f2f2;
   margin-left: 40rpx;
   border-radius: 10rpx;
@@ -366,39 +368,45 @@
 
 .screen {
   width: 564rpx;
-  height: 1298rpx;
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
   z-index: 50;
   transition: all 0.5s;
+  padding-bottom: 150rpx;
 }
-
+.contenBox{
+  height: 100%;
+  overflow-y: auto;
+}
 .screen_content {
   width: 100%;
   font-size: 28rpx;
-  font-weight: 600;
   color: #7e7e7e;
 }
 
 .screen_title {
   line-height: 68rpx;
+  font-weight: bold;
   background-color: #f2f2f2;
   padding: 0 20rpx;
+  font-size: 28rpx;
 }
 
 .screen_text {
-  background-color: pink;
-  font-size: 22rpx;
+  background-color: #fff;
+  font-size: 24rpx;
   text-align: left;
-  padding: 10rpx;
+  padding-bottom: 20rpx;
 }
 
 .list {
-  padding: 14rpx 38rpx;
+  padding: 12rpx 20rpx;
   display: inline-block;
-  margin: 16rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
   background-color: #f2f2f2;
   border-radius: 8rpx;
 }
@@ -409,27 +417,23 @@
 }
 
 .border {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1rpx solid #e1e1e1;
 }
 
 .screen_btn {
-  height: 200rpx;
-  background-color: pink;
-  border-top: 1px solid pink;
+  padding-top: 45rpx;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150rpx;
 }
-
-.button {
-  height: 60rpx;
-  margin-top: 70rpx;
-  /* padding: 0 60rpx; */
-}
-
 .end {
   width: 170rpx;
   line-height: 60rpx;
   float: right;
   font-size: 28rpx;
-  font-weight: 600;
   text-align: center;
   margin-right: 50rpx;
   border-radius: 8rpx;
@@ -437,7 +441,8 @@
 
 .end_left {
   background-color: #fff;
-  color: #e60002;
+  color: #f75959;
+  border: 1rpx solid #f75959;
 }
 
 .end_right {

@@ -1,14 +1,35 @@
 // pages/loging/logion.js
+const util = require('../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    validate: false,//登录名和密码为空检查
+    validate: false, //登录名和密码为空检查
     username: '',
     password: '',
-    wrong:false,//登录名或密码错误
+    wrong: false, //登录名或密码错误
+    // 登录成功后返回的模拟数据
+    userDefaultTradeCompany: {
+      address: "万荣路700号",
+      companyName: "供应链金融测试用户1",
+      contactId: 248,
+      currencyCode: "CNY",
+      customerId: 226,
+      employeeEmail: "shengyang.zhou@hand-china.com",
+      employeeId: 10001,
+      employeeMobil: "13764784777",
+      employeeName: "管理员",
+      partyName: "供应链金融测试用户1",
+      partyNumber: "P0010701",
+      regionCode: "HD",
+      supplierId: 25,
+      tradeCompanyId: 222,
+      tradePartyId: 215,
+    },
+    token: "5050797f-b4ed-416c-a8a6-ad57c3249f7b",
+    tokenExpire:3600,
   },
 
   /**
@@ -21,18 +42,18 @@ Page({
       username: username,
       password: password
     }, this.checkValidate);
-    if (username != '' && password!=''){
+    if (username != '' && password != '') {
       // this.login();
     }
   },
-  
+
   setName: function(e) {
     var username = e.detail.value;
     this.setData({
       username
     }, this.checkValidate);
     wx.setStorageSync('login-username', username)
-    
+
   },
 
   setPass: function(e) {
@@ -41,7 +62,7 @@ Page({
       password
     }, this.checkValidate);
     wx.setStorageSync('login-password', password)
-    
+
   },
 
   checkValidate: function() {
@@ -54,13 +75,26 @@ Page({
     })
   },
 
-  login:function(){
+  login: function() {
+    var that = this;
     var username = this.data.username;
     var password = this.data.password;
-    console.log("登录成功")
-    wx.switchTab({
-      url: '../index/index',
+    var token = that.data.token;
+    var userName = that.data.userName;
+    var tokenExpire = that.data.tokenExpire;
+    var userDefaultTradeCompany = that.data.userDefaultTradeCompany;
+    util.login({
+      token,
+      userName,
+      tokenExpire,
+      userDefaultTradeCompany,
+      success: () => {
+        wx.switchTab({
+          url: '../index/index',
+        })
+      }
     })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

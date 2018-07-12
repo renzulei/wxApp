@@ -46,6 +46,7 @@ function compare(property) {
   }
 }
 
+// 深拷贝数组
 const deepCopy = (p, c) => {
   var copy = c || [];
   for (var i in p) {
@@ -61,11 +62,87 @@ const deepCopy = (p, c) => {
   }
   return copy;
 }
+// 登录成功存储key
+const login = (props) => {
+  let {
+    token,
+    tokenExpire,
+    success,
+    userName,
+    userDefaultTradeCompany
+  } = props;
+  wx.setStorageSync('__wgt', token);
+  wx.setStorageSync('userName', userName);
+  wx.setStorageSync('__wgl', 'zh_CN');
+  wx.setStorageSync('userDefaultTradeCompany', userDefaultTradeCompany);
+  wx.setStorageSync('menuKey', 'index');
+  success && success();
+}
+// 退出登录清除key
+const logout = () => {
+  wx.removeStorage({
+    key: '__wgt'
+  });
+  wx.removeStorage({
+    key: 'userName'
+  });
+  wx.removeStorage({
+    key: 'userDefaultTradeCompany'
+  });
+}
+/* Email 正则*/
+let regEmail = function() {
+  return /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/
+}
+/* Phone 正则*/
+let regPhone = function() {
+  return /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/
+}
+/* Phone 正则*/
+let regPassword = function() {
+  return /(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,16}$/
+}
+/*金额格式化（三位一个逗号）*/
+const formatNum = (str) => {
+  if (str != NaN && str != undefined) {
+    var newStr = "";
+    var count = 0;
+    str = str.toString();
+    if (str.indexOf(".") == -1) {
+      for (var i = str.length - 1; i >= 0; i--) {
+        if (count % 3 == 0 && count != 0) {
+          newStr = str.charAt(i) + "," + newStr;
+        } else {
+          newStr = str.charAt(i) + newStr;
+        }
+        count++;
+      }
+      newStr = newStr; //自动补小数点后两位
+    } else {
+      for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+        if (count % 3 == 0 && count != 0) {
+          newStr = str.charAt(i) + "," + newStr;
+        } else {
+          newStr = str.charAt(i) + newStr; //逐个字符相接起来
+        }
+        count++;
+      }
+      newStr = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+    }
+  }
+  return newStr
+}
 
 module.exports = {
   formatTime: formatTime,
   checkPhone: checkPhone,
   check_storage: check_storage,
   compare: compare,
-  deepCopy: deepCopy
+  deepCopy: deepCopy,
+  login: login,
+  logout: logout,
+  regEmail: regEmail,
+  regPhone: regPhone,
+  regPassword: regPassword,
+  formatNum: formatNum,
 }

@@ -7,6 +7,7 @@ Page({
   data: {
     showHide: 'true',
     showHides: 'true',
+    // 产品列表数据
     shop: [{
       "productId": "3060",
       "productName": "高级瓦楞",
@@ -35,6 +36,7 @@ Page({
       "sort": "0",
       "key": 2
     }],
+    // 筛选条件数据
     filters: [{
       "name": "商品大类",
       "item": [{
@@ -132,28 +134,87 @@ Page({
         "value": "GW"
       }]
     }],
-    productDetail: { 
-      "objectVersionNumber": null, 
-      "productId": 3060, 
-      "productCode": null, 
-      "productName": "高级瓦楞", 
-      "enabledFlag": "Y", "sort": 0, 
-      "productDetail": "<p><br></p>", 
-      "productCycle": "<p><br></p>", 
-      "unitPrice": null, 
-      "physicalStateName": null, 
-      "itemCategoryName": null, 
-      "supperCategoryName": null, 
-      "defaultItemId": 93, 
-      "itemAttributes": null, 
-      "productPic": null, 
-      "lang": null, 
-      "contactId": null, 
-      "favoritesFlag": "N", 
-      "productItemList": null, 
-      "productAttachList": null 
+    // 产品详情数据
+    productDetail: {
+      "objectVersionNumber": null,
+      "productId": 3060,
+      "productCode": null,
+      "productName": "高级瓦楞",
+      "enabledFlag": "Y",
+      "sort": 0,
+      "productDetail": "<p><br></p>",
+      "productCycle": "<p><br></p>",
+      "unitPrice": null,
+      "physicalStateName": null,
+      "itemCategoryName": null,
+      "supperCategoryName": null,
+      "defaultItemId": 93,
+      "itemAttributes": null,
+      "productPic": null,
+      "lang": null,
+      "contactId": null,
+      "favoritesFlag": "N",
+      "productItemList": null,
+      "productAttachList": null
     },
+    // 物料种类数据
+    productItems: [{
+      "objectVersionNumber": null,
+      "itemId": 93,
+      "itemCategoryId": 102,
+      "itemCode": "BW1902000",
+      "itemName": "高级瓦楞",
+      "itemAlias": null,
+      "description": "",
+      "uomCode": "TON",
+      "customsCode": null,
+      "physicalStateCode": "JT",
+      "publicFlag": "Y",
+      "enabledFlag": null,
+      "startDateActive": null,
+      "endDateActive": null,
+      "sourceKey": null,
+      "inventId": null,
+      "categoryCode": null,
+      "itemCategoryIds": null,
+      "categoryName": "高强瓦楞纸",
+      "physicalStateName": "卷筒",
+      "supperCategoryCode": "WLZ",
+      "supperCategoryName": "瓦楞纸",
+      "itemAttributeId": null,
+      "fixedAttributeId": null,
+      "attributeCode": null,
+      "brandCodes": null,
+      "qtyCodes": null,
+      "attributeValue": null,
+      "unitPrice": 4000,
+      "quantity": null,
+      "tonnage": null,
+      "currencyCode": null,
+      "baseOrderQuantity": null,
+      "orderQuantity": null,
+      "orderUom": null,
+      "baseOrderUom": null,
+      "amount": null,
+      "priceCodes": null,
+      "shelveStatusCode": null,
+      "searchBoxContext": null,
+      "priceSort": null,
+      "saleCountSort": null,
+      "itemChangableAttributes": null,
+      "itemFixedAttributes": null,
+      "itemApvSuppliers": null,
+      "itemApvCustomers": null,
+      "attributeName": null
+    }],
     selectedProductId: '',
+    userDefaultTradeCompany: '',
+    partyName:'',//交易主体（从缓存读取）
+    address: "",//收货地址（从缓存读取）
+    items: '',
+    color_choose: '', //选中的物料
+    itemName: '', //选中物料作为参数带到填写规格页面
+    unitPrice:'',//选中物料价格
 
   },
 
@@ -161,9 +222,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var userDefaultTradeCompany = wx.getStorageSync('userDefaultTradeCompany');
+    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
+    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address:"";
+    // console.log(userDefaultTradeCompany)
+    this.setData({
+      partyName: partyName,
+      address: address,
+    })
   },
-
+  typeChoose: function(e) {
+    // console.log(e)
+    var data = e.currentTarget.dataset.item;
+    this.setData({
+      items: data,
+      color_choose: data.itemName,
+      itemName: data.itemName,
+      unitPrice: data.unitPrice,
+    })
+  },
 
   // 筛选的函数
   screenTap: function(event) {

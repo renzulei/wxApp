@@ -6,7 +6,7 @@
       </view>
       <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'></input>
     </view>
-  </view> 
+  </view>
 
   <view class='content_title'>
     <view class='title'>
@@ -42,17 +42,17 @@
       <view class='price'>￥{{item.unitPrice}}</view>
       <view class='shopping' data-productid="{{item.productId}}" bindtap='shoppingTap'>立即购买</view>
     </view>
-    
+
   </view>
   <view class="footer {{ showHide?'bottom100':'bottom0' }}">
     <view class='footer_box clearfix'>
       <view class='footer_message'>
         <text>您好！您当前的交易主体：</text>
-        <text class='right_color'>辽宁阳光天泽包装有限公司</text>
+        <text class='right_color'>{{partyName}}</text>
       </view>
       <view class='footer_site'>
         <text>收货地址：</text>
-        <text class='right_color'>育昌路369号 山东省潍坊市昌乐县</text>
+        <text class='right_color'>{{address}}</text>
       </view>
       <view class='hint'>
         <text class='hint_color'>(如需修改收货地址请点击右方编辑按钮)</text>
@@ -68,12 +68,16 @@
     </view>
 
     <view class='footer_bom clearfix'>
-        <view class='footer_left'>物料选择:</view>
-        <view class='footer_right'>
-          <text class='footer_text'>进口瓦楞纸</text>
-          <text class='footer_text text_color'>进口牛卡纸</text>
-          <text class='footer_text top'>进口砂管纸</text>
-        </view>
+      <view class='footer_left'>物料选择:</view>
+      <view class='footer_right'>
+        <text 
+          wx:for="{{productItems}}" 
+          wx:key="{{item.itemId}}"
+          class='footer_text {{color_choose==item.itemName?"text_color":""}}' 
+          data-item="{{item}}" 
+          bindtap='typeChoose'>{{item.itemName}}
+         </text>
+      </view>
       <view>
       </view>
     </view>
@@ -95,62 +99,15 @@
 
   <!--筛选框  -->
   <view class="screen {{ showHides?'right100':'right0' }}">
-    <view class='screen_content'>
-      <view class='screen_title'>
-        <text>商品大类</text>
-      </view>
-      <view class='screen_text'>
-        <view class='list'>印刷纸</view>
-        <view class='list list_color'>砂管纸</view>
-        <view class='list'>箱板纸</view>
-        <view class='list'>瓦楞纸</view>
-        <view class='list'>进口纸</view>
-        <view class='list'>白板纸</view>
-      </view>
-    </view>
-
-
-    <view class='screen_content'>
-      <view class='screen_title'>
-        <text>存在状态</text>
-      </view>
-      <view class='screen_text'>
-        <view class='list list_color'>平张</view>
-        <view class='list'>卷筒</view>
-      </view>
-    </view>
-
-
-    <view class='screen_content'>
-      <view class='screen_title'>
-        <text>克重</text>
-      </view>
-      <view class='screen_text'>
-        <view class='list'>100g及以下</view>
-        <view class='list'>110g</view>
-        <view class='list'>120g</view>
-        <view class='list'>130g</view>
-        <view class='list'>140g</view>
-        <view class='list list_color'>150g</view>
-        <view class='list'>160g</view>
-        <view class='list'>170g</view>
-        <view class='list'>180g</view>
-        <view class='list'>190g</view>
-        <view class='list'>200g及以上</view>
-      </view>
-    </view>
-
-
-    <view class='screen_content border'>
-      <view class='screen_title'>
-        <text>商品中类</text>
-      </view>
-      <view class='screen_text'>
-        <view class='list'>白卡纸</view>
-        <view class='list'>砂管纸</view>
-        <view class='list'>进口瓦楞纸</view>
-        <view class='list list_color'>进口牛卡纸</view>
-        <view class='list'>白面牛卡纸</view>
+    <view class='contenBox'>
+      <view class='screen_content' wx:for="{{filters}}" wx:for-item="it" wx:key="it.name">
+        <view class='screen_title'>
+          <text>{{it.name}}</text>
+        </view>
+        <view class='screen_text'>
+          <view class='list' wx:for="{{it.item}}" wx:for-item="itin" wx:key="*this">{{itin.name}}</view>
+          <!-- <view class='list list_color'>砂管纸</view> -->
+        </view>
       </view>
     </view>
     <view class='screen_btn clearfix'>
