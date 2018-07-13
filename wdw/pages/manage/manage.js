@@ -1,11 +1,12 @@
-// pages/concern/concern.js
+// pages/manage/manage.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    array: ['请选择支付方式','现金支付', '微信支付', '支付宝支付', '银行卡支付'],
+    index: 0
   },
 
   /**
@@ -15,13 +16,13 @@ Page({
   
   },
 
-  // 跳转到产品列表页面
-  proListTap: function(event) {
-    wx.switchTab({
-      url: '/pages/proList/proList',
+  bindPickerChange: function(e) {
+    console.log(e)
+    var that = this;
+    that.setData({
+      index: e.detail.value
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

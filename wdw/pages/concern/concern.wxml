@@ -9,7 +9,7 @@
         <view class='del'>删除</view>
       </view>
       <view class='price'>￥8670.69</view>
-      <view class='shopping'>立即购买</view>
+    <view class='shopping' bindtap='proListTap'>立即购买</view>
     </view>
 
     <view class='box clearfix'>

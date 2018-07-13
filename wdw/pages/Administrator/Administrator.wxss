@@ -31,7 +31,7 @@
 }
 
 .site {
-  width: 220rpx;
+  width: 250rpx;
   text-align: center;
   font-size: 24rpx;
   color: #fff;
@@ -101,7 +101,7 @@
   .nav_already,
   .nav_abnormal {
     margin-right: 60rpx;
-    float: left;
+    display: inline-block;
     line-height: 76rpx;
     font-size: 26rpx;
     color: #4F4F4F;
