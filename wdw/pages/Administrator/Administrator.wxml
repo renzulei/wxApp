@@ -1,7 +1,7 @@
 <view class="container">
   <view class='content'>
 
-  <view class='nav clearfix'>
+  <view class='nav'>
     <view class='nav_stay'>待收货</view>
       <view class='nav_already'>已收货</view>
         <view class='nav_abnormal'>异常收货</view>

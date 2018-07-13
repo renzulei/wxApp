@@ -277,13 +277,6 @@ Page({
     })
   },
 
-  btnTap: function(e) {
-    console.log(e)
-    wx.navigateTo({
-      url: '/pages/specification/specification',
-    })
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

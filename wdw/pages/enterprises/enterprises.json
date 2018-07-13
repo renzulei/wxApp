@@ -1,1 +1,6 @@
-{}
+  {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#233142",
+    "navigationBarTitleText": "企业地址认证",
+    "navigationBarTextStyle": "white"
+  }

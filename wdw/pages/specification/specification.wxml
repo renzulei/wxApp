@@ -16,6 +16,9 @@
             <view class='left'>
               <text>切长mm:</text>
             </view>
+             <view class='right'>
+              <input class='input'></input>
+            </view>
           </view>
         </view>
 

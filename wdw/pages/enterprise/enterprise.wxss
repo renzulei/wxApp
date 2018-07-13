@@ -1,55 +1,91 @@
 
+/* .container {
+
+} */
 
 .content {
   width: 100%;
 }
-
-.content_text {
-  width: 100%;
+/* list 区域样式========================================== */
+.list {
   height: 98rpx;
+  border-bottom: 1px solid #eee;
+  position: relative;
   padding: 0 20rpx;
-  border-bottom: 1px solid #ECECEC;
-  line-height: 98rpx;
   font-size: 26rpx;
 }
 
 .left {
-  font-weight: bold; 
+  float: left;
+  line-height: 98rpx;
+  font-weight: bold;
+  margin-right: 20rpx;
+  color: #5E5E5E;
 }
 
-.right {
-  color: #8E8E8E;
+.section {
+  float: left;
+  line-height: 98rpx;
+  font-size: 24rpx;
 }
 
-.hint {
-  width: 100%;
-  height: 100rpx;
-  border-top: 1px solid #fff;
-}
-
-.hint image {
-  width: 100%;
-  height: 100%;
-}
-
-.hint_text {
-  width: 615rpx;
-  line-height: 24rpx;
-  margin: 0 auto;
-  margin-top: 70rpx;
-  font-size: 22rpx;
+.picker {
+  color: #808080;
 }
 
 .icon {
-  width: 40rpx;
-  height: 44rpx;
-  float: left;
-  margin-top: 54rpx;
-  margin-left: 20rpx;
+  width: 0;
+  height: 0;
+  border-top: 20rpx solid #CCCCCC;
+  border-bottom: 20rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+  position: absolute;
+  top: 38rpx;
+  right: 100rpx;
 }
 
-.rightColor {
-  color: #F75959;
-  float: right;
-  margin-right: 390rpx;
+.input {
+  display: inline-block;
+  margin-top: 24rpx;
+   width: 550rpx; 
 }
+
+.examine {
+  display: block;
+  color: #F75959;
+  font-size: 26rpx;
+  line-height: 98rpx;
+  text-align: right;
+  margin-right: 380rpx;
+}
+
+/* footer区域样式========================================== */
+
+.footer {
+  height: 44rpx;
+  margin-top: 40rpx;
+  padding: 0 10rpx;
+}
+
+ .footer_icon {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10rpx;
+} 
+
+.footer_icon image {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.footer_left,
+.footer_right {
+  font-size: 24rpx;
+  font-weight: bold;
+    color: #777777;
+}
+

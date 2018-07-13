@@ -87,8 +87,8 @@
       <view class='bottom_left'>
         <text>加入关注</text>
       </view>
-      <view class='bottom_right' bindtap='btnTap'>
-        <text>填写规格</text>
+      <view class='bottom_right'>
+      <navigator url='/pages/specification/specification'> <text>填写规格</text></navigator>
       </view>
     </view>
   </view>

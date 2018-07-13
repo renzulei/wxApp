@@ -1,20 +1,22 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/proList/proList",
+    "pages/Administrator/Administrator",
+    "pages/manage/manage",
+    "pages/concern/concern",
+    "pages/enterprise/enterprise",
+    "pages/enterprises/enterprises",
+    "pages/user/user",
     "pages/compile/compile",
     "pages/login/login",
-    "pages/proList/proList",
     "pages/supplement/supplement",
     "pages/specification/specification",
     "pages/createOrder/createOrder",
     "pages/affirm/affirm",
     "pages/succeed/succeed",
-    "pages/index/index",
     "pages/home/home",
-    "pages/concern/concern",
-    "pages/enterprise/enterprise",
-    "pages/enterprises/enterprises",
     "pages/logs/logs",
-    "pages/user/user",
     "pages/test/test"
   ],
   "window": {

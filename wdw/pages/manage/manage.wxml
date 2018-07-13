@@ -1,0 +1,104 @@
+<view class="contaitner">
+  <!-- table 区域======================================================== -->
+  <view class='table clearfix'>
+    <view class='table_left'>
+      <text class='size_color'>订单编号:</text>
+      <view class='choice'>
+        <input class='input' placeholder='请输入订单编号'></input>
+      </view>
+      <text class='size_color'>商品名称:</text>
+      <view class='choice'>
+        <input class='input' placeholder='请输入商品名称'></input>
+      </view>
+    </view>
+
+    <view class='table_right'>
+      <text class='size_color'>商品名称:</text>
+      <view class="section">
+        <view class="section">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="picker">
+              <view class='choice icon_position'>
+                <input value='{{array[index]}}'></input>
+                <view class='icon'></view>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <view class='btn clearfix'>
+        <view class='btn_search'>
+          <text>搜索</text>
+        </view>
+        <view class='btn_eliminate'>
+          <text>清除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- nav 区域=============================================================== -->
+  <view class='nav'>
+    <view class='nav_stay'>所有订单</view>
+    <view class='nav_already'>已提交</view>
+    <view class='nav_abnormal'>已关闭</view>
+    <view class='nav_abnormal'>已取消</view>
+    <view class='nav_abnormal'>异常</view>
+    <view class='nav_abnormal'>处理</view>
+  </view>
+  <!-- header 区域============================================================ -->
+  <view class='header'>
+    <view class='odd'>
+      <text class='odd_left'>意向订单号:</text>
+      <text class='odd_right'>YCD0018652</text>
+      <text class='odd_left'>订单金额:</text>
+      <text class='odd_right'>￥6178430.0</text>
+    </view>
+    <view class='state'>
+      <text class='odd_left'>订单状态:</text>
+      <text class='odd_right'>待收货</text>
+      <text class='odd_left'>下单时间:</text>
+      <text class='odd_right'>2018-01-26 15:36:21</text>
+    </view>
+    <view class='site' bindtap='particularsTap'>
+      <text>点击查看订单详情(2)</text>
+    </view>
+  </view>
+  <view class='header'>
+    <view class='odd'>
+      <text class='odd_left'>意向订单号:</text>
+      <text class='odd_right'>YCD0018652</text>
+      <text class='odd_left'>订单金额:</text>
+      <text class='odd_right'>￥6178430.0</text>
+    </view>
+    <view class='state'>
+      <text class='odd_left'>订单状态:</text>
+      <text class='odd_right'>待收货</text>
+      <text class='odd_left'>下单时间:</text>
+      <text class='odd_right'>2018-01-26 15:36:21</text>
+    </view>
+    <view class='site' bindtap='particularsTap'>
+      <text>点击查看订单详情(2)</text>
+    </view>
+  </view>
+  <view class='header'>
+    <view class='odd'>
+      <text class='odd_left'>意向订单号:</text>
+      <text class='odd_right'>YCD0018652</text>
+      <text class='odd_left'>订单金额:</text>
+      <text class='odd_right'>￥6178430.0</text>
+    </view>
+    <view class='state'>
+      <text class='odd_left'>订单状态:</text>
+      <text class='odd_right'>待收货</text>
+      <text class='odd_left'>下单时间:</text>
+      <text class='odd_right'>2018-01-26 15:36:21</text>
+    </view>
+    <view class='site' bindtap='particularsTap'>
+      <text>点击查看订单详情(2)</text>
+    </view>
+  </view>
+  <!--提示信息============================================  -->
+  <view class='hint'>没有更多数据了</view>
+</view>
