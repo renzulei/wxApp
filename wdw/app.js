@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -32,12 +32,25 @@ App({
         }
       }
     })
-    
+
   },
   onPageNotFound(res) {
-      console.log(res)
+    console.log(res)
   },
   globalData: {
-    userInfo: null
-  }
+    userInfo: [],
+    http_host: 'http://yz.wangreat.com',
+    openid: wx.getStorageSync('openid'),
+    is_bind: 0, //用户是否绑定手机号
+    user_id: wx.getStorageSync('user_id'),
+    rd_session: wx.getStorageSync('rd_session'), //用户登录态session
+    /*语言配置*/
+    Lang: 'lang=zh_CN',
+    /*内容管理*/
+    cmService: 'http://yz.wangreat.com/core/restapi/public',
+    /*用户管理*/
+    umService: 'http://yz.wangreat.com/core/restapi/public',
+    /*权限管理*/
+    authService: 'http://yz.wangreat.com/core/restapi/private',
+  },
 })

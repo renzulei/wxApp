@@ -1,4 +1,7 @@
 // pages/proList/proList.js
+var app = getApp()
+var http_host = app.globalData.http_host
+var customer_id = app.globalData.customer_id
 Page({
 
   /**
@@ -209,13 +212,14 @@ Page({
     }],
     selectedProductId: '',
     userDefaultTradeCompany: '',
-    partyName:'',//交易主体（从缓存读取）
-    address: "",//收货地址（从缓存读取）
+    partyName: '', //交易主体（从缓存读取）
+    address: "", //收货地址（从缓存读取）
     items: '',
     color_choose: '', //选中的物料
     itemName: '', //选中物料作为参数带到填写规格页面
-    unitPrice:'',//选中物料价格
-
+    unitPrice: '', //选中物料价格
+    searchContent: '', //通过搜索进入产品列表的关键词
+    searchValue: '', //本页面搜索框输入值
   },
 
   /**
@@ -224,13 +228,15 @@ Page({
   onLoad: function(options) {
     var userDefaultTradeCompany = wx.getStorageSync('userDefaultTradeCompany');
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
-    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address:"";
-    // console.log(userDefaultTradeCompany)
+    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
+    // var searchContent = options
+    console.log(options)
     this.setData({
       partyName: partyName,
       address: address,
     })
   },
+  // 物料选择
   typeChoose: function(e) {
     // console.log(e)
     var data = e.currentTarget.dataset.item;
@@ -241,15 +247,44 @@ Page({
       unitPrice: data.unitPrice,
     })
   },
-
-  // 筛选的函数
+  // 搜索框键盘输入值处理函数
+  upSeachValue: function(e) {
+    var searchValue = e.detail.value;
+    this.setData({
+      searchValue: searchValue,
+    })
+  },
+  // 展示筛选框的函数
   screenTap: function(event) {
     var that = this;
     that.setData({
       showHides: (!that.data.showHides)
     })
   },
-
+  // 搜索
+  handleSearch: function() {
+    console.log(1)
+    var searchValue = this.data.searchValue;
+    this.setData({
+      searchContent: searchValue,
+    }, this.fetch({
+      pageSize: 10,
+      current: 1,
+      data: this.data.data
+    }))
+  },
+  // 请求数据
+  fetch: (params = {}) => {
+    wx.request({
+      url: `${http_host}/product/getProductByCondition?page=${params.current}&pageSize=${params.pageSize}`, 
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+  },
   // 底部弹窗函数
   shoppingTap: function(e) {
     var selectedProductId = e.currentTarget.dataset.productid;
