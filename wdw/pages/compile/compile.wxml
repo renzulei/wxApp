@@ -1,3 +1,4 @@
+<import src="../../template/radio/radio.wxml" />
 <view class="container">
   <view class='content'>
 
@@ -7,7 +8,7 @@
       <view class="section">
         <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
           <view class="picker">
-            <text>请选择所在区域</text>
+            <input class='picker_input' placeholder='请填写您的所在地址' value='{{index}}'></input>
             <view class='icon'></view>
           </view>
         </picker>
@@ -32,12 +33,20 @@
     </view>
 
     <!-- footer 区域============================================================== -->
-    <view class='footer'>
-      <view class='footer_icon'>
+    <view class="footer">
+      <!-- <view class="footer_icon">
+         <image class='img_right' src='/images/show.png'></image> 
         <image class='img_left' src='/images/hide.png'></image>
-        <image class='img_right' src='/images/show.png'></image>
-      </view>
-      <text class='footer_text'>设置为默认收货地址</text>
+      </view> -->
+      <!-- 引入的模板 -->
+       <label class="radio" bindtap='add'> 
+        <view class='radio-wrap {{checked?"radio-checked":""}}'>
+          <radio checked="{{checked}}" />
+          <view class='radio-inner'></view>
+         </view> 
+        设置为默认收货地址
+       </label> 
+      <!-- <text class='footer_text'>设置为默认收货地址</text> -->
     </view>
   </view>
 </view>

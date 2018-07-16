@@ -1,4 +1,4 @@
-<import src="../../template/empty/empty.wxml"/>
+<import src="../../template/empty/empty.wxml" />
 <view class='container'>
   <view class='w_search'>
     <view class='input-wrap'>
@@ -43,7 +43,7 @@
       <view class='price'>￥{{item.unitPrice}}</view>
       <view class='shopping' data-productid="{{item.productId}}" bindtap='shoppingTap'>立即购买</view>
     </view>
-    <template is="emptyfill" wx:if="{{shop.length==0}}"/>
+    <template is="emptyfill" wx:if="{{shop.length==0}}" />
   </view>
   <view class="footer {{ showHide?'bottom100':'bottom0' }}">
     <view class='footer_box clearfix'>
@@ -58,9 +58,13 @@
       <view class='hint'>
         <text class='hint_color'>(如需修改收货地址请点击右方编辑按钮)</text>
       </view>
-      <view class='footer_icon'>
-        <image src='/images/del.png'></image>
-      </view>
+      <!-- 跳转到编辑收货地址页 -->
+      <navigator url='/pages/compile/compile'>
+        <view class='footer_icon'>
+          <image src='/images/del.png'></image>
+        </view>
+      </navigator>
+
     </view>
 
     <view class='footer_title'>
@@ -71,12 +75,7 @@
     <view class='footer_bom clearfix'>
       <view class='footer_left'>物料选择:</view>
       <view class='footer_right'>
-        <text 
-          wx:for="{{productItems}}" 
-          wx:key="{{item.itemId}}"
-          class='footer_text {{color_choose==item.itemName?"text_color":""}}' 
-          data-item="{{item}}" 
-          bindtap='typeChoose'>{{item.itemName}}
+        <text wx:for="{{productItems}}" wx:key="{{item.itemId}}" class='footer_text {{color_choose==item.itemName?"text_color":""}}' data-item="{{item}}" bindtap='typeChoose'>{{item.itemName}}
          </text>
       </view>
       <view>
@@ -88,7 +87,9 @@
         <text>加入关注</text>
       </view>
       <view class='bottom_right'>
-      <navigator url='/pages/specification/specification'> <text>填写规格</text></navigator>
+        <navigator url='/pages/specification/specification'>
+          <text>填写规格</text>
+        </navigator>
       </view>
     </view>
   </view>

@@ -1,3 +1,6 @@
+
+@import '../../template/radio/radio.wxss';
+
  /* .container {
   width: 100%;
    background-color: #fff; 
@@ -253,7 +256,8 @@
   font-size: 26rpx;
   font-weight: bold;
   padding: 36rpx 20rpx;
-  margin: 30rpx auto;
+  margin: 30rpx 20rpx 0 20rpx;
+  position: relative;
 }
 
 .title1 {
@@ -371,4 +375,19 @@
   position: absolute;
   top: 26rpx;
   right: 30rpx;
+}
+
+/* hint 右下角的修改图标 */
+.hint_icon {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 130rpx;
+  right: 40rpx;
+}
+
+
+.hint_icon image {
+  width: 40rpx;
+  height: 40rpx;
 }

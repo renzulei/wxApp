@@ -5,16 +5,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
-  
-    region: [],
+    showHide: true,
+    region: ['广东省', '广州市', '海珠区'],
+    index: '',
+    checked: true
   },
-
+  
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
   
+  },
+    // 所在地函数
+  bindRegionChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    var index = e.detail.value;
+    var that = this;
+    that.setData({
+      index: e.detail.value
+    })
+    console.log(index)
+  },
+
+  add: function(event) {
+    console.log(111111)
+    var that = this;
+    that.setData ({
+      checked: (!that.data.checked)
+    })
   },
 
   /**

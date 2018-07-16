@@ -23,19 +23,22 @@
       <view>
         <view class='nav_icon'>
           <image src='/images/gouwuche.png'></image>
-        <view>购物车</view>
+          <view>购物车</view>
         </view>
       </view>
       <view>
-        <view class='nav_icon'>
-          <image src='/images/chaxun.png'></image>
-        <view>意向订单</view>
-        </view>
+        <navigator url='/pages/manage/manage'>
+          <view class='nav_icon'>
+            <image src='/images/chaxun.png'></image>
+            <view>订单管理</view>
+          </view>
+        </navigator>
+
       </view>
       <view>
         <view class='nav_icon' bindtap='AdministratorTap'>
           <image src='/images/xiaoche.png'></image>
-        <view>客户收货管理</view>
+          <view>客户收货管理</view>
         </view>
       </view>
     </view>
@@ -79,7 +82,7 @@
         <view class='content_title'>
           <text>企业管理</text>
         </view>
-        <view class='icon_right {{showHide?"":"rotate"}}' >
+        <view class='icon_right {{showHide?"":"rotate"}}'>
           <image src='/images/right.png'></image>
         </view>
       </view>

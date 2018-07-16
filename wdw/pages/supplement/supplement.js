@@ -5,7 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showHide: true
+    showHide: true,
+    list:[
+      {
+        id: "0",
+        name: "标准订单",
+        intention: "意向订单",
+        checked: false
+      },
+    ]
   
   },
 
@@ -32,6 +40,15 @@ Page({
     })
   },
 
+  add: function (e) {
+    console.log(e)
+    var that = this;
+    var checked = '';
+    that.setData({
+      checked: (!that.data.checked)
+    })
+    console.log(checked)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
