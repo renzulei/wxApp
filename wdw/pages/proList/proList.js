@@ -1,7 +1,8 @@
 // pages/proList/proList.js
 var app = getApp()
-var http_host = app.globalData.http_host
+var cmService = app.globalData.cmService
 var customer_id = app.globalData.customer_id
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -214,12 +215,18 @@ Page({
     userDefaultTradeCompany: '',
     partyName: '', //交易主体（从缓存读取）
     address: "", //收货地址（从缓存读取）
-    items: '',
+    tradePartyId: '',
+    contactId: "",
+    items: '', //选中物料的数据
     color_choose: '', //选中的物料
     itemName: '', //选中物料作为参数带到填写规格页面
     unitPrice: '', //选中物料价格
     searchContent: '', //通过搜索进入产品列表的关键词
     searchValue: '', //本页面搜索框输入值
+    data: {}, //请求接口时携带数据
+    exist: [], //已经被选中的筛选项
+    saleCountSortName: '', //销量排序(ASC表示升序，DESC表示降序)
+    priceSortName: '', //价格排序（ASC表示升序，DESC表示降序）
   },
 
   /**
@@ -229,11 +236,113 @@ Page({
     var userDefaultTradeCompany = wx.getStorageSync('userDefaultTradeCompany');
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
     var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
+    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
+    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId : "";
     // var searchContent = options
     console.log(options)
     this.setData({
       partyName: partyName,
       address: address,
+      tradePartyId: tradePartyId,
+      contactId: contactId
+    })
+    // this.searchContentList() //进入页面加载筛选数据
+    // this.searchBoxCont() //进入页面加载列表数据
+  },
+  searchBoxCont: function() {
+    var data = this.data.data
+    data.saleCountSort = this.state.saleCountSortName
+    data.priceSort = this.state.priceSortName
+    //获取商品数据
+    if (this.state.searchContent) {
+      data.searchBoxContext = this.state.searchContent,
+        this.fetch({
+          pageSize: 10,
+          current: 1,
+          data: data
+        })
+    }
+    this.setData({
+      data: data
+    })
+  },
+  searchContentList: function() {
+    wx.request({
+      url: `${cmService}/product/getProductCondition`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      success: function(res) {
+        console.log(res.data)
+        var json = res.data;
+        var filters = []
+        json.conditionList.map((item, i) => {
+          if (item.meaning == "physicalStates") {
+            filters.push({
+              name: item.description,
+              item: json.physicalStates.map((item, i) => {
+                return ({
+                  name: item.meaning,
+                  value: item.value,
+                })
+              }),
+            })
+          } else if (item.meaning == "supperCategorys") {
+            filters.push({
+              name: item.description,
+              item: json.supperCategorys.map((item, i) => {
+                return ({
+                  name: item.meaning,
+                  value: item.value,
+                })
+              }),
+            })
+          } else if (item.meaning == "midCategorys") {
+            filters.push({
+              name: item.description,
+              item: json.midCategorys.map((item, i) => {
+                return ({
+                  name: item.meaning,
+                  value: item.value,
+                })
+              }),
+            })
+          } else if (item.meaning == "itemBrands") {
+            filters.push({
+              name: item.description,
+              item: json.itemBrands.map((item, i) => {
+                return ({
+                  name: item.meaning,
+                  value: item.value,
+                })
+              }),
+            })
+          } else if (item.meaning == "itemWeights") {
+            filters.push({
+              name: item.description,
+              item: json.itemWeights.map((item, i) => {
+                return ({
+                  name: item.meaning,
+                  value: item.value,
+                })
+              }),
+            })
+          } else if (item.meaning == "itemPrices") {
+            filters.push({
+              name: item.description,
+              item: json.itemPrices.map((item, i) => {
+                return ({
+                  name: item.meaning,
+                  value: item.value,
+                })
+              }),
+            })
+          }
+        })
+        this.setState({
+          filters: filters
+        })
+      }
     })
   },
   // 物料选择
@@ -263,26 +372,170 @@ Page({
   },
   // 搜索
   handleSearch: function() {
-    console.log(1)
     var searchValue = this.data.searchValue;
     this.setData({
       searchContent: searchValue,
-    }, this.fetch({
+    }, this.fetchChoose(this.data.exist))
+  },
+  // 筛选条件放入data参数中
+  fetchChoose: function(newExist) {
+    var items = JSON.stringify(newExist);
+    var data = {}
+    // console.log(items)
+    JSON.parse(items).map((item, i) => {
+      var value = []
+      var name = []
+      item.items.map((it, i) => {
+        value.push(it.value)
+        name.push(it.name)
+        item.title == "存在状态" ? data.physicalStateCode = value.join(",") :
+          item.title == "商品大类" ? data.supperCategoryCode = value.join(",") :
+          item.title == "商品中类" ? data.itemCategoryIds = value.join(",") :
+          item.title == "品牌" ? data.brandCodes = value.join(",") :
+          item.title == "克重" ? data.qtyCodes = value.join(",") :
+          item.title == "价格" ? data.priceCodes = value.join(",") :
+          data.searchBoxContext = this.data.searchContent
+      })
+
+    })
+    if (this.data.searchContent) {
+      data.searchBoxContext = this.data.searchContent;
+    }
+    data.saleCountSort = this.data.saleCountSortName
+    data.priceSort = this.data.priceSortName
+    this.setData({
+      data: data
+    })
+    this.fetch({
       pageSize: 10,
       current: 1,
-      data: this.data.data
-    }))
+      data: data
+    });
   },
-  // 请求数据
-  fetch: (params = {}) => {
+
+  // 根据筛选条件请求商品列表数据
+  fetch: function(params = {}) {
+    console.log(params.data)
+    var tradePartyId = this.data.tradePartyId;
+    var contactId = this.data.contactId;
     wx.request({
-      url: `${http_host}/product/getProductByCondition?page=${params.current}&pageSize=${params.pageSize}`, 
+      url: `${cmService}/product/getProductByCondition?page=${params.current}&pageSize=${params.pageSize}&tradePartyId=${tradePartyId}&contactId=${contactId}`,
       header: {
         'content-type': 'application/json' // 默认值
       },
-      success: function (res) {
+      body: JSON.stringify(params.data),
+      success: function(res) {
         console.log(res.data)
       }
+    })
+  },
+  // 点击筛选项处理函数
+  handleSingleClick: function(e) {
+    var title = e.currentTarget.dataset.title
+    var value = e.currentTarget.dataset.item.value
+    var name = e.currentTarget.dataset.item.name
+    var handlePush = true;
+    var newExist = this.data.exist;
+    newExist.map((item, i) => {
+      if (item.title == title) {
+        this.data.exist.splice(i, 1);
+        item.items.map(itemsName => {
+          if (itemsName.name != name) {
+            handlePush = true;
+          } else {
+            handlePush = false;
+          }
+        })
+      }
+    });
+    if (handlePush) {
+      newExist = this.data.exist;
+      newExist.push({
+        title: title,
+        items: [{
+          name,
+          value
+        }]
+      });
+    };
+    this.setData({
+      exist: newExist
+    });
+    this.filterSelected(newExist);
+    // console.log(newExist)
+    this.fetchChoose(newExist);
+  },
+
+  // filters选中筛选项加selected为true
+  filterSelected: function(newExist) {
+    this.data.filters.map((it, i) => {
+      it.item.map((ite, i) => {
+        ite.selected = false //默认所有筛选项未选中
+      })
+    });
+    newExist.map((item, i) => {
+      this.data.filters.map((it, i) => {
+        if (it.name == item.title) {
+          it.item.map((ite, i) => {
+            ite.selected = (ite.name == item.items[0].name) //被选中的筛选项selected设为true
+          })
+        }
+      })
+    })
+    this.setData({
+      filters: this.data.filters
+    })
+  },
+  // 重置筛选项selected为false,exist为空
+  resetFilters: function() {
+    this.data.filters.map((it, i) => {
+      it.item.map((ite, i) => {
+        ite.selected = false //默认所有筛选项未选中
+      })
+    })
+    this.setData({
+      filters: this.data.filters,
+      exist: [],
+      data: {}
+    })
+    this.fetchChoose([]);
+  },
+  // 根据销量排序
+  sortSales: function() {
+    var priceSortName = "";
+    var saleCountSortName = this.data.saleCountSortName == "ASC" ? "DESC" : this.data.saleCountSortName == "DESC" ? "ASC" : "ASC";
+    this.data.data ? this.data.data.priceSort ? this.data.data.priceSort = "" : "" : "";
+    let arr = util.deepCopy(this.data.data, {});
+    arr.saleCountSort = saleCountSortName;
+    arr.searchBoxContext = this.data.searchContent;
+    this.setData({
+      priceSortName: priceSortName,
+      saleCountSortName: saleCountSortName,
+      data: arr
+    })
+    this.fetch({
+      pageSize: 10,
+      current: 1,
+      data: arr
+    })
+  },
+  // 根据价格排序
+  sortPrice: function() {
+    var saleCountSortName = "";
+    var priceSortName = this.data.priceSortName == "ASC" ? "DESC" : this.data.priceSortName == "DESC" ? "ASC" : "ASC";
+    this.data.data ? this.data.data.saleCountSort ? this.data.data.saleCountSort = "" : "" : "";
+    let arr = util.deepCopy(this.data.data, {});
+    arr.priceSort = priceSortName;
+    arr.searchBoxContext = this.data.searchContent;
+    this.setData({
+      priceSortName: priceSortName,
+      saleCountSortName: saleCountSortName,
+      data: arr
+    })
+    this.fetch({
+      pageSize: 10,
+      current: 1,
+      data: arr
     })
   },
   // 底部弹窗函数

@@ -10,18 +10,18 @@
   </view>
 
   <view class='content_title'>
-    <view class='title'>
+    <view class='title' bindtap='sortSales'>
       <text>销量</text>
       <view class='left'>
-        <view class='arrows_top'></view>
-        <view class='arrows_bottom'></view>
+        <view class='arrows_top {{saleCountSortName=="ASC"?"active":""}}'></view>
+        <view class='arrows_bottom {{saleCountSortName=="DESC"?"active":""}}'></view>
       </view>
     </view>
-    <view class='title'>
+    <view class='title' bindtap='sortPrice'>
       <text>价格</text>
       <view class='right'>
-        <view class='arrows_top_tow'></view>
-        <view class='arrows_bottom_tow'></view>
+        <view class='arrows_top {{priceSortName=="ASC"?"active":""}}'></view>
+        <view class='arrows_bottom {{priceSortName=="DESC"?"active":""}}'></view>
       </view>
     </view>
     <view class='title' bindtap='screenTap'>
@@ -106,17 +106,17 @@
           <text>{{it.name}}</text>
         </view>
         <view class='screen_text'>
-          <view class='list' wx:for="{{it.item}}" wx:for-item="itin" wx:key="*this">{{itin.name}}</view>
+          <view class='list {{itin.selected?"list_color":""}}' wx:for="{{it.item}}" bindtap='handleSingleClick' data-item='{{itin}}' data-title='{{it.name}}' wx:for-item="itin" wx:key="itin.name">{{itin.name}}</view>
           <!-- <view class='list list_color'>砂管纸</view> -->
         </view>
       </view>
     </view>
     <view class='screen_btn clearfix'>
       <view class='button'>
-        <view class='end end_right'>
+        <view class='end end_right' bindtap='motaiTaps'>
           <text>确定</text>
         </view>
-        <view class='end end_left'>
+        <view class='end end_left' bindtap='resetFilters'>
           <text>重置</text>
         </view>
       </view>

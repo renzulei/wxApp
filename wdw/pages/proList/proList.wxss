@@ -33,7 +33,7 @@
   right: 0rpx;
   top: 22rpx;
   height: 78rpx;
-  z-index: 100;
+  z-index: 5;
 }
 
 .w_icon image {
@@ -81,14 +81,8 @@
   left: 410rpx;
 }
 
-.arrows_top {
-  width: 0rpx;
-  border-top: 14rpx solid #fff;
-  border-bottom: 14rpx solid #f75959;
-  border-left: 10rpx solid #fff;
-  border-right: 10rpx solid #fff;
-  position: absolute;
-  top: -14rpx;
+.arrows_top.active{
+   border-bottom: 14rpx solid #f75959;
 }
 
 .arrows_bottom {
@@ -101,7 +95,7 @@
   top: 18rpx;
 }
 
-.arrows_top_tow {
+.arrows_top {
   width: 0rpx;
   border-top: 14rpx solid #fff;
   border-bottom: 14rpx solid #5f5c5b;
@@ -111,14 +105,8 @@
   top: -14rpx;
 }
 
-.arrows_bottom_tow {
-  width: 0rpx;
-  border-top: 14rpx solid #f75959;
-  border-bottom: 14rpx solid #fff;
-  border-left: 10rpx solid #fff;
-  border-right: 10rpx solid #fff;
-  position: absolute;
-  top: 18rpx;
+.arrows_bottom.active {
+    border-top: 14rpx solid #f75959;
 }
 
 .icon {
