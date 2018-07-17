@@ -1,11 +1,14 @@
 // pages/index/index.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  bgc: "/images/bgc.png"
+  bgc: "/images/bgc.png",
+  searchValue:'',
+
   },
 
   /**
@@ -14,7 +17,21 @@ Page({
   onLoad: function (options) {
   
   },
-
+  // 搜索框键盘输入值处理函数
+  upSeachValue: function (e) {
+    var searchValue = e.detail.value;
+    this.setData({
+      searchValue: searchValue,
+    })
+  },
+  // 搜索
+  handleSearch: function () {
+    var searchValue = this.data.searchValue;
+    app.globalData.searchContent = searchValue;
+    wx.switchTab({
+      url: '/pages/proList/proList',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

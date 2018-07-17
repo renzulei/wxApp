@@ -221,6 +221,7 @@ Page({
     color_choose: '', //选中的物料
     itemName: '', //选中物料作为参数带到填写规格页面
     unitPrice: '', //选中物料价格
+    physicalStateCode: '', //选中物料的存在状态
     searchContent: '', //通过搜索进入产品列表的关键词
     searchValue: '', //本页面搜索框输入值
     data: {}, //请求接口时携带数据
@@ -238,8 +239,6 @@ Page({
     var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
     var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
     var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId : "";
-    // var searchContent = options
-    console.log(options)
     this.setData({
       partyName: partyName,
       address: address,
@@ -249,19 +248,35 @@ Page({
     // this.searchContentList() //进入页面加载筛选数据
     // this.searchBoxCont() //进入页面加载列表数据
   },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    var searchContent = app.globalData.searchContent || '';
+    console.log(searchContent)
+    this.setData({
+      searchContent: searchContent
+    })
+  },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
+  },
   searchBoxCont: function() {
     var data = this.data.data
-    data.saleCountSort = this.state.saleCountSortName
-    data.priceSort = this.state.priceSortName
+    data.saleCountSort = this.data.saleCountSortName
+    data.priceSort = this.data.priceSortName
     //获取商品数据
-    if (this.state.searchContent) {
-      data.searchBoxContext = this.state.searchContent,
-        this.fetch({
-          pageSize: 10,
-          current: 1,
-          data: data
-        })
+    if (this.data.searchContent) {
+      data.searchBoxContext = this.data.searchContent;  
     }
+    this.fetch({
+      pageSize: 10,
+      current: 1,
+      data: data
+    })
     this.setData({
       data: data
     })
@@ -339,7 +354,7 @@ Page({
             })
           }
         })
-        this.setState({
+        this.setData({
           filters: filters
         })
       }
@@ -353,6 +368,7 @@ Page({
       items: data,
       color_choose: data.itemName,
       itemName: data.itemName,
+      physicalStateCode: data.physicalStateCode,
       unitPrice: data.unitPrice,
     })
   },
@@ -373,9 +389,17 @@ Page({
   // 搜索
   handleSearch: function() {
     var searchValue = this.data.searchValue;
+    app.globalData.searchContent = searchValue;
     this.setData({
       searchContent: searchValue,
     }, this.fetchChoose(this.data.exist))
+  },
+  goSpecification: function() {
+    var physicalStateCode = this.data.physicalStateCode;
+    var items = this.data.items;
+    wx.navigateTo({
+      url: `/pages/specification/specification?physicalStateCode=${physicalStateCode}&items=${items}`,
+    })
   },
   // 筛选条件放入data参数中
   fetchChoose: function(newExist) {
@@ -538,17 +562,66 @@ Page({
       data: arr
     })
   },
-  // 底部弹窗函数
+  // 底部弹窗函数,同时请求该商品详情数据
   shoppingTap: function(e) {
     var selectedProductId = e.currentTarget.dataset.productid;
-    var that = this;
-
-    that.setData({
-      showHide: !that.data.showHide,
+    console.log(selectedProductId)
+    this.setData({
+      showHide: !this.data.showHide,
       selectedProductId: selectedProductId
     })
+    var tradePartyId = this.data.tradePartyId;
+    var contactId = this.data.contactId;
+    wx.request({
+      url: `${cmService}/product/getProductDetail?tradePartyId=${tradePartyId}`,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      body: JSON.stringify({
+        productId: selectedProductId,
+        contactId: contactId,
+        tradePartyId: tradePartyId
+      }),
+      success: function(res) {
+        console.log(res.data)
+        var json = res.data;
+        if (json.code == "S") {
+          this.setData({
+            productDetail: json.productDetail,
+            unitPrice: json.productDetail.unitPrice,
+            // itemAttributes: json.productDetail.itemAttributes, //商品详情的规格参数，小程序不需要
+            productItems: json.items,
+            // productDetails: json //商品详情全部数据，不需要
+          })
+        }
+      }
+    })
   },
-
+  // 添加关注
+  addFocus: function() {
+    var selectedProductId = this.data.selectedProductId;
+    var tradePartyId = this.data.tradePartyId;
+    wx.request({
+      url: `${cmService}/product/addItemFavorites?tradePartyId=${tradePartyId}&productId=${selectedProductId}`,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function(res) {
+        wx.showToast({
+          title: '添加关注成功',
+          icon: 'success',
+          duration: 1000
+        })
+      },
+      fail: function() {
+        wx.showToast({
+          title: '添加关注失败',
+          image: '/images/failicon.png',
+          duration: 1000
+        })
+      }
+    })
+  },
   // 点击模态框让下面弹窗消失函数
   motaiTap: function(event) {
     var that = this;
@@ -572,19 +645,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
 
   /**
    * 生命周期函数--监听页面卸载
