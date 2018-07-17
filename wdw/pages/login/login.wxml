@@ -14,7 +14,7 @@
         <view class='w_icon'>
           <image src='/images/user.png'></image>
         </view>
-        <input placeholder-class="phcolor" class='w_input' placeholder='请输入您的账号...' bindblur="setName" value='{{username}}'></input>
+        <input placeholder-class="phcolor" class='w_input' placeholder='邮箱 / 用户名 / 手机号' bindblur="setName" value='{{username}}'></input>
       </view>
     </view>
 
@@ -26,7 +26,7 @@
         <input placeholder-class="phcolor" password class='w_input' placeholder='请输入您的密码...' bindblur="setPass" value='{{password}}'></input>
       </view>
       <view wx:if="{{wrong}}" class='warning'>
-        您输入的用户名或密码错误.....
+        {{error_msg}}
       </view>
     </view>
   </view>

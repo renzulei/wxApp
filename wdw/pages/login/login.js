@@ -1,5 +1,7 @@
 // pages/loging/logion.js
 const util = require('../../utils/util.js');
+var app = getApp()
+var umService = app.globalData.umService
 Page({
 
   /**
@@ -29,7 +31,8 @@ Page({
       tradePartyId: 215,
     },
     token: "5050797f-b4ed-416c-a8a6-ad57c3249f7b",
-    tokenExpire:3600,
+    tokenExpire: 3600,
+    error_msg:"您输入的用户名或密码错误....."
   },
 
   /**
@@ -38,6 +41,7 @@ Page({
   onLoad: function(options) {
     var username = wx.getStorageSync('login-username') || '';
     var password = wx.getStorageSync('login-password') || '';
+    
     this.setData({
       username: username,
       password: password
@@ -74,27 +78,65 @@ Page({
       validate: bull
     })
   },
-
+  /**userName Password取值提交**/
+  getSubmitBody: function(v1, v2) {
+    let regP = util.regPhone(),
+      regE = util.regEmail()
+    return regP.test(v1) ? {
+        'phone': v1,
+        'password': v2,
+      } :
+      regE.test(v1) ? {
+        'email': v1,
+        'password': v2,
+      } : {
+        'userName': v1,
+        'password': v2,
+      }
+  },
   login: function() {
     var that = this;
     var username = this.data.username;
     var password = this.data.password;
-    var token = that.data.token;
-    var userName = that.data.userName;
-    var tokenExpire = that.data.tokenExpire;
-    var userDefaultTradeCompany = that.data.userDefaultTradeCompany;
-    util.login({
-      token,
-      userName,
-      tokenExpire,
-      userDefaultTradeCompany,
-      success: () => {
-        wx.switchTab({
-          url: '../index/index',
-        })
+    wx.request({
+      url: `${umService}/user/userLogin`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.getSubmitBody(username, password)),
+      success: function(res) {
+        var json = res.data;
+        if (json.code == "S") {
+          let {
+            tokenExpire,
+            token,
+            userName,
+            userDefaultTradeCompany
+          } = json;
+          util.login({
+            token,
+            userName,
+            tokenExpire,
+            userDefaultTradeCompany,
+            success: () => {
+              wx.switchTab({
+                url: '../index/index',
+              })
+            }
+          })
+          this.setState({
+            wrong: false
+          });
+        } else if (json.code == "E"){
+          this.setState({
+            error_msg: json.msg,
+            wrong: true
+          });
+        }
       }
     })
-    
+
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
