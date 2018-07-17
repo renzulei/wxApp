@@ -12,7 +12,7 @@
         <text class='left_color'>收货地址：</text>
         <text class='right_color'>{{item.addr}}</text>
       </view>
-      <navigator url='/pages/compile/compile'>
+      <navigator hover-class='none' url='/pages/compile/compile'>
          <view class='icon'>
         <image src='/images/del.png'></image>
       </view>

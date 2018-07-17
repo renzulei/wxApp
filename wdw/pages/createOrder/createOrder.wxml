@@ -1,7 +1,7 @@
 <view class="container">
   <view class="content">
 
-    <view class='header'> 
+    <view class='header'>
       <view class='header_icon'>
         <image src='/images/checked.png'></image>
       </view>
@@ -16,61 +16,61 @@
     </view>
 
     <view class='content_table'>
-       <view class="table">
-      <view class="text clearfix">
-        <view class='div'>
-          <view class="box box_left">
-            <view class='left'>
-              <text>幅宽mm:</text>
+      <view class="table">
+        <view class="text clearfix">
+          <view class='div'>
+            <view class="box box_left">
+              <view class='left'>
+                <text>幅宽mm:</text>
+              </view>
+              <view class='right'>
+                <input class='input'></input>
+              </view>
             </view>
-            <view class='right'>
-              <input class='input'></input>
+            <view class="box box_right">
+              <view class='left'>
+                <text>切长mm:</text>
+              </view>
+              <view class='right'>
+                <input class='input'></input>
+              </view>
             </view>
           </view>
-          <view class="box box_right">
-            <view class='left'>
-              <text>切长mm:</text>
+
+          <view class='div'>
+            <view class="box box_left">
+              <view class='left'>
+                <text>件数(不含运费):</text>
+              </view>
+              <view class='right'>
+                <input class='input'></input>
+              </view>
             </view>
-            <view class='right'>
-              <input class='input'></input>
+            <view class="box box_right">
+              <view class='left'>
+                <text>吨数(吨):</text>
+              </view>
+              <view class='right'>
+                <input class='input'></input>
+              </view>
             </view>
+          </view>
+
+        </view>
+        <view class='table_bom clearfix'>
+          <text class='danjia'>1.单价：</text>
+          <text class='table_color'>7000</text>
+          <text class='table_left'>金额：</text>
+          <text class='table_color'>9874983.0</text>
+
+          <view class=' table_btn copy'>
+            <image src='/images/checked.png'></image>
+          </view>
+          <view class=' table_btn del'>
+            <text>删除</text>
           </view>
         </view>
-
-        <view class='div'>
-          <view class="box box_left">
-            <view class='left'>
-              <text>件数(不含运费):</text>
-            </view>
-            <view class='right'>
-              <input class='input'></input>
-            </view>
-          </view>
-          <view class="box box_right">
-            <view class='left'>
-              <text>吨数(吨):</text>
-            </view>
-            <view class='right'>
-              <input class='input'></input>
-            </view>
-          </view>
-        </view>
-
       </view>
-       <view class='table_bom clearfix'>
-        <text class='danjia'>1.单价：</text>
-        <text class='table_color'>7000</text>
-        <text class='table_left'>金额：</text>
-        <text class='table_color'>9874983.0</text>
-
-        <view class=' table_btn copy'>
-          <image src='/images/checked.png'></image>
-        </view> 
-        <view class=' table_btn del'>
-          <text>删除</text>
-        </view>
-      </view>  
-    </view>
     </view>
 
   </view>
@@ -88,9 +88,11 @@
 
     <!-- 下部分 -->
     <view class='footer_bom'>
-      <view class='bom_left'>
-        <text>取消返回</text>
-      </view>
+      <navigator hover-class="none" url='/pages/specification/specification'>
+        <view class='bom_left'>
+          <text>取消返回</text>
+        </view>
+      </navigator>
       <view class='bom_right' bindtap='shoppingTap'>
         <text>创建订单</text>
       </view>

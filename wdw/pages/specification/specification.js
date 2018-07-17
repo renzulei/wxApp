@@ -21,6 +21,13 @@ Page({
     })
   },
 
+// 返回proList产品列表页
+  cancelTap: function() {
+    console.log(1111111);
+    wx.switchTab ({
+      url:"/pages/proList/proList"
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

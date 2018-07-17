@@ -18,38 +18,38 @@
         <text class='title_left'>收货地址：</text>
         <text class='title_right'>育昌路369号 山东省潍坊市昌乐县</text>
       </view>
-      <navigator url='/pages/compile/compile'>
+      <navigator hover-class='none' url='/pages/compile/compile'>
         <view class='hint_icon'>
           <image src='/images/del.png'></image>
         </view>
       </navigator>
     </view>
     <!--订单类型  -->
-    <view class='order'>
-      <view class='type' wx:for="{{ list }}" wx:key="{{item.id}}">
+    <view class='order' wx:for="{{list}}" wx:key="{{item.name}}" value="{{item.value}}" checked="{{checked}}">
+      <view class='type'>
         <text class='size align'>订单类型：</text>
         <view class='order_icon'>
           <!-- <image src='/images/hide.png'></image>
           <image src='/images/show.png'></image> -->
-          <label class="radio" bindtap='add'>
-            <view class='radio-wrap {{item.checked?"radio-checked":""}}'>
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
               <radio value='{{item.id}}' checked="{{checked}}" />
               <view class='radio-inner'></view>
             </view>
           </label>
         </view>
-        <text>{{ item.name }}</text>
+        <text>标准订单</text>
         <view class='intention'>
           <!-- <image src='/images/show.png'></image>
           <image src='/images/hide.png'></image>  -->
-          <label class="radio" bindtap='add'>
-            <view class='radio-wrap {{item.checked?"radio-checked":""}}'>
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
               <radio value='{{item.id}}' checked="{{checked}}" />
               <view class='radio-inner'></view>
             </view>
           </label>
         </view>
-        <text>{{ item.intention }}</text>
+        <text>意向订单</text>
       </view>
 
       <view class='order_hint'>
@@ -64,18 +64,36 @@
       <view class='type'>
         <text class='size align'>支付节点：</text>
         <view class='order_icon'>
-          <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image>
+          <!-- <image src='/images/show.png'></image>
+          <image src='/images/hide.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text class=''>下单预付</text>
         <view class='intention'>
-          <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image>
+          <!-- <image src='/images/show.png'></image>
+          <image src='/images/hide.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text>发货前预付</text>
         <view class='intention'>
-          <image src='/images/hide.png'></image>
-          <image src='/images/show.png'></image>
+          <!-- <image src='/images/hide.png'></image>
+          <image src='/images/show.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text>赊销</text>
         <view class='word_size'>
@@ -88,18 +106,36 @@
       <view class='type'>
         <text class='size align'>账期选择：</text>
         <view class='order_icon'>
-          <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image>
+          <!-- <image src='/images/show.png'></image>
+          <image src='/images/hide.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text class=''>30</text>
         <view class='intention'>
-          <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image>
+          <!-- <image src='/images/show.png'></image>
+          <image src='/images/hide.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text>60</text>
         <view class='intention'>
-          <image src='/images/hide.png'></image>
-          <image src='/images/show.png'></image>
+          <!-- <image src='/images/hide.png'></image>
+          <image src='/images/show.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text>120</text>
       </view>
@@ -108,23 +144,41 @@
       <view class='type'>
         <text class='size align'>支付方式：</text>
         <view class='order_icon'>
-          <image src='/images/hide.png'></image>
-          <image src='/images/show.png'></image>
+          <!-- <image src='/images/hide.png'></image>
+          <image src='/images/show.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text class=''>现金支付</text>
         <view class='intention'>
-          <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image>
+          <!-- <image src='/images/show.png'></image>
+          <image src='/images/hide.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text>白条支付</text>
         <view class='intention'>
-          <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image>
+          <!-- <image src='/images/show.png'></image>
+          <image src='/images/hide.png'></image> -->
+          <label class="radio" catchtap='radioChange'>
+            <view class='radio-wrap {{checked?"radio-checked":""}}'>
+              <radio value='{{item.id}}' checked="{{checked}}" />
+              <view class='radio-inner'></view>
+            </view>
+          </label>
         </view>
         <text>票据支付</text>
         <view class='word_size'>
           <text class='size_color'>现金支付：</text>总金额
-          <text class='size_color'>21,400 </text>(包含此支付方式对总金额的影响
+          <text class='size_color'>21.400</text>(包含此支付方式对总金额的影响
           <text class='size_color'>+0</text>元)</view>
       </view>
 

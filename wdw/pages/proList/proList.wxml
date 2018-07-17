@@ -59,7 +59,7 @@
         <text class='hint_color'>(如需修改收货地址请点击右方编辑按钮)</text>
       </view>
       <!-- 跳转到编辑收货地址页 -->
-      <navigator url='/pages/compile/compile'>
+      <navigator hover-class='none' url='/pages/compile/compile'>
         <view class='footer_icon'>
           <image src='/images/del.png'></image>
         </view>
@@ -87,7 +87,7 @@
         <text>加入关注</text>
       </view>
       <view class='bottom_right'>
-        <navigator url='/pages/specification/specification'>
+        <navigator hover-class='none' url='/pages/specification/specification'>
           <text>填写规格</text>
         </navigator>
       </view>

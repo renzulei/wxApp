@@ -27,7 +27,7 @@
         </view>
       </view>
       <view>
-        <navigator url='/pages/manage/manage'>
+        <navigator hover-class='none' url='/pages/manage/manage'>
           <view class='nav_icon'>
             <image src='/images/chaxun.png'></image>
             <view>订单管理</view>
