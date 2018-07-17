@@ -313,12 +313,6 @@
   font-size: 28rpx;
 }
 
-.type image {
-  width: 48rpx;
-  height: 48rpx;
-  position: absolute;
-}
-
 .order_hint {
   margin-top: 20rpx;
   font-size: 20rpx;
@@ -391,3 +385,8 @@
   width: 40rpx;
   height: 40rpx;
 }
+
+.lable_box {
+  display: inline-block;
+}
+

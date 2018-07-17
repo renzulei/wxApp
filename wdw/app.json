@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/supplement/supplement",
+    "pages/affirm/affirm",
+    "pages/specification/specification",
     "pages/index/index",
     "pages/createOrder/createOrder",
-    "pages/specification/specification",
     "pages/home/home",
-    "pages/supplement/supplement",
     "pages/proList/proList",
     "pages/compile/compile",
     "pages/concern/concern",
@@ -15,7 +16,6 @@
     "pages/enterprise/enterprise",
     "pages/enterprises/enterprises",
     "pages/login/login",
-    "pages/affirm/affirm",
     "pages/succeed/succeed",
     "pages/logs/logs",
     "pages/test/test"
