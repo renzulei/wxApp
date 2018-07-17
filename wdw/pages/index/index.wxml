@@ -2,10 +2,10 @@
 
   <view class='w_search'>
     <view class='input-wrap'>
-      <view class='w_icon'>
+      <view class='w_icon' bindtap='handleSearch'>
         <image src='/images/search.png'></image>
       </view>
-      <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'></input>
+      <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'  bindinput="upSeachValue"></input>
     </view>
   </view>
 
