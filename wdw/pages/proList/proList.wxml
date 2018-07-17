@@ -69,7 +69,7 @@
 
     <view class='footer_title'>
       <text>{{productDetail.productName}}</text>
-      <view class='footer_price'>￥{{productDetail.unitPrice}}</view>
+      <view class='footer_price'>￥{{unitPrice}}</view>
     </view>
 
     <view class='footer_bom clearfix'>
@@ -83,13 +83,14 @@
     </view>
 
     <view class='bottom clearfix'>
-      <view class='bottom_left'>
+      <view class='bottom_left' bindtap='addFocus'>
         <text>加入关注</text>
       </view>
-      <view class='bottom_right'>
-        <navigator url='/pages/specification/specification'>
-          <text>填写规格</text>
-        </navigator>
+      <view wx:if="{{unitPrice}}" class='bottom_right' bindtap='goSpecification'>
+        <text>填写规格</text>
+      </view>
+      <view wx:else class='bottom_right disabled'>
+        <text>填写规格</text>
       </view>
     </view>
   </view>
