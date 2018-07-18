@@ -61,12 +61,13 @@ Page({
   onLoad: function(options) {
 
   },
-  returnFor: function(e) {
-    wx.navigateBack({
-      delta: 0
+
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
     })
   },
-
   // 点击小图标商品列表显示和隐藏
   iconTap: function(event) {
     var that = this;
@@ -75,12 +76,18 @@ Page({
     })
   },
 
+// 点击跳转到确认信息页面
   succeedTap: function(e) {
     wx.navigateTo({
       url: '/pages/affirm/affirm',
     })
   },
-
+// 点击取消返回
+  returnFor: function(e) {
+    wx.navigateBack({
+      delta:1
+    });
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

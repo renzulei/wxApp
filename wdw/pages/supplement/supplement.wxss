@@ -1,10 +1,9 @@
-
 @import '../../template/radio/radio.wxss';
 
- /* .container {
+.container {
   width: 100%;
-   background-color: #fff; 
-} */
+  background-color: #fff;
+}
 
 /* 整个盒子 */
 
@@ -292,7 +291,7 @@
 .type {
   line-height: 48rpx;
   font-size: 22rpx;
-   font-weight: bold; 
+  font-weight: bold;
   color: #4f4f4f;
   margin-bottom: 40rpx;
   position: relative;
@@ -348,7 +347,7 @@
   height: 66rpx;
   background-color: #f6f6f6;
   margin-top: 30rpx;
-  box-shadow: 0px 0px 9px #a3a3a3;
+  box-shadow: 0px 0px 8px #ccc;
   font-size: 22rpx;
   color: #a3a3a3;
   line-height: 66rpx;
@@ -361,10 +360,10 @@
 .arrows {
   width: 0;
   height: 0;
-  border-top: 16rpx solid #5f5c5b;
-  border-bottom: 16rpx solid #f6f6f6;
-  border-left: 14rpx solid #f6f6f6;
-  border-right: 14rpx solid #f6f6f6;
+  border-top: 18rpx solid #5f5c5b;
+  border-bottom: 18rpx solid #f6f6f6;
+  border-left: 12rpx solid #f6f6f6;
+  border-right: 12rpx solid #f6f6f6;
   z-index: 20;
   position: absolute;
   top: 26rpx;
@@ -372,6 +371,7 @@
 }
 
 /* hint 右下角的修改图标 */
+
 .hint_icon {
   width: 40rpx;
   height: 40rpx;
@@ -379,7 +379,6 @@
   top: 130rpx;
   right: 40rpx;
 }
-
 
 .hint_icon image {
   width: 40rpx;
@@ -390,3 +389,14 @@
   display: inline-block;
 }
 
+.date_color {
+  color: #000;
+  font-size: 26rpx;
+}
+
+.date_input {
+  display: block;
+  height: 66rpx;
+  color: #000;
+  font-size: 26rpx;
+}

@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.html": "javascript",
+    "*.wxml": "html",
+    "*.wxss": "css"
+  }
+}

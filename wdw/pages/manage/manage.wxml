@@ -19,7 +19,7 @@
           <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
             <view class="picker">
               <view class='choice icon_position'>
-                <input value='{{array[index]}}'></input>
+                <input class='ipt' value='{{array[index]}}'></input>
                 <view class='icon'></view>
               </view>
             </view>
@@ -40,12 +40,12 @@
 
   <!-- nav 区域=============================================================== -->
   <view class='nav'>
-    <view class='nav_stay'>所有订单</view>
+    <view class='nav_already nav_stay'>所有订单</view>
     <view class='nav_already'>已提交</view>
-    <view class='nav_abnormal'>已关闭</view>
-    <view class='nav_abnormal'>已取消</view>
-    <view class='nav_abnormal'>异常</view>
-    <view class='nav_abnormal'>处理</view>
+    <view class='nav_already'>已关闭</view>
+    <view class='nav_already'>已取消</view>
+    <view class='nav_already'>异常</view>
+    <view class='nav_already'>已审核</view>
   </view>
   <!-- header 区域============================================================ -->
   <view class='header'>

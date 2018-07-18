@@ -21,10 +21,12 @@
   <view class='nav'>
     <view class='nav_bar'>
       <view>
+      <navigator hover-class='none' url='/pages/specification/specification'>
         <view class='nav_icon'>
           <image src='/images/gouwuche.png'></image>
           <view>购物车</view>
         </view>
+        </navigator>
       </view>
       <view>
         <navigator hover-class='none' url='/pages/manage/manage'>
@@ -45,8 +47,6 @@
   </view>
 
   <view class='border'></view>
-
-
   <view class='content'>
     <view class='content_text'>
       <view class='list clearfix' bindtap='takeTap'>

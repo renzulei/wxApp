@@ -7,8 +7,16 @@ Page({
   data: {
   
   },
-//  跳转到补充信息页面
-  shoppingTap: function() {
+
+  // 点击取消返回
+  cancelTap: function(e) {
+     wx.navigateBack({
+       delta: 1
+     })
+  },
+
+  //  跳转到补充信息页面
+  sopTap: function () {
     wx.navigateTo({
       url: '/pages/supplement/supplement',
     })

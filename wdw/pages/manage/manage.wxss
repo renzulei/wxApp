@@ -140,7 +140,7 @@
   overflow-x: auto;
   white-space: nowrap;
   padding: 0 20rpx;
-  background-color: pink;
+  /* background-color: pink; */
 }
 
 .nav_stay, .nav_already, .nav_abnormal {
@@ -156,6 +156,9 @@
   border-bottom: 6rpx solid red;
 }
 
+.nav_already:hover {
+  color:  #f75959;
+}
 
   /*提示信息  ===================================*/
 
@@ -165,4 +168,11 @@
     color: #939292;
     font-size: 26rpx;
     text-align: center;
+  }
+
+  .ipt {
+    display: block;
+    width: 100%;
+    height: 66rpx;
+    line-height: 66rpx;
   }

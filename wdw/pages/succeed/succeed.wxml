@@ -10,7 +10,7 @@
       <view class='size'>请等待审核......</view>
     </view>
 
-    <view class='particulars'>
+    <view class='particulars' bindtap='particularsTap'>
       <text>查看详情</text>
     </view>
 

@@ -15,7 +15,7 @@
       </view>
     </view>
 
-    <view class='content_table'>
+    <view class='content_table'> 
       <view class="table">
         <view class="text clearfix">
           <view class='div'>
@@ -88,12 +88,10 @@
 
     <!-- 下部分 -->
     <view class='footer_bom'>
-      <navigator hover-class="none" url='/pages/specification/specification'>
-        <view class='bom_left'>
+        <view class='bom_left' bindtap='cancelTap'>
           <text>取消返回</text>
         </view>
-      </navigator>
-      <view class='bom_right' bindtap='shoppingTap'>
+      <view class='bom_right' bindtap='sopTap'>
         <text>创建订单</text>
       </view>
     </view>

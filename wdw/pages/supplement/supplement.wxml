@@ -190,8 +190,14 @@
 
       <view class='title'>到货时间：</view>
       <view class='select'>
-        请选择到货时间
-        <view class='arrows'></view>
+        <view class="section">
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2030-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              <input class='date_input' value="{{date}}" placeholder='请选择到货日期'></input>
+              <view class='arrows'></view>
+            </view>
+          </picker>
+        </view>
       </view>
     </view>
 

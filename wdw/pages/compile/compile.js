@@ -5,9 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    array: ['上海市，静安区', '山东省，潍坊市，昌乐县369号', '杭州市，西湖区', '苏州市'],
     showHide: true,
     region: ['广东省', '广州市', '海珠区'],
     index: '',
+    value: '',
     checked: true
   },
   
@@ -37,6 +39,15 @@ Page({
     })
   },
 
+  bindPickerChange: function (e) {
+    // console.log('picker发送选择改变，携带值为', e.detail.value);
+    console.log(e)
+    var value = e.detail.value;
+    var that = this;
+    that.setData({
+      value: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

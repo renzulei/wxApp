@@ -23,6 +23,12 @@ Page({
       index: e.detail.value
     })
   },
+
+  particularsTap: function(e) {
+    wx.navigateTo({
+      url: '/pages/particulars/particulars',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
