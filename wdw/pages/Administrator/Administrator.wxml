@@ -1,10 +1,10 @@
 <view class="container">
   <view class='content'>
 
-  <view class='nav'>
-    <view class='nav_stay'>待收货</view>
-      <view class='nav_already'>已收货</view>
-        <view class='nav_abnormal'>异常收货</view>
+  <view class='nav' catchtap='navTap'>
+    <view class="nav_already {{ num==1?'active':'' }}" data-num='1'>待收货</view>
+      <view class="nav_already {{ num==2?'active':'' }}" data-num='2'>已收货</view>
+        <view class="nav_already {{ num==3?'active':'' }}" data-num='3'>异常收货</view>
   </view>
 
   <!-- header区域========================================================== -->

@@ -1,11 +1,11 @@
-// pages/Administrator/Administrator.js
+// pages/close/close.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    num: 1
+  
   },
 
   /**
@@ -13,21 +13,6 @@ Page({
    */
   onLoad: function (options) {
   
-  },
-
-// 点击跳转到订单详情页
-  particularsTap: function(event) {
-    wx.navigateTo({
-      url: '/pages/particulars/particulars',
-    })
-  },
-
-// nav导航点击事件
-  navTap: function(e) {
-    console.log(e);
-    this.setData({
-      num: e.target.dataset.num
-    })
   },
 
   /**
