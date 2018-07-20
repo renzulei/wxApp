@@ -1,16 +1,16 @@
 {
   "pages": [
+    "pages/login/login",
+    "pages/proList/proList",
     "pages/manage/manage",
     "pages/Administrator/Administrator",
     "pages/specification/specification",
-    "pages/proList/proList",
     "pages/audit/audit",
     "pages/abnormal/abnormal",
     "pages/cancel/cancel",
     "pages/close/close",
     "pages/submit/submit",
     "pages/index/index",
-    "pages/login/login",
     "pages/take/take",
     "pages/compile/compile",
     "pages/home/home",
