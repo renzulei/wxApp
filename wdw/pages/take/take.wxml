@@ -1,6 +1,7 @@
 <import src="../../template/radio/radio.wxml" />
 <view class="contriner">
   <view class="content" wx:for="{{address}}" wx:key="{{item.id}}">
+  <view class='{{ add }}'>
     <view class='box'>
       <view class='title'>
         <text class='left_color'>收货人：</text>
@@ -12,12 +13,9 @@
         <text class='left_color'>收货地址：</text>
         <text class='right_color'>{{item.addr}}</text>
       </view>
-      <navigator hover-class='none' url='/pages/compile/compile'>
-         <view class='icon'>
+         <view class='icon' bindtap='compileTap'>
         <image src='/images/del.png'></image>
       </view>
-      </navigator>
-     
     </view>
     <view class='bottom'>
       <view class='bot clearfix'>
@@ -28,7 +26,8 @@
           </view>
           设为默认地址
         </label>
-        <view class='del' bindtap='del'>删除</view>
+        <view class='del' bindtap='delTap'>删除</view>
+        </view>
       </view>
     </view>
   </view>

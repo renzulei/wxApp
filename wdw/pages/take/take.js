@@ -25,7 +25,7 @@ Page({
         phone: "15122176897",
         addr: "育昌路369号，山东省潍坊市昌乐县"
       },
-    ]
+    ],
   },
 
   /**
@@ -35,15 +35,27 @@ Page({
   
   },
 
+// 跳转到编辑地址页面
   footerTap: function() {
-    console.log(1111)
+    wx.navigateTo({
+      url: '/pages/compile/compile',
+    })
   },
 
+  compileTap: function() {
+      wx.navigateTo({
+        url: '/pages/compile/compile',
+      })
+  },
+
+  delTap: function() {
+    console.log(111111)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**

@@ -1,0 +1,3 @@
+<import src='../../template/empty/empty.wxml'/>
+
+<template is="emptyfill"></template>

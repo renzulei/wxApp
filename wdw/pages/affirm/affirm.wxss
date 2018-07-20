@@ -280,7 +280,7 @@
 
 .order {
   width: 100%;
-  padding: 0 60rpx;
+  padding: 0 40rpx;
 }
 
 .type {

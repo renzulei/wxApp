@@ -107,7 +107,7 @@
     color: #4F4F4F;
   }
 
-  .nav_stay {
+  .active {
     color: #F75959;
     border-bottom: 6rpx solid red;
   }

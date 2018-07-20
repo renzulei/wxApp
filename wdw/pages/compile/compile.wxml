@@ -39,14 +39,24 @@
         <image class='img_left' src='/images/hide.png'></image>
       </view> -->
       <!-- 引入的模板 -->
-       <label class="radio" bindtap='add'> 
+      <label class="radio" bindtap='add'>
         <view class='radio-wrap {{checked?"radio-checked":""}}'>
           <radio checked="{{checked}}" />
           <view class='radio-inner'></view>
-         </view> 
+        </view>
         设置为默认收货地址
-       </label> 
+      </label>
       <!-- <text class='footer_text'>设置为默认收货地址</text> -->
+    </view>
+
+    <view class="section">
+      <picker bindchange="bindPickerChange" value="{{value}}" range="{{array}}">
+        <view class="picker">
+          <view class='save'>
+             <text>保存地址</text>{{array[value]}} 
+            </view>
+        </view>
+      </picker>
     </view>
   </view>
 </view>

@@ -25,31 +25,31 @@
       </navigator>
     </view>
     <!--订单类型  -->
-    <view class='order' wx:for="{{list}}" wx:key="{{item.name}}" value="{{item.value}}" checked="{{checked}}">
+    <view class='order'>
       <view class='type'>
         <text class='size align'>订单类型：</text>
-        <view class='order_icon'>
-          <!-- <image src='/images/hide.png'></image>
-          <image src='/images/show.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap  radio-checked'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text>标准订单</text>
         </view>
-        <text>标准订单</text>
-        <view class='intention'>
-          <!-- <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image>  -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text>意向订单</text>
         </view>
-        <text>意向订单</text>
       </view>
 
       <view class='order_hint'>
@@ -63,39 +63,41 @@
 
       <view class='type'>
         <text class='size align'>支付节点：</text>
-        <view class='order_icon'>
-          <!-- <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap radio-checked'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text class=''>下单预付</text>
         </view>
-        <text class=''>下单预付</text>
-        <view class='intention'>
-          <!-- <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text>发货前预付</text>
         </view>
-        <text>发货前预付</text>
-        <view class='intention'>
-          <!-- <image src='/images/hide.png'></image>
-          <image src='/images/show.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text>赊销</text>
         </view>
-        <text>赊销</text>
         <view class='word_size'>
           <text class='account'>赊销：</text>
           <text>根据约定好的账期进行付款</text>
@@ -105,77 +107,81 @@
 
       <view class='type'>
         <text class='size align'>账期选择：</text>
-        <view class='order_icon'>
-          <!-- <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap radio-checked'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text>30</text>
         </view>
-        <text class=''>30</text>
-        <view class='intention'>
-          <!-- <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text>60</text>
         </view>
-        <text>60</text>
-        <view class='intention'>
-          <!-- <image src='/images/hide.png'></image>
-          <image src='/images/show.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
         </view>
         <text>120</text>
       </view>
 
-
       <view class='type'>
         <text class='size align'>支付方式：</text>
-        <view class='order_icon'>
-          <!-- <image src='/images/hide.png'></image>
-          <image src='/images/show.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap radio-checked'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+
+          <text>现金支付</text>
         </view>
-        <text class=''>现金支付</text>
-        <view class='intention'>
-          <!-- <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+
+          <text>白条支付</text>
         </view>
-        <text>白条支付</text>
-        <view class='intention'>
-          <!-- <image src='/images/show.png'></image>
-          <image src='/images/hide.png'></image> -->
-          <label class="radio" catchtap='radioChange'>
-            <view class='radio-wrap {{checked?"radio-checked":""}}'>
-              <radio value='{{item.id}}' checked="{{checked}}" />
-              <view class='radio-inner'></view>
-            </view>
-          </label>
+        <view class='lable_box'>
+          <view class='order_icon'>
+            <label class="radio">
+              <view class='radio-wrap'>
+                <radio checked="{{checked}}" />
+                <view class='radio-inner'></view>
+              </view>
+            </label>
+          </view>
+          <text>票据支付</text>
         </view>
-        <text>票据支付</text>
+
         <view class='word_size'>
           <text class='size_color'>现金支付：</text>总金额
           <text class='size_color'>21.400</text>(包含此支付方式对总金额的影响
@@ -184,8 +190,14 @@
 
       <view class='title'>到货时间：</view>
       <view class='select'>
-        请选择到货时间
-        <view class='arrows'></view>
+        <view class="section">
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2030-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              <input class='date_input' value="{{date}}" placeholder='请选择到货日期'></input>
+              <view class='arrows'></view>
+            </view>
+          </picker>
+        </view>
       </view>
     </view>
 
@@ -370,7 +382,7 @@
 
     <!-- 下部分 -->
     <view class='footer_bom'>
-      <view class='bom_left'>
+      <view class='bom_left' catchtap='returnFor'>
         <text>取消返回</text>
       </view>
       <view class='bom_right' bindtap='succeedTap'>

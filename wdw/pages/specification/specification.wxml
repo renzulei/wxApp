@@ -1,7 +1,7 @@
 <view class="container">
   <view class="content">
 
-    <view class="table">
+    <view class="table {{ num }}">
       <view class="text clearfix">
         <view class='div'>
           <view class="box box_left">
@@ -48,7 +48,7 @@
         <text class='table_left'>金额：</text>
         <text class='table_color'>9874983.0</text>
 
-        <view class=' table_btn copy'>
+        <view class=' table_btn copy' bindtap='copyTap'>
           <text>复制</text>
         </view> 
         <view class=' table_btn del'>
