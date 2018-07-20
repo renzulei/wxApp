@@ -32,7 +32,7 @@ Page({
     },
     token: "5050797f-b4ed-416c-a8a6-ad57c3249f7b",
     tokenExpire: 3600,
-    error_msg:"您输入的用户名或密码错误....."
+    error_msg: "您输入的用户名或密码错误....."
   },
 
   /**
@@ -41,7 +41,7 @@ Page({
   onLoad: function(options) {
     var username = wx.getStorageSync('login-username') || '';
     var password = wx.getStorageSync('login-password') || '';
-    
+
     this.setData({
       username: username,
       password: password
@@ -95,16 +95,29 @@ Page({
       }
   },
   login: function() {
+    // wx.request({
+    //   url: 'https://yz.wangreat.com/core/restapi/public/product/getProductCondition',
+    //   method:'POST',
+    //   header: {
+    //     'content-type': 'application/json', // 默认值
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //   }
+    // })
     var that = this;
     var username = this.data.username;
     var password = this.data.password;
     wx.request({
       url: `${umService}/user/userLogin`,
-      headers: {
-        'Content-Type': 'application/json'
+      method: 'POST',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'cookie': '__wgl=' + wx.getStorageSync('__wgl')        
       },
-      body: JSON.stringify(this.getSubmitBody(username, password)),
+      data: JSON.stringify(this.getSubmitBody(username, password)),
       success: function(res) {
+        console.log(res.data)
         var json = res.data;
         if (json.code == "S") {
           let {
@@ -124,11 +137,11 @@ Page({
               })
             }
           })
-          this.setState({
+          that.setData({
             wrong: false
           });
-        } else if (json.code == "E"){
-          this.setState({
+        } else if (json.code == "E") {
+          that.setData({
             error_msg: json.msg,
             wrong: true
           });

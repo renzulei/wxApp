@@ -5,7 +5,8 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    wx.setStorageSync('__wgl', 'zh_CN')
+   
     // 登录
     wx.login({
       success: res => {
@@ -39,7 +40,7 @@ App({
   },
   globalData: {
     userInfo: [],
-    http_host: 'http://yz.wangreat.com',
+    http_host: 'https://yz.wangreat.com',
     openid: wx.getStorageSync('openid'),
     is_bind: 0, //用户是否绑定手机号
     user_id: wx.getStorageSync('user_id'),
@@ -47,10 +48,10 @@ App({
     /*语言配置*/
     Lang: 'lang=zh_CN',
     /*内容管理*/
-    cmService: 'http://yz.wangreat.com/core/restapi/public',
+    cmService: 'https://yz.wangreat.com/core/restapi/public',
     /*用户管理*/
-    umService: 'http://yz.wangreat.com/core/restapi/public',
+    umService: 'https://yz.wangreat.com/core/restapi/public',
     /*权限管理*/
-    authService: 'http://yz.wangreat.com/core/restapi/private',
+    authService: 'https://yz.wangreat.com/core/restapi/private',
   },
 })
