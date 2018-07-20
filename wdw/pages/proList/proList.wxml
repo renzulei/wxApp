@@ -1,7 +1,7 @@
 <import src="../../template/empty/empty.wxml" />
 <view class='container'>
   <view class='w_search'>
-    <view class='input-wrap'>
+    <view class='input-wrap'> 
       <view class='w_icon' bindtap='handleSearch'>
         <image src='/images/search.png'></image>
       </view>
@@ -64,7 +64,6 @@
           <image src='/images/del.png'></image>
         </view>
       </navigator>
-
     </view>
 
     <view class='footer_title'>

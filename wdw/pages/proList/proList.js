@@ -7,8 +7,8 @@ Page({
 
   /**
    * 页面的初始数据
-   */
-  data: {
+   */ 
+  data: { 
     showHide: 'true',
     showHides: 'true',
     // 产品列表数据
@@ -245,7 +245,7 @@ Page({
       tradePartyId: tradePartyId,
       contactId: contactId
     })
-    // this.searchContentList() //进入页面加载筛选数据
+     //this.searchContentList() //进入页面加载筛选数据
     // this.searchBoxCont() //进入页面加载列表数据
   },
   /**

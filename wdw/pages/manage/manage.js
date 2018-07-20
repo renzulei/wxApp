@@ -48,7 +48,6 @@ Page({
    */
   onLoad: function(options) {
 
-    this.getData();
   },
 
   bindPickerChange: function(e) {
@@ -105,19 +104,6 @@ abnormalTap: function (e) {
    })
  },
 
-
-  getData: function() {
-    wx.request({
-      url: `http://192.168.10.100:8001/core/restapi/public/saleOrderShow/saleOrderIntentStatus`,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
-        console.log(res.data)
-      }
-
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
