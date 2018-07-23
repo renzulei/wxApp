@@ -1,21 +1,21 @@
 <view class="container">
   <view class='content'>
-    <view class='header'>
+    <view class='header' wx:for="{{ list }}" wx:key="{{ name }}">
       <view class='odd'>
         <text class='odd_left'>意向订单号:</text>
-        <text class='odd_right'>YCD0018652</text>
+        <text class='odd_right'>{{ item.dingdan_hao }}</text>
         <text class='odd_left'>订单金额:</text>
-        <text class='odd_right'>￥6178430.0</text>
+        <text class='odd_right'>{{ item.jia_ge }}</text>
       </view>
       <view class='state'>
         <text class='odd_left'>订单状态:</text>
-        <text class='odd_right'>待收货</text>
+        <text class='odd_right'>{{ item.zhuang_tai }}</text>
         <text class='odd_left'>下单时间:</text>
-        <text class='odd_right'>2018-01-26 15:36:21</text>
+        <text class='odd_right'>{{ item.shi_jian }}</text>
       </view>
       <view class='site'>
         <text class='odd_left'>收货地址:</text>
-        <text class='odd_right'>育昌路369号 山东省潍坊市昌乐县</text>
+        <text class='odd_right'>{{ item.di_zhi }}</text>
       </view>
     </view>
 

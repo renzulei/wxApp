@@ -57,7 +57,7 @@
 .w_title {
   width: 100%;
   height: 34rpx;
-  margin: 20rpx 0;
+  margin: 30rpx 0;
 }
 
 .w_borderLeft {
