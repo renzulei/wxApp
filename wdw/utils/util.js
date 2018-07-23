@@ -78,6 +78,8 @@ const login = (props) => {
   wx.setStorageSync('menuKey', 'index');
   success && success();
 }
+// 授权的cookie
+const authorizedCookie = encodeURI("__wgt=" + wx.getStorageSync('__wgt') + ";" + "__wgl=" + wx.getStorageSync('__wgl') + ";" + "menuKey=" + wx.getStorageSync('menuKey') + ";" + "userName=" + wx.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(wx.getStorageSync('userDefaultTradeCompany')));
 // 退出登录清除key
 const logout = () => {
   wx.removeStorage({
@@ -145,4 +147,5 @@ module.exports = {
   regPhone: regPhone,
   regPassword: regPassword,
   formatNum: formatNum,
+  authorizedCookie: authorizedCookie
 }

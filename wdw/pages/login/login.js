@@ -50,7 +50,53 @@ Page({
       // this.login();
     }
   },
+  login: function () {
+    var that = this;
+    var username = this.data.username;
+    var password = this.data.password;
+    wx.request({
+      url: `${umService}/user/userLogin`,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
+      },
+      data: JSON.stringify(this.getSubmitBody(username, password)),
+      success: function (res) {
+        console.log(res.data)
+        var json = res.data;
+        if (json.code == "S") {
+          let {
+            tokenExpire,
+            token,
+            userName,
+            userDefaultTradeCompany
+          } = json;
+          util.login({
+            token,
+            userName,
+            tokenExpire,
+            userDefaultTradeCompany,
+            success: () => {
+              wx.switchTab({
+                url: '../index/index',
+              })
+            }
+          })
+          that.setData({
+            wrong: false
+          });
+        } else if (json.code == "E") {
+          that.setData({
+            error_msg: json.msg,
+            wrong: true
+          });
+        }
+      }
+    })
 
+
+  },
   setName: function(e) {
     var username = e.detail.value;
     this.setData({
@@ -94,63 +140,7 @@ Page({
         'password': v2,
       }
   },
-  login: function() {
-    // wx.request({
-    //   url: 'https://yz.wangreat.com/core/restapi/public/product/getProductCondition',
-    //   method:'POST',
-    //   header: {
-    //     'content-type': 'application/json', // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data)
-    //   }
-    // })
-    var that = this;
-    var username = this.data.username;
-    var password = this.data.password;
-    wx.request({
-      url: `${umService}/user/userLogin`,
-      method: 'POST',
-      header: {
-        'content-type': 'application/json', // 默认值
-        'cookie': '__wgl=' + wx.getStorageSync('__wgl')        
-      },
-      data: JSON.stringify(this.getSubmitBody(username, password)),
-      success: function(res) {
-        console.log(res.data)
-        var json = res.data;
-        if (json.code == "S") {
-          let {
-            tokenExpire,
-            token,
-            userName,
-            userDefaultTradeCompany
-          } = json;
-          util.login({
-            token,
-            userName,
-            tokenExpire,
-            userDefaultTradeCompany,
-            success: () => {
-              wx.switchTab({
-                url: '../index/index',
-              })
-            }
-          })
-          that.setData({
-            wrong: false
-          });
-        } else if (json.code == "E") {
-          that.setData({
-            error_msg: json.msg,
-            wrong: true
-          });
-        }
-      }
-    })
 
-
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
