@@ -1,7 +1,7 @@
 var app = getApp();
 var cmService = app.globalData.cmService;
 var customer_id = app.globalData.customer_id
-const util = require('../../utils/util.js')
+// const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -10,6 +10,8 @@ Page({
   data: {
     bgc: "/images/bgc.png",
     searchValue: '',
+    list:[],
+    info:[]
   },
 
   /**
@@ -19,7 +21,7 @@ Page({
     // 促销商品
     this.dataInof();
     // 供应链
-    this.getInof();
+    this.getInof(); 
   },
   // 搜索框键盘输入值处理函数
   upSeachValue: function(e) {
@@ -41,7 +43,7 @@ Page({
   dataInof: function() {
     var that = this;
     wx.request({
-      url: `${cmService}/businessExplain/query?region=ZYCP`,
+      url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=ZYCP`,
       data: {},
       method: 'POST',
       header: {
@@ -49,17 +51,14 @@ Page({
         'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
       success: function(res) {
-        console.log(res)
-        var data = res.data;
-        console.log(data)
-        that.setData({
-          // businessAA: data.businessExplain,
-          // categoryIdAA: data.categoryId,
-          // businessIconUrlAA: `/businessdetails.html?categoryId=${data.categoryId}`,
-          // categoryNameAA: data.categoryName,
-          // descriptionAA: data.description,
-          data:res.data
-        })
+        var list = that.data.list;
+        list = res.data;
+        console.log(list);
+       that.setData({
+         title:res.data.categoryName,
+         list:list
+       })
+       console.log(list.businessExplain[0].explainName)
       },
     })
   },
@@ -68,7 +67,7 @@ Page({
   getInof: function() {
     var that = this;
     wx.request({
-      url: `${cmService}/businessExplain/query?region=GYLJR`,
+      url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=GYLJR`,
       data: {},
       method: 'POST',
       header: {
@@ -76,15 +75,12 @@ Page({
         'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
       success: function(res) {
-        var list = res.data;
-        console.log(list);
+        var info = that.data.info;
+        info = res.data;
+        console.log(info);
         that.setData({
-          // businessExplainBB: list.businessExplain,
-          // businessIconUrlBB: list.businessIconUrl,
-          // categoryIdBB: list.categoryId,
-          // categoryNameBB: list.categoryName,
-          // descriptionBB: list.description,
-          add:res.data
+          name: res.data.categoryName,
+          info: info
         })
       },
     })

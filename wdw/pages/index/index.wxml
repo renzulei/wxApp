@@ -5,7 +5,7 @@
       <view class='w_icon' bindtap='handleSearch'>
         <image src='/images/search.png'></image>
       </view>
-      <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索'  bindinput="upSeachValue"></input>
+      <input placeholder-class="phcolor" class='w_input' placeholder='输入产品名称或关键词进行搜索' bindinput="upSeachValue"></input>
     </view>
   </view>
 
@@ -15,91 +15,51 @@
 
   <view class='content'>
     <view class='w_title'>
-      <view class='w_borderLeft'> 
-        <text>{{ data.categoryName }}</text>
+      <view class='w_borderLeft'>
+        <text>{{ title }}</text>
       </view>
     </view>
   </view>
 
   <!-- =========================== -->
   <view class='w_contentShow'>
-    <view class='smbox'>
-      <image src='/images/bgc1.png'></image>
+    <view class='smbox' wx:for="{{ list }}" wx:key="{{ item }}" id='{{ index }}'>
+      <image src="/images/bgc1.png"></image>
       <view class='w_titleContent'>
         <view class='title_one'>
-          <text>万国纸业</text>
-          <text>骄阳白卡纸</text>
-          <text>印刷纸</text>
-          <text>300g</text>
-          <text>卷筒</text>
+          <text>{{ list.businessExplain[0].explainName }}</text>
+          <text>222</text>
+          <text>333</text>
+          <text>444</text>
+          <text>555</text>
         </view>
         <view class='w_border clearfix'>
-          <text>卷筒</text>
-          <text>印刷纸</text>
-          <text>骄阳白卡纸</text>
+          <text>111</text>
+          <text>22</text>
+          <text>33</text>
         </view>
         <view class='w_price'>
-          <text>￥13456.00</text>
-        </view>
-      </view>
-    </view>
-    <view class='smbox'>
-      <image src='/images/bgc1.png'></image>
-      <view class='w_titleContent'>
-        <view class='title_one'>
-          <text>万国纸业</text>
-          <text>骄阳白卡纸</text>
-          <text>印刷纸</text>
-          <text>300g</text>
-          <text>卷筒</text>
-        </view>
-        <view class='w_border clearfix'>
-          <text>卷筒</text>
-          <text>印刷纸</text>
-          <text>骄阳白卡纸</text>
-        </view>
-        <view class='w_price'>
-          <text>￥13456.00</text>
-        </view>
-      </view>
-    </view>
-    <view class='smbox'>
-      <image src='/images/bgc1.png'></image>
-      <view class='w_titleContent'>
-        <view class='title_one'>
-          <text>万国纸业</text>
-          <text>骄阳白卡纸</text>
-          <text>印刷纸</text>
-          <text>300g</text>
-          <text>卷筒</text>
-        </view>
-        <view class='w_border clearfix'>
-          <text>卷筒</text>
-          <text>印刷纸</text>
-          <text>骄阳白卡纸</text>
-        </view>
-        <view class='w_price'>
-          <text>￥13456.00</text>
+          <text>￥13476.00</text>
         </view>
       </view>
     </view>
   </view>
-  <!-- ================ -->
-  <view class='w_footer'>
-    <view class='content'>
-      <view class='w_title'>
-        <view class='w_borderLeft'>
-          <text>{{ add.categoryName }}</text>
-        </view>
+</view>
+<!-- ================ -->
+<view class='w_footer'>
+  <view class='content'>
+    <view class='w_title'>
+      <view class='w_borderLeft'>
+        <text>{{ name }}</text>
       </view>
     </view>
   </view>
 
   <view class='w_nav'>
     <view class='nav'>
-      <image src='/images/btfw.png'></image>
-      <image src='/images/btfw.png'></image>
-      <image src='/images/btfw.png'></image>
+      <image src="/images/shexiao.png"></image>
+      <image src="/images/shexiao.png"></image>
+      <image src="/images/shexiao.png"></image>
     </view>
   </view>
 </view>
