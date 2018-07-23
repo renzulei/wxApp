@@ -5,7 +5,8 @@
 .content {
   width: 100%;
   padding: 24rpx;
-  background-color: #f6f6f6;
+  /* background-color: #f6f6f6; */
+  padding-bottom: 144rpx;
 }
 /* 内容框 */
 .table {
@@ -15,7 +16,7 @@
   border-radius: 6rpx;
   box-shadow: 0px 0px 8px #ccc;
   margin-bottom: 20rpx;
-  padding: 30rpx;
+  padding: 20rpx;
 }
 
 .text {
@@ -26,7 +27,7 @@
 
 /* 每个小盒子 */
 .box {
-  width: 302rpx;
+  width: 320rpx;
   height: 66rpx;
   background-color: #f6f6f6;
   border-radius: 8rpx;
@@ -52,13 +53,15 @@ margin-bottom: 30rpx;
   float: right;
 }
 .left {
-  width: 186rpx;
+  width: 126rpx;
   height: 66rpx;
   float: left;
   text-align: left;
   line-height: 66rpx;
 }
-
+.left.wider{
+  width: 156rpx;
+}
 .left_text {
   display: block;
   width: 186rpx;
@@ -67,15 +70,21 @@ margin-bottom: 30rpx;
 
 
 .right {
-   width: 80rpx; 
+  width: 170rpx; 
   height: 66rpx;
   float: left;
   line-height: 66rpx;
   color: #f75959;
 }
+.right.thiner{
+  width: 140rpx;
+}
+.thiner .input{
+  width: 140rpx;
+}
 .input {
   display: block;
-   width: 80rpx;
+   width: 170rpx;
   height: 66rpx;
 }
 
@@ -94,10 +103,20 @@ margin-bottom: 30rpx;
 .table_color {
   color: #f75959;
 }
-
-.table_btn {
-  width: 86rpx;
+.addnew{
   display: inline-block;
+  padding: 8rpx 26rpx;
+  border: 1rpx solid #ccc;
+  font-size: 24rpx;
+  letter-spacing: 10rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  color: #666;
+}
+.table_btn {
+  float: right;
+  width: 86rpx;
+  /* display: inline-block; */
   vertical-align: middle;
   margin: 0 12rpx;
   border-radius: 8rpx;

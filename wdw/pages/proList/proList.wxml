@@ -1,7 +1,7 @@
 <import src="../../template/empty/empty.wxml" />
 <view class='container'>
   <view class='w_search'>
-    <view class='input-wrap'> 
+    <view class='input-wrap'>
       <view class='w_icon' bindtap='handleSearch'>
         <image src='/images/search.png'></image>
       </view>
@@ -82,7 +82,10 @@
     </view>
 
     <view class='bottom clearfix'>
-      <view class='bottom_left' bindtap='addFocus'>
+      <view wx:if="{{productDetail.favoritesFlag == 'Y'}}" class='bottom_left'>
+        <text>已经关注</text>
+      </view>
+      <view wx:else class='bottom_left' bindtap='addFocus'>
         <text>加入关注</text>
       </view>
       <view wx:if="{{unitPrice}}" class='bottom_right' bindtap='goSpecification'>

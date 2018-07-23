@@ -9,8 +9,8 @@ Page({
 
   /**
    * 页面的初始数据
-   */ 
-  data: { 
+   */
+  data: {
     showHide: 'true',
     showHides: 'true',
     // 产品列表数据
@@ -18,78 +18,9 @@ Page({
     // 筛选条件数据
     filters: [],
     // 产品详情数据
-    productDetail: {
-      "objectVersionNumber": null,
-      "productId": 3060,
-      "productCode": null,
-      "productName": "高级瓦楞",
-      "enabledFlag": "Y",
-      "sort": 0,
-      "productDetail": "<p><br></p>",
-      "productCycle": "<p><br></p>",
-      "unitPrice": null,
-      "physicalStateName": null,
-      "itemCategoryName": null,
-      "supperCategoryName": null,
-      "defaultItemId": 93,
-      "itemAttributes": null,
-      "productPic": null,
-      "lang": null,
-      "contactId": null,
-      "favoritesFlag": "N",
-      "productItemList": null,
-      "productAttachList": null
-    },
+    productDetail: {},
     // 物料种类数据
-    productItems: [{
-      "objectVersionNumber": null,
-      "itemId": 93,
-      "itemCategoryId": 102,
-      "itemCode": "BW1902000",
-      "itemName": "高级瓦楞",
-      "itemAlias": null,
-      "description": "",
-      "uomCode": "TON",
-      "customsCode": null,
-      "physicalStateCode": "JT",
-      "publicFlag": "Y",
-      "enabledFlag": null,
-      "startDateActive": null,
-      "endDateActive": null,
-      "sourceKey": null,
-      "inventId": null,
-      "categoryCode": null,
-      "itemCategoryIds": null,
-      "categoryName": "高强瓦楞纸",
-      "physicalStateName": "卷筒",
-      "supperCategoryCode": "WLZ",
-      "supperCategoryName": "瓦楞纸",
-      "itemAttributeId": null,
-      "fixedAttributeId": null,
-      "attributeCode": null,
-      "brandCodes": null,
-      "qtyCodes": null,
-      "attributeValue": null,
-      "unitPrice": 4000,
-      "quantity": null,
-      "tonnage": null,
-      "currencyCode": null,
-      "baseOrderQuantity": null,
-      "orderQuantity": null,
-      "orderUom": null,
-      "baseOrderUom": null,
-      "amount": null,
-      "priceCodes": null,
-      "shelveStatusCode": null,
-      "searchBoxContext": null,
-      "priceSort": null,
-      "saleCountSort": null,
-      "itemChangableAttributes": null,
-      "itemFixedAttributes": null,
-      "itemApvSuppliers": null,
-      "itemApvCustomers": null,
-      "attributeName": null
-    }],
+    productItems: [],
     selectedProductId: '',
     userDefaultTradeCompany: '',
     partyName: '', //交易主体（从缓存读取）
@@ -105,16 +36,18 @@ Page({
     searchValue: '', //本页面搜索框输入值
     data: {}, //请求接口时携带数据
     exist: [], //已经被选中的筛选项
+    changeableAttrs:[],//商品可变属性
     saleCountSortName: '', //销量排序(ASC表示升序，DESC表示降序)
     priceSortName: '', //价格排序（ASC表示升序，DESC表示降序）
-    total:null,//商品列表总条数
-    pageSize:10,//每页展示条数
+    total: null, //商品列表总条数
+    pageSize: 10, //每页展示条数
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.setStorageSync('menuKey', 'CPLB');
     var userDefaultTradeCompany = wx.getStorageSync('userDefaultTradeCompany');
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
     var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
@@ -151,7 +84,7 @@ Page({
     data.priceSort = this.data.priceSortName
     //获取商品数据
     if (this.data.searchContent) {
-      data.searchBoxContext = this.data.searchContent;  
+      data.searchBoxContext = this.data.searchContent;
     }
     this.fetch({
       pageSize: 10,
@@ -166,7 +99,7 @@ Page({
     var that = this;
     wx.request({
       url: `${cmService}/product/getProductCondition`,
-      method:'POST',
+      method: 'POST',
       header: {
         'Content-Type': 'application/json',
         'cookie': '__wgl=' + wx.getStorageSync('__wgl')
@@ -246,11 +179,15 @@ Page({
   },
 
   // 根据筛选条件请求商品列表数据
-  fetch: function (params = {}) {
+  fetch: function(params = {}) {
     // console.log(params)
     var that = this;
     var tradePartyId = this.data.tradePartyId;
     var contactId = this.data.contactId;
+    wx.showLoading({
+      title: "加载中...",
+      mask: true
+    })
     wx.request({
       url: `${cmService}/product/getProductByCondition?page=${params.current}&pageSize=${params.pageSize}&tradePartyId=${tradePartyId}&contactId=${contactId}`,
       method: 'POST',
@@ -259,7 +196,10 @@ Page({
         'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
       data: JSON.stringify(params.data),
-      success: function (res) {
+      complete: function() {
+        wx.hideLoading()
+      },
+      success: function(res) {
         // console.log(res.data)
         var data = res.data;
         let shop = [];
@@ -275,8 +215,8 @@ Page({
           shop.push(item)
         })
         that.setData({
-          shop:shop,
-          total:data.total
+          shop: shop,
+          total: data.total
         })
       }
     })
@@ -291,6 +231,26 @@ Page({
       itemName: data.itemName,
       physicalStateCode: data.physicalStateCode,
       unitPrice: data.unitPrice,
+    })
+    wx.request({
+      url: `${cmService}/product/getItemChangeableProperty`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'cookie': authorizedCookie
+      },
+      data: JSON.stringify({
+        itemId: data.itemId
+      }),
+      success:(res)=>{
+        console.log(res.data);
+        var json = res.data;
+        if (json.code == "S"){
+          this.setData({
+            changeableAttrs: json.changeableAttrs
+          })
+        }
+      }
     })
   },
   // 搜索框键盘输入值处理函数
@@ -317,10 +277,23 @@ Page({
   },
   goSpecification: function() {
     var physicalStateCode = this.data.physicalStateCode;
-    var items = this.data.items;
-    wx.navigateTo({
-      url: `/pages/specification/specification?physicalStateCode=${physicalStateCode}&items=${items}`,
-    })
+    var items = JSON.stringify(this.data.items);
+    var changeableAttrs = JSON.stringify(this.data.changeableAttrs);
+    // 以下三行仅供调试，避免保存代码总是要跳转
+    wx.setStorageSync('physicalStateCode', physicalStateCode);
+    wx.setStorageSync('items', items);
+    wx.setStorageSync('changeableAttrs', changeableAttrs);
+    if (items) {
+      wx.navigateTo({
+        url: `/pages/specification/specification?physicalStateCode=${physicalStateCode}&items=${items}&changeableAttrs=${changeableAttrs}`,
+      })
+    } else {
+      wx.showModal({
+        title: '温馨提示：',
+        content: '请您先选择物料，再填写规格要求'
+      })
+    }
+
   },
   // 筛选条件放入data参数中
   fetchChoose: function(newExist) {
@@ -469,7 +442,7 @@ Page({
   // 底部弹窗函数,同时请求该商品详情数据
   shoppingTap: function(e) {
     var selectedProductId = e.currentTarget.dataset.productid;
-    console.log(selectedProductId)
+    // console.log(selectedProductId)
     this.setData({
       showHide: !this.data.showHide,
       selectedProductId: selectedProductId
@@ -477,6 +450,10 @@ Page({
     var tradePartyId = this.data.tradePartyId;
     var contactId = this.data.contactId;
     var that = this;
+    wx.showLoading({
+      title: "加载中...",
+      mask: true
+    })
     wx.request({
       url: `${cmService}/product/getProductDetail?tradePartyId=${tradePartyId}`,
       method: 'POST',
@@ -489,6 +466,9 @@ Page({
         contactId: contactId,
         tradePartyId: tradePartyId
       }),
+      complete: function() {
+        wx.hideLoading()
+      },
       success: function(res) {
         var json = res.data;
         if (json.code == "S") {
@@ -506,12 +486,19 @@ Page({
   addFocus: function() {
     var selectedProductId = this.data.selectedProductId;
     var tradePartyId = this.data.tradePartyId;
+    wx.showLoading({
+      title: "加载中...",
+      mask: true
+    })
     wx.request({
       url: `${authService}/product/addItemFavorites?tradePartyId=${tradePartyId}&productId=${selectedProductId}`,
-      method:'POST',
+      method: 'POST',
       header: {
         'content-type': 'application/json', // 默认值
         'cookie': authorizedCookie
+      },
+      complete: function() {
+        wx.hideLoading()
       },
       success: function(res) {
         if (res.data.code == "S") {
@@ -520,14 +507,14 @@ Page({
             icon: 'success',
             duration: 1000
           })
-        }else{
+        } else {
           wx.showToast({
             title: '添加关注失败',
             image: '/images/failicon.png',
             duration: 1000
           })
         }
-        
+
       },
       fail: function() {
         wx.showToast({
@@ -584,7 +571,7 @@ Page({
     var pageSize = this.data.pageSize;
     var total = this.data.total;
     var data = this.data.data;
-    if(pageSize<total){
+    if (pageSize < total) {
       this.fetch({
         pageSize: pageSize + 10,
         current: 1,
@@ -595,7 +582,7 @@ Page({
         pageSize: pageSize + 10
       })
     }
-    
+
   },
 
   /**
