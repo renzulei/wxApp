@@ -1,8 +1,10 @@
 // pages/proList/proList.js
-var app = getApp()
-var cmService = app.globalData.cmService
-var customer_id = app.globalData.customer_id
-const util = require('../../utils/util.js')
+var app = getApp();
+var cmService = app.globalData.cmService;
+var authService = app.globalData.authService;
+var customer_id = app.globalData.customer_id;
+const util = require('../../utils/util.js');
+const authorizedCookie = util.authorizedCookie;
 Page({
 
   /**
@@ -12,132 +14,9 @@ Page({
     showHide: 'true',
     showHides: 'true',
     // 产品列表数据
-    shop: [{
-      "productId": "3060",
-      "productName": "高级瓦楞",
-      "physicalStateName": "卷筒",
-      "supperCategoryName": "瓦楞纸",
-      "itemCategoryName": "高强瓦楞纸",
-      "unitPrice": "4000.0",
-      "sort": "0",
-      "key": 0
-    }, {
-      "productId": "2793",
-      "productName": "测试物料-原纸成品3",
-      "physicalStateName": "平张",
-      "supperCategoryName": "白板纸",
-      "itemCategoryName": "白面牛卡纸",
-      "unitPrice": "780.0",
-      "sort": "1",
-      "key": 1
-    }, {
-      "productId": "3024",
-      "productName": "123",
-      "physicalStateName": "平张",
-      "supperCategoryName": "白板纸",
-      "itemCategoryName": "白面牛卡纸",
-      "unitPrice": "10000.0",
-      "sort": "0",
-      "key": 2
-    }],
+    shop: [],
     // 筛选条件数据
-    filters: [{
-      "name": "商品大类",
-      "item": [{
-        "name": "纱管纸",
-        "value": "SGZ"
-      }, {
-        "name": "进口纸",
-        "value": "JKZ"
-      }, {
-        "name": "白板纸",
-        "value": "BBZ"
-      }, {
-        "name": "箱板纸",
-        "value": "XBZ"
-      }, {
-        "name": "瓦楞纸",
-        "value": "WLZ"
-      }]
-    }, {
-      "name": "存在状态",
-      "item": [{
-        "name": "平张",
-        "value": "PZ"
-      }, {
-        "name": "卷筒",
-        "value": "JT"
-      }]
-    }, {
-      "name": "克重",
-      "item": [{
-        "name": "100g及以下",
-        "value": "100g及以下"
-      }, {
-        "name": "110g",
-        "value": "110g"
-      }, {
-        "name": "120g",
-        "value": "120g"
-      }, {
-        "name": "130g",
-        "value": "130g"
-      }, {
-        "name": "140g",
-        "value": "140g"
-      }, {
-        "name": "150g",
-        "value": "150g"
-      }, {
-        "name": "160g",
-        "value": "160g"
-      }, {
-        "name": "170g",
-        "value": "170g"
-      }, {
-        "name": "180g",
-        "value": "180g"
-      }, {
-        "name": "190g",
-        "value": "190g"
-      }, {
-        "name": "200g及以上",
-        "value": "200g及以上"
-      }]
-    }, {
-      "name": "商品中类",
-      "item": [{
-        "name": "纱管纸",
-        "value": "SGZ"
-      }, {
-        "name": "进口瓦楞纸",
-        "value": "JKWL"
-      }, {
-        "name": "进口牛卡纸",
-        "value": "JKNK"
-      }, {
-        "name": "白面牛卡纸",
-        "value": "BDNKZ"
-      }, {
-        "name": "灰底涂布纸",
-        "value": "HDTBZ"
-      }, {
-        "name": "牛底涂布纸",
-        "value": "NDTBZ"
-      }, {
-        "name": "再生箱板纸",
-        "value": "ZS"
-      }, {
-        "name": "牛卡箱板纸",
-        "value": "NK"
-      }, {
-        "name": "普通瓦楞纸",
-        "value": "PW"
-      }, {
-        "name": "高级瓦楞纸",
-        "value": "GW"
-      }]
-    }],
+    filters: [],
     // 产品详情数据
     productDetail: {
       "objectVersionNumber": null,
@@ -228,6 +107,8 @@ Page({
     exist: [], //已经被选中的筛选项
     saleCountSortName: '', //销量排序(ASC表示升序，DESC表示降序)
     priceSortName: '', //价格排序（ASC表示升序，DESC表示降序）
+    total:null,//商品列表总条数
+    pageSize:10,//每页展示条数
   },
 
   /**
@@ -245,15 +126,15 @@ Page({
       tradePartyId: tradePartyId,
       contactId: contactId
     })
-     //this.searchContentList() //进入页面加载筛选数据
-    // this.searchBoxCont() //进入页面加载列表数据
+    this.searchContentList() //进入页面加载筛选数据
+    this.searchBoxCont() //进入页面加载列表数据
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
     var searchContent = app.globalData.searchContent || '';
-    console.log(searchContent)
+    // console.log(searchContent)
     this.setData({
       searchContent: searchContent
     })
@@ -282,13 +163,16 @@ Page({
     })
   },
   searchContentList: function() {
+    var that = this;
     wx.request({
       url: `${cmService}/product/getProductCondition`,
-      headers: {
-        'Content-Type': 'application/json'
+      method:'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
       success: function(res) {
-        console.log(res.data)
+        // console.log(res.data)
         var json = res.data;
         var filters = []
         json.conditionList.map((item, i) => {
@@ -354,8 +238,45 @@ Page({
             })
           }
         })
-        this.setData({
+        that.setData({
           filters: filters
+        })
+      }
+    })
+  },
+
+  // 根据筛选条件请求商品列表数据
+  fetch: function (params = {}) {
+    // console.log(params)
+    var that = this;
+    var tradePartyId = this.data.tradePartyId;
+    var contactId = this.data.contactId;
+    wx.request({
+      url: `${cmService}/product/getProductByCondition?page=${params.current}&pageSize=${params.pageSize}&tradePartyId=${tradePartyId}&contactId=${contactId}`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
+      },
+      data: JSON.stringify(params.data),
+      success: function (res) {
+        // console.log(res.data)
+        var data = res.data;
+        let shop = [];
+        data.content.map((item, i) => {
+          var item = JSON.parse(item)
+          item.key = i
+          if (item.itemAttributes) {
+            item.itemAttributes.map((it, i) => {
+              if (it.attributeCode == "Y033")
+                item.fixedAttributeValue = it.fixedAttributeValue
+            })
+          }
+          shop.push(item)
+        })
+        that.setData({
+          shop:shop,
+          total:data.total
         })
       }
     })
@@ -435,23 +356,6 @@ Page({
       current: 1,
       data: data
     });
-  },
-
-  // 根据筛选条件请求商品列表数据
-  fetch: function(params = {}) {
-    console.log(params.data)
-    var tradePartyId = this.data.tradePartyId;
-    var contactId = this.data.contactId;
-    wx.request({
-      url: `${cmService}/product/getProductByCondition?page=${params.current}&pageSize=${params.pageSize}&tradePartyId=${tradePartyId}&contactId=${contactId}`,
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      body: JSON.stringify(params.data),
-      success: function(res) {
-        console.log(res.data)
-      }
-    })
   },
   // 点击筛选项处理函数
   handleSingleClick: function(e) {
@@ -572,26 +476,27 @@ Page({
     })
     var tradePartyId = this.data.tradePartyId;
     var contactId = this.data.contactId;
+    var that = this;
     wx.request({
       url: `${cmService}/product/getProductDetail?tradePartyId=${tradePartyId}`,
+      method: 'POST',
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json', // 默认值
+        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         productId: selectedProductId,
         contactId: contactId,
         tradePartyId: tradePartyId
       }),
       success: function(res) {
-        console.log(res.data)
         var json = res.data;
         if (json.code == "S") {
-          this.setData({
+          that.setData({
             productDetail: json.productDetail,
             unitPrice: json.productDetail.unitPrice,
             // itemAttributes: json.productDetail.itemAttributes, //商品详情的规格参数，小程序不需要
             productItems: json.items,
-            // productDetails: json //商品详情全部数据，不需要
           })
         }
       }
@@ -602,16 +507,27 @@ Page({
     var selectedProductId = this.data.selectedProductId;
     var tradePartyId = this.data.tradePartyId;
     wx.request({
-      url: `${cmService}/product/addItemFavorites?tradePartyId=${tradePartyId}&productId=${selectedProductId}`,
+      url: `${authService}/product/addItemFavorites?tradePartyId=${tradePartyId}&productId=${selectedProductId}`,
+      method:'POST',
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json', // 默认值
+        'cookie': authorizedCookie
       },
       success: function(res) {
-        wx.showToast({
-          title: '添加关注成功',
-          icon: 'success',
-          duration: 1000
-        })
+        if (res.data.code == "S") {
+          wx.showToast({
+            title: '添加关注成功',
+            icon: 'success',
+            duration: 1000
+          })
+        }else{
+          wx.showToast({
+            title: '添加关注失败',
+            image: '/images/failicon.png',
+            duration: 1000
+          })
+        }
+        
       },
       fail: function() {
         wx.showToast({
@@ -665,7 +581,21 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    var pageSize = this.data.pageSize;
+    var total = this.data.total;
+    var data = this.data.data;
+    if(pageSize<total){
+      this.fetch({
+        pageSize: pageSize + 10,
+        current: 1,
+        data: data
+      })
+      console.log(pageSize)
+      this.setData({
+        pageSize: pageSize + 10
+      })
+    }
+    
   },
 
   /**
