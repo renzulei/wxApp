@@ -15,8 +15,8 @@
 
   <view class='content'>
     <view class='w_title'>
-      <view class='w_borderLeft'>
-        <text>促销商品/主营商品</text>
+      <view class='w_borderLeft'> 
+        <text>{{ data.categoryName }}</text>
       </view>
     </view>
   </view>
@@ -89,7 +89,7 @@
     <view class='content'>
       <view class='w_title'>
         <view class='w_borderLeft'>
-          <text>供应链金融服务产品</text>
+          <text>{{ add.categoryName }}</text>
         </view>
       </view>
     </view>

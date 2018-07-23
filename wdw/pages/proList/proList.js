@@ -9,8 +9,8 @@ Page({
 
   /**
    * 页面的初始数据
-   */
-  data: {
+   */ 
+  data: { 
     showHide: 'true',
     showHides: 'true',
     // 产品列表数据

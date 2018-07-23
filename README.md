@@ -1,4 +1,4 @@
-# wxApp
+﻿# wxApp
 新增components组件文件夹
   radio组件封装，使用时，在目标文档的.json文件里添加
   {
