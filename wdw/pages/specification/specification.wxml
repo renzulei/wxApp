@@ -11,7 +11,15 @@
               <text>幅宽mm:</text>
             </view>
             <view class='right'>
-              <input class='input' type='number' value='{{item.Y028}}'></input>
+              <input 
+                class='input' 
+                type='number' 
+                data-index='{{index}}' 
+                data-code='{{code}}'
+                value='{{item[code]}}'
+                bindblur='attributeBlur'
+              >
+              </input>
             </view>
           </view>
           <view class="box box_right">
@@ -19,8 +27,16 @@
               <text>切长mm:</text>
             </view>
             <view class='right'>
-              <text wx:if="{{physicalStateCode == 'JT'}}">{{item.Y029}}</text>
-              <input wx:else class='input' type='number' value='{{item.Y029}}'></input>
+              <text wx:if="{{physicalStateCode == 'JT'}}">{{item[cutLength]}}</text>
+              <input wx:else 
+                class='input' 
+                data-code='{{cutLength}}' 
+                type='number' 
+                data-index='{{index}}' 
+                value='{{item[cutLength]}}'
+                bindblur='attributeBlur'
+              >
+              </input>
             </view>
           </view>
         </view>
@@ -30,7 +46,15 @@
               <text>件数(非必填):</text>
             </view>
             <view class='right thiner'>
-              <input class='input' type='number' value='{{item.orderQuantity}}'></input>
+              <input 
+                class='input' 
+                type='number' 
+                data-index='{{index}}' 
+                value='{{item.orderQuantity}}' 
+                bindinput='orderQuantityChange'
+                bindblur='orderQuantityBlur'
+              >
+              </input>
             </view>
           </view>
           <view class="box box_right">
@@ -38,7 +62,15 @@
               <text>吨数(吨):</text>
             </view>
             <view class='right'>
-              <input class='input' type='digit' value='{{item.baseOrderQuantity}}'></input>
+              <input 
+                class='input' 
+                type='digit' 
+                data-index='{{index}}' 
+                bindinput='baseOrderQuantityChange'
+                bindblur='baseOrderQuantityBlur' 
+                value='{{item.baseOrderQuantity}}'
+              >
+              </input>
             </view>
           </view>
         </view>
@@ -63,11 +95,11 @@
     <!-- 上部分 -->
     <view class='footer_top'>
       <text class='footer_left'>总行数：</text>
-      <text class='footer_right'>4</text>
+      <text class='footer_right'>{{data.length}}</text>
       <text class='footer_left'>总吨数：</text>
-      <text class='footer_right'>1950</text>
+      <text class='footer_right'>{{allT}}</text>
       <text class='footer_left'>总金额：</text>
-      <text class='footer_right'>2678943.12</text>
+      <text class='footer_right'>{{allA}}</text>
     </view>
 
     <!-- 下部分 -->
@@ -75,7 +107,7 @@
       <view class='bom_left' bindtap='cancelTap'>
         <text>取消返回</text>
       </view>
-      <view class='bom_right' bindtap='shoppingTap'>
+      <view class='bom_right' bindtap='addCart'>
         <text>加入购物车</text>
       </view>
     </view>

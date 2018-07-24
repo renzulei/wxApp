@@ -16,6 +16,8 @@ Page({
     unitPrice: "",
     itemId: '',
     dataInTable: null, //初始空行，用作添加新的空行
+    allT: 0, //总吨数
+    allA: 0 //总金额
   },
 
   /**
@@ -28,10 +30,9 @@ Page({
     //    items: JSON.parse(options.items),
     //    changeableAttrs: JSON.parse(options.changeableAttrs)
     //  })
-    var physicalStateCode = wx.getStorageSync('physicalStateCode');
-    var items = JSON.parse(wx.getStorageSync('items'));
-    var changeableAttrs = JSON.parse(wx.getStorageSync('changeableAttrs'));
-    console.log(physicalStateCode, items, changeableAttrs)
+    var physicalStateCode = util.getStorageSync('physicalStateCode');
+    var items = JSON.parse(util.getStorageSync('items'));
+    var changeableAttrs = JSON.parse(util.getStorageSync('changeableAttrs'));
     this.setData({
       physicalStateCode: physicalStateCode,
       items: items,
@@ -50,10 +51,16 @@ Page({
     changeableAttrs ? changeableAttrs.map((item, i) => {
       data.map((items, i) => {
         if (item.attributeName == "切长mm") {
+          this.setData({
+            cutLength: item.attributeCode
+          })
           physicalStateCode == "JT" ?
             items[item.attributeCode] = "-" :
             items[item.attributeCode] = ""
         } else {
+          this.setData({
+            code: item.attributeCode
+          })
           items[item.attributeCode] = ''
         }
       })
@@ -66,7 +73,6 @@ Page({
 
   // 返回proList产品列表页
   cancelTap: function() {
-    console.log(1111111);
     wx.switchTab({
       url: "/pages/proList/proList"
     })
@@ -78,28 +84,12 @@ Page({
       url: '/pages/createOrder/createOrder',
     })
   },
-  // 复制函数
-  deepCopy: (p, c) => {
-    var copy = c || {};
-    for (var i in p) {
-      if (!p.hasOwnProperty(i)) {
-        continue;
-      }
-      if (typeof p[i] === 'object' && p[i] != null) {
-        copy[i] = (p[i].constructor === Array) ? [] : {};
-        this.deepCopy(p[i], copy[i]);
-      } else {
-        copy[i] = p[i];
-      }
-    }
-    return copy;
-  },
+
   //复制一行
   copyTap: function(e) {
     var record = e.currentTarget.dataset.record;
     const dataSource = [...this.data.data];
-    var deepData = this.deepCopy(this.data.data[0])
-    console.log(deepData)
+    var deepData = util.deepCopy(this.data.data[0],{})
     for (let i in deepData) {
       for (let j in record) {
         if (i = j) {
@@ -120,7 +110,7 @@ Page({
       dataSource.splice(index, 1);
       this.setData({
         data: dataSource
-      });
+      }, this.doCount);
     }
   },
   handleAdd: function() {
@@ -147,17 +137,309 @@ Page({
     if (!Send) {
       wx.showToast({
         title: '请将信息填写完整',
-        icon:"none",
-        duration:1000
+        icon: "none",
+        duration: 1000
       })
       return
     }
 
-    let dataS = this.deepCopy(...this.data.dataInTable);
-    console.log(dataS);
+    let dataS = util.deepCopy(...this.data.dataInTable,{});
     this.setData({
       data: [...this.data.data, dataS]
     })
+  },
+  // 件数改变触发事件
+  orderQuantityChange: function(e) {
+    var value = e.detail.value;
+    var index = e.currentTarget.dataset.index;
+    this.data.data.map((item, i) => {
+      if (i == index) {
+        item.orderQuantity = isNaN(Number(value).toFixed(0)) ? "" : Number(value).toFixed(0)
+      }
+    })
+    this.setData({
+      data: this.data.data
+    })
+  },
+  // 件数离开焦点
+  orderQuantityBlur: function(e) {
+    let code, cutLength, record;
+    var index = e.currentTarget.dataset.index;
+    record = this.data.data[index];
+    this.data.changeableAttrs ?
+      this.data.changeableAttrs.map((item, i) => {
+        if (item.attributeName == "幅宽mm") {
+          code = item.attributeCode
+        } else if (item.attributeName == "切长mm") {
+          cutLength = item.attributeCode
+        }
+      }) : ""
+    if (this.data.physicalStateCode == "JT") {
+      wx.request({
+        url: `${authService}/common/getItemTonQuantity?itemId=${this.data.itemId}&pieceQty=${Number(record.orderQuantity)}&rangeWidth=${record[code]}`,
+        method: "POST",
+        header: {
+          'Content-Type': 'application/json',
+          'cookie': authorizedCookie
+        },
+        success: (res) => {
+          try {
+            util.catchHttpError(res);
+          } catch (e) {
+            console.error(e)
+            return
+          }
+          var json = res.data;
+          if (json) {
+            this.data.data.map((item, i) => {
+              if (i == index) {
+                item.baseOrderQuantity = json
+                item.amount = (Number(item.baseOrderQuantity) * Number(item.unitPrice)).toFixed(2)
+              }
+            })
+          } else {
+            this.data.data.map((item, i) => {
+              if (i == index) {
+                item.baseOrderQuantity = 0
+                item.amount = 0
+              }
+            })
+          }
+          this.setData({
+            data: this.data.data
+          }, this.doCount)
+        },
+      })
+    } else if (this.data.physicalStateCode == "PZ") {
+      wx.request({
+        url: `${authService}/common/getItemPZTonQuantity?itemId=${this.data.itemId}&pieceQty=${Number(record.orderQuantity)}&rangeWidth=${record[code]}&cutLength=${record[cutLength]}`,
+        method: "POST",
+        header: {
+          'Content-Type': 'application/json',
+          'cookie': authorizedCookie
+        },
+        success: (res) => {
+          try {
+            util.catchHttpError(res);
+          } catch (e) {
+            console.error(e)
+            return
+          }
+          var json = res.data;
+          if (json) {
+            this.data.data.map((item, i) => {
+              if (i == index) {
+                item.baseOrderQuantity = json
+                item.amount = (Number(record.baseOrderQuantity) * Number(record.unitPrice)).toFixed(2);
+              }
+            })
+          } else {
+            this.data.data.map((item, i) => {
+              if (i == index) {
+                item.baseOrderQuantity = ""
+                item.amount = 0
+              }
+            })
+          }
+          this.setData({
+            data: this.data.data
+          }, this.doCount)
+        }
+      })
+    }
+  },
+  // 吨数改变触发事件
+  baseOrderQuantityChange: function(e) {
+    var value = e.detail.value;
+    var index = e.currentTarget.dataset.index;
+    var record = this.data.data[index];
+    if (value) {
+      this.data.data.map((item, i) => {
+        if (i == index) {
+          if (value != record.baseOrderQuantity) {
+            item.orderQuantity = 0
+          }
+          item.baseOrderQuantity = value;
+        }
+      })
+    } else {
+      this.data.data.map((item, i) => {
+        if (i == index) {
+          item.baseOrderQuantity = 0
+        }
+      })
+    }
+    this.setData({
+      data: this.data.data
+    })
+  },
+  // 吨数离开焦点
+  baseOrderQuantityBlur: function(e) {
+    var value = e.detail.value;
+    var index = e.currentTarget.dataset.index;
+    var record = this.data.data[index];
+    this.data.data.map((item, i) => {
+      if (i == index) {
+        item.baseOrderQuantity = Number(record.baseOrderQuantity).toFixed(3)
+        item.amount = (Number(record.baseOrderQuantity) * Number(record.unitPrice)).toFixed(2);
+      }
+
+    })
+    this.setData({
+      data: this.data.data,
+    }, this.doCount)
+  },
+  doCount: function() {
+    var allT = 0,
+      allA = 0;
+    this.data.data.map((item, i) => {
+      allT += Number(item.baseOrderQuantity);
+      allA += Number(item.amount);
+    })
+    this.setData({
+      allT: allT,
+      allA: allA
+    })
+  },
+  // 幅宽和切长离开焦点触发函数
+  attributeBlur: function(e) {
+    var attributeCode = e.currentTarget.dataset.code;
+    var index = e.currentTarget.dataset.index;
+    var value = e.detail.value;
+    value = value < 100 ? 100 : value > 9999 ? 9999 : value;
+    var record = this.data.data[index];
+    if (!Number(value)) {
+      record[attributeCode] = null
+    } else {
+      this.data.data.map((items, i) => {
+        if (i == index) {
+          if (value != record[attributeCode]) {
+            items.orderQuantity = 0
+            items.baseOrderQuantity = 0
+            items.amount = 0
+          }
+          items[attributeCode] = value
+        }
+      })
+    }
+    this.setData({
+      data: this.data.data,
+    }, this.doCount)
+  },
+  // 加入购物车
+  addCart: function(e) {
+    let notSend = true
+    if (!this.data.data.length) {
+      wx.showToast({
+        title: '请至少添加一行规格参数！',
+        icon: 'none',
+        duration: 1000
+      })
+      return
+    }
+    this.data.data.map((item) => {
+      for (let i in item) {
+        if (i != "key") {
+          if (i != "orderQuantity")
+            if (i != "operation")
+              if (i == "baseOrderQuantity") {
+                if (!Number(item[i])) {
+                  notSend = false
+                }
+              } else {
+                if (!item[i]) {
+                  notSend = false
+                }
+              }
+        }
+      }
+    })
+    if (!notSend) {
+      wx.showToast({
+        title: '请将信息填写完整,再添加到购物车',
+        icon: 'none',
+        duration: 1000
+      })
+      return
+    }
+    let dataSource = this.data.data;
+    dataSource.map((item, i) => {
+      var mapAttr = util.deepCopy(this.data.changeableAttrs,[]);
+      mapAttr.map((it) => {
+        let tp = it.attributeCode
+        it.value = item[tp]
+      })
+      item.key = i;
+      item.itemId = this.data.items.itemId;
+      item.itemChangableAttributes = mapAttr;
+      item.itemFixedAttributes = [];
+      item.physicalStateCode = this.data.physicalStateCode
+    });
+    let user = util.getStorageSync('userName');
+    if (user) {
+      if (this.data.items.itemId) {
+        if (!util.getStorageSync("userDefaultTradeCompany").tradePartyId) {
+          wx.showToast({
+            title: '此收货地址不存在，无法添加购物车！',
+            icon:'none',
+            duration:1500
+          })
+        } else {
+          wx.request({
+            url: `${authService}/shopCart/addItemToCart?contactId=${util.getStorageSync("userDefaultTradeCompany").contactId || ""}&tradePartyId=${util.getStorageSync("userDefaultTradeCompany").tradePartyId}`,
+            method: 'POST',
+            header: {
+              'Content-Type': 'application/json',
+              'cookie':util.authorizedCookie
+            },
+            data: JSON.stringify(dataSource),
+            success:function(res){
+              try{
+                util.catchHttpError(res)
+              }catch(e){
+                console.error(e)
+              }
+              var json = res.data;
+              if (json.code == "S") {
+                wx.showModal({
+                  title: '添加购物车成功',
+                  content: '添加购物车成功，点击立即下单前往购物车！',
+                  cancelText:'继续购物',
+                  confirmText:'立即下单',
+                  success: function (re) {
+                    if (re.confirm) {
+                      wx.redirectTo({
+                        url: '/pages/createOrder/createOrder',
+                      })
+                    } else if (re.cancel) {
+                      wx.switchTab({
+                        url: '/pages/proList/proList',
+                      })
+                    }
+                  }
+                })
+              } else {
+                wx.showToast({
+                  title: json.msg,
+                  icon:'none',
+                  duration:1500
+                })
+              }
+            }
+          })
+        }
+      } else {
+        wx.showToast({
+          title: '请您先选择物料，再填写规格要求!',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    } else {
+      wx.redirectTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

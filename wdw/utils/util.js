@@ -55,7 +55,7 @@ const deepCopy = (p, c) => {
     }
     if (typeof p[i] === 'object' && p[i] != null) {
       copy[i] = (p[i].constructor === Array) ? [] : {};
-      this.deepCopy(p[i], copy[i]);
+      deepCopy(p[i], copy[i]);
     } else {
       copy[i] = p[i];
     }
@@ -71,17 +71,46 @@ const login = (props) => {
     userName,
     userDefaultTradeCompany
   } = props;
-  wx.setStorageSync('__wgt', token);
-  wx.setStorageSync('userName', userName);
-  wx.setStorageSync('__wgl', 'zh_CN');
-  wx.setStorageSync('userDefaultTradeCompany', userDefaultTradeCompany);
-  wx.setStorageSync('menuKey', 'index');
+  setStorageSync('__wgt', token, tokenExpire);
+  setStorageSync('userName', userName, tokenExpire);
+  setStorageSync('__wgl', 'zh_CN');
+  setStorageSync('userDefaultTradeCompany', userDefaultTradeCompany, tokenExpire);
+  setStorageSync('menuKey', 'index');
   success && success();
 }
+// 封装缓存存储带时效性
+let setStorageSync = (k,v,t)=>{
+  wx.setStorageSync(k, v);
+  var seconds = parseInt(t);
+  if (seconds > 0) {
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000 + seconds;
+    wx.setStorageSync(k + '_timeOut', timestamp + "")
+  } else {
+    wx.removeStorageSync(k + '_timeOut')
+  }
+}
+// 获取缓存数据
+let getStorageSync = (k, def) => {
+  var deadtime = parseInt(wx.getStorageSync(k + '_timeOut'))
+  if (deadtime) {
+    if (parseInt(deadtime) < Date.parse(new Date()) / 1000) {
+      if (def) { return def; } else { return; }
+    }
+  }
+  var res = wx.getStorageSync(k);
+  if (res) {
+    return res;
+  } else {
+    return def;
+  }
+}
 // 授权的cookie
-const authorizedCookie = encodeURI("__wgt=" + wx.getStorageSync('__wgt') + ";" + "__wgl=" + wx.getStorageSync('__wgl') + ";" + "menuKey=" + wx.getStorageSync('menuKey') + ";" + "userName=" + wx.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(wx.getStorageSync('userDefaultTradeCompany')));
+const authorizedCookie = encodeURI("__wgt=" + getStorageSync('__wgt') + ";" + "__wgl=" + getStorageSync('__wgl') + ";" + "menuKey=" + getStorageSync('menuKey') + ";" + "userName=" + getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(getStorageSync('userDefaultTradeCompany')));
+// 游客cookie
+const noLoginCookie = encodeURI('__wgl=' + getStorageSync('__wgl'))
 // 退出登录清除key
-const logout = () => {
+var logout = () => {
   wx.removeStorage({
     key: '__wgt'
   });
@@ -91,6 +120,74 @@ const logout = () => {
   wx.removeStorage({
     key: 'userDefaultTradeCompany'
   });
+}
+let catchHttpError = function (res) {
+  if (res.statusCode) {
+    switch (res.statusCode) {
+      case 401:
+        getStorageSync('userName') ?
+          wx.showModal({
+            title: '温馨提示',
+            content: '您暂无权限，请联系客服人员',
+            confirmText:'返回首页',
+            success: function(re) {
+              if (re.confirm) {
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
+              } else if (re.cancel) {
+                wx.navigateBack()
+              }
+            }
+          }) : wx.showModal({
+            title: '温馨提示',
+            content: '登录已过期',
+            confirmText: '去登录',
+            success: function (re) {
+              if (re.confirm) {
+                wx.redirectTo({
+                  url: '/pages/login/login',
+                })
+              }
+            }
+          })
+          throw '您暂无权限'
+        break;
+      case 403:
+        wx.showToast({
+          title: '服务器拒绝请求',
+          icon: "none",
+          duration: 1000
+        })
+        throw '服务器拒绝请求'
+        break;
+      case 404:
+        wx.showToast({
+          title: '服务器找不到请求的资源',
+          icon: "none",
+          duration: 1000
+        })
+        throw '服务器找不到请求的资源'
+        break;
+      case 415:
+        wx.showToast({
+          title: '不支持的媒体类型',
+          icon: "none",
+          duration: 1000
+        })
+        throw '不支持的媒体类型'
+        break;
+      case 500:
+        wx.showToast({
+          title: '服务器内部错误',
+          icon: "none",
+          duration: 1000
+        })
+        throw '服务器内部错误'
+        break;
+    }
+  }
+  
 }
 /* Email 正则*/
 let regEmail = function() {
@@ -147,5 +244,9 @@ module.exports = {
   regPhone: regPhone,
   regPassword: regPassword,
   formatNum: formatNum,
-  authorizedCookie: authorizedCookie
+  authorizedCookie: authorizedCookie,
+  noLoginCookie: noLoginCookie,
+  catchHttpError:catchHttpError,
+  setStorageSync: setStorageSync,
+  getStorageSync: getStorageSync
 }

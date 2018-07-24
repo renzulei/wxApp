@@ -47,8 +47,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.setStorageSync('menuKey', 'CPLB');
-    var userDefaultTradeCompany = wx.getStorageSync('userDefaultTradeCompany');
+    console.log(decodeURI(authorizedCookie))
+    util.setStorageSync('menuKey', 'CPLB');
+    var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
     var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
     var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
@@ -102,10 +103,16 @@ Page({
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
-        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
+        'cookie': util.noLoginCookie
       },
       success: function(res) {
         // console.log(res.data)
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
         var json = res.data;
         var filters = []
         json.conditionList.map((item, i) => {
@@ -193,14 +200,19 @@ Page({
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
-        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
+        'cookie': util.noLoginCookie
       },
       data: JSON.stringify(params.data),
       complete: function() {
         wx.hideLoading()
       },
       success: function(res) {
-        // console.log(res.data)
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
         var data = res.data;
         let shop = [];
         data.content.map((item, i) => {
@@ -243,7 +255,12 @@ Page({
         itemId: data.itemId
       }),
       success:(res)=>{
-        console.log(res.data);
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
         var json = res.data;
         if (json.code == "S"){
           this.setData({
@@ -280,9 +297,9 @@ Page({
     var items = JSON.stringify(this.data.items);
     var changeableAttrs = JSON.stringify(this.data.changeableAttrs);
     // 以下三行仅供调试，避免保存代码总是要跳转
-    wx.setStorageSync('physicalStateCode', physicalStateCode);
-    wx.setStorageSync('items', items);
-    wx.setStorageSync('changeableAttrs', changeableAttrs);
+    util.setStorageSync('physicalStateCode', physicalStateCode);
+    util.setStorageSync('items', items);
+    util.setStorageSync('changeableAttrs', changeableAttrs);
     if (items) {
       wx.navigateTo({
         url: `/pages/specification/specification?physicalStateCode=${physicalStateCode}&items=${items}&changeableAttrs=${changeableAttrs}`,
@@ -459,7 +476,7 @@ Page({
       method: 'POST',
       header: {
         'content-type': 'application/json', // 默认值
-        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
+        'cookie': util.noLoginCookie
       },
       data: JSON.stringify({
         productId: selectedProductId,
@@ -470,6 +487,12 @@ Page({
         wx.hideLoading()
       },
       success: function(res) {
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
         var json = res.data;
         if (json.code == "S") {
           that.setData({
@@ -501,6 +524,12 @@ Page({
         wx.hideLoading()
       },
       success: function(res) {
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
         if (res.data.code == "S") {
           wx.showToast({
             title: '添加关注成功',

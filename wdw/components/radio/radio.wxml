@@ -1,7 +1,0 @@
-<label class="radio" bindtap='onTap' data-value="{{value}}">
-  <view class='radio-wrap {{checked?"radio-checked":""}}'>
-    <radio value='{{value}}' checked="{{checked}}"/>
-    <view class='radio-inner'></view>
-  </view>
-  {{value}}
-</label>

@@ -12,26 +12,6 @@ Page({
     username: '',
     password: '',
     wrong: false, //登录名或密码错误
-    // 登录成功后返回的模拟数据
-    userDefaultTradeCompany: {
-      address: "万荣路700号",
-      companyName: "供应链金融测试用户1",
-      contactId: 248,
-      currencyCode: "CNY",
-      customerId: 226,
-      employeeEmail: "shengyang.zhou@hand-china.com",
-      employeeId: 10001,
-      employeeMobil: "13764784777",
-      employeeName: "管理员",
-      partyName: "供应链金融测试用户1",
-      partyNumber: "P0010701",
-      regionCode: "HD",
-      supplierId: 25,
-      tradeCompanyId: 222,
-      tradePartyId: 215,
-    },
-    token: "5050797f-b4ed-416c-a8a6-ad57c3249f7b",
-    tokenExpire: 3600,
     error_msg: "您输入的用户名或密码错误....."
   },
 
@@ -59,7 +39,7 @@ Page({
       method: 'POST',
       header: {
         'content-type': 'application/json', // 默认值
-        'cookie': '__wgl=' + wx.getStorageSync('__wgl')
+        'cookie': util.noLoginCookie
       },
       data: JSON.stringify(this.getSubmitBody(username, password)),
       success: function (res) {

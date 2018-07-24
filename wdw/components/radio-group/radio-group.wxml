@@ -1,3 +1,0 @@
-<radio-group class="radio-group" name="{{name}}">
-<slot></slot>
-</radio-group>
