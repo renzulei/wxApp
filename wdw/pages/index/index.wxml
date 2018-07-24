@@ -1,5 +1,7 @@
-<view class='contenter'>
+<import src="../../wxParse/wxParse.wxml" />
 
+<view class='contenter'>
+  <!-- 搜索框 -->
   <view class='w_search'>
     <view class='input-wrap'>
       <view class='w_icon' bindtap='handleSearch'>
@@ -9,10 +11,10 @@
     </view>
   </view>
 
+  <!-- //背景图 -->
   <view class='w_bgc'>
     <image src='{{ bgc }}'></image>
   </view>
-
   <view class='content'>
     <view class='w_title'>
       <view class='w_borderLeft'>
@@ -22,44 +24,39 @@
   </view>
 
   <!-- =========================== -->
+  <!-- 商品展示 -->
   <view class='w_contentShow'>
-    <view class='smbox' wx:for="{{ list }}" wx:key="{{ item }}" id='{{ index }}'>
-      <image src="/images/bgc1.png"></image>
-      <view class='w_titleContent'>
-        <view class='title_one'>
-          <text>{{ list.businessExplain[0].explainName }}</text>
-          <text>222</text>
-          <text>333</text>
-          <text>444</text>
-          <text>555</text>
-        </view>
-        <view class='w_border clearfix'>
-          <text>111</text>
-          <text>22</text>
-          <text>33</text>
-        </view>
-        <view class='w_price'>
-          <text>￥13476.00</text>
+    <block wx:for="{{ data_List.businessExplain }}" wx:key="{{ categoryId }}" wx:for-index='idx'>
+      <view class='smbox'>
+        <image src="/images/bgc1.png"></image>
+        <view class='w_titleContent'>
+          <view class='title_one'>
+            <text>{{ item.explainName }}</text>
+          </view>
+          <view class='w_border clearfix'>
+            <text>{{ item.explainAlias }}</text>
+          </view>
+          <view class='w_price'>
+            <text>￥13476.00</text>
+          </view>
         </view>
       </view>
-    </view>
+    </block>
   </view>
 </view>
 <!-- ================ -->
+<!-- 供应链 -->
 <view class='w_footer'>
   <view class='content'>
     <view class='w_title'>
       <view class='w_borderLeft'>
-        <text>{{ name }}</text>
+        <text>{{ title_name }}</text>
       </view>
     </view>
   </view>
-
   <view class='w_nav'>
-    <view class='nav'>
-      <image src="/images/shexiao.png"></image>
-      <image src="/images/shexiao.png"></image>
-      <image src="/images/shexiao.png"></image>
+    <view class='nav' wx:for="{{ article.imageUrls }}" wx:key="{{ name }}">
+          <image src="{{article.imageUrls}}"></image>
     </view>
   </view>
 </view>

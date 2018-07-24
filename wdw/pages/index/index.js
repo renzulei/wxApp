@@ -1,3 +1,4 @@
+var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp();
 var cmService = app.globalData.cmService;
 var customer_id = app.globalData.customer_id
@@ -10,8 +11,9 @@ Page({
   data: {
     bgc: "/images/bgc.png",
     searchValue: '',
-    list:[],
-    info:[]
+    data_List: [],
+    info: [],
+    article: []
   },
 
   /**
@@ -21,7 +23,7 @@ Page({
     // 促销商品
     this.dataInof();
     // 供应链
-    this.getInof(); 
+    this.getInof();
   },
   // 搜索框键盘输入值处理函数
   upSeachValue: function(e) {
@@ -43,7 +45,7 @@ Page({
   dataInof: function() {
     var that = this;
     wx.request({
-      url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=ZYCP`,
+      url: `${cmService}/businessExplain/query?region=ZYCP`,
       data: {},
       method: 'POST',
       header: {
@@ -51,14 +53,12 @@ Page({
         'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
       success: function(res) {
-        var list = that.data.list;
-        list = res.data;
+        var list = res.data;
         console.log(list);
-       that.setData({
-         title:res.data.categoryName,
-         list:list
-       })
-       console.log(list.businessExplain[0].explainName)
+        that.setData({
+          title: res.data.categoryName,
+          data_List: list
+        })
       },
     })
   },
@@ -67,7 +67,7 @@ Page({
   getInof: function() {
     var that = this;
     wx.request({
-      url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=GYLJR`,
+      url: `${cmService}/businessExplain/query?region=GYLJR`,
       data: {},
       method: 'POST',
       header: {
@@ -75,16 +75,21 @@ Page({
         'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
       success: function(res) {
-        var info = that.data.info;
-        info = res.data;
-        console.log(info);
+        var infoData = res.data;
+        console.log(res.data.businessExplain[0].simpleContent)
+        console.log(infoData);
         that.setData({
-          name: res.data.categoryName,
-          info: info
+          title_name: res.data.categoryName,
+          info: infoData,
         })
-      },
+          var article = that.data.article;
+         article = res.data.businessExplain[0].simpleContent;
+          console.log(article)
+        WxParse.wxParse('article', 'html', article, that,);
+      }
     })
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
