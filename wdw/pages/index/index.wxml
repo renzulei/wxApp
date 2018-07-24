@@ -55,8 +55,6 @@
     </view>
   </view>
   <view class='w_nav'>
-    <view class='nav' wx:for="{{ article.imageUrls }}" wx:key="{{ name }}">
-          <image src="{{article.imageUrls}}"></image>
-    </view>
+  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
   </view>
 </view>

@@ -82,10 +82,14 @@ Page({
           title_name: res.data.categoryName,
           info: infoData,
         })
+
+        //底部图片
           var article = that.data.article;
          article = res.data.businessExplain[0].simpleContent;
-          console.log(article)
+         console.log(article)
+        // var str = JSON.parse(article);
         WxParse.wxParse('article', 'html', article, that,);
+        
       }
     })
   },
