@@ -2,7 +2,7 @@ var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp();
 var cmService = app.globalData.cmService;
 var customer_id = app.globalData.customer_id
-// const util = require('../../utils/util.js')
+const util = require('../../utils/util.js')
 Page({
 
   /**
