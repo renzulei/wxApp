@@ -105,10 +105,8 @@ let getStorageSync = (k, def) => {
     return def;
   }
 }
-// 授权的cookie
-const authorizedCookie = encodeURI("__wgt=" + getStorageSync('__wgt') + ";" + "__wgl=" + getStorageSync('__wgl') + ";" + "menuKey=" + getStorageSync('menuKey') + ";" + "userName=" + getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(getStorageSync('userDefaultTradeCompany')));
 // 游客cookie
-const noLoginCookie = encodeURI('__wgl=' + getStorageSync('__wgl'))
+const noLoginCookie = encodeURI('__wgl=' + wx.getStorageSync('__wgl'))
 // 退出登录清除key
 var logout = () => {
   wx.removeStorage({
@@ -244,7 +242,6 @@ module.exports = {
   regPhone: regPhone,
   regPassword: regPassword,
   formatNum: formatNum,
-  authorizedCookie: authorizedCookie,
   noLoginCookie: noLoginCookie,
   catchHttpError:catchHttpError,
   setStorageSync: setStorageSync,

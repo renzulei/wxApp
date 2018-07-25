@@ -4,7 +4,8 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-const authorizedCookie = util.authorizedCookie;
+const config = require('../../utils/config.js');
+const authorizedCookie = config.authorizedCookie;
 Page({
 
   /**
