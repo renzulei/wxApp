@@ -4,7 +4,8 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-const authorizedCookie = util.authorizedCookie;
+const config = require('../../utils/config.js');
+const authorizedCookie = config.authorizedCookie;
 Page({
 
   /**
@@ -24,7 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(decodeURI(authorizedCookie))
     //  this.setData({
     //    physicalStateCode: options.physicalStateCode,
     //    items: JSON.parse(options.items),
