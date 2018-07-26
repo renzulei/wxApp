@@ -1,4 +1,6 @@
-/* .contaitener {} */
+ @import '../../template/empty/empty.wxss';
+ 
+ /* .contaitener {} */
 
 /* table 区域样式====================================================== */
 

@@ -1,5 +1,0 @@
-<import src="../../template/empty/empty.wxml" />
-
-<view class='{{shop}}'>
-<template is="emptyfill" wx:if="{{ shop.length==0 }}"></template>
-</view>
