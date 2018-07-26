@@ -1,3 +1,4 @@
+
 // pages/home/home.js
 Page({
 
@@ -12,54 +13,53 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
   },
-    // 点击跳转到客户收货管理页面
+  // 点击跳转到客户收货管理页面
   AdministratorTap: function(event) {
-      wx.navigateTo({
-        url: '/pages/Administrator/Administrator',
-      })
+    wx.navigateTo({
+      url: '/pages/Administrator/Administrator',
+    })
   },
 
   // 企业管理的点击事件
-  onClick: function (event) {
+  onClick: function(event) {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)
     })
   },
 
-  takeTap: function (event) {
+  takeTap: function(event) {
     wx.navigateTo({
       url: '/pages/take/take',
     })
   },
 
   // 跳转到用户页面
-  userTap: function (event) {
+  userTap: function(event) {
     wx.navigateTo({
       url: '/pages/user/user'
     })
   },
 
   // 跳转到我的关注页面
-  concernTap: function (event) {
+  concernTap: function(event) {
     wx.navigateTo({
       url: '/pages/concern/concern',
     })
   },
 
-// 跳转到企业认证页面
-  enterpriseTap: function (event) {
+  // 跳转到企业认证页面
+  enterpriseTap: function(event) {
     wx.navigateTo({
       url: '/pages/enterprise/enterprise',
     })
   },
   // 跳转到企业地址认证页面
-  enterprisesTap: function (event) {
-      wx.navigateTo({
-        url: '/pages/enterprises/enterprises',
-      })
+  enterprisesTap: function(event) {
+    wx.navigateTo({
+      url: '/pages/enterprises/enterprises',
+    })
   },
 
   /**

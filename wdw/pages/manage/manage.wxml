@@ -42,18 +42,17 @@
 
   <!-- nav 区域=============================================================== -->
   <view class='nav_box'>
-    <view class='nav' wx:for="{{ nav }}" wx:key="{{ item }}" catchtap='navTap'>
-      <view class="nav_already {{ num==1?'active':''}}" data-num='1'>{{ item.all }}</view>
-      <view class="nav_already {{ num==2?'active':'' }}" data-num='2'>{{ item.submit }}</view>
-      <view class="nav_already {{ num==3?'active':'' }}" data-num='3'>{{ item.close }}</view>
-      <view class="nav_already {{ num==4?'active':'' }}" data-num='4'>{{ item.cancel }}</view>
-      <view class="nav_already {{ num==5?'active':'' }}" data-num='5'>{{ item.abnormal }}</view>
-      <view class="nav_already {{ num==6?'active':'' }}" data-num='6'>{{ item.audit }}</view>
-     <template is="emptyfill" wx:if="{{shop.length==0}}" />
-    </view>
+    <view class='nav' catchtap='navTap'>
+      <view class="nav_already {{ num==1?'active':''}}" data-num='1'>所有订单</view>
+      <view class="nav_already {{ num==2?'active':'' }}" data-num='2'>已提交</view>
+      <view class="nav_already {{ num==3?'active':'' }}" data-num='3'>已关闭</view>
+      <view class="nav_already {{ num==4?'active':'' }}" data-num='4'>已取消</view>
+      <view class="nav_already {{ num==5?'active':'' }}" data-num='5'>异常</view>
+      <view class="nav_already {{ num==6?'active':'' }}" data-num='6'>已审核</view>
+    </view> 
   </view>
   <!-- header 区域============================================================ -->
-    <view class='box'>
+  <view class='box'>
     <view class='header' wx:for="{{ items }}" wx:key="{{ item }}">
       <view class='odd'>
         <text class='odd_left'>意向订单号:</text>
@@ -71,8 +70,29 @@
         <text>点击查看订单详情(2)</text>
       </view>
     </view>
-      <template is="emptyfill" wx:if="{{shop.length==0}}" />
-  </view>  
+         <template is="emptyfill" wx:if="{{ items.length==0 }}" /> 
+  </view>
+
+   <view class='box' wx:for="{{ shop }}">
+   <text>11111111</text>
+       <template is="emptyfill" wx:if="{{ shop.length==0 }}" /> 
+  </view>
+
+   <view class='box'>
+      <text>11111111</text>
+  </view>
+
+   <view class='box'>
+      <text>11111111</text>
+  </view>
+
+   <view class='box'>
+      <text>11111111</text>
+  </view>
+
+   <view class='box'>
+      <text>11111111</text>
+  </view>
 
   <!--提示信息============================================  -->
   <view class='hint'>没有更多数据了</view>
