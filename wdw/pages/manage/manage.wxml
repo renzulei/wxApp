@@ -52,7 +52,8 @@
     </view> 
   </view>
   <!-- header 区域============================================================ -->
-  <view class='box'>
+  <view class='content_box'>
+    <view class='box'>
     <view class='header' wx:for="{{ items }}" wx:key="{{ item }}">
       <view class='odd'>
         <text class='odd_left'>意向订单号:</text>
@@ -71,29 +72,8 @@
       </view>
     </view>
          <template is="emptyfill" wx:if="{{ items.length==0 }}" /> 
-  </view>
-
-   <view class='box' wx:for="{{ shop }}">
-   <text>11111111</text>
-       <template is="emptyfill" wx:if="{{ shop.length==0 }}" /> 
-  </view>
-
-   <view class='box'>
-      <text>11111111</text>
-  </view>
-
-   <view class='box'>
-      <text>11111111</text>
-  </view>
-
-   <view class='box'>
-      <text>11111111</text>
-  </view>
-
-   <view class='box'>
-      <text>11111111</text>
-  </view>
-
+  </view>  
+</view>
   <!--提示信息============================================  -->
   <view class='hint'>没有更多数据了</view>
 </view>

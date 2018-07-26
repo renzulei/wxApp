@@ -2,23 +2,23 @@
   <view class='content'>
 
     <!-- list 区域========================================================== -->
-    <view class='list'>
-      <text class='left'>用户名:</text>
-      <input class='input' placeholder='740456278963'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>姓名:</text>
-      <input class='input' placeholder='贝吉塔'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>手机号:</text>
-      <input class='input' placeholder='15204758863'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>邮箱账号:</text>
-      <input class='input' placeholder='wangdeshiye@163.com'></input>
-    </view>
-
+      <view class='list'>
+        <text class='left'>用户名:</text>
+        <input class='input' placeholder="4521578"></input>
+      </view>
+      <view class='list'>
+        <text class='left'>姓名:</text>
+        <input class='input' placeholder='贝吉塔'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>手机号:</text>
+        <input class='input' placeholder='15204758863'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>邮箱账号:</text>
+        <input class='input' placeholder='wangdeshiye@163.com'></input>
+      </view>
+  
     <!-- footer 区域============================================================== -->
     <view class='footer'>
       <view class='footer_icon'>

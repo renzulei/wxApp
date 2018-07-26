@@ -10,7 +10,7 @@ Page({
     array: ['请选择支付方式', '现金支付', '微信支付', '支付宝支付', '银行卡支付'], //付款方式
     index: 0,
     // 订单内容
-    items: [
+    items: [ 
       {
         ding_dan: "YCD0018652",
         jin_e: "￥6178430.0",
@@ -63,6 +63,8 @@ Page({
     this.setData({
       num: e.target.dataset.num
     })
+
+    
   },
 
   //已提交页面

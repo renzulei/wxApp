@@ -1,4 +1,11 @@
-
+var WxParse = require('../../wxParse/wxParse.js');
+var app = getApp();
+var cmService = app.globalData.cmService;
+var authService = app.globalData.authService;
+var customer_id = app.globalData.customer_id;
+const util = require('../../utils/util.js');
+const config = require('../../utils/config.js');
+const authorizedCookie = config.authorizedCookie;
 // pages/home/home.js
 Page({
 
@@ -13,6 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+  // this.getData();
   },
   // 点击跳转到客户收货管理页面
   AdministratorTap: function(event) {
@@ -61,6 +69,37 @@ Page({
       url: '/pages/enterprises/enterprises',
     })
   },
+
+
+  // getData: function (e) {
+  //   var that = this;
+  //   wx.request({
+  //     url: `${authService}/user/getMenuList`,
+  //     data: {},
+  //     method: 'GET',
+  //     header: {
+  //       'content-type': 'application/json',
+  //       'cookie': authorizedCookie
+  //     },
+  //     success: function (res) {
+  //       try {
+  //         util.catchHttpError(res);
+  //       } catch (e) {
+  //         console.error(e)
+  //         return
+  //       }
+  //       // console.log(res.data)
+  //       var list = res.data;
+  //       var arr = JSON.parse(list);
+  //       console.log(arr.items);
+  //       that.setData({
+        
+  //       })
+  //     },
+  //   })
+  // },
+
+   
 
   /**
    * 生命周期函数--监听页面初次渲染完成

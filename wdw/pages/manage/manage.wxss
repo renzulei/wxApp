@@ -176,7 +176,3 @@
     line-height: 66rpx;
   }
 
-.box {
-  width: 100%;
-  height: 100%;
-}
