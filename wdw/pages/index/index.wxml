@@ -18,7 +18,7 @@
   <view class='content'>
     <view class='w_title'>
       <view class='w_borderLeft'>
-        <text>{{ title }}</text>
+        <text>促销商品/主营产品</text>
       </view>
     </view>
   </view>
@@ -26,22 +26,22 @@
   <!-- =========================== -->
   <!-- 商品展示 -->
   <view class='w_contentShow'>
-    <block wx:for="{{ data_List.businessExplain }}" wx:key="{{ categoryId }}" wx:for-index='idx'>
-      <view class='smbox'>
-        <image src="/images/bgc1.png"></image>
-        <view class='w_titleContent'>
-          <view class='title_one'>
-            <text>{{ item.explainName }}</text>
-          </view>
-          <view class='w_border clearfix'>
-            <text>{{ item.explainAlias }}</text>
-          </view>
-          <view class='w_price'>
-            <text>￥13476.00</text>
-          </view>
+    <view class='smbox' wx:for="{{shop}}" wx:key="{{item.productId}}">
+      <image src="/images/bgc1.png"></image>
+      <view class='w_titleContent'>
+        <view class='title_one'>
+          <text>{{item.productName}}</text>
+        </view>
+        <view class='w_border clearfix'>
+          <text>{{item.physicalStateName}}</text>
+          <text>{{item.itemCategoryName}}</text>
+          <text>{{item.supperCategoryName}}</text>
+        </view>
+        <view class='w_price'>
+          <text>￥{{item.unitPrice}}</text>
         </view>
       </view>
-    </block>
+    </view>
   </view>
 </view>
 <!-- ================ -->
@@ -50,11 +50,15 @@
   <view class='content'>
     <view class='w_title'>
       <view class='w_borderLeft'>
-        <text>{{ title_name }}</text>
+        <text>{{ categoryName }}</text>
       </view>
     </view>
   </view>
   <view class='w_nav'>
-  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+    <view class='nav' wx:for="{{replyTemArray}}" wx:key="">
+      <view class='explainName'>{{businessExplain[index].explainName}}</view>
+      <template is="wxParse" data="{{wxParseData:item}}" />
+    </view>
+
   </view>
 </view>

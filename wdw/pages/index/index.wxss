@@ -1,5 +1,7 @@
 /* 搜索框 ============================*/
-@import "/wxParse/wxParse.wxss";
+
+/* @import "/wxParse/wxParse.wxss"; */
+
 .w_search {
   width: 100%;
   height: 122rpx;
@@ -74,7 +76,7 @@
   line-height: 34rpx;
   font-size: 32rpx;
   font-weight: bold;
-  color: #5E5E5E;
+  color: #5e5e5e;
 }
 
 /* 图片内容展示区 =================================== */
@@ -105,13 +107,14 @@
 }
 
 .smbox {
-  width: 500rpx;
+  min-width: 500rpx;
   height: 100%;
   position: relative;
   padding: 20rpx;
   display: inline-block;
   color: #fff;
   margin-right: 40rpx;
+  vertical-align: top;
 }
 
 .smbox:last-child {
@@ -126,7 +129,7 @@
   color: #fff;
   font-size: 26rpx;
   box-sizing: border-box;
-  font-weight: bold; 
+  font-weight: bold;
   margin-right: 10rpx;
 }
 
@@ -163,17 +166,34 @@
 .w_nav {
   width: 100%;
   padding: 0 10rpx;
+  font-size: 0;
+  margin-bottom: 30rpx;
 }
 
 .nav {
-  width: 100%;
-  height: 500rpx;
   display: inline-block;
-  /* width: 33.33%; */
-   text-align: center; 
+  width: 32%;
+  padding-bottom: 30rpx;
+  padding-top: 10rpx;
+  min-height: 230rpx;
+  text-align: center;
+  vertical-align: top;
+  border: 1rpx solid #eaeaea;
+  border-radius: 6rpx;
+  margin-right: 2%;
 }
 
- .nav image {
-   width: 100%; 
-   height: 500rpx; 
-} 
+.nav:last-child {
+  margin-right: 0;
+}
+
+.explainName {
+  font-size: 26rpx;
+  line-height: 60rpx;
+  text-align: left;
+  padding-left: 20rpx;
+}
+
+.nav image {
+  width: 194rpx;
+}
