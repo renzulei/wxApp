@@ -76,8 +76,8 @@ Page({
       },
       success: function(res) {
         var infoData = res.data;
-        console.log(res.data.businessExplain[0].simpleContent)
-        console.log(infoData);
+        // console.log(res.data.businessExplain[0].simpleContent)
+        // console.log(infoData);
         that.setData({
           title_name: res.data.categoryName,
           info: infoData,
@@ -86,8 +86,6 @@ Page({
         //底部图片
           var article = that.data.article;
          article = res.data.businessExplain[0].simpleContent;
-         console.log(article)
-        // var str = JSON.parse(article);
         WxParse.wxParse('article', 'html', article, that,);
         
       }

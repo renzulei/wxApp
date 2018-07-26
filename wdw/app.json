@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/supplement/supplement",
-    "pages/affirm/affirm",
-    "pages/particulars/particulars",
     "pages/proList/proList",
+    "pages/particulars/particulars",
     "pages/specification/specification",
+    "pages/affirm/affirm",
+    "pages/supplement/supplement",
     "pages/concern/concern",
     "pages/login/login",
     "pages/manage/manage",
