@@ -1,3 +1,11 @@
+var app = getApp();
+var cmService = app.globalData.cmService;
+var authService = app.globalData.authService;
+var customer_id = app.globalData.customer_id;
+const util = require('../../utils/util.js');
+const config = require('../../utils/config.js');
+const authorizedCookie = config.authorizedCookie;
+
 // pages/enterprise/enterprise.js
 Page({
 
@@ -5,16 +13,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+  list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
   },
-
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

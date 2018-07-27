@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/concern/concern",
-    "pages/home/home",
     "pages/user/user",
+    "pages/home/home",
+    "pages/enterprise/enterprise",
+    "pages/login/login",
+    "pages/concern/concern",
     "pages/proList/proList",
     "pages/index/index",
-    "pages/login/login",
     "pages/manage/manage",
     "pages/particulars/particulars",
     "pages/specification/specification",
@@ -16,7 +17,6 @@
     "pages/take/take",
     "pages/compile/compile",
     "pages/succeed/succeed",
-    "pages/enterprise/enterprise",
     "pages/enterprises/enterprises",
     "pages/logs/logs",
     "pages/test/test"

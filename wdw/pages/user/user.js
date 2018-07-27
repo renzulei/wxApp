@@ -14,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info: []
+    list: []
   },
 
   /**
@@ -23,7 +23,7 @@ Page({
   onLoad: function(options) {
     this.getData();
   },
-
+  // 个人信息数据
   getData: function(e) {
     var that = this;
     wx.request({
@@ -35,24 +35,29 @@ Page({
         'cookie': authorizedCookie
       },
       success: function(res) {
-        try {
-          util.catchHttpError(res);
-        } catch (e) {
-          console.error(e)
-          return
-        }
-        var json = res.data;
-        var info = that.data.info;
-        info = json;
-        that.setData({
-        info:json
-        })
-        console.log(info)
-        var arr = JSON.parse(info);
-        console.log(arr);
+        // try {
+        //   util.catchHttpError(res);
+        // } catch (e) {
+        //   console.error(e)
+        //   return
+        // 
+        that.dataInfo(res.data);
       },
     })
   },
+  dataInfo: function(info) {
+    var data = JSON.parse(info);
+    var arr = [];
+    for (var k in data) {
+      arr.push(data[k])
+    }
+    console.log(arr);
+    this.setData({
+      list: arr
+    })
+  },
+
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
