@@ -1,3 +1,10 @@
+var app = getApp();
+var cmService = app.globalData.cmService;
+var authService = app.globalData.authService;
+var customer_id = app.globalData.customer_id;
+const util = require('../../utils/util.js');
+const config = require('../../utils/config.js');
+const authorizedCookie = config.authorizedCookie;
 // pages/concern/concern.js
 Page({
 
@@ -14,22 +21,6 @@ Page({
         tu_bu: "灰底涂布纸",
         jia_ge: "￥8670.69"
       },
-      {
-        id: "1",
-        title: "江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张",
-        ping_zhang: "平张",
-        yin_shua: "印刷纸",
-        tu_bu: "灰底涂布纸",
-        jia_ge: "￥8670.69"
-      },
-      {
-        id: "2",
-        title: "江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张",
-        ping_zhang: "平张",
-        yin_shua: "印刷纸",
-        tu_bu: "灰底涂布纸",
-        jia_ge: "￥8670.69"
-      }
     ]
 
   },
@@ -38,7 +29,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getData();
   },
 
   // 跳转到产品列表页面
@@ -47,6 +38,35 @@ Page({
       url: '/pages/proList/proList',
     })
   },
+
+  getData: function (e) {
+    var that = this;
+    wx.request({
+      url: `${authService}/common/lookUpValue?code=MD.ITEM_MIDDLE_CATEGORY`,
+      data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'cookie': authorizedCookie
+      },
+      success: function (res) {
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        var json = res.data;
+        var info = that.data.info;
+        info = json;
+        that.setData({
+          info: json
+        })
+        console.log(info);
+      },
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

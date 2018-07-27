@@ -1,3 +1,11 @@
+var WxParse = require('../../wxParse/wxParse.js');
+var app = getApp();
+var cmService = app.globalData.cmService;
+var authService = app.globalData.authService;
+var customer_id = app.globalData.customer_id;
+const util = require('../../utils/util.js');
+const config = require('../../utils/config.js');
+const authorizedCookie = config.authorizedCookie;
 // pages/home/home.js
 Page({
 
@@ -12,55 +20,86 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+  // this.getData();
   },
-    // 点击跳转到客户收货管理页面
+  // 点击跳转到客户收货管理页面
   AdministratorTap: function(event) {
-      wx.navigateTo({
-        url: '/pages/Administrator/Administrator',
-      })
+    wx.navigateTo({
+      url: '/pages/Administrator/Administrator',
+    })
   },
 
   // 企业管理的点击事件
-  onClick: function (event) {
+  onClick: function(event) {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)
     })
   },
 
-  takeTap: function (event) {
+  takeTap: function(event) {
     wx.navigateTo({
       url: '/pages/take/take',
     })
   },
 
   // 跳转到用户页面
-  userTap: function (event) {
+  userTap: function(event) {
     wx.navigateTo({
       url: '/pages/user/user'
     })
   },
 
   // 跳转到我的关注页面
-  concernTap: function (event) {
+  concernTap: function(event) {
     wx.navigateTo({
       url: '/pages/concern/concern',
     })
   },
 
-// 跳转到企业认证页面
-  enterpriseTap: function (event) {
+  // 跳转到企业认证页面
+  enterpriseTap: function(event) {
     wx.navigateTo({
       url: '/pages/enterprise/enterprise',
     })
   },
   // 跳转到企业地址认证页面
-  enterprisesTap: function (event) {
-      wx.navigateTo({
-        url: '/pages/enterprises/enterprises',
-      })
+  enterprisesTap: function(event) {
+    wx.navigateTo({
+      url: '/pages/enterprises/enterprises',
+    })
   },
+
+
+  // getData: function (e) {
+  //   var that = this;
+  //   wx.request({
+  //     url: `${authService}/user/getMenuList`,
+  //     data: {},
+  //     method: 'GET',
+  //     header: {
+  //       'content-type': 'application/json',
+  //       'cookie': authorizedCookie
+  //     },
+  //     success: function (res) {
+  //       try {
+  //         util.catchHttpError(res);
+  //       } catch (e) {
+  //         console.error(e)
+  //         return
+  //       }
+  //       // console.log(res.data)
+  //       var list = res.data;
+  //       var arr = JSON.parse(list);
+  //       console.log(arr.items);
+  //       that.setData({
+        
+  //       })
+  //     },
+  //   })
+  // },
+
+   
 
   /**
    * 生命周期函数--监听页面初次渲染完成

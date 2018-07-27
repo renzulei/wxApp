@@ -120,8 +120,8 @@ Page({
   getInof: function() {
     var that = this;
     wx.request({
-      url: `${cmService}/businessExplain/query?region=GYLJR`,
-      // url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=GYLJR`,
+      // url: `${cmService}/businessExplain/query?region=GYLJR`,
+      url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=GYLJR`,
       data: {},
       method: 'POST',
       header: {
@@ -129,12 +129,12 @@ Page({
         'cookie': '__wgl=' + wx.getStorageSync('__wgl')
       },
       success: function(res) {
-        try {
-          util.catchHttpError(res);
-        } catch (e) {
-          console.error(e)
-          return
-        }
+        // try {
+        //   util.catchHttpError(res);
+        // } catch (e) {
+        //   console.error(e)
+        //   return
+        // }
         var json = res.data;
         // console.log(res);
         that.setData({
@@ -146,6 +146,7 @@ Page({
         json.businessExplain.map(function(item,i){
           replyArr.push(item.simpleContent);
         })
+        // console.log(replyArr)
         for (let i = 0; i < replyArr.length; i++) {
           WxParse.wxParse('reply' + i, 'html', replyArr[i], that);
           if (i === replyArr.length - 1) {
