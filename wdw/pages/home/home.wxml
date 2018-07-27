@@ -21,7 +21,7 @@
   <view class='nav'>
     <view class='nav_bar'>
       <view>
-      <navigator hover-class='none' url='/pages/specification/specification'>
+      <navigator hover-class='none' url='/pages/createOrder/createOrder'>
         <view class='nav_icon'>
           <image src='/images/gouwuche.png'></image>
           <view>购物车</view>
