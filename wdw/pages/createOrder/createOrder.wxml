@@ -16,61 +16,89 @@
     </view>
 
     <view class='content_table'> 
-      <view class="table">
-        <view class="text clearfix">
-          <view class='div'>
-            <view class="box box_left">
-              <view class='left'>
-                <text>幅宽mm:</text>
-              </view>
-              <view class='right'>
-                <input class='input'></input>
-              </view>
+      <view class="table" wx:for="{{tableSource}}" wx:key="{{index}}">
+      <view class="text clearfix">
+        <view class='div'>
+          <view class="box box_left">
+            <view class='left'>
+              <text>幅宽mm:</text>
             </view>
-            <view class="box box_right">
-              <view class='left'>
-                <text>切长mm:</text>
-              </view>
-              <view class='right'>
-                <input class='input'></input>
-              </view>
-            </view>
-          </view>
-
-          <view class='div'>
-            <view class="box box_left">
-              <view class='left'>
-                <text>件数(不含运费):</text>
-              </view>
-              <view class='right'>
-                <input class='input'></input>
-              </view>
-            </view>
-            <view class="box box_right">
-              <view class='left'>
-                <text>吨数(吨):</text>
-              </view>
-              <view class='right'>
-                <input class='input'></input>
-              </view>
+            <view class='right'>
+              <input 
+                class='input' 
+                type='number' 
+                data-index='{{index}}' 
+                data-code='{{code}}'
+                value='{{item[code]}}'
+                bindblur='attributeBlur'
+              >
+              </input>
             </view>
           </view>
-
+          <view class="box box_right">
+            <view class='left'>
+              <text>切长mm:</text>
+            </view>
+            <view class='right'>
+              <text wx:if="{{physicalStateCode == 'JT'}}">{{item[cutLength]}}</text>
+              <input wx:else 
+                class='input' 
+                data-code='{{cutLength}}' 
+                type='number' 
+                data-index='{{index}}' 
+                value='{{item[cutLength]}}'
+                bindblur='attributeBlur'
+              >
+              </input>
+            </view>
+          </view>
         </view>
-        <view class='table_bom clearfix'>
-          <text class='danjia'>1.单价：</text>
-          <text class='table_color'>7000</text>
-          <text class='table_left'>金额：</text>
-          <text class='table_color'>9874983.0</text>
-
-          <view class=' table_btn copy'>
-            <image src='/images/checked.png'></image>
+        <view class='div'>
+          <view class="box box_left">
+            <view class='left wider'>
+              <text>件数(非必填):</text>
+            </view>
+            <view class='right thiner'>
+              <input 
+                class='input' 
+                type='number' 
+                data-index='{{index}}' 
+                value='{{item.orderQuantity}}' 
+                bindinput='orderQuantityChange'
+                bindblur='orderQuantityBlur'
+              >
+              </input>
+            </view>
           </view>
-          <view class=' table_btn del'>
-            <text>删除</text>
+          <view class="box box_right">
+            <view class='left'>
+              <text>吨数(吨):</text>
+            </view>
+            <view class='right'>
+              <input 
+                class='input' 
+                type='digit' 
+                data-index='{{index}}' 
+                bindinput='baseOrderQuantityChange'
+                bindblur='baseOrderQuantityBlur' 
+                value='{{item.baseOrderQuantity}}'
+              >
+              </input>
+            </view>
           </view>
         </view>
       </view>
+      <view class='table_bom clearfix'>
+        <text class='danjia'>单价(不含运费):</text>
+        <text class='table_color'>{{item.unitPrice}}</text>
+        <text class='table_left'>金额:</text>
+        <text class='table_color'>{{item.amount}}</text>
+        <view data-index='{{index}}' class=' table_btn del' bindtap='deleteTap'>
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+      
     </view>
 
   </view>
