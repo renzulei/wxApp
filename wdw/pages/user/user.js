@@ -4,8 +4,6 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-const config = require('../../utils/config.js');
-const authorizedCookie = config.authorizedCookie;
 
 // pages/home/user/user.js
 Page({
@@ -21,6 +19,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
+    this.setData({
+      authorizedCookie: authorizedCookie
+    })
     this.getData();
   },
   // 个人信息数据
@@ -32,7 +34,7 @@ Page({
       method: 'POST',
       header: {
         'content-type': 'application/json',
-        'cookie': authorizedCookie
+        'cookie': this.data.authorizedCookie
       },
       success: function(res) {
         // try {

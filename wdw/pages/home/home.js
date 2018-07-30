@@ -4,8 +4,6 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-const config = require('../../utils/config.js');
-const authorizedCookie = config.authorizedCookie;
 // pages/home/home.js
 Page({
 
@@ -21,6 +19,10 @@ Page({
    */
   onLoad: function(options) {
   // this.getData();
+    let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
+    this.setData({
+      authorizedCookie: authorizedCookie
+    })
   },
   // 点击跳转到客户收货管理页面
   AdministratorTap: function(event) {

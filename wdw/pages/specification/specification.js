@@ -4,8 +4,6 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-const config = require('../../utils/config.js');
-const authorizedCookie = config.authorizedCookie;
 Page({
 
   /**
@@ -25,12 +23,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(decodeURI(authorizedCookie))
     //  this.setData({
     //    physicalStateCode: options.physicalStateCode,
     //    items: JSON.parse(options.items),
     //    changeableAttrs: JSON.parse(options.changeableAttrs)
     //  })
+    let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
+    this.setData({
+      authorizedCookie: authorizedCookie
+    })
     var physicalStateCode = util.getStorageSync('physicalStateCode');
     var items = JSON.parse(util.getStorageSync('items'));
     var changeableAttrs = JSON.parse(util.getStorageSync('changeableAttrs'));
@@ -181,7 +182,7 @@ Page({
         method: "POST",
         header: {
           'Content-Type': 'application/json',
-          'cookie': authorizedCookie
+          'cookie': this.data.authorizedCookie
         },
         success: (res) => {
           try {
@@ -217,7 +218,7 @@ Page({
         method: "POST",
         header: {
           'Content-Type': 'application/json',
-          'cookie': authorizedCookie
+          'cookie': this.data.authorizedCookie
         },
         success: (res) => {
           try {
@@ -391,7 +392,7 @@ Page({
             method: 'POST',
             header: {
               'Content-Type': 'application/json',
-              'cookie':util.authorizedCookie
+              'cookie': this.data.authorizedCookie
             },
             data: JSON.stringify(dataSource),
             success:function(res){

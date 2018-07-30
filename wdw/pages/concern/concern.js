@@ -3,8 +3,6 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-const config = require('../../utils/config.js');
-const authorizedCookie = config.authorizedCookie;
 // pages/concern/concern.js
 Page({
 
@@ -30,7 +28,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getData();
+    // this.getData();
   },
 
   // 跳转到产品列表页面
