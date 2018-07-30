@@ -71,6 +71,7 @@ const login = (props) => {
     userName,
     userDefaultTradeCompany
   } = props;
+  console.log(props)
   setStorageSync('__wgt', token, tokenExpire);
   setStorageSync('userName', userName, tokenExpire);
   setStorageSync('__wgl', 'zh_CN');

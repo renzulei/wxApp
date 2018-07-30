@@ -3,8 +3,6 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-const config = require('../../utils/config.js');
-const authorizedCookie = config.authorizedCookie;
 // pages/concern/concern.js
 Page({
 
@@ -12,17 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    data:[],
+    data: [],
     box: true,
-    list: [{
-        id: "0",
-        title: "江苏富星A级单面涂布灰底白板纸灰底涂布纸350g 平张",
-        ping_zhang: "平张",
-        yin_shua: "印刷纸",
-        tu_bu: "灰底涂布纸",
-        jia_ge: "￥8670.69"
-      },
-    ]
+    list: []
 
   },
 
@@ -30,6 +20,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
+    this.setData({
+      authorizedCookie: authorizedCookie
+    })
     this.getData();
   },
 
@@ -39,7 +33,7 @@ Page({
       url: '/pages/proList/proList',
     })
   },
-  getData: function (e) {
+  getData: function(e) {
     var that = this;
     wx.request({
       url: `${cmService}/product/getProductByCondition?page=1&pageSize=10&tradePartyId=215&contactId=248`,
@@ -47,21 +41,24 @@ Page({
       method: 'POST',
       header: {
         'content-type': 'application/json',
-        'cookie': authorizedCookie
+        'cookie': this.data.authorizedCookie
       },
-      success: function (res) {
+      success: function(res) {
         // try {
         //   util.catchHttpError(res);
         // } catch (e) {
         //   console.error(e)
         //   return
         // 
-       var data = that.data.data;
-       data = res.data;
-       that.setData({
-         data:data
-       })
-       console.log(data)
+        var data = that.data.list;
+        data = res.data;
+        console.log(data);
+        var arr = data.content;
+        console.log(arr);
+        
+        that.setData({
+          data: data
+        })
       },
     })
   },

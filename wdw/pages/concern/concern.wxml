@@ -1,7 +1,7 @@
 <view class="container">
   <view class='content'>
-    <view class='box clearfix' wx:for="{{ list }}" wx:key="{{ name }}">
-      <view class='box_title'>{{ item.title }}</view>
+    <view class='box clearfix' wx:for="{{ data.content }}" wx:key="{{ productId }}">
+      <view class='box_title'>{{ item.productId }}</view>
       <view class='box_text'>
         <text class='text'>{{ item.ping_zhang }}</text>
         <text class='text'>{{ item.yin_shua }}</text>
