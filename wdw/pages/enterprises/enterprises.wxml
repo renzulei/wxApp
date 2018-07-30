@@ -2,46 +2,47 @@
   <view class='content'>
 
     <!-- list 区域========================================================== -->
-    <view class='list'>
-      <text class='left'>所在地区:</text>
-      <input class='input' placeholder='上海市静安区'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>详细地址:</text>
-      <input class='input' placeholder='上海市静安区万荣路1938弄10楼107'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>收货人姓名:</text>
-      <input class='input' placeholder='贝吉塔'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>手机号码:</text>
-      <input class='input' placeholder='13246694946'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>邮箱账号:</text>
-      <input class='input' placeholder='wangdeshiye@163.com'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>身份证号码:</text>
-      <input class='input' placeholder='411091188510673946'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>装运要求:</text>
-      <input class='input' placeholder='立装'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>特殊装运:</text>
-      <input class='input' placeholder='无'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>卸货时间:</text>
-      <input class='input' placeholder='周一到周五--7：00--17:00'></input>
-    </view>
-    <view class='list'>
-      <text class='left'>货物签收授权书:</text>
-      <text class='examine'>点击查看</text>
-
+    <view class='content_box' wx:for="{{ newArr }}" wx:key="{{ tradePartyId }}">
+      <view class='list'>
+        <text class='left'>所在地区:</text>
+        <input class='input' placeholder='{{ item.province }}'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>详细地址:</text>
+        <input class='input' placeholder='{{ item.province }}{{ item.county }}{{ item.shippingAddress }}'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>收货人姓名:</text>
+        <input class='input' placeholder='贝吉塔'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>手机号码:</text>
+        <input class='input' placeholder='13246694946'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>邮箱账号:</text>
+        <input class='input' placeholder='wangdeshiye@163.com'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>身份证号码:</text>
+        <input class='input' placeholder='411091188510673946'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>装运要求:</text>
+        <input class='input' placeholder='{{ item.shipRequireName }}'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>特殊装运:</text>
+        <input class='input' placeholder='无'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>卸货时间:</text>
+        <input class='input' placeholder='{{ item.unloadTypeName }}'></input>
+      </view>
+      <view class='list'>
+        <text class='left'>货物签收授权书:</text>
+        <text class='examine'>点击查看</text>
+      </view>
     </view>
 
     <!-- footer 区域============================================================== -->

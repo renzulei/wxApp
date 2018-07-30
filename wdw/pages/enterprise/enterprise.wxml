@@ -2,51 +2,52 @@
   <view class='content'>
 
     <!-- list 区域========================================================== -->
-    
+    <view class='content_box' wx:for="{{ newArr }}" wx:key="{{ certifyId }}">
       <view class='list'>
         <text class='left'>省份:</text>
-        <input class='input' placeholder='上海市'></input>
+        <input class='input' placeholder='{{ item.provinceName }}'></input>
       </view>
       <view class='list'>
         <text class='left'>城市:</text>
-        <input class='input' placeholder='市辖区'></input>
+        <input class='input' placeholder='{{ item.cityName }}'></input>
       </view>
       <view class='list'>
         <text class='left'>公司地址:</text>
-        <input class='input' placeholder='上海市静安区万荣路1938弄10楼107'></input>
+        <input class='input' placeholder='{{ item.companyAddress }}'></input>
       </view>
       <view class='list'>
         <text class='left'>固定电话:</text>
-        <input class='input' placeholder='021-66955656'></input>
+        <input class='input' placeholder='{{ item.telephone }}'></input>
       </view>
       <view class='list'>
         <text class='left'>传真:</text>
-        <input class='input' placeholder='021-88697513'></input>
+        <input class='input' placeholder='{{ item.fax }}'></input>
       </view>
       <view class='list'>
         <text class='left'>采购员姓名:</text>
-        <input class='input' placeholder='侯亮平'></input>
+        <input class='input' placeholder='{{ item.companyName }}'></input>
       </view>
       <view class='list'>
         <text class='left'>采购员电话:</text>
-        <input class='input' placeholder='13253364839'></input>
+        <input class='input' placeholder='{{ item.purchaserPhone }}'></input>
       </view>
       <view class='list'>
         <text class='left'>邮箱账号:</text>
-        <input class='input' placeholder='740429359@qq.com'></input>
+        <input class='input' placeholder='{{ item.email }}'></input>
       </view>
       <view class='list'>
         <text class='left'>提现银行:</text>
-        <input class='input' placeholder='上海工商银行'></input>
+        <input class='input' placeholder='{{ item.reciptBankName }}'></input>
       </view>
       <view class='list'>
         <text class='left'>提现账户:</text>
-        <input class='input' placeholder='4118 5158 7377 8331 145'></input>
+        <input class='input' placeholder='{{ item.reciptAcctNum }}'></input>
       </view>
       <view class='list'>
         <text class='left'>提现名称:</text>
-        <input class='input' placeholder='收款名称111'></input>
+        <input class='input' placeholder='{{ item.reciptAcctName }}'></input>
       </view>
+    </view>
 
     <view class='list'>
       <text class='left'>提现账户备案:</text>

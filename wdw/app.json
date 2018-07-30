@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/user/user",
-    "pages/home/home",
     "pages/enterprise/enterprise",
-    "pages/login/login",
     "pages/concern/concern",
+    "pages/home/home",
+    "pages/enterprises/enterprises",
+    "pages/login/login",
+    "pages/user/user",
     "pages/proList/proList",
     "pages/index/index",
     "pages/manage/manage",
@@ -17,7 +18,6 @@
     "pages/take/take",
     "pages/compile/compile",
     "pages/succeed/succeed",
-    "pages/enterprises/enterprises",
     "pages/logs/logs",
     "pages/test/test"
   ],

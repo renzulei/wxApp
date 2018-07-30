@@ -20,6 +20,41 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getData();
+  },
+
+  // 企业认证
+  getData: function (e) {
+    var that = this;
+    wx.request({
+      url: `${authService}/certify/getCompanyCertify?tradeCompanyId=222`,
+      data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'cookie': authorizedCookie
+      },
+      success: function (res) {
+        // try {
+        //   util.catchHttpError(res);
+        // } catch (e) {
+        //   console.error(e)
+        //   return
+        // 
+        var json = res.data;
+        var data = that.data.list;
+        data = json;
+        console.log(data.content);
+        var arr = JSON.parse(data.content);
+        console.log(arr);
+        var newArr = [];
+        newArr.push(arr);
+        console.log(newArr);
+        that.setData({
+          newArr: newArr
+        })
+      }
+    })
   },
  
   /**

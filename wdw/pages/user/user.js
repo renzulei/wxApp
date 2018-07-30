@@ -1,4 +1,4 @@
-var WxParse = require('../../wxParse/wxParse.js');
+// var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp();
 var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
@@ -41,23 +41,22 @@ Page({
         //   console.error(e)
         //   return
         // 
-        that.dataInfo(res.data);
+        
+        var json = JSON.parse(res.data);
+        var data = that.data.list;
+          data = json;
+        var arr = [];
+        arr = JSON.parse(data.userInfo);
+        var dataArr = [];
+        dataArr.push(arr);
+          that.setData({
+            dataArr: dataArr
+          })
+        console.log(dataArr);  
       },
+
     })
   },
-  dataInfo: function(info) {
-    var data = JSON.parse(info);
-    var arr = [];
-    for (var k in data) {
-      arr.push(data[k])
-    }
-    console.log(arr);
-    this.setData({
-      list: arr
-    })
-  },
-
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成

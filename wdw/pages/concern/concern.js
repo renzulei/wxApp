@@ -8,7 +8,7 @@ const authorizedCookie = config.authorizedCookie;
 // pages/concern/concern.js
 Page({
 
-  /**
+  /** 
    * 页面的初始数据
    */
   data: {
@@ -39,32 +39,32 @@ Page({
       url: '/pages/proList/proList',
     })
   },
-  // getData: function (e) {
-  //   var that = this;
-  //   wx.request({
-  //     url: `${authService}/resourceBill/queryMyFollowResBill?page=1&pageSize=10`,
-  //     data: {},
-  //     method: 'POST',
-  //     header: {
-  //       'content-type': 'application/json',
-  //       'cookie': authorizedCookie
-  //     },
-  //     success: function (res) {
-  //       // try {
-  //       //   util.catchHttpError(res);
-  //       // } catch (e) {
-  //       //   console.error(e)
-  //       //   return
-  //       // 
-  //      var data = that.data.data;
-  //      data = res.data;
-  //      that.setData({
-  //        data:data
-  //      })
-  //      console.log(data)
-  //     },
-  //   })
-  // },
+  getData: function (e) {
+    var that = this;
+    wx.request({
+      url: `${cmService}/product/getProductByCondition?page=1&pageSize=10&tradePartyId=215&contactId=248`,
+      data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'cookie': authorizedCookie
+      },
+      success: function (res) {
+        // try {
+        //   util.catchHttpError(res);
+        // } catch (e) {
+        //   console.error(e)
+        //   return
+        // 
+       var data = that.data.data;
+       data = res.data;
+       that.setData({
+         data:data
+       })
+       console.log(data)
+      },
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
