@@ -44,22 +44,24 @@ Page({
         'cookie': this.data.authorizedCookie
       },
       success: function(res) {
-        // try {
-        //   util.catchHttpError(res);
-        // } catch (e) {
-        //   console.error(e)
-        //   return
-        // 
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        // 获取动态数据
         var data = that.data.list;
-        data = res.data;
-        console.log(data);
-        var arr = data.content;
-        console.log(arr);
-        
-        that.setData({
-          data: data
+        data = res.data.content;
+        var add = []; 
+        data.map(function(item) {
+          add.push(JSON.parse(item));
         })
-      },
+        console.log(add);
+        that.setData({
+          add: add
+        })
+      }
     })
   },
 

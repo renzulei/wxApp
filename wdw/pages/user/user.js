@@ -37,26 +37,25 @@ Page({
         'cookie': this.data.authorizedCookie
       },
       success: function(res) {
-        // try {
-        //   util.catchHttpError(res);
-        // } catch (e) {
-        //   console.error(e)
-        //   return
-        // 
-        
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+
         var json = JSON.parse(res.data);
         var data = that.data.list;
-          data = json;
+        data = json;
         var arr = [];
         arr = JSON.parse(data.userInfo);
         var dataArr = [];
         dataArr.push(arr);
-          that.setData({
-            dataArr: dataArr
-          })
-        console.log(dataArr);  
+        that.setData({
+          dataArr: dataArr
+        })
+        console.log(dataArr);
       },
-
     })
   },
 
