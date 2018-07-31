@@ -124,8 +124,8 @@ Page({
   getInof: function() {
     var that = this;
     wx.request({
-      // url: `${cmService}/businessExplain/query?region=GYLJR`,
-      url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=GYLJR`,
+      url: `${cmService}/businessExplain/query?region=GYLJR`,
+      // url: `https://yz.wangreat.com/core/restapi/public/businessExplain/query?region=GYLJR`,
       data: {},
       method: 'POST',
       header: {

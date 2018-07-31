@@ -55,7 +55,7 @@ Page({
         'cookie': this.data.authorizedCookie
       },
       success: (res)=> {
-        // console.log(res.data)
+        console.log(res.data)
         try {
           util.catchHttpError(res);
         } catch (e) {
@@ -97,10 +97,22 @@ Page({
               data.key = i + 1;
               arr.push(data)
             })
-          this.setData({
-            tableSource:arr //表格数据源
+          let obj = {}, tableSource = [];
+          arr.map(function (item) {
+            if (obj.hasOwnProperty(item.itemName)) {
+              obj[item.itemName].push(item)
+            } else {
+              obj[item.itemName] = [];
+              obj[item.itemName].push(item);
+            }
           })
-          console.log(arr)
+          Object.keys(obj).map(function (key) {
+            tableSource.push([{'itemName':key,'checked':false}, obj[key]])
+          })
+          console.log(tableSource)
+          this.setData({
+            tableSource: tableSource //表格数据源
+          })
         })
         this.setData({
           data: json.itemList,

@@ -35,11 +35,12 @@ Page({
     searchValue: '', //本页面搜索框输入值
     data: {}, //请求接口时携带数据
     exist: [], //已经被选中的筛选项
-    changeableAttrs:[],//商品可变属性
+    changeableAttrs: [], //商品可变属性
     saleCountSortName: '', //销量排序(ASC表示升序，DESC表示降序)
     priceSortName: '', //价格排序（ASC表示升序，DESC表示降序）
     total: null, //商品列表总条数
-    pageSize: 10, //每页展示条数
+    current: 1, //每页展示条数
+    is_loading_done: false //是否加载完毕
   },
 
   /**
@@ -216,7 +217,12 @@ Page({
           return
         }
         var data = res.data;
-        let shop = [];
+        let shop = that.data.shop || [];
+        if (data.content.length < 10) {
+          that.setData({
+            is_loading_done: true
+          })
+        }
         data.content.map((item, i) => {
           var item = JSON.parse(item)
           item.key = i
@@ -256,7 +262,7 @@ Page({
       data: JSON.stringify({
         itemId: data.itemId
       }),
-      success:(res)=>{
+      success: (res) => {
         try {
           util.catchHttpError(res);
         } catch (e) {
@@ -264,7 +270,7 @@ Page({
           return
         }
         var json = res.data;
-        if (json.code == "S"){
+        if (json.code == "S") {
           this.setData({
             changeableAttrs: json.changeableAttrs
           })
@@ -599,18 +605,20 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    var pageSize = this.data.pageSize;
+    var current = this.data.current;
     var total = this.data.total;
     var data = this.data.data;
-    if (pageSize < total) {
+    var is_loading_done = this.data.is_loading_done;
+    console.log(is_loading_done)
+    if (!is_loading_done) {
       this.fetch({
-        pageSize: pageSize + 10,
-        current: 1,
+        pageSize: 10,
+        current: current + 1,
         data: data
       })
-      console.log(pageSize)
+      console.log(current)
       this.setData({
-        pageSize: pageSize + 10
+        current: current + 1
       })
     }
 

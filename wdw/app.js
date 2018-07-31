@@ -40,7 +40,7 @@ App({
   },
   globalData: {
     userInfo: [],
-    http_host: 'http://192.168.10.100:8001',
+    http_host: 'http://192.168.10.101:8001',
     openid: wx.getStorageSync('openid'),
     is_bind: 0, //用户是否绑定手机号
     user_id: wx.getStorageSync('user_id'),
@@ -48,10 +48,10 @@ App({
     /*语言配置*/
     Lang: 'lang=zh_CN',
     /*内容管理*/
-    cmService: 'http://192.168.10.100:8001/core/restapi/public',
+    cmService: 'http://192.168.10.101:8001/core/restapi/public',
     /*用户管理*/
-    umService: 'http://192.168.10.100:8001/core/restapi/public',
+    umService: 'http://192.168.10.101:8001/core/restapi/public',
     /*权限管理*/
-    authService: 'http://192.168.10.100:8001/core/restapi/private',
+    authService: 'http://192.168.10.101:8001/core/restapi/private',
   },
 })

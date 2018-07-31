@@ -23,18 +23,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //  this.setData({
-    //    physicalStateCode: options.physicalStateCode,
-    //    items: JSON.parse(options.items),
-    //    changeableAttrs: JSON.parse(options.changeableAttrs)
-    //  })
     let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
     this.setData({
       authorizedCookie: authorizedCookie
     })
-    var physicalStateCode = util.getStorageSync('physicalStateCode');
-    var items = JSON.parse(util.getStorageSync('items'));
-    var changeableAttrs = JSON.parse(util.getStorageSync('changeableAttrs'));
+    var physicalStateCode = options.physicalStateCode;
+    var items = JSON.parse(options.items);
+    var changeableAttrs = JSON.parse(options.changeableAttrs);
     this.setData({
       physicalStateCode: physicalStateCode,
       items: items,
@@ -202,7 +197,7 @@ Page({
           } else {
             this.data.data.map((item, i) => {
               if (i == index) {
-                item.baseOrderQuantity = 0
+                item.baseOrderQuantity = ''
                 item.amount = 0
               }
             })
@@ -259,7 +254,7 @@ Page({
       this.data.data.map((item, i) => {
         if (i == index) {
           if (value != record.baseOrderQuantity) {
-            item.orderQuantity = 0
+            item.orderQuantity = ''
           }
           item.baseOrderQuantity = value;
         }
@@ -267,7 +262,7 @@ Page({
     } else {
       this.data.data.map((item, i) => {
         if (i == index) {
-          item.baseOrderQuantity = 0
+          item.baseOrderQuantity = ''
         }
       })
     }
@@ -316,8 +311,8 @@ Page({
       this.data.data.map((items, i) => {
         if (i == index) {
           if (value != record[attributeCode]) {
-            items.orderQuantity = 0
-            items.baseOrderQuantity = 0
+            items.orderQuantity = ''
+            items.baseOrderQuantity = ''
             items.amount = 0
           }
           items[attributeCode] = value
