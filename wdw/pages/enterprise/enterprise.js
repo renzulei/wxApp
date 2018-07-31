@@ -37,15 +37,15 @@ Page({
         'cookie': this.data.authorizedCookie
       },
       success: function(res) {
-        // try {
-        //   util.catchHttpError(res);
-        // } catch (e) {
-        //   console.error(e)
-        //   return
-        // 
-        var json = res.data;
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        // 获取动态数据
         var data = that.data.list;
-        data = json;
+        data = res.data;
         console.log(data.content);
         var arr = JSON.parse(data.content);
         console.log(arr);

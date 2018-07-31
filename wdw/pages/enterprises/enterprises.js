@@ -38,24 +38,36 @@ Page({
         'cookie': this.data.authorizedCookie
       },
       success: function(res) {
-        // try {
-        //   util.catchHttpError(res);
-        // } catch (e) {
-        //   console.error(e)
-        //   return
-        // 
-        var json = res.data;
-        var data = that.data.list;
-        data = json;
-        var arr = JSON.parse(data.content[1]);
-        var newArr = [];
-        newArr.push(arr);
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        //  获取动态数据
+        // var data = that.data.list;
+        // data = res.data;
+        // var arr = JSON.parse(data.content[1]);
+        // var newArr = [];
+        // newArr.push(arr);
+        // that.setData({
+        //   newArr: newArr
+        // })
         // console.log(newArr);
-
-        that.setData({
-          newArr: newArr
+        
+        //  获取动态数据
+        var data = that.data.list;
+        data = res.data.content;
+        var arr = [];
+        data.map(function(item) {
+          arr.push(JSON.parse(item));
         })
-        console.log(newArr);
+        var dataInfo = [];
+        dataInfo = arr.splice(0, 1);
+        console.log(dataInfo);
+        that.setData({
+          dataInfo: dataInfo
+        })
       },
     })
   },

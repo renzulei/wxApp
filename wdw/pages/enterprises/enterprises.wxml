@@ -2,7 +2,7 @@
   <view class='content'>
 
     <!-- list 区域========================================================== -->
-    <view class='content_box' wx:for="{{ newArr }}" wx:key="{{ tradePartyId }}">
+    <view class='content_box' wx:for="{{ dataInfo }}" wx:key="{{ tradePartyId }}">
       <view class='list'>
         <text class='left'>所在地区:</text>
         <input class='input' placeholder='{{ item.province }}'></input>
