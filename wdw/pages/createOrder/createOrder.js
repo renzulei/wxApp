@@ -10,7 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tableSource: [], //表格数据源
+    folders: [], //商品列表是否折叠
+    data: null, //接口返回的原始数据
+    contact: null, //接口返回的附加信息
+    defaultContactPerson: null, //默认收货人
+    selectedRows: [], //被选中的商品数据
+    allA: 0, //总金额
+    allT: 0, //总吨数
   },
 
   // 点击取消返回
@@ -46,6 +53,7 @@ Page({
       contactId: contactId
     }, this.getData)
   },
+  // 获取购物车数据
   getData: function() {
     wx.request({
       url: `${authService}/shopCart/showShopCart?tradePartyId=${this.data.tradePartyId}`,
@@ -54,8 +62,8 @@ Page({
         'Content-Type': 'application/json',
         'cookie': this.data.authorizedCookie
       },
-      success: (res)=> {
-        console.log(res.data)
+      success: (res) => {
+        // console.log(res.data)
         try {
           util.catchHttpError(res);
         } catch (e) {
@@ -84,41 +92,161 @@ Page({
             item.items.map((data, i) => {
               data.itemChangableAttributes.map((item) => {
                 data[item["attributeCode"]] = item.value;
-                if (item["attributeName"] == '幅宽mm'){
+                if (item["attributeName"] == '幅宽mm') {
                   this.setData({
                     code: item["attributeCode"]
                   })
-                }else{
+                } else {
                   this.setData({
                     cutLength: item["attributeCode"]
                   })
-                } 
+                }
               })
               data.key = i + 1;
               arr.push(data)
             })
-          let obj = {}, tableSource = [];
-          arr.map(function (item) {
+          // 以下代码对数据按商品名称分组
+          let obj = {},
+            tableSource = [],
+            folders = [];
+          arr.map(function(item) {
             if (obj.hasOwnProperty(item.itemName)) {
+              item.checked = false;
               obj[item.itemName].push(item)
             } else {
+              item.checked = false;
               obj[item.itemName] = [];
               obj[item.itemName].push(item);
             }
           })
-          Object.keys(obj).map(function (key) {
-            tableSource.push([{'itemName':key,'checked':false}, obj[key]])
+          Object.keys(obj).map(function(key) {
+            folders.push({
+              fold: true
+            })
+            tableSource.push([{
+              'itemName': key,
+              'checked': false
+            }, obj[key]])
           })
-          console.log(tableSource)
+          folders[0].fold = false;
+          // console.log(tableSource)
           this.setData({
-            tableSource: tableSource //表格数据源
+            tableSource: tableSource,
+            folders: folders
           })
         })
         this.setData({
           data: json.itemList,
           contact: contact,
-          defaultContactPerson: defaultContactPerson, //默认收货人
+          defaultContactPerson: defaultContactPerson,
         })
+      }
+    })
+  },
+  // 选中一类商品
+  checkSome: function(e) {
+    var outIndex = e.currentTarget.dataset.outindex;
+    var selectedRows = [],
+      allA = 0,
+      allT = 0;
+    this.data.tableSource.map(function(item, index) {
+      if (index == outIndex) {
+        item[0].checked = !item[0].checked;
+        item[1].map(function(it, i) {
+          item[0].checked ? it.checked = true : it.checked = false;
+        })
+      }
+    })
+    this.data.tableSource.map(function(item, index) {
+      item[1].map(function(it, i) {
+        it.checked ? selectedRows.push(it) : '';
+      })
+    })
+    selectedRows.map(function(it, i) {
+      allA += Number(it.amount);
+      allT += Number(it.baseOrderQuantity);
+    })
+    allT = allT.toFixed(3) //吨数保留三位小数
+    this.setData({
+      tableSource: this.data.tableSource,
+      selectedRows: selectedRows,
+      allA: allA,
+      allT: allT
+    })
+  },
+  // 选中一个商品
+  checkOne: function(e) {
+    var outIndex = e.currentTarget.dataset.outindex;
+    var innerIndex = e.currentTarget.dataset.index;
+    var selectedRows = [],
+      allA = 0,
+      allT = 0;
+    this.data.tableSource.map(function(item, index) {
+      if (index == outIndex) {
+        item[0].checked = true;
+        item[1].map(function(it, i) {
+          i == innerIndex ? it.checked = !it.checked : '';
+          it.checked == false ? item[0].checked = false : '';
+        })
+      }
+    })
+    this.data.tableSource.map(function(item, index) {
+      item[1].map(function(it, i) {
+        it.checked ? selectedRows.push(it) : '';
+      })
+    })
+    // console.log(selectedRows)
+    selectedRows.map(function(it, i) {
+      allA += Number(it.amount);
+      allT += Number(it.baseOrderQuantity);
+    })
+    allT = allT.toFixed(3) //吨数保留三位小数
+    this.setData({
+      tableSource: this.data.tableSource,
+      selectedRows: selectedRows,
+      allA: allA,
+      allT: allT
+    })
+  },
+  // 折叠或展开一类商品列表
+  doFold: function(e) {
+    var index = e.currentTarget.dataset.index;
+    this.data.folders.map(function(it, i) {
+      i == index ? it.fold = !it.fold : ""
+    })
+    this.setData({
+      folders: this.data.folders
+    })
+  },
+  // 删除一个商品
+  onDelete: function(e) {
+    var record = e.currentTarget.dataset.item;
+    wx.request({
+      url: `${authService}/shopCart/delShopCartItem?contactId=${record.contactId}&tradePartyId=${record.tradePartyId}`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'cookie': this.data.authorizedCookie
+      },
+      data: JSON.stringify({
+        inventId: record.inventId,
+        itemId: record.itemId,
+      }),
+      success: (res) => {
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        var json = res.data;
+        if (json.code == "S") {
+
+          this.getData()
+          this.setData({
+            selectedRows: []
+          })
+        }
       }
     })
   },

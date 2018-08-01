@@ -1,13 +1,20 @@
+@import '../../template/empty/empty.wxss';
+page{
+  background-color: #f6f6f6;
+
+}
 .container {
   width: 100%;
   padding-bottom: 144rpx;
+}
+.hide{
+  display: none;
 }
 /* 整个盒子 */
 .content {
   width: 100%;
   padding: 24rpx;
   padding-bottom: 0;
-  background-color: #f6f6f6;
 }
 /* 内容框 */
 .table {
@@ -103,6 +110,7 @@ margin-bottom: 30rpx;
 
 .table_color {
   color: #f75959;
+  display: inline-block;
 }
 
 .table_btn {
@@ -132,7 +140,6 @@ margin-bottom: 30rpx;
 .del {
   border: 1px solid #f75959;
   color: #f75959;
-  margin-left: 100rpx;
 }
 
 /* 底部样式 */
@@ -225,6 +232,7 @@ margin-bottom: 30rpx;
   background-color: #576b95;
   display: inline-block;
   border-radius: 4rpx;
+  vertical-align: middle;
 }
 
 .icon-check image {
@@ -238,4 +246,8 @@ margin-bottom: 30rpx;
 }
 .h-right{
   float: left;
+}
+.danjia{
+  margin-left: 20rpx;
+  display: inline-block;
 }

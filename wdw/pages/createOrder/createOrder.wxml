@@ -1,8 +1,9 @@
+<import src="../../template/empty/empty.wxml" />
 <view class="container">
-  <view class="content" wx:for="{{tableSource}}" wx:for-item="item" wx:for-index="index" wx:key="*this">
-    <view class='header clearfix'>
+  <view class="content" wx:for="{{tableSource}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+    <view class='header clearfix' data-index='{{index}}' bindtap='doFold'>
       <view class='h-left'>
-        <view class='icon-check'>
+        <view class='icon-check' data-outindex='{{index}}' catchtap='checkSome'>
           <image wx:if="{{item[0].checked}}" src='/images/checked.png'></image>
           <image wx:else src='/images/uncheck.png'></image>
         </view>
@@ -18,8 +19,8 @@
         </view>
       </view>
     </view>
-    <view class='content_table'>
-      <view class="table" wx:for="{{item[1]}}" wx:for-item="it" wx:for-index="i" wx:key="*this">
+    <view class='content_table {{folders[index].fold?"hide":""}}'>
+      <view class="table" wx:for="{{item[1]}}" wx:for-item="it" wx:for-index="i" wx:key="{{i}}">
         <view class="text clearfix">
           <view class='div'>
             <view class="box box_left">
@@ -64,11 +65,15 @@
           </view>
         </view>
         <view class='table_bom clearfix'>
+        <view class='icon-check' data-index="{{i}}" data-outindex="{{index}}" bindtap='checkOne'>
+          <image wx:if="{{it.checked}}" src='/images/checked.png'></image>
+          <image wx:else src='/images/uncheck.png'></image>
+        </view>
           <text class='danjia'>单价(不含运费):</text>
           <text class='table_color'>{{it.unitPrice}}</text>
           <text class='table_left'>金额:</text>
           <text class='table_color'>{{it.amount}}</text>
-          <view data-index='{{i}}' class=' table_btn del' bindtap='deleteTap'>
+          <view data-index='{{i}}' class=' table_btn del' data-item="{{it}}" bindtap='onDelete'>
             <text>删除</text>
           </view>
         </view>
@@ -77,16 +82,16 @@
     </view>
 
   </view>
-
+  <template is="emptyfill" wx:if="{{tableSource.length==0}}" />
   <view class='footer'>
     <!-- 上部分 -->
     <view class='footer_top'>
       <text class='footer_left'>已选中规格：</text>
-      <text class='footer_right'>4</text>
+      <text class='footer_right'>{{selectedRows.length}}</text>
       <text class='footer_left'>总吨数：</text>
-      <text class='footer_right'>1950</text>
+      <text class='footer_right'>{{allT}}</text>
       <text class='footer_left'>总金额：</text>
-      <text class='footer_right'>2678943.12</text>
+      <text class='footer_right'>{{allA}}</text>
     </view>
 
     <!-- 下部分 -->
