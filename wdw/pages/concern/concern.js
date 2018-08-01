@@ -12,7 +12,8 @@ Page({
   data: {
     data: [],
     box: true,
-    list: []
+    list: [],
+    content: ''
 
   },
 
