@@ -118,7 +118,7 @@ margin-bottom: 30rpx;
   width: 86rpx;
   /* display: inline-block; */
   vertical-align: middle;
-  margin: 0 12rpx;
+  /* margin-left:12rpx; */
   border-radius: 8rpx;
   text-align: center;
 }
@@ -131,6 +131,7 @@ margin-bottom: 30rpx;
 .del {
   border: 1px solid #f75959;
   color: #f75959;
+  margin-left: 12rpx;
 }
 
 
@@ -147,8 +148,8 @@ margin-bottom: 30rpx;
 .footer_top {
   line-height: 56rpx;
   background-color: #9fb9ef;
-  text-align: right;
-  padding: 0 60rpx;
+  text-align: center;
+  /* padding: 0 60rpx; */
 }
 
 .footer_right {
