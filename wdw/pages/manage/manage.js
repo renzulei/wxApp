@@ -10,31 +10,10 @@ Page({
     num: 1,
     array: ['请选择支付方式', '现金支付', '微信支付', '支付宝支付', '银行卡支付'], //付款方式
     index: 0,
-    // 订单内容
-    // items: [ 
-    //   {
-    //     ding_dan: "YCD0018652",
-    //     jin_e: "￥6178430.0",
-    //     zhuang_tai: "待发货",
-    //     xiadan_shijian: "2018-01-26 15:36:21"
-    //   },
-    //   {
-    //     ding_dan: "YCD0018652",
-    //     jin_e: "￥6178430.0",
-    //     zhuang_tai: "待发货",
-    //     xiadan_shijian: "2018-01-26 15:36:21"
-    //   },
-    //   {
-    //     ding_dan: "YCD0018652",
-    //     jin_e: "￥6178430.0",
-    //     zhuang_tai: "待发货",
-    //     xiadan_shijian: "2018-01-26 15:36:21"
-    //   },
-    // ],
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    // motto: 'Hello World',
+    // userInfo: {},
+    // hasUserInfo: false,
+    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
     navData: [{
         text: '所有订单'
       },
@@ -56,12 +35,26 @@ Page({
     ],
     currentTab: 0,
     navScrollLeft: 0,
-    shop0: [{
+    shop0: [
+      {
       ding_dan: "YCD0018652",
       jin_e: "￥6178430.0",
       zhuang_tai: "待发货",
       xiadan_shijian: "2018-01-26 15:36:21"
-    }, ],
+    },    
+      {
+        ding_dan: "YCD0018652",
+        jin_e: "￥6178430.0",
+        zhuang_tai: "待发货",
+        xiadan_shijian: "2018-01-26 15:36:21"
+      },  
+      {
+        ding_dan: "YCD0018652",
+        jin_e: "￥6178430.0",
+        zhuang_tai: "待发货",
+        xiadan_shijian: "2018-01-26 15:36:21"
+      },  
+     ],
     shop1: [],
     shop2: [],
     shop3: [],
@@ -97,7 +90,6 @@ Page({
         }
       })
     }
-
 
     wx.getSystemInfo({
       success: (res) => {
@@ -142,7 +134,7 @@ Page({
       index: e.detail.value
     })
   },
-  //订单详情
+  // 订单详情
   particularsTap: function(e) {
     wx.navigateTo({
       url: '/pages/particulars/particulars',

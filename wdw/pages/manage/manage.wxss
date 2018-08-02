@@ -96,7 +96,7 @@
 
 .header {
   width: 708rpx;
-  height: 198rpx;
+  /* height: 198rpx; */
   background-color: #9fb9ef;
   margin: 0 auto;
   margin-top: 30rpx;
@@ -178,10 +178,10 @@
 }
 
 .content_box {
-  height: 100%;
+ border-top: 8rpx solid #E8E8E8;
 }
 
-/* ---------------------------------------------------------------------- */
+/* --------------------tab切换-------------------------------------------------- */
 
 
 .nav {
@@ -190,7 +190,6 @@
   line-height: 80rpx;
   box-sizing: border-box;
   overflow: hidden;
-  background: #f7f7f7;
   font-size: 28rpx;
   white-space: nowrap;
   z-index: 99;
@@ -207,20 +206,11 @@
 }
 
 .nav-item.active {
-  color: red;
-  border-bottom: 5rpx solid red;
+  color: #F75959;
+  border-bottom: 5rpx solid #F75959;
 }
 
 .tab-box {
-  background: greenyellow;
-  height: 500rpx;
   box-sizing: border-box;
 }
 
-.tab-content {
-  overflow-y: scroll;
-}
-
-.swiper {
-  height: 0;
-}

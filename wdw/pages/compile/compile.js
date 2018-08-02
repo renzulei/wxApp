@@ -22,7 +22,7 @@ Page({
   },
     // 所在地函数
   bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value);
+    console.log(e);
     var index = e.detail.value;
     var that = this;
     that.setData({
