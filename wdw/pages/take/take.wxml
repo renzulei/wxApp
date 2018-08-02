@@ -4,7 +4,7 @@
   <view class='{{ add }}'>
     <view class='box'>
       <view class='title'>
-        <text class='left_color'>收货人：</text>
+        <text class='left_color'>收货人：</text>  
         <text class='right_color'>{{item.name}}</text>
         <text class='left_color left'>联系方式：</text>
         <text class='right_color'>{{item.phone}}</text>

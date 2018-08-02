@@ -1,14 +1,16 @@
+<import src="../../template/empty/empty.wxml" />
+
 <view class="container">
   <view class='content'>
 
-  <view class='nav' catchtap='navTap'>
+  <!-- <view class='nav' catchtap='navTap'>
     <view class="nav_already {{ num==1?'active':'' }}" data-num='1'>待收货</view>
       <view class="nav_already {{ num==2?'active':'' }}" data-num='2'>已收货</view>
         <view class="nav_already {{ num==3?'active':'' }}" data-num='3'>异常收货</view>
-  </view>
+  </view> -->
 
   <!-- header区域========================================================== -->
-    <view class='header'>
+    <!-- <view class='header'>
       <view class='odd'>
         <text class='odd_left'>意向订单号:</text>
         <text class='odd_right'>YCD0018652</text>
@@ -24,64 +26,98 @@
       <view class='site' bindtap='particularsTap'>
         <text>点击查看订单详情(2)</text>
       </view>
-    </view>
+    </view> -->
 
-     <view class='header'>
-      <view class='odd'>
-        <text class='odd_left'>意向订单号:</text>
-        <text class='odd_right'>YCD0018652</text>
-        <text class='odd_left'>订单金额:</text>
-        <text class='odd_right'>￥6178430.0</text>
-      </view>
-      <view class='state'>
-        <text class='odd_left'>订单状态:</text>
-        <text class='odd_right'>待收货</text>
-        <text class='odd_left'>下单时间:</text>
-        <text class='odd_right'>2018-01-26 15:36:21</text>
-      </view>
-      <view class='site' bindtap='particularsTap'>
-        <text>点击查看订单详情(2)</text>
-      </view>
-    </view>
 
-     <view class='header'>
-      <view class='odd'>
-        <text class='odd_left'>意向订单号:</text>
-        <text class='odd_right'>YCD0018652</text>
-        <text class='odd_left'>订单金额:</text>
-        <text class='odd_right'>￥6178430.0</text>
-      </view>
-      <view class='state'>
-        <text class='odd_left'>订单状态:</text>
-        <text class='odd_right'>待收货</text>
-        <text class='odd_left'>下单时间:</text>
-        <text class='odd_right'>2018-01-26 15:36:21</text>
-      </view>
-      <view class='site' bindtap='particularsTap'>
-        <text>点击查看订单详情(2)</text>
-      </view>
+<view class="container">
+    <!-- tab导航栏 -->
+    <!-- scroll-left属性可以控制滚动条位置 -->
+    <!-- scroll-with-animation滚动添加动画过渡 -->
+    <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+      <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+        <view class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
+      </block>
+    </scroll-view>
+    <!-- 内容 -->
+     <view class='swiper_box'>
+    <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:1100rpx">
+      <!-- 1 -->
+      <swiper-item style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        <view class='content_box'>
+          <view class='header' wx:for="{{ shop0 }}" wx:for-item="navItem" wx:key="{{ idx }}">
+            <view class='odd'>
+              <text class='odd_left'>意向订单号:</text>
+              <text class='odd_right'>{{ navItem.ding_dan }}</text>
+              <text class='odd_left'>订单金额:</text>
+              <text class='odd_right'>{{ navItem.jin_e }}</text>
+            </view>
+            <view class='state'>
+              <text class='odd_left'>订单状态:</text>
+              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
+              <text class='odd_left'>下单时间:</text>
+              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
+            </view>
+            <view class='site' bindtap='particularsTap'>
+              <text>点击查看订单详情(2)</text>
+            </view>
+          </view>
+          <template is="emptyfill" wx:if="{{ shop0.length==0 }}" />
+          <view class='hint'>没有更多数据了</view>
+        </view>
+      </swiper-item>
+      <!-- 2 -->
+      <swiper-item>
+        <view class='content_box'>
+          <view class='header' wx:for="{{ shop1 }}" wx:for-item="navItem" wx:key="{{ idx }}">
+            <view class='odd'>
+              <text class='odd_left'>意向订单号:</text>
+              <text class='odd_right'>{{ navItem.ding_dan }}</text>
+              <text class='odd_left'>订单金额:</text>
+              <text class='odd_right'>{{ navItem.jin_e }}</text>
+            </view>
+            <view class='state'>
+              <text class='odd_left'>订单状态:</text>
+              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
+              <text class='odd_left'>下单时间:</text>
+              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
+            </view>
+            <view class='site' bindtap='particularsTap'>
+              <text>点击查看订单详情(2)</text>
+            </view>
+          </view>
+          <template is="emptyfill" wx:if="{{ shop1.length==0 }}" />
+          <!-- <view class='hint'>没有更多数据了</view> -->
+        </view>
+      </swiper-item>
+      <!-- 3 -->
+      <swiper-item>
+        <view class='content_box'>
+          <view class='header' wx:for="{{ shop2 }}" wx:for-item="navItem" wx:key="{{ idx }}">
+            <view class='odd'>
+              <text class='odd_left'>意向订单号:</text>
+              <text class='odd_right'>{{ navItem.ding_dan }}</text>
+              <text class='odd_left'>订单金额:</text>
+              <text class='odd_right'>{{ navItem.jin_e }}</text>
+            </view>
+            <view class='state'>
+              <text class='odd_left'>订单状态:</text>
+              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
+              <text class='odd_left'>下单时间:</text>
+              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
+            </view>
+            <view class='site' bindtap='particularsTap'>
+              <text class="size">点击查看订单详情(2)</text>
+            </view>
+          </view>
+          <template is="emptyfill" wx:if="{{ shop2.length==0 }}" />
+          <!-- <view class='hint'>没有更多数据了</view> -->
+        </view>
+      </swiper-item>
+    </swiper>
     </view>
-
-     <view class='header'>
-      <view class='odd'>
-        <text class='odd_left'>意向订单号:</text>
-        <text class='odd_right'>YCD0018652</text>
-        <text class='odd_left'>订单金额:</text>
-        <text class='odd_right'>￥6178430.0</text>
-      </view>
-      <view class='state'>
-        <text class='odd_left'>订单状态:</text>
-        <text class='odd_right'>待收货</text>
-        <text class='odd_left'>下单时间:</text>
-        <text class='odd_right'>2018-01-26 15:36:21</text>
-      </view>
-      <view class='site' bindtap='particularsTap'>
-        <text>点击查看订单详情(2)</text>
-      </view>
-    </view>
+  </view>
 
 <!--提示信息============================================  -->
-    <view class='hint'>没有更多数据了</view>
     <view class='footer'>确认收货</view>
   </view>
 </view>

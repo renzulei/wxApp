@@ -49,8 +49,9 @@
         <view class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
       </block>
     </scroll-view>
-    <!-- 页面内容 -->
-    <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab">
+    <!-- 内容 -->
+     <view class='swiper_box'>
+    <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab" style='height:790rpx'>
       <!-- 1 -->
       <swiper-item>
         <view class='content_box'>
@@ -96,7 +97,7 @@
             </view>
           </view>
           <template is="emptyfill" wx:if="{{ shop1.length==0 }}" />
-          <view class='hint'>没有更多数据了</view>
+          <!-- <view class='hint'>没有更多数据了</view> -->
         </view>
       </swiper-item>
       <!-- 3 -->
@@ -120,7 +121,7 @@
             </view>
           </view>
           <template is="emptyfill" wx:if="{{ shop2.length==0 }}" />
-          <view class='hint'>没有更多数据了</view>
+          <!-- <view class='hint'>没有更多数据了</view> -->
         </view>
       </swiper-item>
       <!-- 4 -->
@@ -144,7 +145,7 @@
             </view>
           </view>
           <template is="emptyfill" wx:if="{{ shop3.length==0 }}" />
-          <view class='hint'>没有更多数据了</view>
+          <!-- <view class='hint'>没有更多数据了</view> -->
         </view>
       </swiper-item>
       <!-- 5 -->
@@ -168,7 +169,7 @@
             </view>
           </view>
           <template is="emptyfill" wx:if="{{ shop4.length==0 }}" />
-          <view class='hint'>没有更多数据了</view>
+          <!-- <view class='hint'>没有更多数据了</view> -->
         </view>
       </swiper-item>
       <!-- 6 -->
@@ -192,10 +193,11 @@
             </view>
           </view>
           <template is="emptyfill" wx:if="{{ shop5.length==0 }}" />
-          <view class='hint'>没有更多数据了</view>
+          <!-- <view class='hint'>没有更多数据了</view> -->
         </view>
       </swiper-item>
     </swiper>
+    </view>
   </view>
 </view>
 
