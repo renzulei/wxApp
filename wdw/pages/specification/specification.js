@@ -98,7 +98,7 @@ Page({
     dataSource.push(deepData)
     this.setData({
       data: dataSource
-    });
+    }); 
   },
   deleteTap: function(e) {
     var index = e.currentTarget.dataset.index;

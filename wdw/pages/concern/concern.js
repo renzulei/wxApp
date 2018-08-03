@@ -12,7 +12,7 @@ Page({
   data: {
     data: [],
     box: true,
-    list: [],
+    list: [], //表格数据
     content: ''
 
   },
@@ -54,16 +54,29 @@ Page({
         // 获取动态数据
         var data = that.data.list;
         data = res.data.content;
-        var add = []; 
+        var add = [];
         data.map(function(item) {
           add.push(JSON.parse(item));
         })
         console.log(add);
         that.setData({
-          add: add
+          data: add
         })
       }
     })
+  },
+  //点击删除功能
+  delTap: function(e) {
+    var that = this;
+    console.log(e);
+    var index = e.currentTarget.dataset.index;
+    if (that.data.data.length > 1) {
+      var info = [...this.data.data];
+      info.splice(index, 1);
+      this.setData({
+        data: info
+      })
+    }
   },
 
   /**
