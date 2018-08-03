@@ -7,7 +7,7 @@ Page({
    */
   data: {
     num: 1,
-    index: 0,
+    index: 0, 
     navData: [{
         text: '待收货'
       },

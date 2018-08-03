@@ -12,7 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: [],
+    showHide: true
   },
 
   /**
@@ -54,7 +55,7 @@ Page({
         //   newArr: newArr
         // })
         // console.log(newArr);
-        
+
         //  获取动态数据
         var data = that.data.list;
         data = res.data.content;
@@ -69,6 +70,22 @@ Page({
           dataInfo: dataInfo
         })
       },
+    })
+  },
+
+  // 点击查看功能
+  examineTap: function() {
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide)
+    })
+  },
+
+  // 点击取消蒙层功能
+  cancelTap: function() {
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide)
     })
   },
   /**

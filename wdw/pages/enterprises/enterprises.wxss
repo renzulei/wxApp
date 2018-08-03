@@ -1,6 +1,11 @@
-/* .container {
+page {
+  width: 100%;
+  height: 100%;
+}
 
-} */
+.container {
+  position: relative;
+}
 
 .content {
   width: 100%;
@@ -84,4 +89,43 @@
   font-size: 24rpx;
   font-weight: bold;
   color: #777;
+}
+
+/* ======================================================================== */
+
+/* 蒙层 */
+
+.meng_ceng {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  opacity: 0.3;
+  z-index: 20;
+}
+
+/* 显示和隐藏的盒子 */
+
+.showHide {
+  width: 610rpx;
+  height: 800rpx;
+  background-color: white;
+  position: absolute;
+  margin-left: 70rpx;
+  top: 100rpx;
+  z-index: 30;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.showHide image {
+  width: 610rpx;
+  height: 800rpx;
 }

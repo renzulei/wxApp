@@ -11,7 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: [],
+    showHide: true,
   },
 
   /**
@@ -46,20 +47,34 @@ Page({
         // 获取动态数据
         var data = that.data.list;
         data = res.data;
-        console.log(data.content);
         var arr = JSON.parse(data.content);
-        console.log(arr);
         var newArr = [];
         newArr.push(arr);
-        console.log(newArr);
         that.setData({
           newArr: newArr
         })
+        console.log(newArr);
       }
     })
   },
 
-  /**
+  // 点击查看-弹出蒙层
+  examineTap: function () {
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide)
+    })
+  },
+    // 点击蒙层-取消蒙层
+    cancelTap: function() {
+      var that = this;
+      that.setData({
+        showHide: (!that.data.showHide)
+      })
+    },
+
+
+  /** 
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {

@@ -41,7 +41,7 @@
       </view>
       <view class='list'>
         <text class='left'>货物签收授权书:</text>
-        <text class='examine'>点击查看</text>
+        <text class='examine' bindtap='examineTap'>点击查看</text>
       </view>
     </view>
 
@@ -54,4 +54,9 @@
       <text class='footer_right'>本页面仅支持查询功能,如需修改请前往PC端进行操作。</text>
     </view>
   </view>
+</view>
+<!-- 模态框 -->
+<view class="meng_ceng {{ showHide?'hide':'show' }}" bindtap='cancelTap'></view>
+<view class="showHide {{ showHide?'hide':'show' }}">
+  <text>这是货物签收授权书</text>
 </view>
