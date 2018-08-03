@@ -38,7 +38,7 @@
               </view>
               <view class='right'>
                 <text wx:if="{{it.physicalStateCode == 'JT'}}">{{it[cutLength]}}</text>
-                <input wx:else class='input' data-outindex='{{index}}' data-code='{{cutLength}}' type='number' data-index='{{index}}' value='{{it[cutLength]}}' bindblur='attributeBlur'>
+                <input wx:else class='input' data-outindex='{{index}}' data-code='{{cutLength}}' type='number' data-index='{{i}}' value='{{it[cutLength]}}' bindblur='attributeBlur'>
                 </input>
               </view>
             </view>

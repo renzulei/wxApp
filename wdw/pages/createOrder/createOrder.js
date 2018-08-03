@@ -14,7 +14,7 @@ Page({
     folders: [], //商品列表是否折叠
     data: null, //接口返回的原始数据
     contact: null, //接口返回的附加信息
-    defaultContactPerson: null, //默认收货人
+    defaultContactPerson: '', //默认收货人
     selectedRows: [], //被选中的商品数据
     allA: 0, //总金额
     allT: 0, //总吨数
@@ -424,7 +424,42 @@ Page({
       tableSource: this.data.tableSource,
     })
   },
-
+// 幅宽或切长离开焦点触发事件
+  attributeBlur:function(e){
+    var attributeCode = e.currentTarget.dataset.code;
+    var innerIndex = e.currentTarget.dataset.index;
+    var outIndex = e.currentTarget.dataset.outindex;
+    var value = e.detail.value;
+    value = value < 100 ? 100 : value > 9999 ? 9999 : value;
+    if (!Number(value)) {
+      this.data.tableSource.map(function(item,index){
+        if(outIndex == index){
+          item[1].map(function(it,i){
+            i == innerIndex ? it[attributeCode]=null:''
+          })
+        }
+      })
+    } else {
+      this.data.tableSource.map(function (item, index) {
+        if (outIndex == index) {
+          item[1].map(function (it, i) {
+            if(i==innerIndex){
+              if (value != it[attributeCode]){
+                it.orderQuantity = ''
+                it.baseOrderQuantity = 0
+                it.amount = 0
+              }
+              it[attributeCode] = value
+            }
+          })
+        }
+      })
+    }
+    this.countSelected(this.data.tableSource);
+    this.setData({
+      tableSource: this.data.tableSource,
+    })
+  },
   // 点击取消返回
   cancelTap: function(e) {
     wx.navigateBack({
@@ -456,8 +491,20 @@ Page({
         }
       })
       if(jump&&this.data.jump){
+        this.data.selectedRows.map(function(item){
+          for(var i in item){
+            i == "checked"? delete item[i]:''
+          }
+        })
+        var selectedRows = JSON.stringify(this.data.selectedRows);
+        var contactId = this.data.contactId;
+        var contact = JSON.stringify(this.data.contact);
+        // 以下两行仅供调试，后期删除
+        util.setStorageSync('selectedRows', selectedRows);
+        util.setStorageSync('contactId', contactId);
+        util.setStorageSync('contact', contact);
         wx.navigateTo({
-          url: '/pages/supplement/supplement',
+          url: `/pages/supplement/supplement?selectedRows=${selectedRows}&contactId=${contactId}&contact=${contact}`,
         })
       }
     } else {

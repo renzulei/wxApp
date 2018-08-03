@@ -1,91 +1,300 @@
 // pages/supplement/supplement.js
+var app = getApp();
+var cmService = app.globalData.cmService;
+var authService = app.globalData.authService;
+var customer_id = app.globalData.customer_id;
+const util = require('../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showHide: true,
-    list: [{
-        name: "1",
-        value: "标准订单",
-        checkde: true
-      },
-      {
-        name: "2",
-        value: "意向订单",
-      },
-      {
-        name: "3",
-        value: "下单预付",
-      },
-      {
-        name: "4",
-        value: "发货前预付",
-      },
-      {
-        name: "5",
-        value: "赊销",
-      },
-      {
-        name: "6",
-        value: "30",
-      },
-      {
-        name: "7",
-        value: "60",
-      },
-      {
-        name: "8",
-        value: "120",
-      },
-      {
-        name: "9",
-        value: "现金支付",
-      },
-      {
-        name: "10",
-        value: "白条支付",
-      },
-      {
-        name: "11",
-        value: "票据支付",
-      }
-    ],
     checked: true,
+    allA:0, //总金额
+    allT:0, //总吨数
+    selectedRows:[], //待提交的表格数据
+    saleOrderTypeListChoose:'STD' //默认选择的是标准订单（STD）
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
+    this.setData({
+      authorizedCookie: authorizedCookie
+    })
+    var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
+    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
+    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
+    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
+    // var contactId = options.contactId;
+    // var contact = options.defaultContactPerson;
+    // var selectedRows = JSON.parse(options.contact);
+    // 以下3行仅供调试用，后期删除
+    var contactId = util.getStorageSync('contactId');
+    var contact = JSON.parse(util.getStorageSync('contact'));
+    var contactPerson = contact.defaultContactPerson || contact.personName
+    var selectedRows = JSON.parse(util.getStorageSync('selectedRows'));
+
+    this.getCartCondition(contactId, authorizedCookie, tradePartyId);
+    this.grouping(selectedRows);
+    this.setData({
+      partyName: partyName,
+      address: address,
+      tradePartyId: tradePartyId,
+      contactId: contactId,
+      contact: contact,
+      contactPerson: contactPerson
+    })
 
   },
-
-  bindDateChange: function (e) {
+  /*获取购物车条件*/
+  getCartCondition: function (contactId, authorizedCookie, tradePartyId){
+    wx.request({
+      url: `${authService}/saleOrder/saleOrderCondition?contactId=${contactId}`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'cookie': authorizedCookie
+      },
+      data: JSON.stringify({ tradePartyId: tradePartyId}),
+      success: (res) => {
+        console.log(res.data)
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        var json = res.data;
+        if (json.code == "S") {
+          this.setData({
+            payPointList: json.payPointList,
+            payMethodList: json.payMethodList,
+            saleOrderTypeList: json.saleOrderTypeList,
+            shipMethodList: json.shipMethodList,
+            shipRequireList: json.shipRequireList,
+            contactInfo: json.contactInfo,
+            unloadTimeRequirement: json.contactInfo ? json.contactInfo.uploadStr : "",
+            specialShipment: json.contactInfo ? json.contactInfo.specialShipment : "",
+            shipRequireCode: json.contactInfo ? json.contactInfo.shipRequireCode : "",
+            shipRequireMeaning: json.contactInfo ? json.contactInfo.shipRequireMeaning : "",
+            storeId: json.contactInfo ? json.contactInfo.storeId : "",
+            priceControlFlag: json.contactInfo ? json.customerInfo.priceControlFlag : "",
+            factorList: json.customerInfo ? json.customerInfo.factorList : '',
+          })
+          json.customerInfo.factorList.map((item) => {
+            if (item.factorCode == "CREDIT") {
+              this.setData({
+                factorCodeCREDIT: item.factorCodeValue
+              })
+            } else {
+              this.setData({
+                factorCodeIOUS: item.factorCodeValue
+              })
+            }
+          })
+          json.payPointList.map((item) => {
+            if (item.defaultFlag == "Y") {
+              this.setData({
+                payPointListChoose: item.value,
+                payPointListChooseName: item.meaning,
+                payPointListChooseTag: item.tag,
+              }, this.getCartConditionCallback1(json.payMethodList))
+            }
+          })
+          
+          json.shipMethodList.map((item) => {
+            if (item.defaultFlag == "Y") {
+              this.setData({
+                shipMethodListChoose: item.value,
+                shipMethodListChooseName: item.meaning,
+              })
+            }
+          })
+        } else {
+          wx.showToast({
+            title: json.msg,
+            icon: 'none',
+            duration: 1000
+          })
+         
+        }
+      }
+    })
+  },
+  // getCartCondition回调处理函数1
+  getCartConditionCallback1: function (payMethodList){
+    payMethodList.map((item) => {
+      if (item.defaultFlag == "Y") {
+        this.setData({
+          payMethodListChoose: item.value,
+          payMethodListChooseName: item.meaning,
+        }, () => {
+          if (this.data.priceControlFlag != "Y") {
+            if (this.data.payPointListChooseTag == "CREDIT" && this.data.payMethodListChoose == "IOUS") {
+              this.setData({
+                payMethodListChoose: "",
+                payMethodListChooseName: "",
+              })
+            }
+          }
+        })
+      }
+    })
+  },
+  grouping: function(arr) {
+    // 以下代码对数据按商品名称分组
+    let obj = {},
+      tableSource = [],
+      folders = [];
+    arr.map((item) => {
+      item.itemChangableAttributes.map((it) => {
+        if (it["attributeName"] == '幅宽mm') {
+          this.setData({
+            code: it["attributeCode"]
+          })
+        } else {
+          this.setData({
+            cutLength: it["attributeCode"]
+          })
+        }
+      })
+      if (obj.hasOwnProperty(item.itemName)) {
+        obj[item.itemName].push(item)
+      } else {
+        obj[item.itemName] = [];
+        obj[item.itemName].push(item);
+      }
+    })
+    Object.keys(obj).map(function(key) {
+      folders.push({
+        fold: true
+      })
+      tableSource.push([{
+        'itemName': key,
+      }, obj[key]])
+    })
+    console.log(tableSource)
+    this.countSelected(tableSource)
+    this.setData({
+      tableSource: tableSource,
+      folders: folders
+    })
+  },
+  // 计算被选中的商品
+  countSelected: function (tableSource) {
+    var selectedRows = [];
+    var allA = 0,
+      allT = 0;
+    tableSource.map(function (item, index) {
+      item[1].map(function (it, i) {
+        selectedRows.push(it);
+      })
+    })
+    selectedRows.map(function (it, i) {
+      allA += Number(it.amount);
+      allT += Number(it.baseOrderQuantity);
+    })
+    allT = allT.toFixed(3) //吨数保留三位小数
+    this.setData({
+      selectedRows: selectedRows,
+      allA: allA,
+      allT: allT
+    })
+  },
+// 订单类型改变触发
+  saleOrderTypeListChange:function(e){
+    this.setData({ startDataString: "", endDataString: "" })
+    this.data.payPointList.map((item) => {
+      if (item.defaultFlag == "Y") {
+        this.setData({
+          payPointListChoose: item.value,
+          payPointListChooseName: item.meaning,
+          payPointListChooseTag: item.tag,
+        })
+      }
+    })
+    this.data.payMethodList.map((item) => {
+      if (item.defaultFlag == "Y") {
+        this.setData({
+          payMethodListChoose: item.value,
+          payMethodListChooseName: item.meaning,
+        }, () => {
+          if (this.data.priceControlFlag != "Y") {
+            if (this.data.payPointListChooseTag == "CREDIT" && this.data.payMethodListChoose == "IOUS") {
+              this.setData({
+                payMethodListChoose: "",
+                payMethodListChooseName: "",
+              })
+            }
+          }
+        })
+      }
+    })
+    this.data.shipMethodList.map((item) => {
+      if (item.defaultFlag == "Y") {
+        this.setData({
+          shipMethodListChoose: item.value,
+          shipMethodListChooseName: item.meaning,
+        })
+      }
+    })
+    this.setData({
+      saleOrderTypeListChoose:e.detail.value
+    })
+  },
+  // 删除一个商品
+  onChangeDelete:function(e){
+    var outIndex = e.currentTarget.dataset.outindex;
+    var innerIndex = e.currentTarget.dataset.index;
+    this.data.tableSource.map((item,index)=>{
+      if(outIndex == index){
+        if(item[1].length == 1){
+          this.data.tableSource.splice(index,1)
+        }else{
+          item[1].map((it,i)=>{
+            if(innerIndex == i){
+              item[1].splice(i,1)
+            }
+          })
+        }
+      }
+    })
+    this.countSelected(this.data.tableSource)
+    this.setData({
+      tableSource: this.data.tableSource
+    })
+  },
+  bindDateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
   },
-  // 点击小图标商品列表显示和隐藏
-  iconTap: function(event) {
-    var that = this;
-    that.setData({
-      showHide: (!that.data.showHide)
+  // 折叠或展开一类商品列表
+  doFold: function(e) {
+    var index = e.currentTarget.dataset.index;
+    this.data.folders.map(function(it, i) {
+      i == index ? it.fold = !it.fold : ""
+    })
+    this.setData({
+      folders: this.data.folders
     })
   },
 
-// 点击跳转到确认信息页面
+  // 点击跳转到确认信息页面
   succeedTap: function(e) {
     wx.navigateTo({
       url: '/pages/affirm/affirm',
     })
   },
-// 点击取消返回
+  // 点击取消返回
   returnFor: function(e) {
     wx.navigateBack({
-      delta:1
+      delta: 1
     });
   },
 

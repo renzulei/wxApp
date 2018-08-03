@@ -304,10 +304,6 @@ Page({
     var physicalStateCode = this.data.physicalStateCode;
     var items = JSON.stringify(this.data.items);
     var changeableAttrs = JSON.stringify(this.data.changeableAttrs);
-    // 以下三行仅供调试，避免保存代码总是要跳转
-    util.setStorageSync('physicalStateCode', physicalStateCode);
-    util.setStorageSync('items', items);
-    util.setStorageSync('changeableAttrs', changeableAttrs);
     if (items) {
       wx.navigateTo({
         url: `/pages/specification/specification?physicalStateCode=${physicalStateCode}&items=${items}&changeableAttrs=${changeableAttrs}`,
