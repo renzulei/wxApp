@@ -11,10 +11,10 @@ Page({
    */
   data: {
     checked: true,
-    allA:0, //总金额
-    allT:0, //总吨数
-    selectedRows:[], //待提交的表格数据
-    saleOrderTypeListChoose:'STD' //默认选择的是标准订单（STD）
+    allA: 0, //总金额
+    allT: 0, //总吨数
+    selectedRows: [], //待提交的表格数据
+    saleOrderTypeListChoose: 'STD' //默认选择的是标准订单（STD）
   },
 
   /**
@@ -29,6 +29,7 @@ Page({
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
     var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
     var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
+    var currencyCode = userDefaultTradeCompany ? userDefaultTradeCompany.currencyCode : "";
     // var contactId = options.contactId;
     // var contact = options.defaultContactPerson;
     // var selectedRows = JSON.parse(options.contact);
@@ -44,6 +45,7 @@ Page({
       partyName: partyName,
       address: address,
       tradePartyId: tradePartyId,
+      currencyCode: currencyCode,
       contactId: contactId,
       contact: contact,
       contactPerson: contactPerson
@@ -51,7 +53,7 @@ Page({
 
   },
   /*获取购物车条件*/
-  getCartCondition: function (contactId, authorizedCookie, tradePartyId){
+  getCartCondition: function(contactId, authorizedCookie, tradePartyId) {
     wx.request({
       url: `${authService}/saleOrder/saleOrderCondition?contactId=${contactId}`,
       method: 'POST',
@@ -59,7 +61,9 @@ Page({
         'Content-Type': 'application/json',
         'cookie': authorizedCookie
       },
-      data: JSON.stringify({ tradePartyId: tradePartyId}),
+      data: JSON.stringify({
+        tradePartyId: tradePartyId
+      }),
       success: (res) => {
         console.log(res.data)
         try {
@@ -102,16 +106,33 @@ Page({
                 payPointListChoose: item.value,
                 payPointListChooseName: item.meaning,
                 payPointListChooseTag: item.tag,
-              }, this.getCartConditionCallback1(json.payMethodList))
+              }, this.initPayPointListArr)
             }
           })
-          
+          json.payMethodList.map((item) => {
+            if (item.defaultFlag == "Y") {
+              this.setData({
+                payMethodListChoose: item.value,
+                payMethodListChooseName: item.meaning,
+              }, () => {
+                this.initPayMethodListArr();
+                if (this.data.priceControlFlag != "Y") {
+                  if (this.data.payPointListChooseTag == "CREDIT" && this.data.payMethodListChoose == "IOUS") {
+                    this.setData({
+                      payMethodListChoose: "",
+                      payMethodListChooseName: "",
+                    })
+                  }
+                }
+              })
+            }
+          })
           json.shipMethodList.map((item) => {
             if (item.defaultFlag == "Y") {
               this.setData({
                 shipMethodListChoose: item.value,
                 shipMethodListChooseName: item.meaning,
-              })
+              }, this.getItemSalePrice(this.data.payPointListChoose, this.data.payMethodListChoose, this.data.shipMethodListChoose))
             }
           })
         } else {
@@ -120,31 +141,12 @@ Page({
             icon: 'none',
             duration: 1000
           })
-         
+
         }
       }
     })
   },
-  // getCartCondition回调处理函数1
-  getCartConditionCallback1: function (payMethodList){
-    payMethodList.map((item) => {
-      if (item.defaultFlag == "Y") {
-        this.setData({
-          payMethodListChoose: item.value,
-          payMethodListChooseName: item.meaning,
-        }, () => {
-          if (this.data.priceControlFlag != "Y") {
-            if (this.data.payPointListChooseTag == "CREDIT" && this.data.payMethodListChoose == "IOUS") {
-              this.setData({
-                payMethodListChoose: "",
-                payMethodListChooseName: "",
-              })
-            }
-          }
-        })
-      }
-    })
-  },
+
   grouping: function(arr) {
     // 以下代码对数据按商品名称分组
     let obj = {},
@@ -185,16 +187,16 @@ Page({
     })
   },
   // 计算被选中的商品
-  countSelected: function (tableSource) {
+  countSelected: function(tableSource) {
     var selectedRows = [];
     var allA = 0,
       allT = 0;
-    tableSource.map(function (item, index) {
-      item[1].map(function (it, i) {
+    tableSource.map(function(item, index) {
+      item[1].map(function(it, i) {
         selectedRows.push(it);
       })
     })
-    selectedRows.map(function (it, i) {
+    selectedRows.map(function(it, i) {
       allA += Number(it.amount);
       allT += Number(it.baseOrderQuantity);
     })
@@ -205,9 +207,12 @@ Page({
       allT: allT
     })
   },
-// 订单类型改变触发
-  saleOrderTypeListChange:function(e){
-    this.setData({ startDataString: "", endDataString: "" })
+  // 订单类型改变触发
+  saleOrderTypeListChange: function(e) {
+    this.setData({
+      startDataString: "",
+      endDataString: ""
+    })
     this.data.payPointList.map((item) => {
       if (item.defaultFlag == "Y") {
         this.setData({
@@ -242,22 +247,217 @@ Page({
         })
       }
     })
+    let arr = []
+    arr = e.detail.value.split(":");
+    // console.log(arr)
     this.setData({
-      saleOrderTypeListChoose:e.detail.value
+      saleOrderTypeListChoose: arr[0],
+      saleOrderTypeListChooseName:arr[1]
+    },this.initPayPointListArr)
+  },
+  // 计算可展示的支付节点
+  initPayPointListArr:function(){
+    let arrList = [];
+    if (this.data.saleOrderTypeListChoose != "INTE") {
+      if (this.data.priceControlFlag == "Y") {
+        if (this.data.payPointList)
+          this.data.payPointList.map((item) => {
+            if (item.value == "YXYF") {
+              arrList.push(item)
+            } else if (item.defaultFlag == "Y") {
+              arrList.push(item)
+            }
+          })
+      } else {
+        if (this.data.payPointList)
+          this.data.payPointList.map((item) => {
+            if (item.value != "YXYF") {
+              arrList.push(item)
+            }
+          })
+      }
+    } else {
+      if (this.data.priceControlFlag == "Y") {
+        if (this.data.payPointList)
+          this.data.payPointList.map((item) => {
+            if (item.value == "YXYF") {
+              arrList.push(item)
+            } else if (item.defaultFlag == "Y") {
+              arrList.push(item)
+            }
+          })
+      } else {
+        if (this.data.payPointList)
+          this.data.payPointList.map((item) => {
+            arrList.push(item)
+          })
+      }
+    }
+    this.setData({
+      PayPointListArr: arrList
     })
   },
+  
+  // 支付节点改变触发
+  payPointListChange: function(e) {
+    let arr = []
+    arr = e.detail.value.split(":");
+    // console.log(arr)
+    this.data.payMethodList.map((item) => {
+      if (item.defaultFlag == "Y") {
+        this.setData({
+          payMethodListChoose: item.value,
+          payMethodListChooseName: item.meaning,
+        }, () => {
+          if (this.data.priceControlFlag != "Y") {
+            if (this.data.payPointListChooseTag == "CREDIT" && this.data.payMethodListChoose == "IOUS") {
+              this.setData({
+                payMethodListChoose: "",
+                payMethodListChooseName: "",
+              })
+            }
+          }
+        })
+      }
+      if (arr[0] == "ZDHK") {
+        this.setData({
+          payMethodListChoose: "CREDIT"
+        })
+      }
+    })
+    this.data.shipMethodList.map((item) => {
+      if (item.defaultFlag == "Y") {
+        this.setData({
+          shipMethodListChoose: item.value,
+          shipMethodListChooseName: item.meaning,
+        })
+      }
+    })
+    this.setData({
+      payPointListChoose: arr[0],
+      payPointListChooseTag: arr[1],
+      payPointListChooseName: arr[2],
+    }, this.initPayMethodListArr);
+    this.getItemSalePrice(arr[0], this.data.payMethodListChoose, this.data.shipMethodListChoose)
+  },
+  // 价格查询
+  getItemSalePrice: function (payPointCode, payMethodCode, recMethodCode){
+    if (util.getStorageSync('userName')) {
+      //获取价格
+      this.data.tableSource.map((item, index) => {
+        item[1].map((it, i) => {
+          wx.request({
+            url: `${authService}/price/getItemSalePrice`,
+            method: 'POST',
+            header: {
+              'Content-Type': 'application/json',
+              'cookie': this.data.authorizedCookie
+            },
+            data: JSON.stringify({
+              itemId: it.itemId,
+              payPointCode: payPointCode,
+              payMethodCode: payMethodCode,
+              currencyCode: this.data.currencyCode,
+              contactId: this.data.contactId,
+              storeId: this.data.storeId,
+              recMethodCode: this.data.shipMethodListChoose,
+              tradePartyId: this.data.tradePartyId,
+            }),
+            success: (res) => {
+              // console.log(it.itemName,res.data)
+              try {
+                util.catchHttpError(res);
+              } catch (e) {
+                console.error(e)
+                return
+              }
+              var json = res.data;
+              if (json.code == "S") {
+                it.unitPrice = json.msg || "";
+                it.orderPrice = json.msg || "";
+                it.amount = (it.unitPrice * it.baseOrderQuantity).toFixed(2) || "";
+              } else {
+                wx.showToast({
+                  title: json.msg,
+                  icon: "none",
+                  duration: 1000
+                })
+              }
+              if (index == this.data.tableSource.length - 1) {
+                if (i == item[1].length - 1) {//最后一个循环
+                  this.countSelected(this.data.tableSource)
+                  this.setData({
+                    tableSource: this.data.tableSource
+                  })
+                }
+              }
+            }
+          })
+        })
+      })
+
+    } else {
+      wx.redirectTo({
+        url: '/pages/login/login',
+      })
+    }
+  },
+  // 计算可展示的支付方式
+  initPayMethodListArr: function () {
+    let payPoint = [];
+    if (this.data.payPointListChooseTag == "REPAYMENT") {
+      this.data.payMethodList.map((item, i) => {
+        if (item.value == 'CREDIT') {
+          payPoint.push(item);
+        }
+      })
+
+    } else {
+      this.data.payMethodList.map((item, i) => {
+        if (item.value != 'CREDIT') {
+          payPoint.push(item)
+        }
+      })
+      if (this.data.payPointListChooseTag == "CREDIT") {
+        payPoint.map((item, i) => {
+          if (item.value == 'IOUS') {
+            payPoint.splice(i, 1)
+          }
+        })
+      }
+    }
+
+    if (this.data.priceControlFlag == "Y"){
+      payPoint = payPoint.filter((item,i)=>{
+          return item.defaultFlag == "Y"
+      })
+    }
+    this.setData({
+      payMethodListArr: payPoint
+    })
+  },
+  // 支付方式改变触发
+  payMethodListChange:function(e){
+    let arr = [];
+    arr = e.detail.value.split(":");
+    this.setData({
+      payMethodListChoose: arr[0],
+      payMethodListChooseName: arr[1],
+    });
+    this.getItemSalePrice(this.data.payPointListChoose, arr[0],this.data.shipMethodListChoose);
+  },
   // 删除一个商品
-  onChangeDelete:function(e){
+  onChangeDelete: function(e) {
     var outIndex = e.currentTarget.dataset.outindex;
     var innerIndex = e.currentTarget.dataset.index;
-    this.data.tableSource.map((item,index)=>{
-      if(outIndex == index){
-        if(item[1].length == 1){
-          this.data.tableSource.splice(index,1)
-        }else{
-          item[1].map((it,i)=>{
-            if(innerIndex == i){
-              item[1].splice(i,1)
+    this.data.tableSource.map((item, index) => {
+      if (outIndex == index) {
+        if (item[1].length == 1) {
+          this.data.tableSource.splice(index, 1)
+        } else {
+          item[1].map((it, i) => {
+            if (innerIndex == i) {
+              item[1].splice(i, 1)
             }
           })
         }
@@ -268,10 +468,26 @@ Page({
       tableSource: this.data.tableSource
     })
   },
-  bindDateChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  // 送货方式改变触发
+  shipMethodListChange: function (e) {
+    let arr = [];
+    arr = e.detail.value.split(":");
     this.setData({
-      date: e.detail.value
+      shipMethodListChoose: arr[0],
+      shipMethodListChooseName: arr[1],
+    })
+    this.getItemSalePrice(this.data.payPointListChoose, this.data.payMethodListChoose, arr[0]);
+  },
+  // 结束时间
+  onEndChange: function(e) {
+    this.setData({
+      endDataString: e.detail.value
+    })
+  },
+  // 开始时间/到货时间
+  onStartChange:function(e){
+    this.setData({
+      startDataString: e.detail.value
     })
   },
   // 折叠或展开一类商品列表

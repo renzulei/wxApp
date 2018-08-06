@@ -129,6 +129,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 999;
 }
 
 .footer_top {
@@ -208,7 +209,9 @@
 .left_size {
   font-size: 24rpx;
 }
-
+.size14{
+  font-size: 28rpx;
+}
 .header_icon {
   width: 36rpx;
   height: 36rpx;
@@ -291,14 +294,19 @@
   width: 100%;
   padding: 30rpx 20rpx 30rpx 20rpx;
 }
-
+.thin{
+  font-weight: normal;
+  color: #666;
+  margin-left: 20rpx;
+}
 .type {
   line-height: 48rpx;
   font-size: 22rpx;
   font-weight: bold;
   color: #4f4f4f;
-  margin-bottom: 40rpx;
+  margin-bottom: 30rpx;
   position: relative;
+  margin-top: 10rpx;
 }
 
 .order_icon, .intention {
@@ -317,10 +325,10 @@
 }
 
 .order_hint {
-  margin-top: 20rpx;
+  margin-top: 10rpx;
   font-size: 20rpx;
   color: #4f4f4f;
-  margin-bottom: 40rpx;
+  line-height: 40rpx;
 }
 
 .hint_color {
@@ -357,6 +365,8 @@
   line-height: 66rpx;
   padding: 0 20rpx;
   position: relative;
+  display: inline-block;
+  margin-left: 20rpx;
 }
 
 /* 箭头样式 */
