@@ -9,7 +9,8 @@ Page({
     region: ["1", "2", "3", "4", "5"],
     data: '',
     value: '',
-    checked: true
+    checked: true,
+    info: []
   },
 
 
@@ -38,12 +39,34 @@ Page({
     })
   },
 
-  bindPickerChange: function(e) {
-    var that = this;
-    var value = e.detail.value;
-    that.setData({
-      value: e.detail.value,
+  saveTap: function(e) {
+    var info = this.data.data;
+    console.log(e);
+    wx.navigateTo({
+      url: '/pages/take/take'
     })
+  },
+
+  btnTap: function(e) {
+    var info = this.data.info;
+    console.log(info);
+    wx.navigateTo({
+      url: '/pages/take/take?name=' + JSON.stringify(info),
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+
+  formSubmit: function(e) {
+    var that = this;
+    // console.log(e.detail)
+    var info = this.data.info;
+    info = e.detail.value;
+    that.setData({
+      info: info
+    })
+    // console.log(info);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

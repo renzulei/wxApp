@@ -3,36 +3,35 @@
   <view class='content'>
 
     <!-- list 区域========================================================== -->
-    <form bindsubmit='formSubmit'>
+    <form bindsubmit="formSubmit">
       <view class='list'>
         <text class='left'>所在地区:</text>
         <view class="section">
           <picker mode="region" bindchange="bindRegionChange" value="{{ region }}" custom-item="{{ customItem }}">
             <view class="picker">
-              <input class='picker_input' placeholder='请填写您的所在地址' value='{{ data }}'></input>
+              <input class='picker_input' placeholder='请填写您的所在地址' value='{{ data }}' name="addr"></input>
               <view class='icon'></view>
             </view>
           </picker>
         </view>
       </view>
-
       <view class='list'>
         <text class='left'>详细地址:</text>
-        <input class='input' placeholder='请填写您所在的详细地址'></input>
+        <input class='input' placeholder='请填写您所在的详细地址' name="site"></input>
       </view>
       <view class='list'>
         <text class='left'>邮政编码:</text>
-        <input class='input' placeholder='请填写所在地区的邮政编码'></input>
+        <input class='input' placeholder='请填写所在地区的邮政编码' name="postcode"></input>
       </view>
       <view class='list'>
         <text class='left'>手机号码:</text>
-        <input class='input' placeholder='请填写您的手机号码'></input>
+        <input class='input' placeholder='请填写您的手机号码' name="phone"></input>
       </view>
       <view class='list'>
         <text class='left'>电话号码:</text>
-        <input class='input' placeholder='请填写您的电话号码(选填)'></input>
+        <input class='input' placeholder='请填写您的电话号码(选填)' name="dian_hua"></input>
       </view>
-      <!-- <button class="btn_login" formType="submit">保存地址</button> -->
+      <button class="btn_login" formType="submit" bindtap='btnTap'>保存地址</button>
     </form>
     <!-- footer 区域============================================================== -->
     <view class="footer">
@@ -48,14 +47,12 @@
         </view>
         设置为默认收货地址
       </label>
-      <!-- <text class='footer_text'>设置为默认收货地址</text> -->
     </view>
 
-    <view class="section">
-      <picker bindchange="bindPickerChange" value="{{ index }}" range="{{ region }}">
-        <view class='save'>
-          <text>保存地址</text>{{ region[index] }}</view>
-      </picker>
-    </view>
+    <!-- <view class="section">
+      <view class='save' bindtap='saveTap'>
+        <text>保存地址</text>
+      </view>
+    </view> -->
   </view>
 </view>

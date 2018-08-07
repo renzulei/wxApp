@@ -28,13 +28,9 @@
       <view class='type'>
         <text class='size align'>订单类型：</text>
         <radio-group class="radio-group" bindchange="saleOrderTypeListChange">
-          <label 
-            class="radio" 
-            wx:for="{{saleOrderTypeList}}"
-            wx:key="{{item.value}}"
-          >
+          <label class="radio" wx:for="{{saleOrderTypeList}}" wx:key="{{item.value}}">
             <view class='radio-wrap {{item.value == saleOrderTypeListChoose?"radio-checked":""}}'>
-              <radio value='{{item.value}}'/>
+              <radio value='{{item.value+":"+item.meaning}}' name='{{item.meaning}}'/>
               <view class='radio-inner'></view>
             </view>
             {{item.meaning}}
@@ -53,141 +49,90 @@
 
       <view class='type'>
         <text class='size align'>支付节点：</text>
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap radio-checked'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-          <text class=''>下单预付</text>
-        </view>
-
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-          <text>发货前预付</text>
-        </view>
-
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-          <text>赊销</text>
-        </view>
-        <view class='word_size'>
-          <text class='account'>赊销：</text>
-          <text>根据约定好的账期进行付款</text>
-        </view>
-      </view>
-
-
-      <view class='type'>
-        <text class='size align'>账期选择：</text>
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap radio-checked'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-          <text>30</text>
-        </view>
-
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-          <text>60</text>
-        </view>
-
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-        </view>
-        <text>120</text>
+        <text wx:if="{{priceControlFlag=='Y'}}">{{payPointListChooseName}}</text>
+        <radio-group wx:else class="radio-group" bindchange="payPointListChange">
+          <label class="radio" wx:for="{{PayPointListArr}}" wx:key="{{item.value}}">
+            <view class='radio-wrap {{item.value == payPointListChoose?"radio-checked":""}}'>
+              <radio value='{{item.value+":"+item.tag+":"+item.meaning}}' />
+              <view class='radio-inner'></view>
+            </view>
+            {{item.meaning}}
+            <text class='thin'>{{item.meaning=='下单预付'?'订单生效后立即进行付款':
+                      item.meaning=='发货预付'?'发货前48小时进行付款':
+                      item.meaning=='赊销'?'根据约定好的账期进行付款':
+                      item.meaning=='开票后30天'?'开票后30天到期付款':
+                      item.meaning=='意向订单预付'?'意向订单生效后立即进行付款':''}}</text>
+          </label>
+        </radio-group>
       </view>
 
       <view class='type'>
         <text class='size align'>支付方式：</text>
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap radio-checked'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-
-          <text>现金支付</text>
-        </view>
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-
-          <text>白条支付</text>
-        </view>
-        <view class='lable_box'>
-          <view class='order_icon'>
-            <label class="radio">
-              <view class='radio-wrap'>
-                <radio checked="{{checked}}" />
-                <view class='radio-inner'></view>
-              </view>
-            </label>
-          </view>
-          <text>票据支付</text>
-        </view>
-
-        <view class='word_size'>
-          <text class='size_color'>现金支付：</text>总金额
-          <text class='size_color'>21.400</text>(包含此支付方式对总金额的影响
-          <text class='size_color'>+0</text>元)</view>
-      </view>
-
-      <view class='title'>到货时间：</view>
-      <view class='select'>
-        <view class="section">
-          <picker mode="date" value="{{date}}" start="2015-09-01" end="2030-09-01" bindchange="bindDateChange">
-            <view class="picker">
-              <input class='date_input' value="{{date}}" placeholder='请选择到货日期'></input>
-              <view class='arrows'></view>
+        <radio-group class="radio-group" bindchange="payMethodListChange">
+          <label class="radio" wx:for="{{payMethodListArr}}" wx:key="{{item.value}}">
+            <view class='radio-wrap {{item.value == payMethodListChoose?"radio-checked":""}}'>
+              <radio value='{{item.value+":"+item.meaning}}' name='{{item.meaning}}'/>
+              <view class='radio-inner'></view>
             </view>
-          </picker>
+            {{item.meaning}}
+          </label>
+        </radio-group>
+      </view>
+      <view class='type' wx:if="{{payMethodListChoose == 'IOUS'}}">
+        <text class='size align'>保理公司：</text>
+        <text class='size14'>{{factorCodeIOUS}}</text>
+      </view>
+      <view class='type' wx:elif="{{payMethodListChoose == 'CREDIT'}}">
+        <text class='size align'>保理公司：</text>
+        <text class='size14'>{{factorCodeCREDIT}}</text>
+      </view>
+      <view class='title'>到货时间：</view>
+      <view wx:if="{{saleOrderTypeListChoose == 'INTE'}}">
+        <view class='select'>
+          <view class="section">
+            <picker mode="date" value="{{startDataString}}" start="2015-09-01" end="2030-09-01" bindchange="onStartChange">
+              <view class="picker">
+                <input class='date_input' value="{{startDataString}}" placeholder='起始时间'></input>
+                <view class='arrows'></view>
+              </view>
+            </picker>
+          </view>
         </view>
+        <view class='select'>
+          <view class="section">
+            <picker mode="date" value="{{endDataString}}" start="2015-09-01" end="2030-09-01" bindchange="onEndChange">
+              <view class="picker">
+                <input class='date_input' value="{{endDataString}}" placeholder='结束时间'></input>
+                <view class='arrows'></view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view wx:else>
+        <view class='select'>
+          <view class="section">
+            <picker mode="date" value="{{startDataString}}" start="2015-09-01" end="2030-09-01" bindchange="onStartChange">
+              <view class="picker">
+                <input class='date_input' value="{{startDataString}}" placeholder='请选择到货时间'></input>
+                <view class='arrows'></view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class='type'>
+        <text class='size align'>送货方式：</text>
+        <text wx:if="{{priceControlFlag=='Y'}}">{{shipMethodListChooseName}}</text>
+        <radio-group wx:else class="radio-group" bindchange="shipMethodListChange">
+          <label class="radio" wx:for="{{shipMethodList}}" wx:key="{{item.value}}">
+            <view class='radio-wrap {{item.value == shipMethodListChoose?"radio-checked":""}}'>
+              <radio value='{{item.value+":"+item.meaning}}' name='{{item.meaning}}'/>
+              <view class='radio-inner'></view>
+            </view>
+            {{item.meaning}}
+          </label>
+        </radio-group>
       </view>
     </view>
 
@@ -219,16 +164,16 @@
                 <text class='right_color'>{{it[cutLength]}}</text>
               </view>
               <view class="box">
-                <text>件数（不含运费）：</text>
+                <text>件数：</text>
                 <text class='right_color'>{{it.orderQuantity||''}}</text>
               </view>
               <view class="box">
-                <text>吨说（吨）：</text>
+                <text>吨数（吨）：</text>
                 <text class='right_color'>{{it.baseOrderQuantity}}</text>
               </view>
             </view>
             <view class='table_bom clearfix'>
-              <text>单价：</text>
+              <text>单价{{shipMethodListChoose=='DELIVERY'?"[含运费]":"[不含运费]"}}：</text>
               <text class='right_color'>{{it.unitPrice}}</text>
               <text class='left'>金额：</text>
               <text class='right_color'>{{it.amount}}</text>
