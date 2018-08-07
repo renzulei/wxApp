@@ -1,4 +1,8 @@
 // pages/succeed/succeed.js
+var app = getApp();
+var cmService = app.globalData.cmService;
+var authService = app.globalData.authService;
+const util = require('../../utils/util.js');
 Page({
 
   /**
@@ -12,18 +16,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var saleOrderShow = JSON.parse(options.saleOrderShow);
+    // console.log(saleOrderShow)
+    this.setData({
+      saleOrderShow: saleOrderShow
+    })
   },
 
   // 点击跳转到产品列表页面
-  succeedTap: function(event) {
-    console.log(111)
+  succeedTap: function() {
     wx.switchTab({
       url: '/pages/proList/proList',
     })
   },
 
-  particularsTap: function(e) {
+  particularsTap: function() {
     wx.navigateTo({
       url: '/pages/particulars/particulars',
     })

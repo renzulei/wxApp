@@ -47,7 +47,7 @@
         <text>下单后开始备货，到货时间为预计时间段，按照根据意向订单后续下达的要货计划j进行到货。</text>
       </view>
 
-      <view class='type'>
+      <view class='type paypoint'>
         <text class='size align'>支付节点：</text>
         <text wx:if="{{priceControlFlag=='Y'}}">{{payPointListChooseName}}</text>
         <radio-group wx:else class="radio-group" bindchange="payPointListChange">
@@ -92,7 +92,7 @@
           <view class="section">
             <picker mode="date" value="{{startDataString}}" start="2015-09-01" end="2030-09-01" bindchange="onStartChange">
               <view class="picker">
-                <input class='date_input' value="{{startDataString}}" placeholder='起始时间'></input>
+                <view class='size14'>{{startDataString?startDataString:"起始时间"}}</view>
                 <view class='arrows'></view>
               </view>
             </picker>
@@ -102,7 +102,8 @@
           <view class="section">
             <picker mode="date" value="{{endDataString}}" start="2015-09-01" end="2030-09-01" bindchange="onEndChange">
               <view class="picker">
-                <input class='date_input' value="{{endDataString}}" placeholder='结束时间'></input>
+                <view class='size14'>{{endDataString?endDataString:"结束时间"}}</view>
+                
                 <view class='arrows'></view>
               </view>
             </picker>
@@ -114,7 +115,7 @@
           <view class="section">
             <picker mode="date" value="{{startDataString}}" start="2015-09-01" end="2030-09-01" bindchange="onStartChange">
               <view class="picker">
-                <input class='date_input' value="{{startDataString}}" placeholder='请选择到货时间'></input>
+                <view class='size14'>{{startDataString?startDataString:"请选择到货时间"}}</view>
                 <view class='arrows'></view>
               </view>
             </picker>
@@ -203,7 +204,7 @@
       <view class='bom_left' catchtap='returnFor'>
         <text>取消返回</text>
       </view>
-      <view class='bom_right' bindtap='succeedTap'>
+      <view class='bom_right' bindtap='submitData'>
         <text>确认信息</text>
       </view>
     </view>

@@ -5,8 +5,8 @@
     </view>
 
     <view class='text'>
-      恭喜您！订单创建成功!您的订单号为
-      <text class='color'>YCD0018652</text>
+      <view>恭喜您！订单创建成功!</view>
+      <view>您的订单号为<text class='color'>{{saleOrderShow[0].orderNumber}}</text></view>
       <view class='size'>请等待审核......</view>
     </view>
 
