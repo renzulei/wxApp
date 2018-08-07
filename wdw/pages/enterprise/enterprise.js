@@ -12,7 +12,7 @@ Page({
    */
   data: {
     list: [],
-    showHide: true,
+    showHide: true, 
   },
 
   /**
@@ -73,6 +73,12 @@ Page({
       })
     },
 
+  examineTap1: function() {
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide)
+    })
+  },
 
   /** 
    * 生命周期函数--监听页面初次渲染完成

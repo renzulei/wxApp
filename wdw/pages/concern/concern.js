@@ -61,14 +61,13 @@ Page({
         console.log(add);
         that.setData({
           data: add
-        })
+        })  
       }
-    })
+    })  
   },
   //点击删除功能
   delTap: function(e) {
     var that = this;
-    console.log(e);
     var index = e.currentTarget.dataset.index;
     if (that.data.data.length > 1) {
       var info = [...this.data.data];
