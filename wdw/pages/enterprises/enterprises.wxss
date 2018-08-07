@@ -115,6 +115,8 @@ page {
   margin-left: 70rpx;
   top: 100rpx;
   z-index: 30;
+  text-align: center;
+  color: #f75959;
 }
 
 .show {

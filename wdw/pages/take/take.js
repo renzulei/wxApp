@@ -1,4 +1,4 @@
-// pages/take/take.js
+// pages/take/take.js 
 Page({
 
   /**
@@ -26,6 +26,7 @@ Page({
         addr: "育昌路369号，山东省潍坊市昌乐县"
       },
     ],
+    radio_checked: true
   },
 
   /**
@@ -48,8 +49,23 @@ Page({
       })
   },
 
-  delTap: function() {
-    console.log(111111)
+// 点击删除功能
+  delTap: function(e) {
+    // console.log(e);
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    console.log(index);
+    if(that.data.address.length > 1) {
+      var info = [...this.data.address];
+      info.splice(index,1);
+      this.setData({
+        address: info
+      })
+    }
+  },
+
+  selected: function(e) {
+    console.log(e);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

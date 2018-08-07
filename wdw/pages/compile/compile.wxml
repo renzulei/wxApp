@@ -7,9 +7,9 @@
       <view class='list'>
         <text class='left'>所在地区:</text>
         <view class="section">
-          <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+          <picker mode="region" bindchange="bindRegionChange" value="{{ region }}" custom-item="{{ customItem }}">
             <view class="picker">
-              <input class='picker_input' placeholder='请填写您的所在地址' value='{{index}}'></input>
+              <input class='picker_input' placeholder='请填写您的所在地址' value='{{ data }}'></input>
               <view class='icon'></view>
             </view>
           </picker>
@@ -52,12 +52,10 @@
     </view>
 
     <view class="section">
-      <picker bindchange="bindPickerChange" value="{{value}}" range="{{array}}">
-        <view class="picker">
-          <view class='save'>
-            <text>保存地址</text>{{array[value]}}</view>
-          </view>
+      <picker bindchange="bindPickerChange" value="{{ index }}" range="{{ region }}">
+        <view class='save'>
+          <text>保存地址</text>{{ region[index] }}</view>
       </picker>
-      </view>
     </view>
   </view>
+</view>

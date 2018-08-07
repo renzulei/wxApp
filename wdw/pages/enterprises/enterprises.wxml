@@ -5,7 +5,7 @@
     <view class='content_box' wx:for="{{ dataInfo }}" wx:key="{{ tradePartyId }}">
       <view class='list'>
         <text class='left'>所在地区:</text>
-        <input class='input' placeholder='{{ item.province }}'></input>
+        <input class='input' placeholder='{{ item.province }}'></input> 
       </view>
       <view class='list'>
         <text class='left'>详细地址:</text>
@@ -41,7 +41,8 @@
       </view>
       <view class='list'>
         <text class='left'>货物签收授权书:</text>
-        <text class='examine' bindtap='examineTap'>点击查看</text>
+        <text class='examine' bindtap='examineTap'>点击查看
+        </text>
       </view>
     </view>
 
@@ -58,5 +59,6 @@
 <!-- 模态框 -->
 <view class="meng_ceng {{ showHide?'hide':'show' }}" bindtap='cancelTap'></view>
 <view class="showHide {{ showHide?'hide':'show' }}">
-  <text>这是货物签收授权书</text>
+<text>惊不惊喜，意不意外</text>
+   <image src='/images/user.png'></image>
 </view>
