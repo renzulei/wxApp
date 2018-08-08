@@ -27,12 +27,12 @@ Page({
     })
     var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
-    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
     var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
     var currencyCode = userDefaultTradeCompany ? userDefaultTradeCompany.currencyCode : "";
     var contactId = options.contactId;
     var contact = JSON.parse(options.contact);
     var selectedRows = JSON.parse(options.selectedRows);
+    var address = contact.address;
     var contactPerson = contact.defaultContactPerson || contact.personName
     this.setData({
       partyName: partyName,

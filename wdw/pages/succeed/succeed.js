@@ -32,7 +32,7 @@ Page({
 
   particularsTap: function() {
     wx.navigateTo({
-      url: '/pages/particulars/particulars',
+      url: '/pages/manage/manage',
     })
   },
   /**
