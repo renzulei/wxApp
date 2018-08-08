@@ -1,14 +1,14 @@
 <view class="container">
   <view class='content'>
-    <view class='box clearfix' wx:for="{{ data }}" wx:key="{{ productId }}" wx:id="index">
-      <view class='box_title'>{{ item.productName }}</view>
+    <view class='box clearfix' wx:for="{{ data }}" wx:key="{{ resourceBillId }}" >
+      <view class='box_title'>{{ item.address }}</view>
       <view class='box_text'>
-        <text class='text'>{{ item.physicalStateName }}</text>
-        <text class='text'>{{ item.supperCategoryName }}</text>
-        <text class='text'>{{ item.itemCategoryName }}</text>  
+        <text class='text'>{{ item.categoryName }}</text>
+        <text class='text'>{{ item.categoryName }}</text>
+        <text class='text'>{{ item.categoryName }}</text>  
         <view class='del' data-index='index' bindtap='delTap'>删除</view>
       </view>
-      <view class='price'>{{ item.unitPrice }}</view>
+      <view class='price'>没这数据</view>
     <view class='shopping' bindtap='proListTap'>立即购买</view>
     </view>
   </view>

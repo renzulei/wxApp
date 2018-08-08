@@ -7,10 +7,10 @@ const util = require('../../utils/util.js');
 // pages/enterprise/enterprise.js
 Page({
 
-  /**
+  /** 
    * 页面的初始数据
    */
-  data: {
+  data: { 
     list: [],
     showHide: true, 
   },
@@ -30,7 +30,7 @@ Page({
   getData: function(e) {
     var that = this;
     wx.request({
-      url: `${authService}/certify/getCompanyCertify?tradeCompanyId=222`,
+      url: `${authService}/certify/getCompanyCertify?tradeCompanyId=${wx.getStorageSync('userDefaultTradeCompany') ? wx.getStorageSync('userDefaultTradeCompany').tradeCompanyId||'':''}`,
       data: {},
       method: 'POST',
       header: {

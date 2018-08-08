@@ -2,14 +2,14 @@
   <view class='content'>
 
     <!-- list 区域========================================================== -->
-    <view class='content_box' wx:for="{{ dataInfo }}" wx:key="{{ tradePartyId }}">
+    <view class='content_box' wx:for="{{ data }}" wx:key="{{ tradePartyId }}">
       <view class='list'>
         <text class='left'>所在地区:</text>
-        <input class='input' placeholder='{{ item.province }}'></input> 
+        <input class='input' placeholder='{{ item.province }}{{ item.city }}'></input> 
       </view>
       <view class='list'>
         <text class='left'>详细地址:</text>
-        <input class='input' placeholder='{{ item.province }}{{ item.county }}{{ item.shippingAddress }}'></input>
+        <input class='input' placeholder='{{ item.shippingAddress }}'></input>
       </view>
       <view class='list'>
         <text class='left'>收货人姓名:</text>
@@ -33,7 +33,7 @@
       </view>
       <view class='list'>
         <text class='left'>特殊装运:</text>
-        <input class='input' placeholder='无'></input>
+        <input class='input' placeholder='{{ item.specialShipment }}'></input>
       </view>
       <view class='list'>
         <text class='left'>卸货时间:</text>

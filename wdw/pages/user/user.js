@@ -12,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+   
   },
 
   /**
@@ -45,10 +45,8 @@ Page({
         }
 
         var json = JSON.parse(res.data);
-        var data = that.data.list;
-        data = json;
         var arr = [];
-        arr = JSON.parse(data.userInfo);
+        arr = JSON.parse(json.userInfo);
         var dataArr = [];
         dataArr.push(arr);
         that.setData({

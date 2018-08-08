@@ -21,11 +21,11 @@
   <view class='nav'>
     <view class='nav_bar'>
       <view>
-      <navigator hover-class='none' url='/pages/createOrder/createOrder'>
-        <view class='nav_icon'>
-          <image src='/images/gouwuche.png'></image>
-          <view>购物车</view>
-        </view>
+        <navigator hover-class='none' url='/pages/createOrder/createOrder'>
+          <view class='nav_icon'>
+            <image src='/images/gouwuche.png'></image>
+            <view>购物车</view>
+          </view>
         </navigator>
       </view>
       <view>
@@ -49,7 +49,7 @@
   <view class='border'></view>
   <view class='content'>
     <view class='content_text'>
-      <view class='list clearfix' bindtap='takeTap'>
+      <!-- <view class='list clearfix' bindtap='takeTap'>
         <view class='icon_left'>
           <image src='/images/shouhuo.png'></image>
         </view>
@@ -59,7 +59,7 @@
         <view class='icon_right'>
           <image src='/images/right.png'></image>
         </view>
-      </view>
+      </view> -->
 
 
       <view class='list clearfix' bindtap='concernTap'>

@@ -39,12 +39,6 @@ Page({
     })
   },
 
-  takeTap: function(event) {
-    wx.navigateTo({
-      url: '/pages/take/take',
-    })
-  },
-
   // 跳转到用户页面
   userTap: function(event) {
     wx.navigateTo({

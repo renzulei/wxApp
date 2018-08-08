@@ -10,11 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    data: [],
     box: true,
-    list: [], //表格数据
-    content: ''
-
+    pageSize: 10,//页面数据条数
+    current: 1,//起始页
   },
 
   /**
@@ -34,10 +32,14 @@ Page({
       url: '/pages/proList/proList',
     })
   },
-  getData: function(e) {
+  
+
+  getData: function (e) {
     var that = this;
+    var current = this.data.current;
+    var pageSize = this.data.pageSize;
     wx.request({
-      url: `${cmService}/product/getProductByCondition?page=1&pageSize=10&tradePartyId=215&contactId=248`,
+      url: `${authService}/resourceBill/queryMyFollowResBill?page=${ current }&pageSize=${ pageSize }`,
       data: {},
       method: 'POST',
       header: {
@@ -51,32 +53,33 @@ Page({
           console.error(e)
           return
         }
-        // 获取动态数据
-        var data = that.data.list;
-        data = res.data.content;
-        var add = [];
-        data.map(function(item) {
-          add.push(JSON.parse(item));
+        // 获取动态数据 
+        console.log(res.data);
+        var data = [];
+        data = res.data.content;  
+        data = data.map(function(item, i) {
+          return JSON.parse(item);
         })
-        console.log(add);
+        console.log(data);
         that.setData({
-          data: add
-        })  
+          data: data
+        })    
       }
-    })  
+
+    })
   },
   //点击删除功能
-  delTap: function(e) {
-    var that = this;
-    var index = e.currentTarget.dataset.index;
-    if (that.data.data.length > 1) {
-      var info = [...this.data.data];
-      info.splice(index, 1);
-      this.setData({
-        data: info
-      })
-    }
-  },
+  // delTap: function(e) {
+  //   var that = this;
+  //   var index = e.currentTarget.dataset.index;
+  //   if (that.data.data.length > 1) {
+  //     var info = [...this.data.data];
+  //     info.splice(index, 1);
+  //     this.setData({
+  //       data: info
+  //     })
+  //   }
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

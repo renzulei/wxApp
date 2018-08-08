@@ -11,8 +11,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: { 
-    list: [],
+  data: {
     showHide: true
   },
 
@@ -57,17 +56,20 @@ Page({
         // console.log(newArr);
 
         //  获取动态数据
-        var data = that.data.list;
+        console.log(res.data);
+        var data = [];
         data = res.data.content;
+        // console.log(data);
         var arr = [];
-        data.map(function(item) {
-          arr.push(JSON.parse(item));
+        data.map(function(item, i) {
+          arr.push(JSON.parse(item))
         })
-        var dataInfo = [];
-        dataInfo = arr.splice(0, 1);
-        console.log(dataInfo);
+        console.log(arr);
+        var newArr = [];
+        newArr = arr.slice(0,1)
+        console.log(newArr);
         that.setData({
-          dataInfo: dataInfo
+          data: newArr
         })
       },
     })
