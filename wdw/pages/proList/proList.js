@@ -65,6 +65,11 @@ Page({
     })
     this.searchContentList() //进入页面加载筛选数据
     this.searchBoxCont() //进入页面加载列表数据
+    if (!util.getStorageSync("userName")) {
+      wx.redirectTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面显示

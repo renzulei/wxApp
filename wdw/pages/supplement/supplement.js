@@ -27,20 +27,13 @@ Page({
     })
     var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
-    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
     var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
     var currencyCode = userDefaultTradeCompany ? userDefaultTradeCompany.currencyCode : "";
-    // var contactId = options.contactId;
-    // var contact = options.defaultContactPerson;
-    // var selectedRows = JSON.parse(options.contact);
-    // 以下3行仅供调试用，后期删除
-    var contactId = util.getStorageSync('contactId');
-    var contact = JSON.parse(util.getStorageSync('contact'));
+    var contactId = options.contactId;
+    var contact = JSON.parse(options.contact);
+    var selectedRows = JSON.parse(options.selectedRows);
+    var address = contact.address;
     var contactPerson = contact.defaultContactPerson || contact.personName
-    var selectedRows = JSON.parse(util.getStorageSync('selectedRows'));
-
-    this.getCartCondition(contactId, authorizedCookie, tradePartyId);
-    this.grouping(selectedRows);
     this.setData({
       partyName: partyName,
       address: address,
@@ -49,8 +42,8 @@ Page({
       contactId: contactId,
       contact: contact,
       contactPerson: contactPerson
-    })
-
+    }, this.grouping(selectedRows, contactId, authorizedCookie, tradePartyId))   
+    
   },
   /*获取购物车条件*/
   getCartCondition: function(contactId, authorizedCookie, tradePartyId) {
@@ -147,7 +140,7 @@ Page({
     })
   },
 
-  grouping: function(arr) {
+  grouping: function (arr, contactId, authorizedCookie, tradePartyId) {
     // 以下代码对数据按商品名称分组
     let obj = {},
       tableSource = [],
@@ -179,12 +172,12 @@ Page({
         'itemName': key,
       }, obj[key]])
     })
-    console.log(tableSource)
+    // console.log(tableSource)
     this.countSelected(tableSource)
     this.setData({
       tableSource: tableSource,
       folders: folders
-    })
+    }, this.getCartCondition(contactId, authorizedCookie, tradePartyId))
   },
   // 计算被选中的商品
   countSelected: function(tableSource) {
@@ -252,11 +245,11 @@ Page({
     // console.log(arr)
     this.setData({
       saleOrderTypeListChoose: arr[0],
-      saleOrderTypeListChooseName:arr[1]
-    },this.initPayPointListArr)
+      saleOrderTypeListChooseName: arr[1]
+    }, this.initPayPointListArr)
   },
   // 计算可展示的支付节点
-  initPayPointListArr:function(){
+  initPayPointListArr: function() {
     let arrList = [];
     if (this.data.saleOrderTypeListChoose != "INTE") {
       if (this.data.priceControlFlag == "Y") {
@@ -297,7 +290,7 @@ Page({
       PayPointListArr: arrList
     })
   },
-  
+
   // 支付节点改变触发
   payPointListChange: function(e) {
     let arr = []
@@ -341,7 +334,7 @@ Page({
     this.getItemSalePrice(arr[0], this.data.payMethodListChoose, this.data.shipMethodListChoose)
   },
   // 价格查询
-  getItemSalePrice: function (payPointCode, payMethodCode, recMethodCode){
+  getItemSalePrice: function(payPointCode, payMethodCode, recMethodCode) {
     if (util.getStorageSync('userName')) {
       //获取价格
       this.data.tableSource.map((item, index) => {
@@ -384,7 +377,7 @@ Page({
                 })
               }
               if (index == this.data.tableSource.length - 1) {
-                if (i == item[1].length - 1) {//最后一个循环
+                if (i == item[1].length - 1) { //最后一个循环
                   this.countSelected(this.data.tableSource)
                   this.setData({
                     tableSource: this.data.tableSource
@@ -403,7 +396,7 @@ Page({
     }
   },
   // 计算可展示的支付方式
-  initPayMethodListArr: function () {
+  initPayMethodListArr: function() {
     let payPoint = [];
     if (this.data.payPointListChooseTag == "REPAYMENT") {
       this.data.payMethodList.map((item, i) => {
@@ -427,9 +420,9 @@ Page({
       }
     }
 
-    if (this.data.priceControlFlag == "Y"){
-      payPoint = payPoint.filter((item,i)=>{
-          return item.defaultFlag == "Y"
+    if (this.data.priceControlFlag == "Y") {
+      payPoint = payPoint.filter((item, i) => {
+        return item.defaultFlag == "Y"
       })
     }
     this.setData({
@@ -437,14 +430,14 @@ Page({
     })
   },
   // 支付方式改变触发
-  payMethodListChange:function(e){
+  payMethodListChange: function(e) {
     let arr = [];
     arr = e.detail.value.split(":");
     this.setData({
       payMethodListChoose: arr[0],
       payMethodListChooseName: arr[1],
     });
-    this.getItemSalePrice(this.data.payPointListChoose, arr[0],this.data.shipMethodListChoose);
+    this.getItemSalePrice(this.data.payPointListChoose, arr[0], this.data.shipMethodListChoose);
   },
   // 删除一个商品
   onChangeDelete: function(e) {
@@ -469,7 +462,7 @@ Page({
     })
   },
   // 送货方式改变触发
-  shipMethodListChange: function (e) {
+  shipMethodListChange: function(e) {
     let arr = [];
     arr = e.detail.value.split(":");
     this.setData({
@@ -485,7 +478,7 @@ Page({
     })
   },
   // 开始时间/到货时间
-  onStartChange:function(e){
+  onStartChange: function(e) {
     this.setData({
       startDataString: e.detail.value
     })
@@ -500,12 +493,137 @@ Page({
       folders: this.data.folders
     })
   },
+  /*补充信息页面提交数据*/
+  submitData: function() {
+    let contactId, tradePartyId
+    if (util.getStorageSync('userName')) {
+      let data = [],
+        canClick = true
+      this.data.selectedRows.map((it, j) => {
+        contactId = it.contactId
+        tradePartyId = it.tradePartyId
+        it.specialRequirement = "", //特殊要求
+        it.inventItemId = it.inventId
+        it.orderPrice = it.unitPrice
+        it.itemChangableAttributes.map((its) => {
+          its.itemAttrValue = its.value
+        })
+        it.soItemAttributeList = it.itemChangableAttributes
+        if (!Number(it.amount)) {
+          canClick = false
+        }
+      })
+      data = [{
+        orderTypeCode: this.data.saleOrderTypeListChoose, //订单类型
+        payPointCode: this.data.payPointListChoose,//支付节点
+        custTradePartyId: tradePartyId, //交易主体
+        payMethodCode: this.data.payMethodListChoose, //支付方式
+        custContactId: contactId, //客户联系信息id
+        recMethodCode: this.data.shipMethodListChoose, //送货方式
+        unloadTimeRequirement: this.data.unloadTimeRequirement, //卸货时间要求
+        shipRequireCode: this.data.shipRequireCode, //装运要求
+        otherShipRequirement: this.data.specialShipment, //其他装运要求
+        saleOrderLine: this.data.selectedRows, //表格内容
+        deliveryDate: this.data.startDataString, //起始时间
+        deliveryDateTo: this.data.endDataString || '', //结束时间
+      }]
+      if (!this.data.payMethodListChoose) {
+        wx.showToast({
+          title: '支付方式不能为空！',
+          icon: 'none',
+          duration: 1000
+        })
+        return
+      }
+      if (!this.data.startDataString) {
+        wx.showToast({
+          title: '到货时间未填写完整',
+          icon: 'none',
+          duration: 1000
+        })
+        return
+      }
+      if (this.data.saleOrderTypeListChoose == "INTE") {
+        if (!this.data.endDataString) {
+          wx.showToast({
+            title: '到货时间未填写完整',
+            icon: 'none',
+            duration: 1000
+          })
+          return
+        }
+      }
+      if (canClick) {
+        wx.request({
+          url: `${authService}/saleOrder/submitShopCartToOrderCache?tradePartyId=${this.data.tradePartyId}`,
+          method: 'POST',
+          header: {
+            'Content-Type': 'application/json',
+            'cookie': this.data.authorizedCookie
+          },
+          data: JSON.stringify(data),
+          success:(res)=>{
+            try {
+              util.catchHttpError(res);
+            } catch (e) {
+              console.error(e)
+              return
+            }
+            var json = res.data;
+            if (json.code == "S") {
+              var prevData = this.prevData();
+              wx.navigateTo({
+                url: `/pages/affirm/affirm?prevData=${prevData}`,//跳转下一页，this.data携带本页面全部数据
+              })
+            } else {
+              wx.showToast({
+                title: json.msg,
+                icon: 'none',
+                duration: 1000
+              })
+              
+            }
+          }
+        })
+        
+      } else {
+        wx.showToast({
+          title: '金额不能为空',
+          icon: 'none',
+          duration: 1000
+        })
+      }
 
-  // 点击跳转到确认信息页面
-  succeedTap: function(e) {
-    wx.navigateTo({
-      url: '/pages/affirm/affirm',
-    })
+    } else {
+      wx.redirectTo({
+        url: '/pages/login/login',
+      })
+    }
+  },
+  // 传递到下个页面的数据
+  prevData:function(){
+    var prevData = {};
+    prevData.contactPerson=this.data.contactPerson;
+    prevData.contact=this.data.contact;
+    prevData.saleOrderTypeListChoose=this.data.saleOrderTypeListChoose;
+    prevData.payPointListChooseName=this.data.payPointListChooseName;
+    prevData.payMethodListChooseName=this.data.payMethodListChooseName;
+    prevData.payMethodListChoose=this.data.payMethodListChoose;
+    prevData.factorCodeIOUS=this.data.factorCodeIOUS;
+    prevData.payMethodListChoose=this.data.payMethodListChoose;
+    prevData.factorCodeCREDIT=this.data.factorCodeCREDIT;
+    prevData.startDataString=this.data.startDataString;
+    prevData.endDataString=this.data.endDataString;
+    prevData.tableSource=this.data.tableSource;
+    prevData.code=this.data.code;
+    prevData.cutLength=this.data.cutLength;
+    prevData.selectedRows=this.data.selectedRows;
+    prevData.allT=this.data.allT;
+    prevData.allA=this.data.allA;
+    prevData.shipMethodListChoose=this.data.shipMethodListChoose;
+    prevData.folders = this.data.folders;
+    
+    return JSON.stringify(prevData)
   },
   // 点击取消返回
   returnFor: function(e) {

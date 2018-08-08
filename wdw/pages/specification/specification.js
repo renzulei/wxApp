@@ -75,12 +75,6 @@ Page({
     })
   },
 
-  // 创建订单页面
-  shoppingTap: function() {
-    wx.navigateTo({
-      url: '/pages/createOrder/createOrder',
-    })
-  },
 
   //复制一行
   copyTap: function(e) {

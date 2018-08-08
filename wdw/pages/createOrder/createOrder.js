@@ -499,10 +499,6 @@ Page({
         var selectedRows = JSON.stringify(this.data.selectedRows);
         var contactId = this.data.contactId;
         var contact = JSON.stringify(this.data.contact);
-        // 以下两行仅供调试，后期删除
-        util.setStorageSync('selectedRows', selectedRows);
-        util.setStorageSync('contactId', contactId);
-        util.setStorageSync('contact', contact);
         wx.navigateTo({
           url: `/pages/supplement/supplement?selectedRows=${selectedRows}&contactId=${contactId}&contact=${contact}`,
         })

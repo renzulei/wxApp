@@ -4,200 +4,89 @@
     <view class='hint'>
       <view class='title1'>
         <text class='title_left'>您好！您当前的交易主体：</text>
-        <text class='title_right'>辽宁阳光天泽包装有限公司</text>
+        <text class='title_right'>{{partyName}}</text>
       </view>
       <view class='title2'>
         <text class='title_left'>收货人：</text>
-        <text class='title_right'>侯亮平</text>
+        <text class='title_right'>{{prevData.contactPerson}}</text>
         <text class='title_left relation'>联系方式：</text>
-        <text class='title_right'>15122176897</text>
+        <text class='title_right'>{{prevData.contact.telephone}}</text>
       </view>
       <view class='title3'>
         <text class='title_left'>收货地址：</text>
-        <text class='title_right'>育昌路369号 山东省潍坊市昌乐县</text>
+        <text class='title_right'>{{address}}</text>
       </view>
     </view>
     <!--订单类型  -->
     <view class='order'>
       <view class='type'>
         <text class='size_left'>订单类型：</text>
-        <text class='right_color'>标准订单</text>
+        <text class='right_color'>{{prevData.saleOrderTypeListChoose == "STD"?"标准订单":"意向订单"}}</text>
          <text class='size_right'>支付节点：</text>
-        <text class='right_color'>赊销</text>
+        <text class='right_color'>{{prevData.payPointListChooseName}}</text>
       </view>
      
       <view class='type'>
-        <text class='size_left'>账期选择：</text>
-        <text class='right_color'>120</text>
-         <text class='size_right right'>支付方式：</text>
-        <text class='right_color'>现金支付</text>
-      <view class='title'>到货时间：<text class='right_color'>2018-6-18</text></view>
+        <text class='size_left'>支付方式：</text>
+        <text class='right_color'>{{prevData.payMethodListChooseName}}</text>
+        <view class='inline-block' wx:if="{{prevData.payMethodListChoose == 'IOUS'}}">
+          <text class='size_right'>保理公司：</text>
+          <text class='right_color'>{{prevData.factorCodeIOUS}}</text>
+        </view>
+        <view class='inline-block' wx:if="{{prevData.payMethodListChoose == 'CREDIT'}}">
+          <text class='size_right'>保理公司：</text>
+          <text class='right_color'>{{prevData.factorCodeCREDIT}}</text>
+        </view>
       </view>
+      <view class='type'>
+          <text class='size_left'>到货时间：</text>
+          <text class='right_color'>{{prevData.startDataString}}{{prevData.endDataString?("至"+prevData.endDataString):""}}</text>
+        </view>
     </view>
 
     <!--商品列表区域  -->
-    <view class="bgc_header">
-      <view class='header'>
-        <view class='header_icon'>
-          <image src='/images/checked.png'></image>
-        </view>
-        <view class='header_top'>
-          <text class='left_color'>商品列表(4）</text>
-          <text>江苏富星A级单面涂布灰底白板纸......</text>
-        </view>
-        <view class='header_bom'>
-          <view class='icon' bindtap='iconTap'>
-            <image src='/images/xia.png'></image>
+    <view class='listContent'>
+      <view class='wrap' wx:for="{{prevData.tableSource}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+        <view class='header' data-index='{{index}}' bindtap='doFold'>
+          <view class='header_top'>
+            <text class='left_color'>商品列表({{item[1].length}}）</text>
+            <text>{{item[0].itemName}}</text>
           </view>
-          <text class='bom_text'>点击展开商品列表</text>
+          <view class='header_bom'>
+            <view class='icon'>
+              <image src='/images/xia.png'></image>
+            </view>
+            <text class='bom_text'>点击展开商品列表</text>
+          </view>
         </view>
-      </view>
-    </view>
-    <view class="div {{ showHide? 'show' : 'hide' }}"></view>
+        <!--需要显示隐藏的区域  -->
+        <view class="content_table {{prevData.folders[index].fold?'hide':''}}">
+          <view class="table" wx:for="{{item[1]}}" wx:for-item="it" wx:for-index="i" wx:key="{{i}}">
+            <view class="text clearfix">
+              <view class="box">
+                <text>幅宽mm：</text>
+                <text class='right_color'>{{it[prevData.code]}}</text>
+              </view>
+              <view class="box">
+                <text>切长mm：</text>
+                <text class='right_color'>{{it[prevData.cutLength]}}</text>
+              </view>
+              <view class="box">
+                <text>件数：</text>
+                <text class='right_color'>{{it.orderQuantity||''}}</text>
+              </view>
+              <view class="box">
+                <text>吨数（吨）：</text>
+                <text class='right_color'>{{it.baseOrderQuantity}}</text>
+              </view>
+            </view>
+            <view class='table_bom clearfix'>
+              <text>单价{{shipMethodListChoose=='DELIVERY'?"[含运费]":"[不含运费]"}}：</text>
+              <text class='right_color'>{{it.unitPrice}}</text>
+              <text class='left'>金额：</text>
+              <text class='right_color'>{{it.amount}}</text>
 
-    <!--需要显示隐藏的区域  -->
-    <view class="content_table {{ showHide? 'hide' : 'show' }}">
-      <view class="table">
-        <view class="text clearfix">
-          <view class="box">
-            <text>幅宽mm：</text>
-            <text class='right_color'>137</text>
-          </view>
-          <view class="box">
-            <text>切长mm：</text>
-            <text class='right_color'>6</text>
-          </view>
-          <view class="box">
-            <text>件数（不含运费）：</text>
-            <text class='right_color'>2</text>
-          </view>
-          <view class="box">
-            <text>吨说（吨）：</text>
-            <text class='right_color'>10</text>
-          </view>
-        </view>
-        <view class='table_bom clearfix'>
-          <text>1.单价：</text>
-          <text class='right_color'>7000</text>
-          <text class='left'>金额：</text>
-          <text class='right_color'>9874983.0</text>
-
-          <!-- <view class=' table_btn copy'>
-          <text>复制</text>
-        </view> -->
-          <view class=' table_btn del'>
-            <text>删除</text>
-          </view>
-          <view class='plsu'>
-            <image src='/images/checked.png'></image>
-          </view>
-        </view>
-      </view>
-      <view class="table">
-        <view class="text clearfix">
-          <view class="box">
-            <text>幅宽mm：</text>
-            <text class='right_color'>137</text>
-          </view>
-          <view class="box">
-            <text>切长mm：</text>
-            <text class='right_color'>6</text>
-          </view>
-          <view class="box">
-            <text>件数（不含运费）：</text>
-            <text class='right_color'>2</text>
-          </view>
-          <view class="box">
-            <text>吨说（吨）：</text>
-            <text class='right_color'>10</text>
-          </view>
-        </view>
-        <view class='table_bom clearfix'>
-          <text>1.单价：</text>
-          <text class='right_color'>7000</text>
-          <text class='left'>金额：</text>
-          <text class='right_color'>9874983.0</text>
-
-          <!-- <view class=' table_btn copy'>
-          <text>复制</text>
-        </view> -->
-          <view class=' table_btn del'>
-            <text>删除</text>
-          </view>
-          <view class='plsu'>
-            <image src='/images/checked.png'></image>
-          </view>
-        </view>
-      </view>
-      <view class="table">
-        <view class="text clearfix">
-          <view class="box">
-            <text>幅宽mm：</text>
-            <text class='right_color'>137</text>
-          </view>
-          <view class="box">
-            <text>切长mm：</text>
-            <text class='right_color'>6</text>
-          </view>
-          <view class="box">
-            <text>件数（不含运费）：</text>
-            <text class='right_color'>2</text>
-          </view>
-          <view class="box">
-            <text>吨说（吨）：</text>
-            <text class='right_color'>10</text>
-          </view>
-        </view>
-        <view class='table_bom clearfix'>
-          <text>1.单价：</text>
-          <text class='right_color'>7000</text>
-          <text class='left'>金额：</text>
-          <text class='right_color'>9874983.0</text>
-
-          <!-- <view class=' table_btn copy'>
-          <text>复制</text>
-        </view> -->
-          <view class=' table_btn del'>
-            <text>删除</text>
-          </view>
-          <view class='plsu'>
-            <image src='/images/checked.png'></image>
-          </view>
-        </view>
-      </view>
-      <view class="table">
-        <view class="text clearfix">
-          <view class="box">
-            <text>幅宽mm：</text>
-            <text class='right_color'>137</text>
-          </view>
-          <view class="box">
-            <text>切长mm：</text>
-            <text class='right_color'>6</text>
-          </view>
-          <view class="box">
-            <text>件数（不含运费）：</text>
-            <text class='right_color'>2</text>
-          </view>
-          <view class="box">
-            <text>吨说（吨）：</text>
-            <text class='right_color'>10</text>
-          </view>
-        </view>
-        <view class='table_bom clearfix'>
-          <text>1.单价：</text>
-          <text class='right_color'>7000</text>
-          <text class='left'>金额：</text>
-          <text class='right_color'>9874983.0</text>
-
-          <!-- <view class=' table_btn copy'>
-          <text>复制</text>
-        </view> -->
-          <view class=' table_btn del'>
-            <text>删除</text>
-          </view>
-          <view class='plsu'>
-            <image src='/images/checked.png'></image>
+            </view>
           </view>
         </view>
       </view>
@@ -208,16 +97,16 @@
     <!-- 上部分 -->
     <view class='footer_top'>
       <text class='footer_left'>已选中规格：</text>
-      <text class='footer_right'>4</text>
+      <text class='footer_right'>{{prevData.selectedRows.length}}</text>
       <text class='footer_left'>总吨数：</text>
-      <text class='footer_right'>1950</text>
+      <text class='footer_right'>{{prevData.allT}}</text>
       <text class='footer_left'>总金额：</text>
-      <text class='footer_right'>2678943.12</text>
+      <text class='footer_right'>{{prevData.allA}}</text>
     </view>
 
     <!-- 下部分 -->
     <view class='footer_bom'>
-      <view class='bom_left'>
+      <view class='bom_left' bindtap='goBack'>
         <text>返回修改</text>
       </view>
       <view class='bom_right' bindtap='placeTap'>

@@ -20,11 +20,12 @@
 }
 
 .text {
-  width: 326rpx;
   margin: 0 auto;
   margin-top: 60rpx;
-  font-size: 30rpx;
+  font-size: 26rpx;
+  line-height: 50rpx;
   color: #777;
+  text-align: center
 }
 
 .color {
@@ -48,7 +49,7 @@
 .particulars {
   background-color: #fff;
   border: 1px solid #f75959;
-  line-height: 88rpx;
+  line-height: 86rpx;
   color: #f75959;
 }
 

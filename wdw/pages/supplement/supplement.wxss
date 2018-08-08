@@ -5,12 +5,18 @@
   background-color: #fff;
 }
 .radio-group{
-  display: inline-block
+  display: inline-block;
+  vertical-align: top;
 }
 .radio{
   font-size: 24rpx;
-  margin-left: 20rpx;
+  margin-left: 30rpx;
   display: inline-block;
+  vertical-align: bottom;
+}
+.paypoint .radio{
+  display: block;
+  margin-left: 0;
 }
 /* 整个盒子 */
 
@@ -413,6 +419,8 @@
   height: 66rpx;
   color: #000;
   font-size: 26rpx;
+  position: relative;
+  z-index: -1;
 }
 .listContent{
   padding: 10rpx 0;
