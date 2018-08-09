@@ -25,7 +25,10 @@
   font-weight: bold;
   line-height: 24rpx;
 }
-
+.inline-block{
+  display: inline-block;
+  width: 48%;
+}
 .state  {
   margin-top: 30rpx;
 }
@@ -46,8 +49,11 @@
 
 .odd_right {
   color: #fff;
-  padding-right: 70rpx;
   padding-left: 10rpx;
+}
+
+swiper-item{
+overflow-y: auto;
 }
 
 /* list 区域样式 ============================================================*/
@@ -113,8 +119,8 @@
 
   /*提示信息  ===================================*/
   .hint {
-    line-height: 26rpx;
-    margin-top: 50rpx;
+    line-height: 50rpx;
+    margin-top: 30rpx;
     color: #939292;
     font-size: 26rpx;
     text-align: center;

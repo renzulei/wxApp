@@ -2,122 +2,123 @@
 
 <view class="container">
   <view class='content'>
+    <view class="container">
+      <!-- tab导航栏 -->
+      <!-- scroll-left属性可以控制滚动条位置 -->
+      <!-- scroll-with-animation滚动添加动画过渡 -->
+      <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
 
-  <!-- <view class='nav' catchtap='navTap'>
-    <view class="nav_already {{ num==1?'active':'' }}" data-num='1'>待收货</view>
-      <view class="nav_already {{ num==2?'active':'' }}" data-num='2'>已收货</view>
-        <view class="nav_already {{ num==3?'active':'' }}" data-num='3'>异常收货</view>
-  </view> -->
-
-  <!-- header区域========================================================== -->
-    <!-- <view class='header'>
-      <view class='odd'>
-        <text class='odd_left'>意向订单号:</text>
-        <text class='odd_right'>YCD0018652</text>
-        <text class='odd_left'>订单金额:</text>
-        <text class='odd_right'>￥6178430.0</text>
-      </view>
-      <view class='state'>
-        <text class='odd_left'>订单状态:</text>
-        <text class='odd_right'>待收货</text>
-        <text class='odd_left'>下单时间:</text>
-        <text class='odd_right'>2018-01-26 15:36:21</text>
-      </view>
-      <view class='site' bindtap='particularsTap'>
-        <text>点击查看订单详情(2)</text>
-      </view>
-    </view> -->
-
-
-<view class="container">
-    <!-- tab导航栏 -->
-    <!-- scroll-left属性可以控制滚动条位置 -->
-    <!-- scroll-with-animation滚动添加动画过渡 -->
-    <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
-      <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
-        <view class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
-      </block>
-    </scroll-view>
-    <!-- 内容 -->
-     <view class='swiper_box'>
-    <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:1100rpx">
-      <!-- 1 -->
-      <swiper-item style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop0 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
-            </view>
-          </view>
-          <template is="emptyfill" wx:if="{{ shop0.length==0 }}" />
-          <view class='hint'>没有更多数据了</view>
+        <view class="nav-item {{currentTab == 0 ?'active':''}}" data-code='SHIPPED,PSHIPED' bindtap="getShipmentList">
+          待收货
         </view>
-      </swiper-item>
-      <!-- 2 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop1 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
+        <view class="nav-item {{currentTab == 1 ?'active':''}}" data-code='R' data-current="1" bindtap="getReceiveList">已收货</view>
+        <view class="nav-item {{currentTab == 2 ?'active':''}}" data-code='ER,P' data-current="2" bindtap="getErrReceiveList">异常收货</view>
+
+      </scroll-view>
+      <!-- 内容 -->
+      <view class='swiper_box'>
+        <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:1100rpx">
+          <!-- 1 -->
+          <swiper-item>
+            <view class='content_box'>
+              <view class='header' wx:for="{{ shipmentList }}">
+                <view class='odd'>
+                  <view class='inline-block'>
+                    <text class='odd_left'>发货单号:</text>
+                    <text class='odd_right'>{{item.shipmentNumber}}</text>
+                  </view>
+                  <view class='inline-block'>
+                    <text class='odd_left'>发货时间:</text>
+                    <text class='odd_right'>{{item.shipmentDateShow}}</text>
+                  </view>
+                </view>
+                <view class='state'>
+                  <view class='inline-block'>
+                    <text class='odd_left'>订单状态:</text>
+                    <text class='odd_right'>{{item.shipmentStatusMeaning}}</text>
+                  </view>
+                  <view class='inline-block'>
+                    <text class='odd_left'>联系人:</text>
+                    <text class='odd_right'>{{item.custContact.personName}}</text>
+                  </view>
+                </view>
+                <view class='site' bindtap='particularsTap'>
+                  <text>点击查看订单详情({{item.lines.length}})</text>
+                </view>
+              </view>
+              <template is="emptyfill" wx:if="{{ shipmentList.length==0 }}" />
+              <view class='hint' wx:if="{{shipmentList.length == shipmentTotal}}">没有更多数据了</view>
+              <view bindtap='shipmentMore' class='hint' wx:if="{{shipmentList.length < shipmentTotal}}">加载更多</view>
             </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
+          </swiper-item>
+          <!-- 2 -->
+          <swiper-item>
+            <view class='content_box'>
+              <view class='header' wx:for="{{ receiveList }}">
+                <view class='odd'>
+                  <view class='inline-block'>
+                    <text class='odd_left'>发货单号:</text>
+                    <text class='odd_right'>{{item.receiveNumber}}</text>
+                  </view>
+                  <view class='inline-block'>
+                    <text class='odd_left'>收货时间:</text>
+                    <text class='odd_right'>{{item.receiveDatetimeShow}}</text>
+                  </view>
+                </view>
+                <view class='state'>
+                  <view class='inline-block'>
+                    <text class='odd_left'>订单状态:</text>
+                    <text class='odd_right'>{{item.receiveStatusMeaning}}</text>
+                  </view>
+                  <view class='inline-block'>
+                    <text class='odd_left'>联系人:</text>
+                    <text class='odd_right'>{{item.custContact.personName}}</text>
+                  </view>
+                </view>
+                <view class='site' bindtap='particularsTap'>
+                  <text>点击查看订单详情({{item.lines.length}})</text>
+                </view>
+              </view>
+              <template is="emptyfill" wx:if="{{ receiveList.length==0 }}" />
+              <view class='hint' wx:if="{{receiveList.length == receiveTotal}}">没有更多数据了</view>
+              <view bindtap='receiveMore' class='hint' wx:if="{{receiveList.length < receiveTotal}}">加载更多</view>
             </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
+          </swiper-item>
+          <!-- 3 -->
+          <swiper-item>
+            <view class='content_box'>
+              <view class='header' wx:for="{{ errReceiveList }}">
+                <view class='odd'>
+                  <view class='inline-block'>
+                    <text class='odd_left'>发货单号:</text>
+                    <text class='odd_right'>{{item.receiveNumber}}</text>
+                  </view>
+                  <view class='inline-block'>
+                    <text class='odd_left'>收货时间:</text>
+                    <text class='odd_right'>{{item.receiveDatetimeShow}}</text>
+                  </view>
+                </view>
+                <view class='state'>
+                  <view class='inline-block'>
+                    <text class='odd_left'>订单状态:</text>
+                    <text class='odd_right'>{{item.receiveStatusMeaning}}</text>
+                  </view>
+                  <view class='inline-block'>
+                    <text class='odd_left'>联系人:</text>
+                    <text class='odd_right'>{{item.custContact.personName}}</text>
+                  </view>
+                </view>
+                <view class='site' bindtap='particularsTap'>
+                  <text>点击查看订单详情({{item.lines.length}})</text>
+                </view>
+              </view>
+              <template is="emptyfill" wx:if="{{ errReceiveList.length==0 }}" />
+              <view class='hint' wx:if="{{errReceiveList.length == errReceiveTotal}}">没有更多数据了</view>
+              <view bindtap='errReceiveMore' class='hint' wx:if="{{errReceiveList.length < errReceiveTotal}}">加载更多</view>
             </view>
-          </view>
-          <template is="emptyfill" wx:if="{{ shop1.length==0 }}" />
-          <!-- <view class='hint'>没有更多数据了</view> -->
-        </view>
-      </swiper-item>
-      <!-- 3 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop2 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text class="size">点击查看订单详情(2)</text>
-            </view>
-          </view>
-          <template is="emptyfill" wx:if="{{ shop2.length==0 }}" />
-          <!-- <view class='hint'>没有更多数据了</view> -->
-        </view>
-      </swiper-item>
-    </swiper>
+          </swiper-item>
+        </swiper>
+      </view>
     </view>
-  </view>
-
-<!--提示信息============================================  -->
-    <view class='footer'>确认收货</view>
   </view>
 </view>
