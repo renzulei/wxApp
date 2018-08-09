@@ -17,7 +17,7 @@
       </view>
       <view class='list'>
         <text class='left'>固定电话:</text>
-        <input class='input' placeholder='{{ item.telephone }}'></input>
+        <input class='input' placeholder='{{ item.telephone }}'></input> 
       </view>
       <view class='list'>
         <text class='left'>传真:</text>
@@ -90,7 +90,6 @@
 <!-- 模态框 -->
    <view class="meng_ceng {{ showHide?'hide':'show' }}" bindtap='cancelTap'></view>
       <view class="showHide {{ showHide?'hide':'show' }}">
-      <text>这是货物签收授权书</text>
-      <image src='/images/search.png'></image>
+      <image mode='widthFix' src='{{img}}'></image>
       </view>
 </view>

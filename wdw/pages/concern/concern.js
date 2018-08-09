@@ -13,6 +13,11 @@ Page({
     box: true,
     pageSize: 10,//页面数据条数
     current: 1,//起始页
+    array: ['请选择商品大类', '高级瓦楞纸', '进口瓦楞纸', '普通瓦楞纸'],
+    index: 0,
+    show: true,
+    shouHide: true,
+    region: ['广东省', '广州市', '海珠区'],
   },
 
   /**
@@ -26,14 +31,7 @@ Page({
     this.getData();
   },
 
-  // 跳转到产品列表页面
-  proListTap: function(event) {
-    wx.switchTab({
-      url: '/pages/proList/proList',
-    })
-  },
-  
-
+     // 获取动态数据 
   getData: function (e) {
     var that = this;
     var current = this.data.current;
@@ -53,7 +51,7 @@ Page({
           console.error(e)
           return
         }
-        // 获取动态数据 
+   
         console.log(res.data);
         var data = [];
         data = res.data.content;  
@@ -62,24 +60,46 @@ Page({
         })
         console.log(data);
         that.setData({
-          data: data
-        })    
+          data: data,
+        })
       }
-
     })
   },
-  //点击删除功能
-  // delTap: function(e) {
-  //   var that = this;
-  //   var index = e.currentTarget.dataset.index;
-  //   if (that.data.data.length > 1) {
-  //     var info = [...this.data.data];
-  //     info.splice(index, 1);
-  //     this.setData({
-  //       data: info
-  //     })
-  //   }
-  // },
+
+// 商品大类点击事件
+  bindPickerChange: function (e) {
+    console.log(e)
+    var that = this;
+    that.setData({
+      index: e.detail.value
+    })
+  },
+
+  // 点击选中取消按钮
+  iconTap: function(e) {
+    console.log(e);
+    var that = this;
+    that.setData({
+      show: (!that.data.show)
+    })
+  },
+
+//取消关注点击事件
+  footerTap: function(e) {
+    console.log(e);
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide),
+      show: false
+    })
+  },
+
+  bindRegionChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      region: e.detail.value
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

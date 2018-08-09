@@ -1,15 +1,74 @@
-<view class="container">
-  <view class='content'>
-    <view class='box clearfix' wx:for="{{ data }}" wx:key="{{ resourceBillId }}" >
-      <view class='box_title'>{{ item.address }}</view>
-      <view class='box_text'>
-        <text class='text'>{{ item.categoryName }}</text>
-        <text class='text'>{{ item.categoryName }}</text>
-        <text class='text'>{{ item.categoryName }}</text>  
-        <view class='del' data-index='index' bindtap='delTap'>删除</view>
+<view class="contaitner">
+  <!-- table 区域======================================================== -->
+  <view class='table clearfix'>
+    <view class='table_left'>
+      <text class='size_color'>区域:</text>
+      <view class='choice'>
+        <input class='input' placeholder='请选择所在地区'></input>
+        <view class='img_icon icon'></view>
       </view>
-      <view class='price'>没这数据</view>
-    <view class='shopping' bindtap='proListTap'>立即购买</view>
+      <text class='size_color'>公司名称:</text>
+      <view class='choice'>
+        <input class='input' placeholder='请输入商品名称'></input>
+      </view>
+    </view>
+
+    <view class='table_right'>
+      <text class='size_color'>商品大类:</text>
+      <view class="section">
+        <view class="section">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="picker">
+              <view class='choice icon_position'>
+                <input class='ipt' value='{{array[index]}}'></input>
+                <view class='icon'></view>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='btn clearfix'>
+        <view class='btn_search'>
+          <text>搜索</text>
+        </view>
+        <view class='btn_eliminate'>
+          <text>清除</text>
+        </view>
+      </view>
     </view>
   </view>
 </view>
+
+<view class="border"></view>
+<!-- ======================内容区====================================== -->
+<view class='content'>
+  <view class='box' wx:for="{{ data }}" wx:key="{{ tradePartyId }}">
+    <view class='box_content clearfix'>
+      <view>
+        <text class='box_text'>区域：</text>
+        <text>{{ item.province }}</text>
+        <text class='box_text right'>商品大类：</text>
+        <text>{{ item.categoryName }}</text>
+      </view>
+      <view>
+        <text class='box_text'>联系人：</text>
+        <text>{{ item.contactName }}</text>
+        <text class='box_text right'>联系方式：</text>
+        <text>{{ item.contactPhone }}</text>
+      </view>
+      <view>
+        <text class='box_text'>公司名称：</text>
+        <text>{{ item.resourceAttachName }}</text>
+      </view>
+      <view>
+        <text class='box_text'>公司地址：</text>
+        <text>{{ item.address }}</text>
+      </view>
+    </view>
+    <view class='box_icon' catchtap='iconTap'>
+      <image wx:if="{{ show== false}}" src='/images/uncheck.png'></image>
+      <image wx:else="{{ show==true }}" src='/images/checked.png'></image>
+    </view>
+  </view>
+</view>
+<view class="footer {{ shouHide?'footer_bgc':'' }}" catchtap='footerTap'>取消关注</view>
