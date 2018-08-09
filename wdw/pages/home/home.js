@@ -66,37 +66,6 @@ Page({
     })
   },
 
-
-  // getData: function (e) {
-  //   var that = this;
-  //   wx.request({
-  //     url: `${authService}/user/getMenuList`,
-  //     data: {},
-  //     method: 'GET',
-  //     header: {
-  //       'content-type': 'application/json',
-  //       'cookie': authorizedCookie
-  //     },
-  //     success: function (res) {
-  //       try {
-  //         util.catchHttpError(res);
-  //       } catch (e) {
-  //         console.error(e)
-  //         return
-  //       }
-  //       // console.log(res.data)
-  //       var list = res.data;
-  //       var arr = JSON.parse(list);
-  //       console.log(arr.items);
-  //       that.setData({
-        
-  //       })
-  //     },
-  //   })
-  // },
-
-   
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -13,6 +13,7 @@ Page({
   data: { 
     list: [],
     showHide: true, 
+    img: "/images/hide.png"
   },
 
   /**

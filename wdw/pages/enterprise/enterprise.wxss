@@ -106,8 +106,7 @@ position: relative;
 /* 显示和隐藏的盒子 */
 
 .showHide {
-  width: 610rpx;
-  height: 800rpx;
+  width: 80%;
   background-color: white;
   position: absolute;
   margin-left: 70rpx;
@@ -124,6 +123,5 @@ position: relative;
 }
 
 .showHide image {
-  width: 610rpx;
-  height: 800rpx;
+  width: 80%;
 }
