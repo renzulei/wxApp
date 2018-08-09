@@ -24,6 +24,8 @@
   width: 156rpx;
   height: 156rpx;
   margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .headerUser image {
