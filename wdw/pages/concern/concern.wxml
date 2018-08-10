@@ -4,9 +4,17 @@
     <view class='table_left'>
       <text class='size_color'>区域:</text>
       <view class='choice'>
-        <input class='input' placeholder='请选择所在地区'></input>
-        <view class='img_icon icon'></view>
+        <view class="section">
+          <picker mode="region" bindchange="bindRegionChange">
+            <view class="picker">
+              <input class="input" placeholder='请选择所在地区' value='{{ region }}'></input>
+            </view>
+          </picker>
+          <view class='img_icon icon'></view>
+        </view>
       </view>
+
+
       <text class='size_color'>公司名称:</text>
       <view class='choice'>
         <input class='input' placeholder='请输入商品名称'></input>
@@ -58,17 +66,17 @@
       </view>
       <view>
         <text class='box_text'>公司名称：</text>
-        <text>{{ item.resourceAttachName }}</text>
+        <text>{{ item.partyName }}</text>
       </view>
       <view>
         <text class='box_text'>公司地址：</text>
         <text>{{ item.address }}</text>
       </view>
     </view>
-    <view class='box_icon' catchtap='iconTap'>
-      <image wx:if="{{ show== false}}" src='/images/uncheck.png'></image>
-      <image wx:else="{{ show==true }}" src='/images/checked.png'></image>
+    <view class='box_icon' catchtap='iconTap' data-index='{{index}}'>
+      <image wx:if="{{!item.checked}}" src='/images/uncheck.png'></image>
+      <image wx:else src='/images/checked.png'></image>
     </view>
   </view>
 </view>
-<view class="footer {{ shouHide?'footer_bgc':'' }}" catchtap='footerTap'>取消关注</view>
+<view class="footer {{ showHide?'footer_bgc':'' }}" catchtap='footerTap' data-index='index'>取消关注</view>

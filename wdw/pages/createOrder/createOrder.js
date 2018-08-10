@@ -510,7 +510,7 @@ Page({
         duration: 1000
       })
     }
-    
+     
   },
   checkUserFreeze: function() {
     wx.request({

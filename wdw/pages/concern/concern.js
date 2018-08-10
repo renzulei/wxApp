@@ -10,14 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    data: [],
     box: true,
-    pageSize: 10,//页面数据条数
-    current: 1,//起始页
+    pageSize: 10, //页面数据条数
+    current: 1, //起始页
     array: ['请选择商品大类', '高级瓦楞纸', '进口瓦楞纸', '普通瓦楞纸'],
     index: 0,
-    show: true,
-    shouHide: true,
     region: ['广东省', '广州市', '海珠区'],
+    showHide: false
   },
 
   /**
@@ -31,8 +31,8 @@ Page({
     this.getData();
   },
 
-     // 获取动态数据 
-  getData: function (e) {
+  // 获取动态数据 
+  getData: function(e) {
     var that = this;
     var current = this.data.current;
     var pageSize = this.data.pageSize;
@@ -51,23 +51,26 @@ Page({
           console.error(e)
           return
         }
-   
-        console.log(res.data);
-        var data = [];
-        data = res.data.content;  
+
+        // console.log(res.data);
+        var data = that.data.data;
+        data = res.data.content;
         data = data.map(function(item, i) {
-          return JSON.parse(item);
+          item = JSON.parse(item);
+          item.checked = false;
+          return item;
         })
         console.log(data);
         that.setData({
           data: data,
         })
+        // console.log(data);
       }
     })
   },
 
-// 商品大类点击事件
-  bindPickerChange: function (e) {
+  // 商品大类点击事件
+  bindPickerChange: function(e) {
     console.log(e)
     var that = this;
     that.setData({
@@ -77,24 +80,42 @@ Page({
 
   // 点击选中取消按钮
   iconTap: function(e) {
-    console.log(e);
-    var that = this;
-    that.setData({
-      show: (!that.data.show)
+    var index = e.currentTarget.dataset.index;
+    this.data.data.map((item, i) => {
+      if (index == i) {
+        item.checked = !item.checked;
+      } else {
+        item.checked = false;
+      }
     })
+    this.setData({
+      data: this.data.data
+    })
+
+    var showHide = this.data.showHide;
+    console.log(showHide);
+    if(showHide == false) {
+      showHide = true
+    }else{
+      showHide = false
+    }
+    this.setData({
+      showHide: showHide
+    })
+      
+    // this.data.data.map((item,i)=>{
+    //   if(item.checked == true) {
+
+    //   }
+    // })
   },
 
-//取消关注点击事件
+  //取消关注点击事件
   footerTap: function(e) {
-    console.log(e);
-    var that = this;
-    that.setData({
-      showHide: (!that.data.showHide),
-      show: false
-    })
+
   },
 
-  bindRegionChange: function (e) {
+  bindRegionChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       region: e.detail.value
