@@ -1,0 +1,183 @@
+<view class="container">
+  <view class='content' wx:if="{{orderType == 'waitReceive' || orderType == 'partReceive'}}">
+    <view class='header'>
+      <view class='odd'>
+        <view class='inline-block'>
+          <text class='odd_left'>发货单号:</text>
+          <text class='odd_right'>{{dataSource.shipmentNumber}}</text>
+        </view>
+        <view class='inline-block'>
+          <text class='odd_left'>发货时间:</text>
+          <text class='odd_right'>{{dataSource.shipmentDateShow}}</text>
+        </view>
+      </view>
+      <view class='state'>
+        <view class='inline-block'>
+          <text class='odd_left'>订单状态:</text>
+          <text class='odd_right'>{{dataSource.shipmentStatusMeaning}}</text>
+        </view>
+        <view class='inline-block'>
+          <text class='odd_left'>联系人:</text>
+          <text class='odd_right'>{{dataSource.custContact.personName}}</text>
+        </view>
+      </view>
+      <view class='state'>
+        <text class='odd_left'>收货地址:</text>
+        <text class='odd_right'>{{dataSource.custContact.province + dataSource.custContact.county + dataSource.custContact.address}}</text>
+      </view>
+    </view>
+
+    <view class='list clearfix {{item.receiveStatusCode != "C"?"disabled":""}} {{item.checked?"checked":""}}' data-disabled='{{item.receiveStatusCode == "C"?false:true}}' data-index="{{index}}" wx:for="{{dataSource.lines}}" bindtap='doSelect'>
+      <view class='row'>
+        <view class='inline-block'>
+          <text class='item_left'>商品:</text>
+          <text class='item_right'>{{item.itemName}}</text>
+        </view>
+        <view class='inline-block'>
+          <text class='item_left'>所属订单:</text>
+          <text class='item_right'>{{item.orderHeaderNumber}}</text>
+        </view>
+      </view>
+      <view class='item'>
+        <text class='item_left'>序号:</text>
+        <text class='item_right'>{{index}}</text>
+      </view>
+      <view class='item'>
+        <text class='item_left'>{{item.soItemAttributes[0].attributeName}}:</text>
+        <text class='item_right'>{{item.soItemAttributes[0].itemAttrValue}}</text>
+      </view>
+
+      <view class='item'>
+        <text class='item_left'>{{item.soItemAttributes[1].attributeName}}:</text>
+        <text class='item_right'>{{item.soItemAttributes[1].itemAttrValue}}</text>
+      </view>
+      <view class='item'>
+        <text class='item_left'>收货状态:</text>
+        <text class='item_right'>{{item.receiveStatusMeaning}}</text>
+      </view>
+      <view class='item'>
+        <text class='item_left'>件数:</text>
+        <text class='item_right'>{{item.pieceQuantity}}</text>
+      </view>
+
+      <view class='item'>
+        <text class='item_left'>单位:</text>
+        <text class='item_right'>{{item.uomMeaning}}</text>
+      </view>
+
+    </view>
+    <view class='footer'>
+      <view class='half' bindtap='confirmReceive'>确认收货</view>
+      <view class='half diff' bindtap='abnormalReceive'>异常收货</view>
+    </view>
+    <view class='backModal' wx:if="{{showModal}}">
+      <view class='content'>
+        <view class='list clearfix' data-index="{{index}}" wx:for="{{selectedRows}}">
+          <view class='row'>
+            <view class='inline-block'>
+              <text class='item_left'>商品:</text>
+              <text class='item_right'>{{item.itemName}}</text>
+            </view>
+            <view class='inline-block'>
+              <text class='item_left'>所属订单:</text>
+              <text class='item_right'>{{item.orderHeaderNumber}}</text>
+            </view>
+          </view>
+          <view class='item'>
+            <text class='item_left'>序号:</text>
+            <text class='item_right'>{{index}}</text>
+          </view>
+          <view class='item'>
+            <text class='item_left'>{{item.soItemAttributes[0].attributeName}}:</text>
+            <text class='item_right'>{{item.soItemAttributes[0].itemAttrValue}}</text>
+          </view>
+
+          <view class='item'>
+            <text class='item_left'>{{item.soItemAttributes[1].attributeName}}:</text>
+            <text class='item_right'>{{item.soItemAttributes[1].itemAttrValue}}</text>
+          </view>
+          <view class='row'>
+            <text class='item_left'>异常信息:</text>
+            <textarea placeholder="请输入异常信息" data-index='{{index}}' bindblur="onCellChange"/>
+          </view>
+          
+        </view>
+        <view class='row text-right'>
+          <view class='ok' bindtap='handleOk'>确定</view>
+          <view class='cancel' bindtap='handleCancel'>取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='content' wx:if="{{orderType=='abnormalReceive'||orderType=='waitConfirm'||orderType=='received'}}">
+    <view class='header'>
+      <view class='odd'>
+        <view class='inline-block'>
+          <text class='odd_left'>收货单号:</text>
+          <text class='odd_right'>{{dataSource.receiveNumber}}</text>
+        </view>
+        <view class='inline-block'>
+          <text class='odd_left'>收货时间:</text>
+          <text class='odd_right'>{{dataSource.receiveDatetimeShow}}</text>
+        </view>
+      </view>
+      <view class='state'>
+        <view class='inline-block'>
+          <text class='odd_left'>订单状态:</text>
+          <text class='odd_right'>{{dataSource.receiveStatusMeaning}}</text>
+        </view>
+        <view class='inline-block'>
+          <text class='odd_left'>联系人:</text>
+          <text class='odd_right'>{{dataSource.custContact.personName}}</text>
+        </view>
+      </view>
+      <view class='state'>
+        <text class='odd_left'>收货地址:</text>
+        <text class='odd_right'>{{dataSource.custContact.province + dataSource.custContact.county + dataSource.custContact.address}}</text>
+      </view>
+    </view>
+
+    <view class='list clearfix {{item.checked?"checked":""}}' data-disabled='{{item.receiveStatusCode == "C"?false:true}}' data-index="{{index}}" wx:for="{{dataSource.lines}}" wx:key="{{index}}">
+      <view class='row'>
+        <view class='inline-block'>
+          <text class='item_left'>商品:</text>
+          <text class='item_right'>{{item.itemName}}</text>
+        </view>
+        <view class='inline-block'>
+          <text class='item_left'>所属订单:</text>
+          <text class='item_right'>{{item.orderHeaderNumber}}</text>
+        </view>
+      </view>
+      <view class='item'>
+        <text class='item_left'>序号:</text>
+        <text class='item_right'>{{index}}</text>
+      </view>
+      <view class='item'>
+        <text class='item_left'>{{item.soItemAttributes[0].attributeName}}:</text>
+        <text class='item_right'>{{item.soItemAttributes[0].itemAttrValue}}</text>
+      </view>
+
+      <view class='item'>
+        <text class='item_left'>{{item.soItemAttributes[1].attributeName}}:</text>
+        <text class='item_right'>{{item.soItemAttributes[1].itemAttrValue}}</text>
+      </view>
+      <view class='item'>
+        <text class='item_left'>收货数量:</text>
+        <text class='item_right'>{{item.quantity}}</text>
+      </view>
+      <view class='item'>
+        <text class='item_left'>发货数量:</text>
+        <text class='item_right'>{{item.shipmentQuantity}}</text>
+      </view>
+
+      <view class='item'>
+        <text class='item_left'>单位:</text>
+        <text class='item_right'>{{item.uomMeaning}}</text>
+      </view>
+      <view class='row' wx:if="{{orderType=='abnormalReceive'||orderType=='waitConfirm'}}">
+        <text class='item_left'>异常信息:</text>
+        <text class='item_right'>{{item.exceptionMessage}}</text>
+      </view>
+    </view>
+  </view>
+</view>

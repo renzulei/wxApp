@@ -271,9 +271,14 @@ Page({
     })
   },
   // 点击跳转到订单详情页
-  particularsTap: function(event) {
+  receiveDetail: function(e) {
+    var orderTypeCode = e.currentTarget.dataset.type;
+    var receiveHeaderId = e.currentTarget.dataset.headerid;
+    // 临时存储，后期删除
+    util.setStorageSync('orderTypeCode', orderTypeCode)
+    util.setStorageSync('receiveHeaderId', receiveHeaderId)
     wx.navigateTo({
-      url: '/pages/particulars/particulars',
+      url: `/pages/receiveDetail/receiveDetail?orderTypeCode=${orderTypeCode}&receiveHeaderId=${receiveHeaderId}`,
     })
   },
 
