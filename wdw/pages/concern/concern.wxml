@@ -25,10 +25,10 @@
       <text class='size_color'>商品大类:</text>
       <view class="section">
         <view class="section">
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{arr}}">
             <view class="picker">
               <view class='choice icon_position'>
-                <input class='ipt' value='{{array[index]}}'></input>
+                <input class='ipt' value='{{arr[index]}}'></input>
                 <view class='icon'></view>
               </view>
             </view>

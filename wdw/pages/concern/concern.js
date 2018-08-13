@@ -10,14 +10,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    data: [],
+    data: [], //数据
     box: true,
     pageSize: 10, //页面数据条数
     current: 1, //起始页
-    array: ['请选择商品大类', '高级瓦楞纸', '进口瓦楞纸', '普通瓦楞纸'],
+    arr: ["11", "22"], //商品大类
     index: 0,
     region: ['广东省', '广州市', '海珠区'],
-    showHide: false
+    showHide: false,
+    json: []
   },
 
   /**
@@ -29,6 +30,8 @@ Page({
       authorizedCookie: authorizedCookie
     })
     this.getData();
+    // this.commodity();
+    // this.footerTap();
   },
 
   // 获取动态数据 
@@ -89,29 +92,18 @@ Page({
       }
     })
     this.setData({
-      data: this.data.data
+      data: this.data.data,
     })
 
-    var showHide = this.data.showHide;
-    console.log(showHide);
-    if(showHide == false) {
-      showHide = true
-    }else{
-      showHide = false
-    }
+    var showHide = false;
+    this.data.data.map((item, i) => {
+      if (item.checked == true) {
+        showHide = true;
+      }
+    })
     this.setData({
       showHide: showHide
     })
-      
-    // this.data.data.map((item,i)=>{
-    //   if(item.checked == true) {
-
-    //   }
-    // })
-  },
-
-  //取消关注点击事件
-  footerTap: function(e) {
 
   },
 
@@ -122,6 +114,69 @@ Page({
     })
   },
 
+
+  //取消关注点击事件
+  footerTap: function(e) {
+    var that = this;
+    var current = this.data.current;
+    var pageSize = this.data.pageSize;
+    var showHide = this.data.showHide;
+    if (showHide == true) {
+      wx.request({
+        url: `${authService}/resourceBill/queryMyFollowResBill?page=${current}&pageSize=${pageSize }`,
+        data: {},
+        method: 'POST',
+        header: {
+          'content-type': 'application/json',
+          'cookie': this.data.authorizedCookie
+        },
+        success: function(res) {
+          try {
+            util.catchHttpError(res);
+          } catch (e) {
+            console.error(e)
+            return
+          }
+          var info = res.data.content;
+          var data = [];
+          info.map((item, i) => {
+            data.push(JSON.parse(item));
+          
+          })
+          console.log(data);
+        }
+      })
+    }
+  },
+
+
+
+  //商品大类
+  // commodity: function(e) {
+  //   var that = this;
+  //   wx.request({
+  //     url: `${authService}/common/lookUpValue?code=MD.ITEM_MIDDLE_CATEGORY`,
+  //     data: {},
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/json',
+  //       'cookie': this.data.authorizedCookie
+  //     },
+  //     success: function(res) {
+  //       try {
+  //         util.catchHttpError(res);
+  //       } catch (e) {
+  //         console.error(e)
+  //         return
+  //       }
+
+  //   var data = res.data;
+  //   // console.log(data);
+  //   var arr = Array.from(data);
+  //   console.log(arr);
+  // }
+  // })
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -171,3 +226,31 @@ Page({
 
   }
 })
+
+// var that = this;
+// var current = this.data.current;
+// var pageSize = this.data.pageSize;
+// wx.request({
+//   url: `${authService}/resourceBill/queryMyFollowResBill?page=${current}&pageSize=${pageSize}`,
+//   data: {},
+//   method: 'POST',
+//   header: {
+//     'content-type': 'application/json',
+//     'cookie': this.data.authorizedCookie
+//   },
+//   success: function (res) {
+//     try {
+//       util.catchHttpError(res);
+//     } catch (e) {
+//       console.error(e)
+//       return
+//     }
+//     var info = res.data.content;
+//     console.log(info);
+//     var newData = [];
+//     info.map((item, i) => {
+//       newData.push(JSON.parse(item))
+//     })
+//     console.log(newData);
+//   }
+// })
