@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/Administrator/Administrator",
+    "pages/receiveDetail/receiveDetail",
     "pages/concern/concern",
     "pages/manage/manage",
     "pages/enterprise/enterprise",
@@ -9,7 +11,6 @@
     "pages/user/user",
     "pages/particulars/particulars",
     "pages/specification/specification",
-    "pages/Administrator/Administrator",
     "pages/proList/proList",
     "pages/index/index",
     "pages/affirm/affirm",

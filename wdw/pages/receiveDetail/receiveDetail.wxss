@@ -1,0 +1,148 @@
+
+/* .container {} */
+
+.content {
+  width: 100%;
+  background-color: #fff;
+  padding-bottom: 90rpx;
+}
+
+/* header 区域样式 */
+.header {
+  width: 708rpx;
+  height: 198rpx;
+  background-color: #9FB9EF;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
+  padding: 30rpx ;
+  margin-bottom: 30rpx;
+}
+.inline-block{
+  display: inline-block;
+  width: 48%;
+}
+.odd,
+.state,
+.site {
+  height: 24rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 24rpx;
+}
+
+.state,
+.site  {
+  margin-top: 30rpx;
+}
+
+.odd_left {
+  color: #FFF3D0;
+}
+
+.odd_right {
+  color: #fff;
+  padding-left: 10rpx;
+}
+
+/* list 区域样式 */
+
+.list {
+  width: 706rpx;
+  /* height: 186rpx; */
+  margin: 0 auto;
+  border: 1px solid #E8E8E8;
+  padding: 20rpx;
+  padding-bottom: 10rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  background-color: #fff;
+}
+.disabled{
+  background-color: #f1f1f1;
+}
+.checked{
+  background-color: rgb(211, 223, 250);
+  border-color: #9FB9EF;
+  border-radius: 3px;
+}
+.row{
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+.item {
+  float: left;
+  width: 33.33%;
+  margin-bottom: 20rpx;
+}
+
+.item_left {
+  color: #787878;
+}
+
+.item_right {
+  color: #576B95;
+  padding-left: 10rpx;
+}
+
+.footer {
+  width: 100%;
+  line-height: 90rpx;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+}
+.full{
+  width: 100%;
+  background-color: #F75959;  
+}
+.half{
+  width: 50%;
+  float: left;
+  background-color: #F75959;
+}
+.diff{
+  background-color: #787878
+}
+textarea{
+  border:1px solid #e1e1e1;
+  width: 95%;
+  height: 200rpx;
+  border-radius: 3px;
+  font-weight: normal;
+  margin-top: 20rpx;
+  padding: 10rpx;
+}
+.text-right{
+  text-align: right;
+}
+.ok,.cancel{
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  color: #fff;
+  background-color: #576B95;
+  font-size: 26rpx;
+  margin-right: 20rpx;
+}
+.cancel{
+  background-color: #fff;
+  color: #333;
+  border:1px solid #e1e1e1;
+}
+.backModal{
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5)
+}
+.backModal .content{
+  padding-bottom: 10rpx;
+  padding-top: 20rpx;
+}
