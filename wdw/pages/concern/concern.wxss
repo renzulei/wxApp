@@ -35,7 +35,7 @@
 }
 
 .ipt, .input {
-  display: inline-block;
+  display: block;
   height: 100%;
   width: 100%;
   font-size: 22rpx;
@@ -160,4 +160,9 @@
   position: absolute;
   right: 20rpx;
   top: 26rpx;
+}
+
+.picker, .input {
+  display: block;
+  height: 62rpx;
 }
