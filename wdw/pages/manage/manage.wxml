@@ -15,20 +15,32 @@
     </view>
 
     <view class='table_right'>
-      <text class='size_color'>商品名称:</text>
+      <text class='size_color'>支付状态:</text>
       <view class="section">
         <view class="section">
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker bindchange="bindPickerChange" value='{{payStatusIndex}}' range="{{payStatusArray}}" range-key='label'>
             <view class="picker">
               <view class='choice icon_position'>
-                <input class='ipt' value='{{array[index]}}'></input>
+                <view class='fl'>{{payStatusArray[payStatusIndex].label}}</view>
                 <view class='icon'></view>
               </view>
             </view>
           </picker>
         </view>
       </view>
-
+      <text class='size_color'>订单类型:</text>
+      <view class="section">
+        <view class="section">
+          <picker value = '{{saleOrderTypeIndex}}' range='{{saleOrderTypeArray}}' range-key='label'>
+            <view class="picker">
+              <view class='choice icon_position'>
+                <view class='fl'>{{saleOrderTypeArray[saleOrderTypeIndex].label}}</view>
+                <view class='icon'></view>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
       <view class='btn clearfix'>
         <view class='btn_search'>
           <text>搜索</text>
@@ -42,161 +54,35 @@
   <!-- ================================ -->
   <view class="container">
     <!-- tab导航栏 -->
-    <!-- scroll-left属性可以控制滚动条位置 -->
-    <!-- scroll-with-animation滚动添加动画过渡 -->
-    <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+
+    <view class='nav'>
       <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
         <view class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
       </block>
-    </scroll-view>
+    </view>
     <!-- 内容 -->
-     <view class='swiper_box'>
-    <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab" style='height:790rpx'>
-      <!-- 1 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop0 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
-            </view>
+    <view class='swiper_box'>
+      <view class='content_box'>
+        <view class='header' wx:for="{{ shop0 }}" wx:for-item="navItem" wx:key="{{ idx }}">
+          <view class='odd'>
+            <text class='odd_left'>意向订单号:</text>
+            <text class='odd_right'>{{ navItem.ding_dan }}</text>
+            <text class='odd_left'>订单金额:</text>
+            <text class='odd_right'>{{ navItem.jin_e }}</text>
           </view>
-          <template is="emptyfill" wx:if="{{ shop0.length==0 }}" />
-          <view class='hint'>没有更多数据了</view>
-        </view>
-      </swiper-item>
-      <!-- 2 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop1 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
-            </view>
+          <view class='state'>
+            <text class='odd_left'>订单状态:</text>
+            <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
+            <text class='odd_left'>下单时间:</text>
+            <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
           </view>
-          <template is="emptyfill" wx:if="{{ shop1.length==0 }}" />
-          <!-- <view class='hint'>没有更多数据了</view> -->
-        </view>
-      </swiper-item>
-      <!-- 3 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop2 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
-            </view>
+          <view class='site' bindtap='particularsTap'>
+            <text>点击查看订单详情(2)</text>
           </view>
-          <template is="emptyfill" wx:if="{{ shop2.length==0 }}" />
-          <!-- <view class='hint'>没有更多数据了</view> -->
         </view>
-      </swiper-item>
-      <!-- 4 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop3 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
-            </view>
-          </view>
-          <template is="emptyfill" wx:if="{{ shop3.length==0 }}" />
-          <!-- <view class='hint'>没有更多数据了</view> -->
-        </view>
-      </swiper-item>
-      <!-- 5 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop4 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
-            </view>
-          </view>
-          <template is="emptyfill" wx:if="{{ shop4.length==0 }}" />
-          <!-- <view class='hint'>没有更多数据了</view> -->
-        </view>
-      </swiper-item>
-      <!-- 6 -->
-      <swiper-item>
-        <view class='content_box'>
-          <view class='header' wx:for="{{ shop5 }}" wx:for-item="navItem" wx:key="{{ idx }}">
-            <view class='odd'>
-              <text class='odd_left'>意向订单号:</text>
-              <text class='odd_right'>{{ navItem.ding_dan }}</text>
-              <text class='odd_left'>订单金额:</text>
-              <text class='odd_right'>{{ navItem.jin_e }}</text>
-            </view>
-            <view class='state'>
-              <text class='odd_left'>订单状态:</text>
-              <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
-              <text class='odd_left'>下单时间:</text>
-              <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
-            </view>
-            <view class='site' bindtap='particularsTap'>
-              <text>点击查看订单详情(2)</text>
-            </view>
-          </view>
-          <template is="emptyfill" wx:if="{{ shop5.length==0 }}" />
-          <!-- <view class='hint'>没有更多数据了</view> -->
-        </view>
-      </swiper-item>
-    </swiper>
+        <template is="emptyfill" wx:if="{{ shop0.length==0 }}" />
+        <view class='hint'>没有更多数据了</view>
+      </view>
     </view>
   </view>
 </view>

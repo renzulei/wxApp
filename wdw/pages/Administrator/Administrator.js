@@ -76,6 +76,7 @@ Page({
   },
   // 待收货
   getShipmentList:function(){
+    if(this.data.currentTab == 0) return; //当前已经被选中的状态下不做任何操作
     this.switchNav(0)
     this.setData({
       shipmentList: [],
@@ -205,8 +206,8 @@ Page({
   },
   // 已收货
   getReceiveList: function () {
+    if (this.data.currentTab == 1) return;    
     this.switchNav(1);
-    //收货查询的API
    this.setData({
      receiveList:[],
      receiveTotal:0,
@@ -221,6 +222,7 @@ Page({
 
   // 异常收货
   getErrReceiveList: function () {
+    if (this.data.currentTab == 2) return;        
     this.switchNav(2);
     this.setData({
       errReceiveList:[],
