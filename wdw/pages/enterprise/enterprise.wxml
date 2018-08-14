@@ -17,7 +17,7 @@
       </view>
       <view class='list'>
         <text class='left'>固定电话:</text>
-        <input class='input' placeholder='{{ item.telephone }}'></input> 
+        <input class='input' placeholder='{{ item.telephone }}'></input>  
       </view>
       <view class='list'>
         <text class='left'>传真:</text>
@@ -59,7 +59,7 @@
       </view>
       <view class='list'>
         <text class='left'>开户许可证:</text>
-        <text class='examine'>点击查看</text>
+        <text class='examine'>点击查看</text> 
       </view>
       <view class='list'>
         <text class='left'>税务登记证:</text>

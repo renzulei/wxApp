@@ -79,4 +79,4 @@
     </view>
   </view>
 </view>
-<view class="footer {{ showHide?'footer_bgc':'' }}" catchtap='footerTap' data-index='index'>取消关注</view>
+<view class="footer {{ showHide?'footer_bgc':'' }}" catchtap='footerTap'>取消关注</view>

@@ -6,7 +6,7 @@ const util = require('../../utils/util.js');
 // pages/concern/concern.js
 Page({
 
-  /** 
+  /**  
    * 页面的初始数据
    */
   data: {
@@ -18,7 +18,7 @@ Page({
     index: 0,
     region: ['广东省', '广州市', '海珠区'],
     showHide: false,
-    json: []
+    json: [],
   },
 
   /**
@@ -30,8 +30,7 @@ Page({
       authorizedCookie: authorizedCookie
     })
     this.getData();
-    // this.commodity();
-    // this.footerTap();
+    this.footerTap();
   },
 
   // 获取动态数据 
@@ -118,65 +117,73 @@ Page({
   //取消关注点击事件
   footerTap: function(e) {
     var that = this;
+    var showHide = this.data.showHide;
+    var resourceBillId;
+    this.data.data.map((item, i) => {
+      if (item.checked) {
+        resourceBillId = item.resourceBillId
+      }
+      if (item.checked == !false) {
+        wx.request({
+          url: `${authService}/resourceBill/submitFollow?resourceBillId=${resourceBillId}`,
+          data: {},
+          method: 'POST',
+          header: {
+            'content-type': 'application/json',
+            'cookie': this.data.authorizedCookie
+          },
+          success: function(res) {
+            try {
+              util.catchHttpError(res);
+            } catch (e) {
+              console.error(e)
+              return
+            }
+            var arr = res.data;
+            console.log(arr);
+          }
+        })
+      }
+      that.setData({
+        showHide: false
+      })
+    })
+// ===二次渲染===
     var current = this.data.current;
     var pageSize = this.data.pageSize;
-    var showHide = this.data.showHide;
-    if (showHide == true) {
-      wx.request({
-        url: `${authService}/resourceBill/queryMyFollowResBill?page=${current}&pageSize=${pageSize }`,
-        data: {},
-        method: 'POST',
-        header: {
-          'content-type': 'application/json',
-          'cookie': this.data.authorizedCookie
-        },
-        success: function(res) {
-          try {
-            util.catchHttpError(res);
-          } catch (e) {
-            console.error(e)
-            return
-          }
-          var info = res.data.content;
-          var data = [];
-          info.map((item, i) => {
-            data.push(JSON.parse(item));
-          
-          })
-          console.log(data);
+    wx.request({
+      url: `${authService}/resourceBill/queryMyFollowResBill?page=${current}&pageSize=${pageSize}`,
+      data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'cookie': this.data.authorizedCookie
+      },
+      success: function (res) {
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
         }
-      })
-    }
+
+        // console.log(res.data);
+        var data = that.data.data;
+        data = res.data.content;
+        data = data.map(function (item, i) {
+          item = JSON.parse(item);
+          item.checked = false;
+          return item;
+        })
+        console.log(data);
+        that.setData({
+          data: data,
+        })
+        // console.log(data);
+      }
+    })
   },
 
-
-
-  //商品大类
-  // commodity: function(e) {
-  //   var that = this;
-  //   wx.request({
-  //     url: `${authService}/common/lookUpValue?code=MD.ITEM_MIDDLE_CATEGORY`,
-  //     data: {},
-  //     method: 'POST',
-  //     header: {
-  //       'content-type': 'application/json',
-  //       'cookie': this.data.authorizedCookie
-  //     },
-  //     success: function(res) {
-  //       try {
-  //         util.catchHttpError(res);
-  //       } catch (e) {
-  //         console.error(e)
-  //         return
-  //       }
-
-  //   var data = res.data;
-  //   // console.log(data);
-  //   var arr = Array.from(data);
-  //   console.log(arr);
-  // }
-  // })
-  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

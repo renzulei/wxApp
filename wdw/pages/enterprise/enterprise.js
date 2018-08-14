@@ -10,9 +10,9 @@ Page({
   /** 
    * 页面的初始数据
    */
-  data: { 
+  data: {
     list: [],
-    showHide: true, 
+    showHide: true,
     img: "/images/hide.png"
   },
 
@@ -25,6 +25,7 @@ Page({
       authorizedCookie: authorizedCookie
     })
     this.getData();
+    this.img();
   },
 
   // 企业认证
@@ -59,20 +60,44 @@ Page({
     })
   },
 
+
+  img: function(e) {
+    wx.request({
+      url: `${authService}/ossObject/download?objectId=2311`,
+      data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'cookie': this.data.authorizedCookie
+      },
+      success: function(res) {
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+
+        console.log(res);
+      }
+
+    })
+  },
+
   // 点击查看-弹出蒙层
-  examineTap: function () {
+  examineTap: function() {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)
     })
   },
-    // 点击蒙层-取消蒙层
-    cancelTap: function() {
-      var that = this;
-      that.setData({
-        showHide: (!that.data.showHide)
-      })
-    },
+  // 点击蒙层-取消蒙层
+  cancelTap: function() {
+    var that = this;
+    that.setData({
+      showHide: (!that.data.showHide)
+    })
+  },
 
   examineTap1: function() {
     var that = this;
