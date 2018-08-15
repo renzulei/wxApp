@@ -13,7 +13,8 @@
         <view class='headerBorder'></view>
       </view>
       <view class='header_text'>
-        <open-data type="userNickName" lang="zh_CN"></open-data>
+        <!-- <open-data type="userNickName" lang="zh_CN"></open-data> -->
+        {{userName}}
       </view>
     </view>
   </view>

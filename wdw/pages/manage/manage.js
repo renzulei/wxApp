@@ -88,7 +88,7 @@ Page({
         'cookie': authorizedCookie
       },
       success: (res) => {
-        console.log(res.data)
+        // console.log(res.data)
         try {
           util.catchHttpError(res);
         } catch (e) {
@@ -148,7 +148,7 @@ Page({
         data.orderStatusCode = 'RETURN'
       }
     }
-    console.log('请求参数data',data)
+    // console.log('请求参数data',data)
     wx.request({
       url: `${authService}/saleOrderShow/getAllSaleOrders?page=${page}&pageSize=${pageSize}`,
       method: 'POST',
@@ -158,7 +158,7 @@ Page({
       },
       data: JSON.stringify(data),
       success: (res) => {
-        console.log(page,res.data)
+        // console.log(page,res.data)
         this.setData({
           loading:false
         })
@@ -297,8 +297,9 @@ Page({
   },
   // 订单详情
   particularsTap: function(e) {
+    var orderHeaderId = e.currentTarget.dataset.headid;
     wx.navigateTo({
-      url: '/pages/particulars/particulars',
+      url: `/pages/particulars/particulars?orderHeaderId=${orderHeaderId}`,
     })
   },
   /**
@@ -344,7 +345,7 @@ Page({
     var total = this.data.total;
     var is_loading_done = this.data.is_loading_done;
     var loading = this.data.loading;
-    console.log(is_loading_done)
+    // console.log(is_loading_done)
     if (!is_loading_done && !loading) {
       this.handleFetch({
         pageSize: 10,

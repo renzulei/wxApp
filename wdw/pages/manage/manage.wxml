@@ -80,7 +80,7 @@
             <text class='odd_right'>{{item.createdDateShow}}</text>
           </view>
           <view class='site' data-headid='{{item.orderHeaderId}}' bindtap='particularsTap'>
-            <text>点击查看订单详情({{item.saleOrderLine.length}})</text>
+            <text>点击查看订单详情</text>
           </view>
         </view>
 

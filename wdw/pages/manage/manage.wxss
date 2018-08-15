@@ -121,7 +121,7 @@
   text-align: center;
   font-size: 24rpx;
   color: #fff;
-  font-weight: highter;
+  font-weight: lighter;
   margin: 34rpx auto 0;
 }
 

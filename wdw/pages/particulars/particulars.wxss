@@ -1,4 +1,4 @@
-
+@import '../../template/loading/loading.wxss';
 /* .container {} */
 
 .content {
@@ -45,15 +45,23 @@
 
 .list {
   width: 706rpx;
-  height: 186rpx;
   margin: 0 auto;
   border: 1px solid #E8E8E8;
   padding: 20rpx;
+  padding-bottom: 1rpx;
   font-size: 24rpx;
   font-weight: bold;
   margin-bottom: 30rpx;
 }
-
+.inlineblock{
+  width: 100%;
+  float: left;
+}
+.half{
+  float: left;
+  margin-bottom: 20rpx;
+  width: 50%;
+}
 .item {
   float: left;
   width: 33.33%;
@@ -68,14 +76,11 @@
   color: #576B95;
   padding-left: 10rpx;
 }
-
-.footer {
-  width: 100%;
-  line-height: 90rpx;
-  background-color: #F75959;
-  position: fixed;
-  bottom: 0;
+.hint {
+  line-height: 26rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  color: #939292;
+  font-size: 26rpx;
   text-align: center;
-  font-size: 30rpx;
-  color: #fff;
 }
