@@ -1,3 +1,5 @@
+<import src="../../template/empty/empty.wxml" />
+
 <view class="contaitner">
   <!-- table 区域======================================================== -->
   <view class='table clearfix'>
@@ -7,17 +9,17 @@
         <view class="section">
           <picker mode="region" bindchange="bindRegionChange">
             <view class="picker">
-              <input class="input" placeholder='请选择所在地区' value='{{ region }}'></input>
+              <input class="input" placeholder='请选择所在地区' value='{{ region }}' data-index="index" bindinput='input'></input>
             </view>
           </picker>
           <view class='img_icon icon'></view>
         </view>
-      </view>
+      </view> 
 
 
       <text class='size_color'>公司名称:</text>
       <view class='choice'>
-        <input class='input' placeholder='请输入商品名称'></input>
+        <input class='input' placeholder='请输入商品名称' bindinput='choiceTap'></input>
       </view>
     </view>
 
@@ -25,10 +27,10 @@
       <text class='size_color'>商品大类:</text>
       <view class="section">
         <view class="section">
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{arr}}">
+          <picker bindchange="commodityTap" value="{{ idx }}" range="{{ arr }}" range-key="label">
             <view class="picker">
               <view class='choice icon_position'>
-                <input class='ipt' value='{{arr[index]}}'></input>
+                <input class='ipt' value='{{ arr[idx].label }}' placeholder='请选择商品大类'></input>
                 <view class='icon'></view>
               </view>
             </view>
@@ -36,7 +38,7 @@
         </view>
       </view>
       <view class='btn clearfix'>
-        <view class='btn_search'>
+        <view class='btn_search' bindtap='searchTap'>
           <text>搜索</text>
         </view>
         <view class='btn_eliminate'>
@@ -79,4 +81,6 @@
     </view>
   </view>
 </view>
-<view class="footer {{ showHide?'footer_bgc':'' }}" catchtap='footerTap'>取消关注</view>
+<view class="footer {{ showHide?'footer_bgc':'' }}" wx:if="{{ data.length <= 0?'':'hide' }}" catchtap='footerTap'>取消关注
+</view>
+ <template is="emptyfill" wx:if="{{data.length == 0}}" />

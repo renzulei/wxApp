@@ -1,5 +1,5 @@
 
-/* @import '../../template/empty/empty.wxss'; */
+@import '../../template/empty/empty.wxss';
 
 .table_left, .table_right {
   width: 50%;

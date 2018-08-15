@@ -14,7 +14,7 @@
       <view class='list'>
         <text class='left'>收货人姓名:</text>
         <input class='input' placeholder='贝吉塔'></input>
-      </view>
+      </view> 
       <view class='list'>
         <text class='left'>手机号码:</text>
         <input class='input' placeholder='13246694946'></input>

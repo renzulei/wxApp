@@ -101,7 +101,7 @@ Page({
           console.error(e)
           return
         }
-        var json = res.data;
+        var json = res.data; 
         let arr = [{
           label:'请选择支付状态',
           value:''
@@ -109,7 +109,7 @@ Page({
         Object.keys(json).forEach((k, i) => {
           arr.push({ value: k, label: json[k] });
         })
-        // console.log(arr)
+        console.log(arr)
         this.setData({ payStatusArray: arr })
       }
     })

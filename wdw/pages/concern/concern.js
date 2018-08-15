@@ -7,18 +7,21 @@ const util = require('../../utils/util.js');
 Page({
 
   /**  
-   * 页面的初始数据
+   * 页面的初始数据 
    */
   data: {
     data: [], //数据
     box: true,
     pageSize: 10, //页面数据条数
     current: 1, //起始页
-    arr: ["11", "22"], //商品大类
-    index: 0,
-    region: ['广东省', '广州市', '海珠区'],
-    showHide: false,
+    // index: 0,
+    region: ['上海市', '静安区', '万荣路'],
+    showHide: false, //取消关注的显示隐藏
     json: [],
+     arr: [], //商品大类
+     idx: 0,
+     area: '',
+    company: '',
   },
 
   /**
@@ -30,7 +33,7 @@ Page({
       authorizedCookie: authorizedCookie
     })
     this.getData();
-    this.footerTap();
+    this.commodityTap();
   },
 
   // 获取动态数据 
@@ -55,28 +58,53 @@ Page({
         }
 
         // console.log(res.data);
-        var data = that.data.data;
-        data = res.data.content;
+        var data = res.data.content;
         data = data.map(function(item, i) {
           item = JSON.parse(item);
           item.checked = false;
           return item;
         })
-        console.log(data);
+        // console.log(data);
         that.setData({
           data: data,
         })
         // console.log(data);
       }
     })
-  },
+  }, 
 
   // 商品大类点击事件
-  bindPickerChange: function(e) {
-    console.log(e)
+  commodityTap: function(e) {
     var that = this;
-    that.setData({
-      index: e.detail.value
+    wx.request({
+      url: `${authService}/common/lookUpValue?code=MD.ITEM_MIDDLE_CATEGORY`,
+      data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'cookie': this.data.authorizedCookie
+      },
+      success: function(res) {
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        console.log(res);
+        var info = res.data;
+        var arr = [{
+          label: "请选择商品大类",
+          value:''
+        }];
+        Object.keys(info).forEach((k, i) => {
+          arr.push({ value: k, label: info[k] });
+        })
+        console.log(arr)
+        that.setData({
+          arr: arr
+        })
+      },
     })
   },
 
@@ -114,6 +142,7 @@ Page({
   },
 
 
+
   //取消关注点击事件
   footerTap: function(e) {
     var that = this;
@@ -123,67 +152,58 @@ Page({
       if (item.checked) {
         resourceBillId = item.resourceBillId
       }
-      if (item.checked == !false) {
-        wx.request({
-          url: `${authService}/resourceBill/submitFollow?resourceBillId=${resourceBillId}`,
-          data: {},
-          method: 'POST',
-          header: {
-            'content-type': 'application/json',
-            'cookie': this.data.authorizedCookie
-          },
-          success: function(res) {
-            try {
-              util.catchHttpError(res);
-            } catch (e) {
-              console.error(e)
-              return
-            }
-            var arr = res.data;
-            console.log(arr);
-          }
-        })
-      }
-      that.setData({
-        showHide: false
-      })
     })
-// ===二次渲染===
-    var current = this.data.current;
-    var pageSize = this.data.pageSize;
     wx.request({
-      url: `${authService}/resourceBill/queryMyFollowResBill?page=${current}&pageSize=${pageSize}`,
+      url: `${authService}/resourceBill/submitFollow?resourceBillId=${resourceBillId}`,
       data: {},
       method: 'POST',
       header: {
         'content-type': 'application/json',
         'cookie': this.data.authorizedCookie
       },
-      success: function (res) {
+      success: (res) => {
         try {
           util.catchHttpError(res);
         } catch (e) {
           console.error(e)
           return
         }
-
-        // console.log(res.data);
-        var data = that.data.data;
-        data = res.data.content;
-        data = data.map(function (item, i) {
-          item = JSON.parse(item);
-          item.checked = false;
-          return item;
-        })
-        console.log(data);
-        that.setData({
-          data: data,
-        })
-        // console.log(data);
+        var arr = res.data;
+        console.log(arr);
+        this.getData();
       }
+    })
+    that.setData({
+      showHide: false
     })
   },
 
+//搜索
+  searchTap: function(e){
+    var that = this;
+    var area = that.data.area;
+    var company = that.data.company;
+    console.log(area);
+    console.log(company);
+  },
+  //区域
+input: function(e) {
+  console.log(e.detail.value);
+  var area = e.detail.value;
+  this.setData({
+    area: area
+  })
+  console.log(area);
+},
+//公司名称
+  choiceTap: function(e) {
+    // console.log(e.detail.value);
+    var company = e.detail.value;
+    this.setData({
+      company: company
+    })
+    console.log(company);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
