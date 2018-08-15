@@ -10,57 +10,20 @@ Page({
    * 页面的初始数据 
    */
   data: {
-    num: 1,
+    page:1,
+    pageSize:10,
     payStatusArray: [], //支付状态
-    payStatusIndex: 0,
+    payStatusIndex: -1,
     saleOrderTypeArray:[],
-    saleOrderTypeIndex:0,
-    // motto: 'Hello World',
-    // userInfo: {},
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    navData: [{
-        text: '所有订单'
-      },
-      {
-        text: '已提交'
-      },
-      {
-        text: '已关闭'
-      },
-      {
-        text: '已取消'
-      },
-      {
-        text: '异常'
-      },
-      {
-        text: '已审核'
-      },
-      
-    ],
+    saleOrderTypeIndex:-1,
+    orderNumber:'',
+    itemName:'',
     currentTab: 0,
-    navScrollLeft: 0,
-    shop0: [
-      {
-      ding_dan: "YCD0018652",
-      jin_e: "￥6178430.0",
-      zhuang_tai: "待发货",
-      xiadan_shijian: "2018-01-26 15:36:21"
-    },    
-      {
-        ding_dan: "YCD0018652",
-        jin_e: "￥6178430.0",
-        zhuang_tai: "待发货",
-        xiadan_shijian: "2018-01-26 15:36:21"
-      },  
-      {
-        ding_dan: "YCD0018652",
-        jin_e: "￥6178430.0",
-        zhuang_tai: "待发货",
-        xiadan_shijian: "2018-01-26 15:36:21"
-      },  
-     ],
+    dataSource:[],//列表数据源
+    orderStatusCode:'',//订单状态
+    orderTypeCode:'',//订单类型
+    loading:false,//是否正在加载
+    is_loading_done: false, //是否加载完毕
   },
 
   //事件处理函数
@@ -83,6 +46,10 @@ Page({
     }
     this.getPayStatus(authorizedCookie)
     this.getConditions(contactId, authorizedCookie)
+    this.handleFetch({
+      page:1,
+      pageSize:10
+    })
   },
   // 支付状态请求
   getPayStatus: function (authorizedCookie){
@@ -102,10 +69,7 @@ Page({
           return
         }
         var json = res.data;
-        let arr = [{
-          label:'请选择支付状态',
-          value:''
-        }]
+        let arr = [];
         Object.keys(json).forEach((k, i) => {
           arr.push({ value: k, label: json[k] });
         })
@@ -133,9 +97,6 @@ Page({
         }
         var json = res.data;
         var saleOrderTypeArray = [{
-          value: '',
-          label: '请选择订单类型',
-        },{
           value: 'INTE',
           label: '意向订单',
         }]
@@ -145,7 +106,7 @@ Page({
               value: item.value,
               label: item.meaning,
             })
-          })
+          });
           this.setData({
             saleOrderTypeArray: saleOrderTypeArray,
             saleOrderStatusList: json.saleOrderStatusList
@@ -161,20 +122,177 @@ Page({
       }
     })
   },
-  switchNav(event) {
-    var cur = event.currentTarget.dataset.current;
-    if (this.data.currentTab != cur) {
+  // 获取订单列表数据
+  handleFetch:function({ page, pageSize, orderStatusCode, orderTypeCode }){
+    this.setData({
+      loading:true
+    })
+    var tradePartyId = util.getStorageSync('userDefaultTradeCompany') ? util.getStorageSync('userDefaultTradeCompany').tradePartyId : '';
+    var contactId = util.getStorageSync('userDefaultTradeCompany') ? util.getStorageSync('userDefaultTradeCompany').contactId:'';
+    var data = {}
+    data = {
+      custTradePartyId: tradePartyId,
+      custContactId: contactId,
+      orderNumber: this.data.orderNumber || "",
+      payStatusCode: this.data.payStatusCode || "",
+      itemName: this.data.itemName || "",
+      creationDateFrom: "",
+      creationDateTo: ""
+    }
+    if (orderStatusCode) {
+      data.orderStatusCode = orderStatusCode == "allorder" ? "" : orderStatusCode 
+    }
+    if (orderTypeCode){
+      data.orderTypeCode = orderTypeCode;
+      if (orderTypeCode == 'RET'){
+        data.orderStatusCode = 'RETURN'
+      }
+    }
+    console.log('请求参数data',data)
+    wx.request({
+      url: `${authService}/saleOrderShow/getAllSaleOrders?page=${page}&pageSize=${pageSize}`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'cookie': this.data.authorizedCookie
+      },
+      data: JSON.stringify(data),
+      success: (res) => {
+        console.log(page,res.data)
+        this.setData({
+          loading:false
+        })
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        var json = res.data;
+
+        if (json.code == "S") {
+          var dataSource = this.data.dataSource || [];          
+          if (json.saleOrderList.length < 10) {
+            this.setData({
+              is_loading_done: true
+            })
+          }
+          dataSource = dataSource.concat(json.saleOrderList)
+          this.setData({
+            dataSource: dataSource,
+            total: json.total
+          })
+        } else {
+          wx.showToast({
+            title: json.msg,
+            icon: "none",
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
+  switchNav(e) {
+    var orderStatusCode = e.currentTarget.dataset.code;
+    var index = e.currentTarget.dataset.current;
+    this.setData({
+      orderStatusCode: orderStatusCode
+    })
+    if (this.data.currentTab != index) {
+      this.toInit();
       this.setData({
-        currentTab: cur
+        currentTab: index
+      })
+      this.handleFetch({
+        page:1,
+        pageSize:10,
+        orderStatusCode: orderStatusCode,
+        orderTypeCode: this.data.orderTypeCode
       })
     }
   },
-  // ------------------------------------------------------------------------------------------------------------
-  bindPickerChange: function(e) {
-    console.log(e)
-    var that = this;
-    that.setData({
-      index: e.detail.value
+  // 还原到初始数据
+  toInit:function(){
+    this.setData({
+      dataSource: [],
+      page: 1,
+      is_loading_done: false
+    })
+  },
+  // 订单编号输入改变
+  bindOrderNumberchange:function(e){
+    var orderNumber = e.detail.value;
+    this.setData({
+      orderNumber: orderNumber
+    })
+  },
+  // 商品名称输入改变
+  bindItemNamechange: function (e) {
+    var itemName = e.detail.value;
+    this.setData({
+      itemName: itemName
+    })
+  },
+  // 支付状态改变触发事件
+  bindPayStatusChange: function(e) {
+    var index = e.detail.value;
+    this.setData({
+      payStatusIndex: index
+    });
+    this.data.payStatusArray.map((item,i)=>{
+      if(index == i){
+        this.setData({
+          payStatusCode:item.value //支付状态
+        })
+      }
+    })
+  },
+  // 订单类型改变触发事件
+  bindSaleOrderTypeChange: function (e) {
+    this.setData({
+      orderNumber: '',
+      itemName: '',
+      payStatusIndex: -1,
+      payStatusCode: '',
+      orderTypeCode: ''
+    })
+    var index = e.detail.value;
+    this.toInit();
+    this.setData({
+      saleOrderTypeIndex: index,
+    });
+    this.data.saleOrderTypeArray.map((item, i) => {
+      if (index == i) {
+        this.setData({
+          orderTypeCode: item.value //订单类型
+        })
+        this.handleFetch({
+          page: 1,
+          pageSize: 10,
+          orderTypeCode: item.value
+        })
+      }
+    })
+  },
+  // 清空筛选条件
+  resetSearch:function(){
+    this.setData({
+      orderNumber:'',
+      itemName:'',
+      payStatusIndex:-1,
+      payStatusCode:'',
+      saleOrderTypeIndex:-1,
+      orderTypeCode:''
+    })
+  },
+  // 搜索
+  handleSearch:function(){
+    this.toInit();
+    this.handleFetch({
+      pageSize: 10,
+      page: 1,
+      orderStatusCode: this.data.orderStatusCode,
+      orderTypeCode: this.data.orderTypeCode
     })
   },
   // 订单详情
@@ -182,17 +300,6 @@ Page({
     wx.navigateTo({
       url: '/pages/particulars/particulars',
     })
-  },
-
-  // nav点击事件
-  navTap: function(e) {
-    console.log(e)
-    var num = this.data.num;
-    this.setData({
-      num: e.target.dataset.num
-    })
-
-
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -233,7 +340,22 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    var page = this.data.page;
+    var total = this.data.total;
+    var is_loading_done = this.data.is_loading_done;
+    var loading = this.data.loading;
+    console.log(is_loading_done)
+    if (!is_loading_done && !loading) {
+      this.handleFetch({
+        pageSize: 10,
+        page: page + 1,
+        orderStatusCode: this.data.orderStatusCode,
+        orderTypeCode: this.data.orderTypeCode
+      })
+      this.setData({
+        page: page + 1
+      })
+    }
   },
 
   /**

@@ -1,0 +1,74 @@
+.ant-spin {
+  color: #108ee9;
+  vertical-align: middle;
+  text-align: center;
+  opacity: 0;
+  position: absolute;
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  font-size: 12px;
+  display: none;
+}
+.loading-wrap{
+  text-align: center;
+  margin: 20rpx 0;
+}
+.ant-spin-spinning {
+  opacity: 1;
+  position: static;
+  display: inline-block;
+}
+
+.ant-spin-dot {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  animation: antRotate 1.2s infinite linear;
+}
+
+.ant-spin-dot text {
+  width: 9px;
+  height: 9px;
+  border-radius: 100%;
+  background-color: #108ee9;
+  transform: scale(0.75);
+  display: block;
+  position: absolute;
+  opacity: 0.3;
+  animation: antSpinMove 1s infinite linear alternate;
+  transform-origin: 50% 50%;
+}
+
+.ant-spin-dot text:nth-child(1) {
+  left: 0;
+  top: 0;
+}
+
+.ant-spin-dot text:nth-child(2) {
+  right: 0;
+  top: 0;
+  animation-delay: 0.4s;
+}
+
+.ant-spin-dot text:nth-child(3) {
+  right: 0;
+  bottom: 0;
+  animation-delay: 0.8s;
+}
+
+.ant-spin-dot text:nth-child(4) {
+  left: 0;
+  bottom: 0;
+  animation-delay: 1.2s;
+}
+@keyframes antRotate {
+  to {
+    transform: rotate(405deg);
+  }
+}
+@keyframes antSpinMove {
+  to {
+    opacity: 1;
+  }
+}
