@@ -1,4 +1,5 @@
 <import src="../../template/empty/empty.wxml" />
+<import src="../../template/loading/loading.wxml" />
 
 <view class="contaitner">
   <!-- table 区域======================================================== -->
@@ -6,46 +7,47 @@
     <view class='table_left'>
       <text class='size_color'>订单编号:</text>
       <view class='choice'>
-        <input class='input' placeholder='请输入订单编号'></input>
+        <input class='input' bindinput='bindOrderNumberchange' value='{{orderNumber}}' placeholder='请输入订单编号'></input>
       </view>
       <text class='size_color'>商品名称:</text>
       <view class='choice'>
-        <input class='input' placeholder='请输入商品名称'></input>
+        <input class='input' bindinput='bindItemNamechange' value='{{itemName}}' placeholder='请输入商品名称'></input>
       </view>
     </view>
 
     <view class='table_right'>
-      <text class='size_color'>支付状态:</text>
-      <view class="section">
-        <view class="section">
-          <picker bindchange="bindPickerChange" value='{{payStatusIndex}}' range="{{payStatusArray}}" range-key='label'>
-            <view class="picker">
-              <view class='choice icon_position'>
-                <view class='fl'>{{payStatusArray[payStatusIndex].label}}</view>
-                <view class='icon'></view>
-              </view>
-            </view>
-          </picker>
-        </view>
-      </view>
       <text class='size_color'>订单类型:</text>
       <view class="section">
         <view class="section">
-          <picker value = '{{saleOrderTypeIndex}}' range='{{saleOrderTypeArray}}' range-key='label'>
+          <picker bindchange='bindSaleOrderTypeChange' value = '{{saleOrderTypeIndex}}' range='{{saleOrderTypeArray}}' range-key='label'>
             <view class="picker">
               <view class='choice icon_position'>
-                <view class='fl'>{{saleOrderTypeArray[saleOrderTypeIndex].label}}</view>
+                <view class='fl'>{{saleOrderTypeArray[saleOrderTypeIndex].label||'请选择订单类型'}}</view>
                 <view class='icon'></view>
               </view>
             </view>
           </picker>
         </view>
       </view>
+      <text class='size_color'>支付状态:</text>
+      <view class="section">
+        <view class="section">
+          <picker bindchange="bindPayStatusChange" value='{{payStatusIndex}}' range="{{payStatusArray}}" range-key='label'>
+            <view class="picker">
+              <view class='choice icon_position'>
+                <view class='fl'>{{payStatusArray[payStatusIndex].label||'请选择支付状态'}}</view>
+                <view class='icon'></view>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      
       <view class='btn clearfix'>
-        <view class='btn_search'>
+        <view class='btn_search' bindtap='handleSearch'>
           <text>搜索</text>
         </view>
-        <view class='btn_eliminate'>
+        <view class='btn_eliminate' bindtap='resetSearch'>
           <text>清除</text>
         </view>
       </view>
@@ -56,78 +58,36 @@
     <!-- tab导航栏 -->
 
     <view class='nav'>
-      <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
-        <view class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
+      <view class="nav-item {{currentTab == 0 ?'active':''}}" data-code="allorder" data-current='0' bindtap="switchNav">全部订单</view>
+      <block wx:for="{{saleOrderStatusList}}" wx:key="{{index}}" wx:if='{{orderTypeCode == "STD"}}'>
+        <view class="nav-item {{currentTab == index+1 ?'active':''}}" data-code="{{item.value}}" data-current='{{index+1}}' bindtap="switchNav">{{item.meaning}}</view>
       </block>
     </view>
     <!-- 内容 -->
     <view class='swiper_box'>
       <view class='content_box'>
-        <view class='header' wx:for="{{ shop0 }}" wx:for-item="navItem" wx:key="{{ idx }}">
+        <view class='header' wx:for="{{ dataSource }}" wx:key="{{index}}">
           <view class='odd'>
-            <text class='odd_left'>意向订单号:</text>
-            <text class='odd_right'>{{ navItem.ding_dan }}</text>
+            <text class='odd_left'>{{item.orderTypeMeaning}}号:</text>
+            <text class='odd_right'>{{item.orderNumber }}</text>
             <text class='odd_left'>订单金额:</text>
-            <text class='odd_right'>{{ navItem.jin_e }}</text>
+            <text class='odd_right'>{{ item.orderTotalAmount }}</text>
           </view>
           <view class='state'>
-            <text class='odd_left'>订单状态:</text>
-            <text class='odd_right'>{{ navItem.zhuang_tai }}</text>
+            <text class='odd_left'>支付状态:</text>
+            <text class='odd_right'>{{item.payStatusMeaning}}</text>
             <text class='odd_left'>下单时间:</text>
-            <text class='odd_right'>{{ navItem.xiadan_shijian }}</text>
+            <text class='odd_right'>{{item.createdDateShow}}</text>
           </view>
-          <view class='site' bindtap='particularsTap'>
-            <text>点击查看订单详情(2)</text>
+          <view class='site' data-headid='{{item.orderHeaderId}}' bindtap='particularsTap'>
+            <text>点击查看订单详情</text>
           </view>
         </view>
-        <template is="emptyfill" wx:if="{{ shop0.length==0 }}" />
-        <view class='hint'>没有更多数据了</view>
+
+        <template is="loading" wx:if="{{loading}}" />
+        <template is="emptyfill" wx:if="{{ dataSource.length==0 }}" />
+        <view class='hint' wx:if='{{(dataSource.length == total)&&dataSource.length!=0}}'>没有更多数据了╮(╯▽╰)╭</view>
       </view>
     </view>
   </view>
 </view>
-
-
-
-
-
-
-
-
-
-<!-- ------------------------- -->
-<!-- nav 区域=============================================================== -->
-<!-- <view class='nav_box'>
-    <view class='nav' catchtap='navTap'>
-      <view class="nav_already {{ num==1?'active':''}}" data-num='1'>所有订单</view>
-      <view class="nav_already {{ num==2?'active':'' }}" data-num='2'>已提交</view>
-      <view class="nav_already {{ num==3?'active':'' }}" data-num='3'>已关闭</view>
-      <view class="nav_already {{ num==4?'active':'' }}" data-num='4'>已取消</view>
-      <view class="nav_already {{ num==5?'active':'' }}" data-num='5'>异常</view>
-      <view class="nav_already {{ num==6?'active':'' }}" data-num='6'>已审核</view>
-    </view>
-  </view> -->
-
-<!-- header 区域============================================================ -->
-<!-- <view class='content_box'>
-    <view class='header' wx:for="{{ items }}" wx:key="{{ item }}">
-      <view class='odd'>
-        <text class='odd_left'>意向订单号:</text>
-        <text class='odd_right'>{{ item.ding_dan }}</text>
-        <text class='odd_left'>订单金额:</text>
-        <text class='odd_right'>{{ item.jin_e }}</text>
-      </view>
-      <view class='state'>
-        <text class='odd_left'>订单状态:</text>
-        <text class='odd_right'>{{ item.zhuang_tai }}</text>
-        <text class='odd_left'>下单时间:</text>
-        <text class='odd_right'>{{ item.xiadan_shijian }}</text>
-      </view>
-      <view class='site' bindtap='particularsTap'>
-        <text>点击查看订单详情(2)</text>
-      </view>
-    </view>
-    <template is="emptyfill" wx:if="{{ items.length==0 }}" />
-  <view class='hint'>没有更多数据了</view>
-  </view> 
-    <template is="emptyfill" wx:if="{{ items.length==0 }}" /> -->

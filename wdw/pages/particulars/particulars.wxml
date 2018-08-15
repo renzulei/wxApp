@@ -1,148 +1,61 @@
+<import src="../../template/loading/loading.wxml" />
 <view class="container">
   <view class='content'>
-    <view class='header' wx:for="{{ list }}" wx:key="{{ name }}">
+    <view class='header'>
       <view class='odd'>
-        <text class='odd_left'>意向订单号:</text>
-        <text class='odd_right'>{{ item.dingdan_hao }}</text>
+        <text class='odd_left'>{{dataSource.orderTypeMeaning}}号:</text>
+        <text class='odd_right'>{{dataSource.orderNumber}}</text>
         <text class='odd_left'>订单金额:</text>
-        <text class='odd_right'>{{ item.jia_ge }}</text>
+        <text class='odd_right'>{{dataSource.orderTotalAmount}}</text>
       </view>
       <view class='state'>
-        <text class='odd_left'>订单状态:</text>
-        <text class='odd_right'>{{ item.zhuang_tai }}</text>
+        <text class='odd_left'>支付状态:</text>
+        <text class='odd_right'>{{dataSource.payStatusMeaning}}</text>
         <text class='odd_left'>下单时间:</text>
-        <text class='odd_right'>{{ item.shi_jian }}</text>
+        <text class='odd_right'>{{dataSource.createdDateShow}}</text>
       </view>
       <view class='site'>
         <text class='odd_left'>收货地址:</text>
-        <text class='odd_right'>{{ item.di_zhi }}</text>
+        <text class='odd_right'>{{dataSource.custContact.province+dataSource.custContact.county+dataSource.custContact.address}}</text>
       </view>
     </view>
+    <view class='wrap'>
+      <view class='list clearfix' wx:for='{{tableSource}}' wx:key='{{index}}'>
+        <view class='inlineblock'>
+          <view class='item'>
+            <text class='item_left'>序号:</text>
+            <text class='item_right'>{{index}}</text>
+          </view>
+          <view class='half'>
+            <text class='item_left'>产品:</text>
+            <text class='item_right'>{{item.itemName}}</text>
+          </view>
+        </view>
+        <view class='item'>
+          <text class='item_left'>吨数:</text>
+          <text class='item_right'>{{item.orderQuantity}}</text>
+        </view>
+        <view class='item'>
+          <text class='item_left'>{{item.soItemAttributeList[0].attributeName}}:</text>
+          <text class='item_right'>{{item.soItemAttributeList[0].itemAttrValue}}</text>
+        </view>
+        <view class='item'>
+          <text class='item_left'>{{item.soItemAttributeList[1].attributeName}}:</text>
+          <text class='item_right'>{{item.soItemAttributeList[1].itemAttrValue}}</text>
+        </view>
+        
 
-    <view class='list'>
-      <view class='item clearfix'>
-        <text class='item_left'>序号:</text>
-        <text class='item_right'>1</text>
+        <view class='item'>
+          <text class='item_left'>单价:</text>
+          <text class='item_right'>{{item.orderPrice}}</text>
+        </view>
+        <view class='item'>
+          <text class='item_left'>金额:</text>
+          <text class='item_right'>{{item.amount}}</text>
+        </view>
       </view>
-      <view class='item'>
-        <text class='item_left'>幅宽mm:</text>
-        <text class='item_right'>111</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>件数(不含运费):</text>
-        <text class='item_right'>8</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>切长mm:</text>
-        <text class='item_right'>10</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>已创建订单吨数:</text>
-        <text class='item_right'>5</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>单价:</text>
-        <text class='item_right'>7000</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>金额:</text>
-        <text class='item_right'>9874983.0</text>
-      </view>
+      <template is="loading" wx:if="{{loading}}" />
+      <view class='hint' wx:if='{{(tableSource.length == total)&&tableSource.length!=0}}'>没有更多数据了╮(╯▽╰)╭</view>
     </view>
-
-    <view class='list'>
-      <view class='item clearfix'>
-        <text class='item_left'>序号:</text>
-        <text class='item_right'>1</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>幅宽mm:</text>
-        <text class='item_right'>111</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>件数(不含运费):</text>
-        <text class='item_right'>8</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>切长mm:</text>
-        <text class='item_right'>10</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>已创建订单吨数:</text>
-        <text class='item_right'>5</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>单价:</text>
-        <text class='item_right'>7000</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>金额:</text>
-        <text class='item_right'>9874983.0</text>
-      </view>
-    </view>
-
-    <view class='list'>
-      <view class='item clearfix'>
-        <text class='item_left'>序号:</text>
-        <text class='item_right'>1</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>幅宽mm:</text>
-        <text class='item_right'>111</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>件数(不含运费):</text>
-        <text class='item_right'>8</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>切长mm:</text>
-        <text class='item_right'>10</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>已创建订单吨数:</text>
-        <text class='item_right'>5</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>单价:</text>
-        <text class='item_right'>7000</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>金额:</text>
-        <text class='item_right'>9874983.0</text>
-      </view>
-    </view>
-
-    <view class='list'>
-      <view class='item clearfix'>
-        <text class='item_left'>序号:</text>
-        <text class='item_right'>1</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>幅宽mm:</text>
-        <text class='item_right'>111</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>件数(不含运费):</text>
-        <text class='item_right'>8</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>切长mm:</text>
-        <text class='item_right'>10</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>已创建订单吨数:</text>
-        <text class='item_right'>5</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>单价:</text>
-        <text class='item_right'>7000</text>
-      </view>
-      <view class='item'>
-        <text class='item_left'>金额:</text>
-        <text class='item_right'>9874983.0</text>
-      </view>
-    </view>
-
-    <view class='footer'>确认收货</view>
   </view>
 </view>

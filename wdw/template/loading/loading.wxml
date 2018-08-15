@@ -1,0 +1,13 @@
+<template name="loading">
+<view class='loading-wrap'>
+  <view class="ant-spin ant-spin-spinning">
+    <view class="ant-spin-dot">
+      <text></text>
+      <text></text>
+      <text></text>
+      <text></text>
+      
+    </view>
+  </view>
+</view>
+</template>

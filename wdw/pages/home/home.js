@@ -1,8 +1,6 @@
-var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp();
 var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
-var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
 // pages/home/home.js
 Page({
@@ -18,10 +16,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-  // this.getData();
     let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
+    var userName = util.getStorageSync('userName');
     this.setData({
-      authorizedCookie: authorizedCookie
+      authorizedCookie: authorizedCookie,
+      userName:userName
     })
   },
   // 点击跳转到客户收货管理页面
