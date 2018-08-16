@@ -7,9 +7,9 @@
       <text class='size_color'>区域:</text>
       <view class='choice'>
         <view class="section">
-          <picker mode="region" bindchange="bindRegionChange">
+          <picker mode="region" bindchange="changeAddress">
             <view class="picker">
-              <input class="input" placeholder='请选择所在地区' value='{{ region }}' data-index="index" bindinput='input'></input>
+            <view class='input'>{{ area || "请选择所在区域" }}</view>
             </view>
           </picker>
           <view class='img_icon icon'></view>
@@ -19,7 +19,7 @@
 
       <text class='size_color'>公司名称:</text>
       <view class='choice'>
-        <input class='input' placeholder='请输入商品名称' bindinput='choiceTap'></input>
+        <input class='input' placeholder='请输入商品名称' value='{{ partyName }}' bindinput='corName'></input>
       </view>
     </view>
 
@@ -27,10 +27,10 @@
       <text class='size_color'>商品大类:</text>
       <view class="section">
         <view class="section">
-          <picker bindchange="commodityTap" value="{{ idx }}" range="{{ arr }}" range-key="label">
+          <picker bindchange="commodityTap" value="{{ categoryIndex }}" range="{{ arr }}" range-key="label">
             <view class="picker">
               <view class='choice icon_position'>
-                <input class='ipt' value='{{ arr[idx].label }}' placeholder='请选择商品大类'></input>
+                <view class='input'>{{ arr[categoryIndex].label || "请选择商品大类" }}</view>
                 <view class='icon'></view>
               </view>
             </view>
@@ -38,10 +38,10 @@
         </view>
       </view>
       <view class='btn clearfix'>
-        <view class='btn_search' bindtap='searchTap'>
+        <view class='btn_search' bindtap='handleSearch'>
           <text>搜索</text>
         </view>
-        <view class='btn_eliminate'>
+        <view class='btn_eliminate' bindtap='clearUp'>
           <text>清除</text>
         </view>
       </view>

@@ -3,17 +3,23 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
- 
+
 // pages/enterprise/enterprise.js
 Page({
 
-  /** 
+  /**  
    * 页面的初始数据
    */
   data: {
     list: [],
     showHide: true,
-    img: "/images/hide.png"
+    busLicenceAttchId: '', //营业执照
+    organizationAttchId: '', //组织机构代码
+    taxAttchId: '', //税务登记证
+    accountAttchId: '', //开户许可证
+    billingAttchId: '', //开票资料
+    orgAuthAttchId: '', //企业认证授权书
+    enchashmentAcctRecord: '', //提现账户备案
   },
 
   /**
@@ -25,7 +31,7 @@ Page({
       authorizedCookie: authorizedCookie
     })
     this.getData();
-    this.img();
+    this.imgSrc();
   },
 
   // 企业认证
@@ -60,32 +66,31 @@ Page({
     })
   },
 
-
-  img: function(e) {
-    wx.request({
-      url: `${authService}/ossObject/download?objectId=2311`,
-      data: {},
-      method: 'POST',
-      header: {
-        'content-type': 'application/json',
-        'cookie': this.data.authorizedCookie
-      },
-      success: function(res) {
-        try {
-          util.catchHttpError(res);
-        } catch (e) {
-          console.error(e)
-          return
-        }
-
-        console.log(res);
+imgSrc: function(e) {
+  wx.request({
+    url: `${authService}/ossObject/download?objectId=2306`,
+    data: {},
+    method: 'GET',
+    header: {
+      'content-type': 'application/json',
+      'cookie': this.data.authorizedCookie
+    },
+    success: (res) => {
+      try {
+        util.catchHttpError(res);
+      } catch (e) {
+        console.error(e)
+        return
       }
+      console.log(res);
+    }
+  })
+},
 
-    })
-  },
+
 
   // 点击查看-弹出蒙层
-  examineTap: function() {
+  handleViewImage: function() {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)
@@ -93,13 +98,6 @@ Page({
   },
   // 点击蒙层-取消蒙层
   cancelTap: function() {
-    var that = this;
-    that.setData({
-      showHide: (!that.data.showHide)
-    })
-  },
-
-  examineTap1: function() {
     var that = this;
     that.setData({
       showHide: (!that.data.showHide)

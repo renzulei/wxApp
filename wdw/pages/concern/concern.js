@@ -15,13 +15,13 @@ Page({
     pageSize: 10, //页面数据条数
     current: 1, //起始页
     // index: 0,
-    region: ['上海市', '静安区', '万荣路'],
     showHide: false, //取消关注的显示隐藏
     json: [],
-     arr: [], //商品大类
-     idx: 0,
-     area: '',
-    company: '',
+    arr: [], //商品大类
+    categoryIndex: -1, //商品大类序号
+    partyName: '', //公司名称
+    area: "", //区域数组
+    categoryID: "", //商品大类
   },
 
   /**
@@ -33,7 +33,7 @@ Page({
       authorizedCookie: authorizedCookie
     })
     this.getData();
-    this.commodityTap();
+    this.categoryList();
   },
 
   // 获取动态数据 
@@ -71,10 +71,9 @@ Page({
         // console.log(data);
       }
     })
-  }, 
-
-  // 商品大类点击事件
-  commodityTap: function(e) {
+  },
+  //商品大类和区域搜索的请求数据
+  categoryList: function() {
     var that = this;
     wx.request({
       url: `${authService}/common/lookUpValue?code=MD.ITEM_MIDDLE_CATEGORY`,
@@ -93,12 +92,12 @@ Page({
         }
         console.log(res);
         var info = res.data;
-        var arr = [{
-          label: "请选择商品大类",
-          value:''
-        }];
+        var arr = [];
         Object.keys(info).forEach((k, i) => {
-          arr.push({ value: k, label: info[k] });
+          arr.push({
+            value: k,
+            label: info[k]
+          });
         })
         console.log(arr)
         that.setData({
@@ -134,15 +133,6 @@ Page({
 
   },
 
-  bindRegionChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value
-    })
-  },
-
-
-
   //取消关注点击事件
   footerTap: function(e) {
     var that = this;
@@ -177,32 +167,86 @@ Page({
       showHide: false
     })
   },
-
-//搜索
-  searchTap: function(e){
-    var that = this;
-    var area = that.data.area;
-    var company = that.data.company;
-    console.log(area);
-    console.log(company);
-  },
   //区域
-input: function(e) {
-  console.log(e.detail.value);
-  var area = e.detail.value;
-  this.setData({
-    area: area
-  })
-  console.log(area);
-},
-//公司名称
-  choiceTap: function(e) {
+  changeAddress: function(e) {
     // console.log(e.detail.value);
-    var company = e.detail.value;
+    var list = e.detail.value;
+    // console.log(list);
+    var area;
+    for (var k in list) {
+      var area = list[0] + list[1] + list[2];
+    }
+    // console.log(area)
     this.setData({
-      company: company
+      area: area
     })
-    console.log(company);
+    console.log(area);
+  },
+
+  // 商品大类点击事件
+  commodityTap: function(e) {
+    console.log(e)
+    var categoryID;
+    var index = e.detail.value;
+    this.data.arr.map((item, i) => {
+      if (index == i) {
+        categoryID = item.value;
+      }
+    })
+    this.setData({
+      categoryIndex: index,
+      categoryID: categoryID
+    })
+    console.log(categoryID);
+  },
+
+  //搜索
+  handleSearch(e) {
+    var data = {};
+    if (this.setData.area) {
+      data.area = this.setData.area;
+      if (this.setData.categoryID) {
+        data.itemCategoryCode = this.setData.categoryID;
+        if (this.setData.partyName) {
+          data.partyName = this.setData.partyName
+        }
+      } else if (this.setData.partyName) {
+        data.partyName = this.setData.partyName
+      }
+    } else if (this.setData.categoryID) {
+      data.itemCategoryCode = this.setData.categoryID;
+      if (this.setData.partyName) {
+        data.partyName = this.setData.partyName
+      }
+    } else if (this.setData.partyName) {
+      data.partyName = this.setData.partyName
+    }
+    this.getData({
+      pageSize: 10,
+      current: 1,
+      data: data
+    });
+    console.log(data);
+  },
+
+  //公司名称
+  corName: function(e) {
+    // console.log(e.detail.value);
+    var partyName = e.detail.value;
+    this.setData({
+      partyName: partyName
+    })
+    console.log(partyName);
+  },
+
+  //清除
+  clearUp: function(e){
+    this.setData({
+      categoryIndex: '',
+      categoryID: "",
+      partyName: '',
+      area: "",
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
