@@ -52,29 +52,33 @@
 <view class="border"></view>
 <!-- ======================内容区====================================== -->
 <view class='content'>
-  <view class='box' wx:for="{{ data }}" wx:key="{{ tradePartyId }}">
-    <view class='box_content clearfix'>
-      <view>
+  <!-- <view class='box'> -->
+    <view class='box_content clearfix' wx:for="{{ data }}" wx:key="{{ tradePartyId }}">
+      <view class=''>
         <text class='box_text'>区域：</text>
         <text>{{ item.province }}</text>
         <text class='box_text right'>商品大类：</text>
         <text>{{ item.categoryName }}</text>
       </view>
+      
       <view>
         <text class='box_text'>联系人：</text>
         <text>{{ item.contactName }}</text>
         <text class='box_text right'>联系方式：</text>
         <text>{{ item.contactPhone }}</text>
       </view>
+
+
       <view>
         <text class='box_text'>公司名称：</text>
         <text>{{ item.partyName }}</text>
       </view>
+      
       <view>
         <text class='box_text'>公司地址：</text>
         <text>{{ item.address }}</text>
       </view>
-    </view>
+    <!-- </view> -->
     <view class='box_icon' catchtap='iconTap' data-index='{{index}}'>
       <image wx:if="{{!item.checked}}" src='/images/uncheck.png'></image>
       <image wx:else src='/images/checked.png'></image>

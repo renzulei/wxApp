@@ -32,18 +32,16 @@ Page({
     this.setData({
       authorizedCookie: authorizedCookie
     })
-    this.getData();
+    this.getData({ page:1, pageSize:10, data:{} });
     this.categoryList();
   },
 
   // 获取动态数据 
-  getData: function(e) {
+  getData: function({page, pageSize, data}) {
     var that = this;
-    var current = this.data.current;
-    var pageSize = this.data.pageSize;
     wx.request({
-      url: `${authService}/resourceBill/queryMyFollowResBill?page=${ current }&pageSize=${ pageSize }`,
-      data: {},
+      url: `${authService}/resourceBill/queryMyFollowResBill?page=${ page }&pageSize=${ pageSize }`,
+      data: JSON.stringify(data),
       method: 'POST',
       header: {
         'content-type': 'application/json',
@@ -169,18 +167,14 @@ Page({
   },
   //区域
   changeAddress: function(e) {
-    // console.log(e.detail.value);
     var list = e.detail.value;
-    // console.log(list);
     var area;
     for (var k in list) {
       var area = list[0] + list[1] + list[2];
     }
-    // console.log(area)
     this.setData({
       area: area
     })
-    console.log(area);
   },
 
   // 商品大类点击事件
@@ -197,36 +191,35 @@ Page({
       categoryIndex: index,
       categoryID: categoryID
     })
-    console.log(categoryID);
+    // console.log(categoryID);
   },
 
   //搜索
   handleSearch(e) {
     var data = {};
-    if (this.setData.area) {
-      data.area = this.setData.area;
-      if (this.setData.categoryID) {
-        data.itemCategoryCode = this.setData.categoryID;
-        if (this.setData.partyName) {
-          data.partyName = this.setData.partyName
+    if (this.data.area) {
+      data.area = this.data.area;
+      if (this.data.categoryID) {
+        data.itemCategoryCode = this.data.categoryID;
+        if (this.data.partyName) {
+          data.partyName = this.data.partyName
         }
-      } else if (this.setData.partyName) {
-        data.partyName = this.setData.partyName
+      } else if (this.data.partyName) {
+        data.partyName = this.data.partyName
       }
-    } else if (this.setData.categoryID) {
-      data.itemCategoryCode = this.setData.categoryID;
-      if (this.setData.partyName) {
-        data.partyName = this.setData.partyName
+    } else if (this.data.categoryID) {
+      data.itemCategoryCode = this.data.categoryID;
+      if (this.data.partyName) {
+        data.partyName = this.data.partyName
       }
-    } else if (this.setData.partyName) {
-      data.partyName = this.setData.partyName
+    } else if (this.data.partyName) {
+      data.partyName = this.data.partyName
     }
     this.getData({
       pageSize: 10,
-      current: 1,
+      page: 1,
       data: data
     });
-    console.log(data);
   },
 
   //公司名称
@@ -236,7 +229,7 @@ Page({
     this.setData({
       partyName: partyName
     })
-    console.log(partyName);
+    // console.log(partyName);
   },
 
   //清除
