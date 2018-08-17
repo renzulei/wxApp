@@ -58,12 +58,12 @@
       <view class='hint'>
         <text class='hint_color'>(如需修改收货地址请点击右方编辑按钮)</text>
       </view>
-      <!-- 跳转到编辑收货地址页 -->
-      
-        <view class='footer_icon'>
-          <image src='/images/del.png'></image>
-        </view>
-     
+      <!-- 弹窗选择收货地址 -->
+
+      <view class='footer_icon' bindtap='showModalS'>
+        <image src='/images/del.png'></image>
+      </view>
+
     </view>
 
     <view class='footer_title'>
@@ -93,6 +93,38 @@
       </view>
       <view wx:else class='bottom_right disabled'>
         <text>填写规格</text>
+      </view>
+    </view>
+
+    <view class='changeAddr {{visibleS?"origin":""}}'>
+      <view class='w80'>
+        <view class='tit'>请选择业务主体与收货地址 <text class='close' bindtap='hideModalS'>x</text></view>
+        <view class='inner'>
+          <view class='clearfix'>
+            <view class='k'>业务主体:</view>
+            <view class='v'>
+              <picker range='{{dataS}}' value='{{partyIndex}}' range-key='partyName' bindchange='partyChange'>
+                <view class="picker">
+                  {{dataS[partyIndex].partyName || '--请选择业务主体--'}}
+                </view>
+              </picker>
+            </view>
+          </view>
+          <view class='clearfix'>
+            <view class='k'>收货地址:</view>
+            <view class='v'>
+              <picker range='{{contacts}}' value='{{addrIndex}}' range-key='address' bindchange='addrChange'>
+                <view class="picker">
+                  {{contacts[addrIndex].address || '--请选择收货地址--'}}
+                </view>
+              </picker>
+            </view>
+          </view>
+          <view class='text-right'>
+            <view class='confirm {{canSubmitT&&canSubmit&&contacts.length?"active":""}}' bindtap='handleOk'>确定</view>
+            <view class='cancel' bindtap='hideModalS'>取消</view>
+          </view>
+          </view>
       </view>
     </view>
   </view>

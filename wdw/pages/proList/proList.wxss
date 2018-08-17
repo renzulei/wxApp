@@ -442,3 +442,111 @@
   background-color: #f75959;
   color: #fff;
 }
+
+.changeAddr{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  transform: scale(0,0);
+  transition: all 0.4s;
+}
+.changeAddr.origin{
+   transform: scale(1,1);
+}
+.w80{
+  background-color: #fff;
+  /* padding: 20rpx; */
+  width: 700rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 350rpx;
+}
+
+.changeAddr .tit{
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #e4e4e4;
+  font-size: 26rpx;
+}
+.changeAddr .inner{
+  padding: 30rpx;
+}
+.changeAddr .clearfix{
+  height: 50rpx;
+  margin-bottom: 30rpx;
+}
+.changeAddr .k{
+  display: inline-block;
+  width: 160rpx;
+  font-size: 26rpx;
+  vertical-align: middle;
+  text-align: right;
+  padding-right: 20rpx;
+}
+.changeAddr .v{
+  width: 400rpx;
+  display: inline-block;
+  vertical-align: middle
+}
+.changeAddr .v picker{
+  position: relative;
+  height: 50rpx;
+  border: 1rpx solid #e4e4e4;
+  border-radius: 5rpx;
+}
+.changeAddr .v picker:after{
+  content: '';
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  border-top: 8rpx solid #666;
+  border-bottom: none;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+}
+.text-right{
+  text-align: right;
+}
+.changeAddr .confirm,.changeAddr .cancel{
+  display: inline-block;
+  width: 100rpx;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 50rpx;
+  margin-right: 20rpx;
+  color: #333;
+  background-color: #fff;
+  border: 1rpx solid #ddd;
+}
+.changeAddr .confirm.active{
+  background-color: #49a9ee;
+  color: #fff;
+  border: 1rpx solid #49a9ee;
+}
+.changeAddr .cancel{
+
+}
+.close{
+  position: absolute;
+  right: 20rpx;
+  top: 10rpx;
+  width: 50rpx;
+  height: 50rpx;
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  line-height: 50rpx;
+}
+.picker{
+  padding-right: 50rpx;
+  padding-left: 20rpx;
+  line-height: 48rpx;
+  font-size: 24rpx;
+  color: #666;
+}

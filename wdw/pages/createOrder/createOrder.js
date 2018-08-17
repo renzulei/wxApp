@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    allOrder:[], //所有订单
     tableSource: [], //表格数据源
     folders: [], //商品列表是否折叠
     data: null, //接口返回的原始数据
@@ -73,6 +74,7 @@ Page({
               its.tradePartyId = contact.tradePartyId
           })
         })
+        let allOrder = [];
         json.itemList.map((item, i) => {
           let arr = [];
           if (item.items)
@@ -115,17 +117,18 @@ Page({
               'checked': false
             }, obj[key]])
           })
-          folders[0].fold = false;
-          // console.log(tableSource)
-          this.setData({
+          // folders[0].fold = false;
+          allOrder.push({
             tableSource: tableSource,
             folders: folders
           })
         })
+        console.log(allOrder)
         this.setData({
           data: json.itemList,
           contact: contact,
           defaultContactPerson: defaultContactPerson,
+          allOrder:allOrder
         })
       }
     })

@@ -10,8 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showHide: 'true',
-    showHides: 'true',
+    showHide: true,
+    showHides: true,
+    visibleS:false,
     // 产品列表数据
     shop: [],
     // 筛选条件数据
@@ -40,18 +41,31 @@ Page({
     priceSortName: '', //价格排序（ASC表示升序，DESC表示降序）
     total: null, //商品列表总条数
     current: 1, //每页展示条数
-    is_loading_done: false //是否加载完毕
+    is_loading_done: false, //是否加载完毕
+    partyIndex:-1, //业务主体数组索引
+    addrIndex:-1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.init(); //初始化
+    this.searchContentList() //进入页面加载筛选数据
+    this.searchBoxCont() //进入页面加载列表数据
+    if (!util.getStorageSync("userName")) {
+      wx.redirectTo({
+        url: '/pages/login/login',
+      })
+    }
+  },
+  // 初始化
+  init:function(){
+    util.setStorageSync('menuKey', 'CPLB');    
     let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
     this.setData({
       authorizedCookie: authorizedCookie
     })
-    util.setStorageSync('menuKey', 'CPLB');
     var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
     var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
     var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
@@ -63,13 +77,6 @@ Page({
       tradePartyId: tradePartyId,
       contactId: contactId
     })
-    this.searchContentList() //进入页面加载筛选数据
-    this.searchBoxCont() //进入页面加载列表数据
-    if (!util.getStorageSync("userName")) {
-      wx.redirectTo({
-        url: '/pages/login/login',
-      })
-    }
   },
   /**
    * 生命周期函数--监听页面显示
@@ -86,6 +93,111 @@ Page({
    */
   onHide: function() {
 
+  },
+  // 切换交易主体和地址的弹窗
+  showModalS:function(){
+    this.setData({
+      visibleS:true
+    })
+    wx.request({
+      url: `${authService}/user/getAllUserContact`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'cookie': this.data.authorizedCookie
+      },
+      success: (res)=> {
+        console.log(res.data)
+        try {
+          util.catchHttpError(res);
+        } catch (e) {
+          console.error(e)
+          return
+        }
+        var json = res.data;
+        if(json.code == 'S'){
+          this.setData({
+            dataS: json.userContacts.tradePartys || [],
+            companyName: json.userContacts.companyName
+          })
+        }
+      }
+    })
+  },
+  // 隐藏弹窗
+  hideModalS:function(){
+    this.setData({
+      visibleS: false
+    })
+  },
+  // 业务主体改变
+  partyChange:function(e){
+    var index = e.detail.value;
+    this.data.dataS.map((item,i)=>{
+      if(index == i){
+        this.setData({
+          canSubmit: true,
+          partyName: item.partyName,
+          partyNumber: item.partyNumber,
+          tradeCompanyId: item.tradeCompanyId,
+          tradePartyId: item.tradePartyId,
+          currencyCode: item.customer ? item.customer.currencyCode : "",
+          customerId: item.customer ? item.customer.customerId : "",
+          supplierId: item.supplier ? item.supplier.supplierId : "",
+          employeeEmail: item.exclusiveDealer ? item.exclusiveDealer.email : "",
+          employeeId: item.exclusiveDealer ? item.exclusiveDealer.employeeId : "",
+          employeeMobil: item.exclusiveDealer ? item.exclusiveDealer.mobil : "",
+          employeeName: item.exclusiveDealer ? item.exclusiveDealer.name : "",
+          contacts: item.contacts,
+        })
+      }
+    })
+    this.setData({
+      partyIndex:index,
+    })
+  },
+  // 收货地址改变
+  addrChange:function(e){
+    var index = e.detail.value;
+    this.data.contacts.map((item, i) => {
+      if (index == i) {
+        this.setData({
+          canSubmitT: true,
+          contactId: item.contactId,
+          regionCode: item.regionCode,
+          address: item.address,
+        })
+      }
+    });
+    this.setData({
+      addrIndex:index,
+    })
+  },
+  handleOk:function(){
+    if (!(this.data.canSubmitT && this.data.canSubmit && this.data.contacts.length)) return;
+    var userDefaultTradeCompany = {
+      address: this.data.address,
+      companyName: this.data.companyName,
+      contactId: this.data.contactId,
+      currencyCode: this.data.currencyCode,
+      customerId: this.data.customerId,
+      employeeEmail: this.data.employeeEmail,
+      employeeId: this.data.employeeId,
+      employeeMobil: this.data.employeeMobil,
+      employeeName: this.data.employeeName,
+      partyName: this.data.partyName,
+      partyNumber: this.data.partyNumber,
+      regionCode: this.data.regionCode,
+      supplierId: this.data.supplierId,
+      tradeCompanyId: this.data.tradeCompanyId,
+      tradePartyId: this.data.tradePartyId
+    }
+    // console.log(userDefaultTradeCompany)
+    util.setStorageSync('userDefaultTradeCompany', userDefaultTradeCompany, 3600);
+    this.init();
+    this.setData({
+      visibleS: false
+    })
   },
   searchBoxCont: function() {
     var data = this.data.data
@@ -567,7 +679,8 @@ Page({
   motaiTap: function(event) {
     var that = this;
     that.setData({
-      showHide: (!that.data.showHide)
+      showHide: !that.data.showHide,
+      color_choose:''
     })
   },
 
