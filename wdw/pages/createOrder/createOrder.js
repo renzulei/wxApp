@@ -119,8 +119,11 @@ Page({
           })
           // folders[0].fold = false;
           allOrder.push({
+            allA:Number(0).toFixed(2),
+            allT: Number(0).toFixed(3),
             tableSource: tableSource,
-            folders: folders
+            folders: folders,
+            contact:item.contact
           })
         })
         console.log(allOrder)
@@ -136,66 +139,84 @@ Page({
   // 选中一类商品
   checkSome: function(e) {
     var outIndex = e.currentTarget.dataset.outindex;
-    this.data.tableSource.map(function(item, index) {
-      if (index == outIndex) {
-        item[0].checked = !item[0].checked;
-        item[1].map(function(it, i) {
-          item[0].checked ? it.checked = true : it.checked = false;
+    var innerIndex = e.currentTarget.dataset.index;
+    this.data.allOrder.map(function(item, index) {
+      if(outIndex == index){
+        item.tableSource.map((it, i) => {
+          if (i == innerIndex) {
+            it[0].checked = !it[0].checked;
+            it[1].map(function (t) {
+              it[0].checked ? t.checked = true : t.checked = false;
+            })
+          }
         })
       }
     })
-    this.countSelected(this.data.tableSource);
-    this.setData({
-      tableSource: this.data.tableSource,
-    })
+    this.countSelected(this.data.allOrder);
   },
   // 选中一个商品
   checkOne: function(e) {
     var outIndex = e.currentTarget.dataset.outindex;
+    var middIndex = e.currentTarget.dataset.mdindex;
     var innerIndex = e.currentTarget.dataset.index;
-    this.data.tableSource.map(function(item, index) {
-      if (index == outIndex) {
-        item[0].checked = true;
-        item[1].map(function(it, i) {
-          i == innerIndex ? it.checked = !it.checked : '';
-          it.checked == false ? item[0].checked = false : '';
+    this.data.allOrder.map((itemOut,indexOut)=>{
+      if(indexOut == outIndex){
+        itemOut.tableSource.map(function (item, index) {
+          if (index == middIndex) {
+            item[0].checked = true;
+            item[1].map(function (it, i) {
+              i == innerIndex ? it.checked = !it.checked : '';
+              it.checked == false ? item[0].checked = false : '';
+            })
+          }
         })
       }
     })
-    this.countSelected(this.data.tableSource);
-    this.setData({
-      tableSource: this.data.tableSource,
-    })
+    this.countSelected(this.data.allOrder);
   },
   // 计算被选中的商品
-  countSelected: function(tableSource) {
+  countSelected: function(allOrder) {
     var selectedRows = [];
-    var allA = 0,
-      allT = 0;
-    tableSource.map(function(item, index) {
-      item[1].map(function(it, i) {
-        it.checked ? selectedRows.push(it) : '';
+    allOrder.map((itemOut,indexOut)=>{
+      selectedRows[indexOut] = [];
+      itemOut.tableSource.map(function (item, index) {
+        item[1].map(function (it, i) {
+          it.checked ? selectedRows[indexOut].push(it) : '';
+        })
       })
     })
-    selectedRows.map(function(it, i) {
-      allA += Number(it.amount);
-      allT += Number(it.baseOrderQuantity);
+    selectedRows.map((item,index)=>{
+      var allA = 0,
+        allT = 0;
+      item.map(function (it, i) {
+        allA += Number(it.amount);
+        allT += Number(it.baseOrderQuantity);
+      })
+      allT = allT.toFixed(3) //吨数保留三位小数
+      allA = allA.toFixed(2) //金额数保留2位小数
+      allOrder[index].allA = allA;
+      allOrder[index].allT = allT;
     })
-    allT = allT.toFixed(3) //吨数保留三位小数
+    // console.log(selectedRows)
+    // console.log(allOrder)
     this.setData({
       selectedRows: selectedRows,
-      allA: allA,
-      allT: allT
+      allOrder: allOrder
     })
   },
   // 折叠或展开一类商品列表
   doFold: function(e) {
     var index = e.currentTarget.dataset.index;
-    this.data.folders.map(function(it, i) {
-      i == index ? it.fold = !it.fold : ""
+    var outIndex = e.currentTarget.dataset.outindex;
+    this.data.allOrder.map((itemOut,indexOut)=>{
+      if (indexOut == outIndex){
+        itemOut.folders.map(function (it, i) {
+          i == index ? it.fold = !it.fold : ""
+        })
+      }
     })
     this.setData({
-      folders: this.data.folders
+      allOrder: this.data.allOrder
     })
   },
   // 删除一个商品
@@ -233,17 +254,23 @@ Page({
   // 件数改变触发事件
   orderQuantityChange: function(e) {
     var value = e.detail.value;
-    var innerIndex = e.currentTarget.dataset.index;
-    var outIndex = e.currentTarget.dataset.outindex;
-    this.data.tableSource.map(function(item, index) {
-      if (index == outIndex) {
-        item[1].map(function(it, i) {
-          i == innerIndex ? it.orderQuantity = isNaN(Number(value).toFixed(0)) ? "" : Number(value).toFixed(0) : '';
+    var innerIndex = e.currentTarget.dataset.index;//最内层数组索引
+    var middIndex = e.currentTarget.dataset.mdindex;//中间层数组索引
+    var outIndex = e.currentTarget.dataset.outindex;//最外层数组索引
+    this.data.allOrder.map((itemOut, indexOut) => {
+      if (indexOut == outIndex) {
+        itemOut.tableSource.map(function (item, index) {
+          if (index == middIndex) {
+            item[1].map(function (it, i) {
+              i == innerIndex ? it.orderQuantity = isNaN(Number(value).toFixed(0)) ? "" : Number(value).toFixed(0) : '';
+            })
+          }
         })
       }
     })
+    
     this.setData({
-      tableSource: this.data.tableSource,
+      allOrder: this.data.allOrder,
     })
   },
   // 件数获得焦点事件
@@ -262,20 +289,26 @@ Page({
   // 件数离开焦点触发事件
   orderQuantityBlur: function(e) {
     var value = e.detail.value;
-    var innerIndex = e.currentTarget.dataset.index;
-    var outIndex = e.currentTarget.dataset.outindex;
+    var innerIndex = e.currentTarget.dataset.index;//最内层数组索引
+    var middIndex = e.currentTarget.dataset.mdindex;//中间层数组索引
+    var outIndex = e.currentTarget.dataset.outindex;//最外层数组索引
     var record, code = this.data.code,
       cutLength = this.data.cutLength;
-    this.data.tableSource.map(function(item, index) {
-      if (index == outIndex) {
-        item[1].map(function(it, i) {
-          i == innerIndex ? record = it : '';
+    this.data.allOrder.map((itemOut, indexOut) => {
+      if (indexOut == outIndex) {
+        itemOut.tableSource.map(function (item, index) {
+          if (index == middIndex) {
+            item[1].map(function (it, i) {
+              i == innerIndex ? record = it : '';
+            })
+            if (!record.orderQuantity) {
+              record.orderQuantity = ""
+            }
+          }
         })
-        if (!record.orderQuantity) {
-          record.orderQuantity = ""
-        }
       }
     })
+    
     if (record.physicalStateCode == "JT") {
       if (this.data.orderQuantityValue != value)
         wx.request({
@@ -295,33 +328,38 @@ Page({
             }
             var json = res.data;
             if (json) {
-              this.data.tableSource.map(function(item, index) {
-                if (index == outIndex) {
-                  item[1].map(function(it, i) {
-                    if (i == innerIndex) {
-                      it.baseOrderQuantity = (Number(json)).toFixed(3)
-                      it.amount = (Number(json) * Number(it.unitPrice)).toFixed(2);
+              this.data.allOrder.map((itemOut, indexOut) => {
+                if (indexOut == outIndex) {
+                  itemOut.tableSource.map(function (item, index) {
+                    if (index == middIndex) {
+                      item[1].map(function (it, i) {
+                        if (i == innerIndex) {
+                          it.baseOrderQuantity = (Number(json)).toFixed(3)
+                          it.amount = (Number(json) * Number(it.unitPrice)).toFixed(2);
+                        }
+                      })
                     }
                   })
                 }
               })
-
+              
             } else {
-              this.data.tableSource.map(function(item, index) {
-                if (index == outIndex) {
-                  item[1].map(function(it, i) {
-                    if (i == innerIndex) {
-                      it.baseOrderQuantity = 0
-                      it.amount = 0;
+              this.data.allOrder.map((itemOut, indexOut) => {
+                if (indexOut == outIndex) {
+                  itemOut.tableSource.map(function (item, index) {
+                    if (index == middIndex) {
+                      item[1].map(function (it, i) {
+                        if (i == innerIndex) {
+                          it.baseOrderQuantity = 0
+                          it.amount = 0;
+                        }
+                      })
                     }
                   })
                 }
               })
             }
-            this.countSelected(this.data.tableSource);
-            this.setData({
-              tableSource: this.data.tableSource,
-            })
+            this.countSelected(this.data.allOrder);
           }
         })
     } else if (record.physicalStateCode == "PZ") {
@@ -343,33 +381,37 @@ Page({
             }
             var json = res.data;
             if (json) {
-              this.data.tableSource.map(function(item, index) {
-                if (index == outIndex) {
-                  item[1].map(function(it, i) {
-                    if (i == innerIndex) {
-                      it.baseOrderQuantity = (Number(json)).toFixed(3)
-                      it.amount = (Number(json) * Number(it.unitPrice)).toFixed(2);
+              this.data.allOrder.map((itemOut, indexOut) => {
+                if (indexOut == outIndex) {
+                  itemOut.tableSource.map(function (item, index) {
+                    if (index == middIndex) {
+                      item[1].map(function (it, i) {
+                        if (i == innerIndex) {
+                          it.baseOrderQuantity = (Number(json)).toFixed(3)
+                          it.amount = (Number(json) * Number(it.unitPrice)).toFixed(2);
+                        }
+                      })
                     }
                   })
                 }
               })
-
             } else {
-              this.data.tableSource.map(function(item, index) {
-                if (index == outIndex) {
-                  item[1].map(function(it, i) {
-                    if (i == innerIndex) {
-                      it.baseOrderQuantity = ''
-                      it.amount = 0;
+              this.data.allOrder.map((itemOut, indexOut) => {
+                if (indexOut == outIndex) {
+                  itemOut.tableSource.map(function (item, index) {
+                    if (index == middIndex) {
+                      item[1].map(function (it, i) {
+                        if (i == innerIndex) {
+                          it.baseOrderQuantity = ''
+                          it.amount = 0;
+                        }
+                      })
                     }
                   })
                 }
               })
             }
-            this.countSelected(this.data.tableSource);
-            this.setData({
-              tableSource: this.data.tableSource,
-            })
+            this.countSelected(this.data.allOrder);
           }
         })
     }
@@ -377,91 +419,111 @@ Page({
   // 吨数改变触发事件
   baseOrderQuantityChange: function(e) {
     var value = e.detail.value;
-    var innerIndex = e.currentTarget.dataset.index;
-    var outIndex = e.currentTarget.dataset.outindex;
+    var innerIndex = e.currentTarget.dataset.index;//最内层数组索引
+    var middIndex = e.currentTarget.dataset.mdindex;//中间层数组索引
+    var outIndex = e.currentTarget.dataset.outindex;//最外层数组索引
     if (value) {
-      this.data.tableSource.map(function(item, index) {
-        if (index == outIndex) {
-          item[1].map(function(it, i) {
-            if (i == innerIndex) {
-              if (value != it.baseOrderQuantity) {
-                it.orderQuantity = ''
-              }
-              it.baseOrderQuantity = value;
+      this.data.allOrder.map((itemOut, indexOut) => {
+        if (indexOut == outIndex) {
+          itemOut.tableSource.map(function (item, index) {
+            if (index == middIndex) {
+              item[1].map(function (it, i) {
+                if (i == innerIndex) {
+                  if (value != it.baseOrderQuantity) {
+                    it.orderQuantity = ''
+                  }
+                  it.baseOrderQuantity = value;
+                }
+              })
             }
           })
         }
       })
     } else {
-      this.data.tableSource.map(function(item, index) {
-        if (index == outIndex) {
-          item[1].map(function(it, i) {
-            if (i == innerIndex) {
-              it.baseOrderQuantity = 0;
+      this.data.allOrder.map((itemOut, indexOut) => {
+        if (indexOut == outIndex) {
+          itemOut.tableSource.map(function (item, index) {
+            if (index == middIndex) {
+              item[1].map(function (it, i) {
+                if (i == innerIndex) {
+                  it.baseOrderQuantity = 0;
+                }
+              })
             }
           })
         }
       })
     }
     this.setData({
-      tableSource: this.data.tableSource,
+      allOrder: this.data.allOrder,
     })
   },
   // 吨数离开焦点触发事件
   baseOrderQuantityBlur: function(e) {
     var value = e.detail.value;
-    var innerIndex = e.currentTarget.dataset.index;
-    var outIndex = e.currentTarget.dataset.outindex;
-    this.data.tableSource.map(function(item, index) {
-      if (index == outIndex) {
-        item[1].map(function(it, i) {
-          if (i == innerIndex) {
-            it.baseOrderQuantity = Number(value).toFixed(3);
-            it.amount = (Number(it.baseOrderQuantity) * Number(it.unitPrice)).toFixed(2);
+    var innerIndex = e.currentTarget.dataset.index;//最内层数组索引
+    var middIndex = e.currentTarget.dataset.mdindex;//中间层数组索引
+    var outIndex = e.currentTarget.dataset.outindex;//最外层数组索引
+    this.data.allOrder.map((itemOut, indexOut) => {
+      if (indexOut == outIndex) {
+        itemOut.tableSource.map(function (item, index) {
+          if (index == middIndex) {
+            item[1].map(function (it, i) {
+              if (i == innerIndex) {
+                it.baseOrderQuantity = Number(value).toFixed(3);
+                it.amount = (Number(it.baseOrderQuantity) * Number(it.unitPrice)).toFixed(2);
+              }
+            })
           }
         })
       }
     })
-    this.countSelected(this.data.tableSource);
-    this.setData({
-      tableSource: this.data.tableSource,
-    })
+
+    this.countSelected(this.data.allOrder);
   },
-// 幅宽或切长离开焦点触发事件
+  // 幅宽或切长离开焦点触发事件
   attributeBlur:function(e){
     var attributeCode = e.currentTarget.dataset.code;
-    var innerIndex = e.currentTarget.dataset.index;
-    var outIndex = e.currentTarget.dataset.outindex;
+    var innerIndex = e.currentTarget.dataset.index;//最内层数组索引
+    var middIndex = e.currentTarget.dataset.mdindex;//中间层数组索引
+    var outIndex = e.currentTarget.dataset.outindex;//最外层数组索引
     var value = e.detail.value;
     value = value < 100 ? 100 : value > 9999 ? 9999 : value;
     if (!Number(value)) {
-      this.data.tableSource.map(function(item,index){
-        if(outIndex == index){
-          item[1].map(function(it,i){
-            i == innerIndex ? it[attributeCode]=null:''
-          })
-        }
-      })
-    } else {
-      this.data.tableSource.map(function (item, index) {
-        if (outIndex == index) {
-          item[1].map(function (it, i) {
-            if(i==innerIndex){
-              if (value != it[attributeCode]){
-                it.orderQuantity = ''
-                it.baseOrderQuantity = 0
-                it.amount = 0
-              }
-              it[attributeCode] = value
+      this.data.allOrder.map((itemOut, indexOut) => {
+        if (indexOut == outIndex) {
+          itemOut.tableSource.map(function (item, index) {
+            if (index == middIndex) {
+              item[1].map(function (it, i) {
+                i == innerIndex ? it[attributeCode] = null : ''
+              })
             }
           })
         }
       })
+      
+    } else {
+      this.data.allOrder.map((itemOut, indexOut) => {
+        if (indexOut == outIndex) {
+          itemOut.tableSource.map(function (item, index) {
+            if (index == middIndex) {
+              item[1].map(function (it, i) {
+                if (i == innerIndex) {
+                  if (value != it[attributeCode]) {
+                    it.orderQuantity = ''
+                    it.baseOrderQuantity = 0
+                    it.amount = 0
+                  }
+                  it[attributeCode] = value
+                }
+              })
+            }
+          })
+        }
+      })
+      
     }
-    this.countSelected(this.data.tableSource);
-    this.setData({
-      tableSource: this.data.tableSource,
-    })
+    this.countSelected(this.data.allOrder);
   },
   // 点击取消返回
   cancelTap: function(e) {
@@ -473,42 +535,68 @@ Page({
   //  跳转到补充信息页面
   sopTap: function() {
     var jump = true;
-    if (this.data.selectedRows.length != 0){
-      this.data.selectedRows.map((it)=>{
-        if (!Number(it.baseOrderQuantity)) {
-          wx.showToast({
-            title: '吨数不能为0！',
-            icon: 'none',
-            duration: 1000
-          })
-          jump = false
-        } else if (!Number(it.amount)) {
-          wx.showToast({
-            title: '金额不能为0！',
-            icon: 'none',
-            duration: 1000
-          })
-          jump = false
-        }else{
-          this.checkUserFreeze()
-        }
-      })
-      if(jump&&this.data.jump){
-        this.data.selectedRows.map(function(item){
-          for(var i in item){
-            i == "checked"? delete item[i]:''
+    var selectedRows = this.data.selectedRows.filter((item,index)=>{
+      if(item.length >0) return item //过滤掉空数组
+    })
+    if (selectedRows.length == 1){
+      selectedRows.map((item)=>{
+        item.map((it)=>{
+          if (!Number(it.baseOrderQuantity)) {
+            wx.showToast({
+              title: '吨数不能为0！',
+              icon: 'none',
+              duration: 1000
+            })
+            jump = false
+          } else if (!Number(it.amount)) {
+            wx.showToast({
+              title: '金额不能为0！',
+              icon: 'none',
+              duration: 1000
+            })
+            jump = false
+          } else {
+            this.checkUserFreeze()
           }
         })
-        var selectedRows = JSON.stringify(this.data.selectedRows);
-        var contactId = this.data.contactId;
-        var contact = JSON.stringify(this.data.contact);
+      })
+      if(jump&&this.data.jump){
+        var contactId,contact;
+        selectedRows.map(function(item){
+          item.map((it)=>{
+            for (var i in it) {
+              i == "checked" ? delete it[i] : ''
+            }
+            contactId = it.contactId
+          })
+        })
+        selectedRows = selectedRows[0];//减少数组层级
+        this.data.allOrder.map((itemOut,indexOut)=>{
+          itemOut.tableSource.map((item,index)=>{
+            item[1].map((it,i)=>{
+              if (it.checked){
+                contact = itemOut.contact;
+              }
+            })
+          })
+        })
+        // console.log(contact)        
+        // console.log(selectedRows)        
+        var selectedRows = JSON.stringify(selectedRows);
+        contact = JSON.stringify(contact);
         wx.navigateTo({
           url: `/pages/supplement/supplement?selectedRows=${selectedRows}&contactId=${contactId}&contact=${contact}`,
         })
       }
-    } else {
+    } else if(selectedRows.length == 0) {
       wx.showToast({
         title: '请选择要提交的行数据！',
+        icon: 'none',
+        duration: 1000
+      })
+    }else{
+      wx.showToast({
+        title: '一次只能下一个订单',
         icon: 'none',
         duration: 1000
       })

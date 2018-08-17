@@ -17,11 +17,6 @@
         <text class='title_left'>收货地址：</text>
         <text class='title_right'>{{address}}</text>
       </view>
-      <navigator hover-class='none' url='/pages/compile/compile'>
-        <view class='hint_icon'>
-          <image src='/images/del.png'></image>
-        </view>
-      </navigator>
     </view>
     <!--订单类型  -->
     <view class='order'>
@@ -191,8 +186,6 @@
   <view class='footer'>
     <!-- 上部分 -->
     <view class='footer_top'>
-      <text class='footer_left'>已选中规格：</text>
-      <text class='footer_right'>{{selectedRows.length}}</text>
       <text class='footer_left'>总吨数：</text>
       <text class='footer_right'>{{allT}}</text>
       <text class='footer_left'>总金额：</text>

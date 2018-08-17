@@ -29,7 +29,11 @@ Page({
       url: '/pages/Administrator/Administrator',
     })
   },
-
+  takeTap:function(){
+    wx.navigateTo({
+      url: '/pages/changeAddr/changeAddr',
+    })
+  },
   // 企业管理的点击事件
   onClick: function(event) {
     var that = this;

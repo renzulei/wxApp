@@ -42,8 +42,8 @@ Page({
       contactId: contactId,
       contact: contact,
       contactPerson: contactPerson
-    }, this.grouping(selectedRows, contactId, authorizedCookie, tradePartyId))   
-    
+    })   
+    this.grouping(selectedRows, contactId, authorizedCookie, tradePartyId);
   },
   /*获取购物车条件*/
   getCartCondition: function(contactId, authorizedCookie, tradePartyId) {

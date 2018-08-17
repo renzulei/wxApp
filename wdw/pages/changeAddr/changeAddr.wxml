@@ -1,0 +1,27 @@
+<!--pages/changeAddr/changeAddr.wxml-->
+<view class='container'>
+  <view class='list clearfix'>
+    <view class='k'>业务主体：</view>
+    <view class='v'>
+      <picker range='{{dataS}}' value='{{partyIndex}}' range-key='partyName' bindchange='partyChange'>
+        <view class="picker">
+          {{dataS[partyIndex].partyName || '请选择业务主体'}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class='list clearfix'>
+    <view class='k'>收货地址：</view>
+    <view class='v'>
+      <picker range='{{contacts}}' value='{{addrIndex}}' range-key='address' bindchange='addrChange'>
+        <view class="picker">
+          {{contacts[addrIndex].address || '请选择收货地址'}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class='btns'>
+    <view class='btn' bindtap='goback'>取消返回</view>
+    <view class='btn {{canSubmitT&&canSubmit&&contacts.length?"active":""}}' bindtap='handleOk'>确定修改</view>
+  </view>
+</view>

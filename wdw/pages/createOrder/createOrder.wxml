@@ -1,11 +1,15 @@
 <import src="../../template/empty/empty.wxml" />
 <view class="container">
 <view class='allOrder' wx:for='{{allOrder}}' wx:for-item='itemOut' wx:for-index="indexOut" wx:key="{{indexOut}}">
-
+  <view class='orderName'>
+    <text class='red'>订单{{indexOut+1}}:</text>
+    <text class='allT'>总吨数：{{itemOut.allT}}</text>
+    <text class='allA'>总金额：{{itemOut.allA}}</text>
+  </view>
   <view class="content" wx:for="{{itemOut.tableSource}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
-    <view class='header clearfix' data-index='{{index}}' bindtap='doFold'>
+    <view class='header clearfix' data-index='{{index}}'  data-outindex='{{indexOut}}' bindtap='doFold'>
       <view class='h-left'>
-        <view class='icon-check' data-outindex='{{index}}' catchtap='checkSome'>
+        <view class='icon-check' data-outindex='{{indexOut}}' data-index='{{index}}' catchtap='checkSome'>
           <image wx:if="{{item[0].checked}}" src='/images/checked.png'></image>
           <image wx:else src='/images/uncheck.png'></image>
         </view>
@@ -17,7 +21,7 @@
         </view>
         <view class='header_bom'>
           <text class='left_color left_size'>收货地址：</text>
-          <text>{{contact.address}}</text>
+          <text>{{itemOut.contact.address}}</text>
         </view>
       </view>
     </view>
@@ -30,7 +34,7 @@
                 <text>幅宽mm:</text>
               </view>
               <view class='right'>
-                <input class='input' type='number' data-outindex='{{index}}' data-index='{{i}}' data-code='{{code}}' value='{{it[code]}}' bindblur='attributeBlur'>
+                <input class='input' type='number' data-index="{{i}}" data-mdindex='{{index}}' data-outindex="{{indexOut}}" data-code='{{code}}' value='{{it[code]}}' bindblur='attributeBlur'>
                 </input>
               </view>
             </view>
@@ -40,7 +44,7 @@
               </view>
               <view class='right'>
                 <text wx:if="{{it.physicalStateCode == 'JT'}}">{{it[cutLength]}}</text>
-                <input wx:else class='input' data-outindex='{{index}}' data-code='{{cutLength}}' type='number' data-index='{{i}}' value='{{it[cutLength]}}' bindblur='attributeBlur'>
+                <input wx:else class='input' data-index="{{i}}" data-mdindex='{{index}}' data-outindex="{{indexOut}}" data-code='{{cutLength}}' type='number' value='{{it[cutLength]}}' bindblur='attributeBlur'>
                 </input>
               </view>
             </view>
@@ -51,7 +55,7 @@
                 <text>件数(非必填):</text>
               </view>
               <view class='right thiner'>
-                <input class='input' type='number' data-outindex='{{index}}' data-index='{{i}}' value='{{it.orderQuantity}}' bindinput='orderQuantityChange' bindblur='orderQuantityBlur' bindfocus='orderQuantityFocus'>
+                <input class='input' type='number' data-index="{{i}}" data-mdindex='{{index}}' data-outindex="{{indexOut}}" value='{{it.orderQuantity}}' bindinput='orderQuantityChange' bindblur='orderQuantityBlur' bindfocus='orderQuantityFocus'>
                 </input>
               </view>
             </view>
@@ -60,14 +64,14 @@
                 <text>吨数(吨):</text>
               </view>
               <view class='right'>
-                <input class='input' type='digit' data-outindex='{{index}}' data-index='{{i}}' bindinput='baseOrderQuantityChange' bindblur='baseOrderQuantityBlur' value='{{it.baseOrderQuantity}}'>
+                <input class='input' type='digit' data-index="{{i}}" data-mdindex='{{index}}' data-outindex="{{indexOut}}" bindinput='baseOrderQuantityChange' bindblur='baseOrderQuantityBlur' value='{{it.baseOrderQuantity}}'>
                 </input>
               </view>
             </view>
           </view>
         </view>
         <view class='table_bom clearfix'>
-        <view class='icon-check' data-index="{{i}}" data-outindex="{{index}}" bindtap='checkOne'>
+        <view class='icon-check' data-index="{{i}}" data-mdindex='{{index}}' data-outindex="{{indexOut}}" bindtap='checkOne'>
           <image wx:if="{{it.checked}}" src='/images/checked.png'></image>
           <image wx:else src='/images/uncheck.png'></image>
         </view>
@@ -87,16 +91,6 @@
 </view>
   <template is="emptyfill" wx:if="{{allOrder.length==0}}" />
   <view class='footer'>
-    <!-- 上部分 -->
-    <view class='footer_top'>
-      <text class='footer_left'>已选中规格：</text>
-      <text class='footer_right'>{{selectedRows.length}}</text>
-      <text class='footer_left'>总吨数：</text>
-      <text class='footer_right'>{{allT}}</text>
-      <text class='footer_left'>总金额：</text>
-      <text class='footer_right'>{{allA}}</text>
-    </view>
-
     <!-- 下部分 -->
     <view class='footer_bom'>
       <view class='bom_left' bindtap='cancelTap'>

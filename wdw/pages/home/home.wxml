@@ -51,17 +51,17 @@
   <view class='border'></view>
   <view class='content'>
     <view class='content_text'>
-      <!-- <view class='list clearfix' bindtap='takeTap'>
+      <view class='list clearfix' bindtap='takeTap'>
         <view class='icon_left'>
           <image src='/images/shouhuo.png'></image>
         </view>
         <view class='content_title'>
-          <text>收货地址管理</text>
+          <text>业务主体地址修改</text>
         </view>
         <view class='icon_right'>
           <image src='/images/right.png'></image>
         </view>
-      </view> -->
+      </view>
 
 
       <view class='list clearfix' bindtap='concernTap'>

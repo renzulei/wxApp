@@ -5,7 +5,7 @@ page{
 }
 .container {
   width: 100%;
-  padding-bottom: 144rpx;
+  padding-bottom: 100rpx;
 }
 .hide{
   display: none;
@@ -145,7 +145,6 @@ margin-bottom: 30rpx;
 /* 底部样式 */
 .footer {
   width: 100%;
-  height: 144rpx;
   font-size: 24rpx;
   font-weight: bold;
   position: fixed;
@@ -250,4 +249,24 @@ margin-bottom: 30rpx;
 .danjia{
   margin-left: 20rpx;
   display: inline-block;
+}
+.orderName{
+  margin:24rpx;
+  margin-bottom: 0;
+  background-color: #fff;
+  height: 86rpx;
+  line-height: 86rpx;
+  font-size: 26rpx;
+  border-radius: 3px;
+  padding-left: 24rpx;
+}
+.orderName .red{
+  color: #F75959;
+  font-weight: bold;
+  margin-right: 40rpx;
+}
+.allT,.allA{
+  margin-right: 40rpx;
+  font-weight: bold;
+  color: #818181
 }
