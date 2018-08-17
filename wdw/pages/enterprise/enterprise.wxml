@@ -51,31 +51,31 @@
 
     <view class='list'>
       <text class='left'>提现账户备案:</text>
-      <text class='examine' bindtap="handleViewImage">点击查看</text>
+      <text class='examine' data-index='enchashmentAcctRecord' bindtap="handleViewImage">点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>营业执照:</text>
-      <text class='examine'>点击查看</text>
+      <text class='examine' data-index='busLicenceAttchId' bindtap="handleViewImage">点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>开户许可证:</text>
-      <text class='examine'>点击查看</text>
+      <text class='examine' data-index='accountAttchId' bindtap="handleViewImage">点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>税务登记证:</text>
-      <text class='examine'>点击查看</text>
+      <text class='examine' data-index='taxAttchId' bindtap="handleViewImage">点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>组织机构代码:</text>
-      <text class='examine'>点击查看</text>
+      <text class='examine' data-index='organizationAttchId' bindtap="handleViewImage">点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>开票资料:</text>
-      <text class='examine'>点击查看</text>
+      <text class='examine' data-index='billingAttchId' bindtap="handleViewImage">点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>企业认证授权书:</text>
-      <text class='examine'>点击查看</text>
+      <text class='examine' data-index='orgAuthAttchId' bindtap="handleViewImage">点击查看</text>
     </view>
 
     <!-- footer 区域============================================================== -->
@@ -90,6 +90,6 @@
   <!-- 模态框 -->
   <view class="meng_ceng {{ showHide?'hide':'show' }}" bindtap='cancelTap'></view>
   <view class="showHide {{ showHide?'hide':'show' }}">
-    <image mode='widthFix' src='{{ enchashmentAcctRecord }}'></image>
+    <image mode='widthFix' src='{{ viewImage }}'></image>
   </view>
 </view>

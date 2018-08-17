@@ -31,7 +31,6 @@ Page({
       authorizedCookie: authorizedCookie
     })
     this.getData();
-    this.imgSrc();
   },
 
   // 企业认证
@@ -59,40 +58,35 @@ Page({
         var newArr = [];
         newArr.push(arr);
         that.setData({
-          newArr: newArr
+          newArr: newArr,
         })
         console.log(newArr);
       }
     })
   },
 
-imgSrc: function(e) {
-  wx.request({
-    url: `${authService}/ossObject/download?objectId=2306`,
-    data: {},
-    method: 'GET',
-    header: {
-      'content-type': 'application/json',
-      'cookie': this.data.authorizedCookie
-    },
-    success: (res) => {
-      try {
-        util.catchHttpError(res);
-      } catch (e) {
-        console.error(e)
-        return
-      }
-      console.log(res);
-    }
-  })
-},
-
-
-
   // 点击查看-弹出蒙层
-  handleViewImage: function() {
+  handleViewImage: function (e) {
     var that = this;
+    var id = e.currentTarget.dataset.index;
+    // this.data.newArr.map((item, i)=>{
+    //   id = item.enchashmentAcctRecord;
+    // })
+    console.log(id);
+    // wx.request({
+    //   url: `${authService}/ossObject/download?objectId=${id}`,
+    //   method: 'GET',
+    //   header: {
+    //     'content-type': 'application/json',
+    //     'cookie': this.data.authorizedCookie
+    //   },
+    //   success: function (res) {
+    //     // console.log(res.data);
+    //   }
+    // })
+
     that.setData({
+      viewImage: `${authService}/ossObject/download?objectId=${id}`,
       showHide: (!that.data.showHide)
     })
   },
