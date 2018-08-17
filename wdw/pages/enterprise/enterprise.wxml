@@ -51,11 +51,11 @@
 
     <view class='list'>
       <text class='left'>提现账户备案:</text>
-      <text class='examine' bindtap="examineTap">点击查看</text>
+      <text class='examine' bindtap="handleViewImage">点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>营业执照:</text>
-      <text class='examine' bindtap='examineTap1'>点击查看</text>
+      <text class='examine'>点击查看</text>
     </view>
     <view class='list'>
       <text class='left'>开户许可证:</text>
@@ -90,6 +90,6 @@
   <!-- 模态框 -->
   <view class="meng_ceng {{ showHide?'hide':'show' }}" bindtap='cancelTap'></view>
   <view class="showHide {{ showHide?'hide':'show' }}">
-    <image mode='widthFix' src='{{img}}'></image>
+    <image mode='widthFix' src='{{ enchashmentAcctRecord }}'></image>
   </view>
 </view>
