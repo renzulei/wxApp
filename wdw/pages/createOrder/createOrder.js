@@ -30,10 +30,10 @@ Page({
       authorizedCookie: authorizedCookie
     })
     var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
-    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
-    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
-    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
-    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId : "";
+    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName || "": "";
+    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address || "": "";
+    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId || "": "";
+    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId || "": "";
     this.setData({
       partyName: partyName,
       address: address,

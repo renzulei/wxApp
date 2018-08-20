@@ -11,7 +11,7 @@ Page({
   data: {
     showHide: true,
     showHides: true,
-    visibleS:false,
+    visibleS: false,
     // 产品列表数据
     shop: [],
     // 筛选条件数据
@@ -41,8 +41,8 @@ Page({
     total: null, //商品列表总条数
     current: 1, //每页展示条数
     is_loading_done: false, //是否加载完毕
-    partyIndex:-1, //业务主体数组索引
-    addrIndex:-1,
+    partyIndex: -1, //业务主体数组索引
+    addrIndex: -1,
   },
 
   /**
@@ -59,17 +59,18 @@ Page({
     }
   },
   // 初始化
-  init:function(){
-    util.setStorageSync('menuKey', 'CPLB');    
+  init: function() {
+    util.setStorageSync('menuKey', 'CPLB');
     let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
     this.setData({
       authorizedCookie: authorizedCookie
     })
     var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
-    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
-    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
-    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
-    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId : "";
+    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName || "" : "";
+    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address || "" : "";
+    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId || "" : "";
+    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId || "" : "";
+    console.log(userDefaultTradeCompany)
     this.setData({
       partyName: partyName,
       address: address,
@@ -94,9 +95,9 @@ Page({
 
   },
   // 切换交易主体和地址的弹窗
-  showModalS:function(){
+  showModalS: function() {
     this.setData({
-      visibleS:true
+      visibleS: true
     })
     wx.request({
       url: `${authService}/user/getAllUserContact`,
@@ -105,7 +106,7 @@ Page({
         'Content-Type': 'application/json',
         'cookie': this.data.authorizedCookie
       },
-      success: (res)=> {
+      success: (res) => {
         console.log(res.data)
         try {
           util.catchHttpError(res);
@@ -114,7 +115,7 @@ Page({
           return
         }
         var json = res.data;
-        if(json.code == 'S'){
+        if (json.code == 'S') {
           this.setData({
             dataS: json.userContacts.tradePartys || [],
             companyName: json.userContacts.companyName
@@ -124,16 +125,16 @@ Page({
     })
   },
   // 隐藏弹窗
-  hideModalS:function(){
+  hideModalS: function() {
     this.setData({
       visibleS: false
     })
   },
   // 业务主体改变
-  partyChange:function(e){
+  partyChange: function(e) {
     var index = e.detail.value;
-    this.data.dataS.map((item,i)=>{
-      if(index == i){
+    this.data.dataS.map((item, i) => {
+      if (index == i) {
         this.setData({
           canSubmit: true,
           partyName: item.partyName,
@@ -152,11 +153,11 @@ Page({
       }
     })
     this.setData({
-      partyIndex:index,
+      partyIndex: index,
     })
   },
   // 收货地址改变
-  addrChange:function(e){
+  addrChange: function(e) {
     var index = e.detail.value;
     this.data.contacts.map((item, i) => {
       if (index == i) {
@@ -169,10 +170,10 @@ Page({
       }
     });
     this.setData({
-      addrIndex:index,
+      addrIndex: index,
     })
   },
-  handleOk:function(){
+  handleOk: function() {
     if (!(this.data.canSubmitT && this.data.canSubmit && this.data.contacts.length)) return;
     var userDefaultTradeCompany = {
       address: this.data.address,
@@ -326,6 +327,7 @@ Page({
         wx.hideLoading()
       },
       success: function(res) {
+        console.log(res.data)
         try {
           util.catchHttpError(res);
         } catch (e) {
@@ -679,7 +681,7 @@ Page({
     var that = this;
     that.setData({
       showHide: !that.data.showHide,
-      color_choose:''
+      color_choose: ''
     })
   },
 

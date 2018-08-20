@@ -16,8 +16,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if (!util.getStorageSync("userName")) {
+      wx.redirectTo({
+        url: '/pages/login/login',
+      })
+    }
     let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
-    var userName = util.getStorageSync('userName');
+    var userName = util.getStorageSync('userName') || "";
     this.setData({
       authorizedCookie: authorizedCookie,
       userName:userName

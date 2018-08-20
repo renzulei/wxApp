@@ -32,8 +32,8 @@ Page({
       receiveHeaderId: receiveHeaderId
     })
     var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
-    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
-    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId : "";
+    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId || "": "";
+    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId || "": "";
     this.setData({
       tradePartyId: tradePartyId,
       contactId: contactId
