@@ -8,13 +8,12 @@ Page({
 
   /**  
    * 页面的初始数据 
-   */
+   */ 
   data: {
     data: [], //数据
     box: true,
     pageSize: 10, //页面数据条数
-    current: 1, //起始页
-    // index: 0,
+    page: 1, //起始页
     showHide: false, //取消关注的显示隐藏
     json: [],
     arr: [], //商品大类
@@ -138,7 +137,7 @@ Page({
     var resourceBillId;
     this.data.data.map((item, i) => {
       if (item.checked) {
-        resourceBillId = item.resourceBillId
+        resourceBillId = item.resourceBillId;
       }
     })
     wx.request({
@@ -216,8 +215,8 @@ Page({
       data.partyName = this.data.partyName
     }
     this.getData({
-      pageSize: 10,
       page: 1,
+      pageSize: 10,
       data: data
     });
   },

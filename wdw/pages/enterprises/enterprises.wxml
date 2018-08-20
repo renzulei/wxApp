@@ -1,43 +1,43 @@
 <view class="container">
-  <view class='content'>
+  <view class='content'> 
 
     <!-- list 区域========================================================== -->
     <view class='content_box' wx:for="{{ data }}" wx:key="{{ tradePartyId }}">
       <view class='list'>
         <text class='left'>所在地区:</text>
-        <input class='input' placeholder='{{ item.province }}{{ item.city }}'></input> 
+        <text class='style'>{{ item.province }}{{ item.city }}</text> 
       </view>
       <view class='list'>
         <text class='left'>详细地址:</text>
-        <input class='input' placeholder='{{ item.shippingAddress }}'></input>
+        <text class='style'>{{ item.shippingAddress }}</text>
       </view>
-      <view class='list'>
+      <view class='list'> 
         <text class='left'>收货人姓名:</text>
-        <input class='input' placeholder='贝吉塔'></input>
+        <text class='style'>假数据</text>
       </view> 
       <view class='list'>
         <text class='left'>手机号码:</text>
-        <input class='input' placeholder='13246694946'></input>
+        <text class='style'>假数据</text>
       </view>
       <view class='list'>
         <text class='left'>邮箱账号:</text>
-        <input class='input' placeholder='wangdeshiye@163.com'></input>
+        <text class='style'>假数据</text>
       </view>
       <view class='list'>
         <text class='left'>身份证号码:</text>
-        <input class='input' placeholder='411091188510673946'></input>
+        <text class='style'>假数据</text>
       </view>
       <view class='list'>
         <text class='left'>装运要求:</text>
-        <input class='input' placeholder='{{ item.shipRequireName }}'></input>
+        <text class='style'>{{ item.shipRequireName }}</text>
       </view>
       <view class='list'>
         <text class='left'>特殊装运:</text>
-        <input class='input' placeholder='{{ item.specialShipment }}'></input>
+        <text class='style'>{{ item.specialShipment }}</text>
       </view>
       <view class='list'>
         <text class='left'>卸货时间:</text>
-        <input class='input' placeholder='{{ item.unloadTypeName }}'></input>
+        <text class='style'>{{ item.unloadTypeName }}</text>
       </view>
       <view class='list'>
         <text class='left'>货物签收授权书:</text>
@@ -59,6 +59,5 @@
 <!-- 模态框 -->
 <view class="meng_ceng {{ showHide?'hide':'show' }}" bindtap='cancelTap'></view>
 <view class="showHide {{ showHide?'hide':'show' }}">
-<text>惊不惊喜，意不意外</text>
-   <image src='/images/user.png'></image>
+   <image src='{{ viewImage }}'></image>
 </view>

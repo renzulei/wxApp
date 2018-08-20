@@ -5,79 +5,80 @@
     <view class='content_box' wx:for="{{ newArr }}" wx:key="{{ certifyId }}">
       <view class='list'>
         <text class='left'>省份:</text>
-        <input class='input' placeholder='{{ item.provinceName }}'></input>
+        <text class='input'>{{ item.provinceName }}</text>
       </view>
       <view class='list'>
         <text class='left'>城市:</text>
-        <input class='input' placeholder='{{ item.cityName }}'></input>
+        <text class='input'>{{ item.cityName }}</text>
       </view>
       <view class='list'>
         <text class='left'>公司地址:</text>
-        <input class='input' placeholder='{{ item.companyAddress }}'></input>
+        <text class='input'>{{ item.companyAddress }}</text>
       </view>
       <view class='list'>
         <text class='left'>固定电话:</text>
-        <input class='input' placeholder='{{ item.telephone }}'></input>
+        <text class='input'>{{ item.telephone }}</text>
       </view>
       <view class='list'>
         <text class='left'>传真:</text>
-        <input class='input' placeholder='{{ item.fax }}'></input>
+        <text class='input'>{{ item.fax }}</text>
       </view>
       <view class='list'>
         <text class='left'>采购员姓名:</text>
-        <input class='input' placeholder='{{ item.companyName }}'></input>
+        <text class='input'>{{ item.companyName }}</text>
       </view>
       <view class='list'>
         <text class='left'>采购员电话:</text>
-        <input class='input' placeholder='{{ item.purchaserPhone }}'></input>
+        <text class='input'>{{ item.purchaserPhone }}</text>
       </view>
       <view class='list'>
         <text class='left'>邮箱账号:</text>
-        <input class='input' placeholder='{{ item.email }}'></input>
+        <text class='input'>{{ item.email }}</text>
       </view>
       <view class='list'>
         <text class='left'>提现银行:</text>
-        <input class='input' placeholder='{{ item.reciptBankName }}'></input>
+        <text class='input'>{{ item.reciptBankName }}</text>
       </view>
       <view class='list'>
         <text class='left'>提现账户:</text>
-        <input class='input' placeholder='{{ item.reciptAcctNum }}'></input>
+        <text class='input'>{{ item.reciptAcctNum }}</text>
       </view>
       <view class='list'>
         <text class='left'>提现名称:</text>
-        <input class='input' placeholder='{{ item.reciptAcctName }}'></input>
+        <text class='input'>{{ item.reciptAcctName }}</text>
       </view>
     </view>
 
-    <view class='list'>
-      <text class='left'>提现账户备案:</text>
-      <text class='examine' data-index='enchashmentAcctRecord' bindtap="handleViewImage">点击查看</text>
-    </view>
-    <view class='list'>
-      <text class='left'>营业执照:</text>
-      <text class='examine' data-index='busLicenceAttchId' bindtap="handleViewImage">点击查看</text>
-    </view>
-    <view class='list'>
-      <text class='left'>开户许可证:</text>
-      <text class='examine' data-index='accountAttchId' bindtap="handleViewImage">点击查看</text>
-    </view>
-    <view class='list'>
-      <text class='left'>税务登记证:</text>
-      <text class='examine' data-index='taxAttchId' bindtap="handleViewImage">点击查看</text>
-    </view>
-    <view class='list'>
-      <text class='left'>组织机构代码:</text>
-      <text class='examine' data-index='organizationAttchId' bindtap="handleViewImage">点击查看</text>
-    </view>
-    <view class='list'>
-      <text class='left'>开票资料:</text>
-      <text class='examine' data-index='billingAttchId' bindtap="handleViewImage">点击查看</text>
-    </view>
-    <view class='list'>
-      <text class='left'>企业认证授权书:</text>
-      <text class='examine' data-index='orgAuthAttchId' bindtap="handleViewImage">点击查看</text>
-    </view>
-
+    <block wx:for="{{ newArr }}" wx:key="{{ certifyId }}">
+      <view class='list'>
+        <text class='left'>提现账户备案:</text>
+        <text class='examine' data-index='{{ item.enchashmentAcctRecord }}' bindtap="enchashmentAcctRecord">点击查看</text>
+      </view>
+      <view class='list'>
+        <text class='left'>营业执照:</text>
+        <text class='examine' data-index='{{ item.busLicenceAttchId }}' bindtap="busLicenceAttchId">点击查看</text>
+      </view>
+      <view class='list'>
+        <text class='left'>开户许可证:</text>
+        <text class='examine' data-index='{{ item.accountAttchId }}' bindtap="accountAttchId">点击查看</text>
+      </view>
+      <view class='list'>
+        <text class='left'>税务登记证:</text>
+        <text class='examine' data-index='{{ item.taxAttchId }}' bindtap="taxAttchId">点击查看</text>
+      </view>
+      <view class='list'>
+        <text class='left'>组织机构代码:</text>
+        <text class='examine' data-index='{{ item.organizationAttchId }}' bindtap="organizationAttchId">点击查看</text>
+      </view>
+      <view class='list'>
+        <text class='left'>开票资料:</text>
+        <text class='examine' data-index='{{ item.billingAttchId }}' bindtap="billingAttchId">点击查看</text>
+      </view>
+      <view class='list'>
+        <text class='left'>企业认证授权书:</text>
+        <text class='examine' data-index='{{ item.orgAuthAttchId }}' bindtap="orgAuthAttchId">点击查看</text>
+      </view>
+    </block>
     <!-- footer 区域============================================================== -->
     <view class='footer'>
       <view class='footer_icon'>

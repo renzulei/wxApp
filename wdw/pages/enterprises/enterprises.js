@@ -4,7 +4,7 @@ var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
 var customer_id = app.globalData.customer_id;
 const util = require('../../utils/util.js');
-
+ 
 
 Page({
 
@@ -12,7 +12,8 @@ Page({
    * 页面的初始数据 
    */
   data: {
-    showHide: true
+    showHide: true,
+    viweImage: '',  //图片路径
   },
 
   /**

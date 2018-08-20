@@ -6,19 +6,19 @@
       <view class='content_box' wx:for="{{ dataArr }}" wx:key="{{ userName }}">
         <view class='list'>
           <text class='left'>用户名:</text>
-          <input class='input' placeholder="{{ item.userName }}"></input>
+          <text class='style'>{{ item.userName }}</text>
         </view>
         <view class='list'>
           <text class='left'>姓名:</text>
-          <input class='input' placeholder='{{ item.fullName }}'></input>
+          <text class='style'>{{ item.fullName }}</text>
         </view>
         <view class='list'>
           <text class='left'>手机号:</text>
-          <input class='input' placeholder='{{ item.phone }}'></input>
+          <text class='style'>{{ item.phone }}</text>
         </view>
         <view class='list'>
           <text class='left'>邮箱账号:</text>
-          <input class='input' placeholder='{{ item.email }}'></input>
+          <text class='style'>{{ item.email }}</text>
         </view>
       </view>
 

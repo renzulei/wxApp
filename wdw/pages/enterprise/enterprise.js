@@ -13,13 +13,7 @@ Page({
   data: {
     list: [],
     showHide: true,
-    busLicenceAttchId: '', //营业执照
-    organizationAttchId: '', //组织机构代码
-    taxAttchId: '', //税务登记证
-    accountAttchId: '', //开户许可证
-    billingAttchId: '', //开票资料
-    orgAuthAttchId: '', //企业认证授权书
-    enchashmentAcctRecord: '', //提现账户备案
+    viewImage: '', //图片路径
   },
 
   /**
@@ -34,7 +28,7 @@ Page({
   },
 
   // 企业认证
-  getData: function(e) {
+  getData: function() {
     var that = this;
     wx.request({
       url: `${authService}/certify/getCompanyCertify?tradeCompanyId=${wx.getStorageSync('userDefaultTradeCompany') ? wx.getStorageSync('userDefaultTradeCompany').tradeCompanyId||'':''}`,
@@ -66,27 +60,85 @@ Page({
   },
 
   // 点击查看-弹出蒙层
-  handleViewImage: function (e) {
+  //账号备案
+  enchashmentAcctRecord: function(e) {
     var that = this;
-    var id = e.currentTarget.dataset.index;
-    // this.data.newArr.map((item, i)=>{
-    //   id = item.enchashmentAcctRecord;
-    // })
-    console.log(id);
-    // wx.request({
-    //   url: `${authService}/ossObject/download?objectId=${id}`,
-    //   method: 'GET',
-    //   header: {
-    //     'content-type': 'application/json',
-    //     'cookie': this.data.authorizedCookie
-    //   },
-    //   success: function (res) {
-    //     // console.log(res.data);
-    //   }
-    // })
-
+    console.log(e);
+    var enchashmentAcctRecord = e.currentTarget.dataset.index;
+    console.log(enchashmentAcctRecord);
     that.setData({
-      viewImage: `${authService}/ossObject/download?objectId=${id}`,
+      viewImage: `${authService}/ossObject/download?objectId=${enchashmentAcctRecord}`, //图片路径
+      showHide: (!that.data.showHide)
+    })
+    // this.handleViewImageImg(enchashmentAcctRecord);
+  },
+  //营业执照
+  busLicenceAttchId: function(e) {
+    var that = this;
+    console.log(e);
+    var busLicenceAttchId = e.currentTarget.dataset.index;
+    console.log(busLicenceAttchId);
+    that.setData({
+      viewImage: `${authService}/ossObject/download?objectId=${busLicenceAttchId}`, //图片路径
+      showHide: (!that.data.showHide)
+    })
+  },
+  //开户许可证
+  accountAttchId: function(e) {
+    var that = this;
+    console.log(e);
+    var accountAttchId = e.currentTarget.dataset.index;
+    console.log(accountAttchId);
+    that.setData({
+      viewImage: `${authService}/ossObject/download?objectId=${accountAttchId}`, //图片路径
+      showHide: (!that.data.showHide)
+    })
+  },
+
+  //税务登记证
+  taxAttchId: function(e) {
+    var that = this;
+    console.log(e);
+    var taxAttchId = e.currentTarget.dataset.index;
+    console.log(taxAttchId);
+    that.setData({
+      viewImage: `${authService}/ossObject/download?objectId=${taxAttchId}`, //图片路径
+      showHide: (!that.data.showHide)
+    })
+  },
+
+  //组织机构代码
+  organizationAttchId: function(e) {
+    var that = this;
+    console.log(e);
+    var organizationAttchId = e.currentTarget.dataset.index;
+    console.log(organizationAttchId);
+    that.setData({
+      viewImage: `${authService}/ossObject/download?objectId=${organizationAttchId}`, //图片路径
+      showHide: (!that.data.showHide)
+    })
+  },
+
+  //开票资料
+  billingAttchId: function(e) {
+    var that = this;
+    console.log(e);
+    var billingAttchId = e.currentTarget.dataset.index;
+    console.log(billingAttchId);
+    that.setData({
+      viewImage: `${authService}/ossObject/download?objectId=${billingAttchId}`, //图片路径
+      showHide: (!that.data.showHide)
+    })
+  },
+
+  //企业认证授权书
+  orgAuthAttchId: function(e) {
+    var that = this;
+    console.log(e);
+    var orgAuthAttchId = e.currentTarget.dataset.index;
+    console.log(orgAuthAttchId);
+    that.setData({
+      viewImage: `${authService}/ossObject/download?objectId=${orgAuthAttchId}`, //图片路径
       showHide: (!that.data.showHide)
     })
   },

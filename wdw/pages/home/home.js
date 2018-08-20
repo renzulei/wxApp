@@ -65,7 +65,7 @@ Page({
   // 跳转到企业地址认证页面
   enterprisesTap: function(event) {
     wx.navigateTo({
-      url: '/pages/enterprises/enterprises',
+      url: '/pages/site/site',
     })
   },
 

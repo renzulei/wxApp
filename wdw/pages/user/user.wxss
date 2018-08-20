@@ -45,10 +45,9 @@
   right: 100rpx;
 }
 
-.input {
-  display: inline-block;
-  margin-top: 24rpx;
-   width: 550rpx; 
+.style {
+  color: #777777;
+  line-height: 98rpx; 
   font-size: 24rpx;
 }
 
