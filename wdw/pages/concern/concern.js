@@ -55,7 +55,7 @@ Page({
           return
         }
 
-        // console.log(res.data);
+        console.log(res.data);
         var data = res.data.content;
         data = data.map(function(item, i) {
           item = JSON.parse(item);

@@ -25,10 +25,10 @@ Page({
     let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
     console.log(authorizedCookie)
     var userDefaultTradeCompany = util.getStorageSync('userDefaultTradeCompany');
-    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName : "";
-    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address : "";
-    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId : "";
-    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId : "";
+    var partyName = userDefaultTradeCompany ? userDefaultTradeCompany.partyName || "": "";
+    var address = userDefaultTradeCompany ? userDefaultTradeCompany.address || "": "";
+    var tradePartyId = userDefaultTradeCompany ? userDefaultTradeCompany.tradePartyId || "": "";
+    var contactId = userDefaultTradeCompany ? userDefaultTradeCompany.contactId || "": "";
     this.setData({
       partyName: partyName,
       address: address,
