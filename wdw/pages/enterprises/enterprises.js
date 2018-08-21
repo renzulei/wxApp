@@ -12,74 +12,87 @@ Page({
    * 页面的初始数据 
    */
   data: {
+    info:[],
     showHide: true,
     viweImage: '',  //图片路径
+    page: 1, //初始页面
+    pageSize: 1, //页面条数
+    // tradePartyId:'', //id值
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var info = JSON.parse(options.data);
+    this.setData({
+      info: info
+    })
     let authorizedCookie = encodeURI("__wgt=" + util.getStorageSync('__wgt') + ";" + "__wgl=" + util.getStorageSync('__wgl') + ";" + "menuKey=" + util.getStorageSync('menuKey') + ";" + "userName=" + util.getStorageSync('userName') + ";" + 'userDefaultTradeCompany=' + JSON.stringify(util.getStorageSync('userDefaultTradeCompany')));
     this.setData({
       authorizedCookie: authorizedCookie
     })
-    this.getData();
+    // this.getData({page:1,pageSize:2,info:{}});
   },
 
-  // 企业地址认证
-  getData: function(e) {
-    var that = this;
-    wx.request({
-      url: `${authService}/certify/queryCompanyAddrCertify?page=1&pageSize=2&tradePartyId=215`,
-      data: {},
-      method: 'POST',
-      header: {
-        'content-type': 'application/json',
-        'cookie': this.data.authorizedCookie
-      },
-      success: function(res) {
-        try {
-          util.catchHttpError(res);
-        } catch (e) {
-          console.error(e)
-          return
-        }
-        //  获取动态数据
-        // var data = that.data.list;
-        // data = res.data;
-        // var arr = JSON.parse(data.content[1]);
-        // var newArr = [];
-        // newArr.push(arr);
-        // that.setData({
-        //   newArr: newArr
-        // })
-        // console.log(newArr);
+  // 企业地址
+  // getData: function ({page, pageSize, info}) {
+  //   var that = this;
+  //   let tradePartyId = '';
+  //   if (wx.getStorageSync('userDefaultTradeCompany') ? wx.getStorageSync('userDefaultTradeCompany').tradePartyId || "" : "" != null) {
+  //     tradePartyId = wx.getStorageSync('userDefaultTradeCompany') ? wx.getStorageSync('userDefaultTradeCompany').tradePartyId || "" : "";
+  //   }
+  //   wx.request({
+  //     url: `${authService}/certify/queryCompanyAddrCertify?page=${page}&pageSize=${pageSize}&tradePartyId=${tradePartyId}`,
+  //     data: JSON.stringify(info),
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/json',
+  //       'cookie': this.data.authorizedCookie
+  //     },
+  //     success: function(res) {
+  //       try {
+  //         util.catchHttpError(res);
+  //       } catch (e) {
+  //         console.error(e)
+  //         return
+  //       }
 
-        //  获取动态数据
-        console.log(res.data);
-        var data = [];
-        data = res.data.content;
-        // console.log(data);
-        var arr = [];
-        data.map(function(item, i) {
-          arr.push(JSON.parse(item))
-        })
-        console.log(arr);
-        var newArr = [];
-        newArr = arr.slice(0,1)
-        console.log(newArr);
-        that.setData({
-          data: newArr
-        })
-      },
-    })
-  },
+  //       //  获取动态数据
+  //       console.log(res.data);
+  //       var data = res.data.content;
+  //       var info = [];
+  //       data.map(function(item, i) {
+  //         info.push(JSON.parse(item))
+  //       })
+  //       // console.log(arr);
+  //       // var info = [];
+  //       // info = arr.slice(0,1);
+
+  //       //获取到图片的地址
+  //       // var certAttachUrl;
+  //       // info.map((item, i) => {
+  //       //   certAttachUrl = item.companyAddrContacts.certAttachUrl;
+  //       // })
+  //       // console.log(certAttachUrl);
+
+  //       that.setData({
+  //         info: info,
+  //         // certAttachUrl:certAttachUrl
+  //       })
+  //       console.log(info);
+  //       // console.log(certAttachUrl);
+  //     },
+  //   })
+  // },
 
   // 点击查看功能
   examineTap: function() {
+    var certAttachUrl = this.data.certAttachUrl;
+    console.log(certAttachUrl);
     var that = this;
     that.setData({
+      viewImage: certAttachUrl,
       showHide: (!that.data.showHide)
     })
   },

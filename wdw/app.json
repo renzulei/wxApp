@@ -1,13 +1,13 @@
 {
   "pages": [
-    "pages/concern/concern",
+    "pages/site/site",
     "pages/enterprises/enterprises",
+    "pages/login/login",
+    "pages/concern/concern",
+    "pages/enterprise/enterprise",
+    "pages/user/user",
     "pages/proList/proList",
     "pages/home/home",
-    "pages/site/site",
-    "pages/user/user",
-    "pages/enterprise/enterprise",
-    "pages/login/login",
     "pages/changeAddr/changeAddr",
     "pages/createOrder/createOrder",
     "pages/manage/manage",
