@@ -2,7 +2,7 @@
   <view class='content'> 
 
     <!-- list 区域========================================================== -->
-    <view class='content_box' wx:for="{{ data }}" wx:key="{{ tradePartyId }}">
+    <view class='content_box' wx:for="{{ info }}" wx:key="{{ tradePartyId }}">
       <view class='list'>
         <text class='left'>所在地区:</text>
         <text class='style'>{{ item.province }}{{ item.city }}</text> 
@@ -12,20 +12,20 @@
         <text class='style'>{{ item.shippingAddress }}</text>
       </view>
       <view class='list'> 
-        <text class='left'>收货人姓名:</text>
-        <text class='style'>假数据</text>
+        <text class='left'>收货人姓名:</text> 
+        <text class='style'>{{item.companyAddrContacts[0].contactName}}</text>
       </view> 
       <view class='list'>
         <text class='left'>手机号码:</text>
-        <text class='style'>假数据</text>
+        <text class='style'>{{item.companyAddrContacts[0].phone}}</text>
       </view>
       <view class='list'>
         <text class='left'>邮箱账号:</text>
-        <text class='style'>假数据</text>
+        <text class='style'>{{item.companyAddrContacts[0].email}}</text>
       </view>
       <view class='list'>
         <text class='left'>身份证号码:</text>
-        <text class='style'>假数据</text>
+        <text class='style'>{{item.companyAddrContacts[0].identityCard}}</text>
       </view>
       <view class='list'>
         <text class='left'>装运要求:</text>
