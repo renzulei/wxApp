@@ -1,6 +1,6 @@
 <view class="content">
 
-  <view class='div' wx:for="{{ info }}" wx:key="{{ tradePartyId }}">
+  <view class='div' wx:for="{{ info }}" wx:key="{{ tradePartyId }}" wx:for-index="index">
     <view class='text'>
       <text class='bold '>所在地区：</text>
       <text>{{ item.province }}{{ item.city }}</text>
@@ -19,7 +19,7 @@
     </view>
     <view class='btn'>
       <view class='examine'>{{ item.statusName }}</view>
-      <view class='details' data-index='id' bindtap='detailsTap'>查看详情</view>
+      <view class='details' data-index='{{ item.addressId }}' bindtap='detailsTap'>查看详情</view>
     </view>
   </view>
   

@@ -8,7 +8,7 @@ Page({
 
   /**  
    * 页面的初始数据 
-   */ 
+   */
   data: {
     data: [], //数据
     box: true,
@@ -21,6 +21,8 @@ Page({
     partyName: '', //公司名称
     area: "", //区域数组
     categoryID: "", //商品大类
+    load: false,
+    loading: false, //加载动画的显示
   },
 
   /**
@@ -31,12 +33,20 @@ Page({
     this.setData({
       authorizedCookie: authorizedCookie
     })
-    this.getData({ page:1, pageSize:10, data:{} });
+    this.getData({
+      page: 1,
+      pageSize: 10,
+      data: {}
+    });
     this.categoryList();
   },
 
   // 获取动态数据 
-  getData: function({page, pageSize, data}) {
+  getData: function({
+    page,
+    pageSize,
+    data
+  }) {
     var that = this;
     wx.request({
       url: `${authService}/resourceBill/queryMyFollowResBill?page=${ page }&pageSize=${ pageSize }`,
@@ -61,11 +71,9 @@ Page({
           item.checked = false;
           return item;
         })
-        // console.log(data);
         that.setData({
           data: data,
         })
-        // console.log(data);
       }
     })
   },
@@ -232,7 +240,7 @@ Page({
   },
 
   //清除
-  clearUp: function(e){
+  clearUp: function(e) {
     this.setData({
       categoryIndex: '',
       categoryID: "",
@@ -240,6 +248,8 @@ Page({
       area: "",
     })
   },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -278,8 +288,44 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function(e) {
+    var page = this.data.page;
+    var pageSize = this.data.pageSize;
+    var load = this.data.load;
+    var loading = this.data.loading;
+    var info = this.data.data;
 
+    var that = this;
+    // 显示加载图标
+    wx.showLoading({
+      title: '玩命加载中',
+    })
+    page = page + 1;
+    wx.request({
+      url: `${authService}/resourceBill/queryMyFollowResBill?page=${ page }&pageSize=${ pageSize }`,
+      method: "POST",
+      // 请求头部
+      header: {
+        'content-type': 'application/text',
+        'cookie': this.data.authorizedCookie
+      },
+      success: function(res) {
+        console.log(res.data);
+        // 回调函数
+        var info = res.data;
+        var arr = [];
+        for (var i = 0; i < info.length; i++) {
+          arr.push(info[i]);
+        }
+        console.log(arr);
+        // 设置数据
+        that.setData({
+          info: arr
+        })
+        // 隐藏加载框
+        wx.hideLoading();
+      }
+    })
   },
 
   /**

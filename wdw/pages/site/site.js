@@ -68,14 +68,8 @@ Page({
   //跳转到查看详情页面
   detailsTap: function(e) {
     var id = e.currentTarget.dataset.index;
-  var odd = this.data.info.map((item, i)=>{
-      console.log(item)
-       odd = item.addressId
-       return odd;
-    })
-    console.log(odd)
     wx.navigateTo({
-      url: '/pages/enterprises/enterprises?data=' + JSON.stringify(this.data.info),
+      url: '/pages/enterprises/enterprises?data=' + JSON.stringify(this.data.info) + '&id='+ id,
     })
   },
   /**
