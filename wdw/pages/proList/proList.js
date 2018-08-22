@@ -551,7 +551,11 @@ Page({
     this.setData({
       priceSortName: priceSortName,
       saleCountSortName: saleCountSortName,
-      data: arr
+      data: arr,
+      shop:[],
+      current:1,
+      pageSize:10,
+      is_loading_done: false
     })
     this.fetch({
       pageSize: 10,
@@ -570,7 +574,11 @@ Page({
     this.setData({
       priceSortName: priceSortName,
       saleCountSortName: saleCountSortName,
-      data: arr
+      data: arr,
+      shop: [],
+      current: 1,
+      pageSize: 10,
+      is_loading_done: false
     })
     this.fetch({
       pageSize: 10,

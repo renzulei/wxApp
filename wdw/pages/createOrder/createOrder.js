@@ -555,12 +555,10 @@ Page({
               duration: 1000
             })
             jump = false
-          } else {
-            this.checkUserFreeze()
           }
         })
       })
-      if(jump&&this.data.jump){
+      if(jump){
         var contactId,contact;
         selectedRows.map(function(item){
           item.map((it)=>{
@@ -579,14 +577,11 @@ Page({
               }
             })
           })
-        })
-        // console.log(contact)        
-        // console.log(selectedRows)        
+        })      
         var selectedRows = JSON.stringify(selectedRows);
         contact = JSON.stringify(contact);
-        wx.navigateTo({
-          url: `/pages/supplement/supplement?selectedRows=${selectedRows}&contactId=${contactId}&contact=${contact}`,
-        })
+        this.checkUserFreeze(selectedRows, contactId, contact)
+        
       }
     } else if(selectedRows.length == 0) {
       wx.showToast({
@@ -603,7 +598,7 @@ Page({
     }
      
   },
-  checkUserFreeze: function() {
+  checkUserFreeze: function (selectedRows, contactId, contact) {
     wx.request({
       url: `${authService}/saleOrder/checkUserFreeze?tradePartyId=${this.data.tradePartyId}`,
       method: 'POST',
@@ -626,8 +621,9 @@ Page({
             icon: 'none',
             duration: 1000
           })
-          this.setData({
-            jump:false
+        }else{
+          wx.navigateTo({
+            url: `/pages/supplement/supplement?selectedRows=${selectedRows}&contactId=${contactId}&contact=${contact}`,
           })
         }
       }

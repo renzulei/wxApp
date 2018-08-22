@@ -196,7 +196,7 @@ margin-bottom: 30rpx;
 /* header样式 */
 
 .header {
-  height: 140rpx;
+  /* height: 140rpx; */
   background-color: #9fb9ef;
   margin-bottom: 20rpx;
   border-radius: 8rpx;
@@ -204,6 +204,8 @@ margin-bottom: 30rpx;
   font-size: 24rpx;
   position: relative;
   padding-top: 24rpx;
+  padding-bottom: 24rpx;
+  padding-left: 100rpx;
 }
 
 .header_top, .header_bom {
@@ -215,6 +217,7 @@ margin-bottom: 30rpx;
 }
 .header_top{
   margin-top: 0;
+  height: auto
 }
 .left_color {
   color: #fff3d0;
@@ -239,7 +242,9 @@ margin-bottom: 30rpx;
   height: 36rpx;
 }
 .h-left{
-  float: left;
+  /* float: left; */
+  position: absolute;
+  left: 0;
   text-align: center;
   width: 100rpx;
 }
