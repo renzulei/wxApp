@@ -21,8 +21,7 @@ Page({
     partyName: '', //公司名称
     area: "", //区域数组
     categoryID: "", //商品大类
-    load: false,
-    loading: false, //加载动画的显示
+    loading: true, //加载动画的显示
   },
 
   /**
@@ -289,41 +288,46 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function(e) {
-    var page = this.data.page;
-    var pageSize = this.data.pageSize;
-    var load = this.data.load;
-    var loading = this.data.loading;
-    var info = this.data.data;
-
+    var page = this.data.page; //页数
+    var pageSize = this.data.pageSize; //总条数
+    var loading = this.data.loading;  //loading提示图标
+    var info = this.data.data; //起始数据
     var that = this;
-    // 显示加载图标
-    wx.showLoading({
-      title: '玩命加载中',
-    })
+
+    //loging 显示图标
+      wx.showLoading({
+        title: '正在加载',
+        icon: 'loading',
+      })
     page = page + 1;
     wx.request({
-      url: `${authService}/resourceBill/queryMyFollowResBill?page=${ page }&pageSize=${ pageSize }`,
-      method: "POST",
+      url: `${authService}/resourceBill/queryMyFollowResBill?page=${page}&pageSize=${pageSize}`,
+      data:{},
+      method: 'POST',
       // 请求头部
       header: {
-        'content-type': 'application/text',
+        'content-type': 'application/json',
         'cookie': this.data.authorizedCookie
       },
-      success: function(res) {
-        console.log(res.data);
-        // 回调函数
-        var info = res.data;
+      success: (res)=> {
+        var json = res.data.content;
+        var total = res.data.total;
         var arr = [];
-        for (var i = 0; i < info.length; i++) {
-          arr.push(info[i]);
-        }
-        console.log(arr);
-        // 设置数据
-        that.setData({
-          info: arr
+        json.map((item,i) =>{
+          arr.push(JSON.parse(item));
         })
-        // 隐藏加载框
-        wx.hideLoading();
+      
+        this.setData({
+          total: total,
+          page: page,
+          data: info.concat(arr),
+        })
+        console.log(total)
+
+        //隐藏loading图标
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 1000)
       }
     })
   },
@@ -335,31 +339,3 @@ Page({
 
   }
 })
-
-// var that = this;
-// var current = this.data.current;
-// var pageSize = this.data.pageSize;
-// wx.request({
-//   url: `${authService}/resourceBill/queryMyFollowResBill?page=${current}&pageSize=${pageSize}`,
-//   data: {},
-//   method: 'POST',
-//   header: {
-//     'content-type': 'application/json',
-//     'cookie': this.data.authorizedCookie
-//   },
-//   success: function (res) {
-//     try {
-//       util.catchHttpError(res);
-//     } catch (e) {
-//       console.error(e)
-//       return
-//     }
-//     var info = res.data.content;
-//     console.log(info);
-//     var newData = [];
-//     info.map((item, i) => {
-//       newData.push(JSON.parse(item))
-//     })
-//     console.log(newData);
-//   }
-// })
