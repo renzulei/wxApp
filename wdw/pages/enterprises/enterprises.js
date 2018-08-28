@@ -1,4 +1,4 @@
-// pages/enterprises/enterprises.js
+ // pages/enterprises/enterprises.js
 var app = getApp();
 var cmService = app.globalData.cmService;
 var authService = app.globalData.authService;
@@ -75,11 +75,11 @@ Page({
           info.push(JSON.parse(item))
         })
 
-        //获取到图片的地址
-        // var certAttachUrl;
-        // info.map((item, i) => {
-        //   certAttachUrl = item.companyAddrContacts.certAttachUrl;
-        // })
+        // 获取到图片的地址
+        var certAttachUrl;
+        info.map((item, i) => {
+          certAttachUrl = item.companyAddrContacts.certAttachUrl;
+        })
 
         that.setData({
           info: info,

@@ -1,0 +1,25 @@
+<view class="content">
+
+  <view class='div' wx:for="{{ info }}" wx:key="{{ tradePartyId }}" wx:for-index="index">
+    <view class='text'>
+      <text class='bold '>所在地区：</text>
+      <text>{{ item.province }}{{ item.city }}</text>
+      <text class='bold right'>联系方式：</text>
+      <text>{{ item.companyAddrContacts[0].phone }}</text>
+    </view>
+    <view class='text'>
+      <text class='bold '>收货人姓名：</text>
+      <text>{{ item.companyAddrContacts[0].contactName }}</text>
+      <text class='bold right'>公司名称：</text>
+      <text>{{ item.partyName }}</text> 
+    </view>
+    <view class='text'>
+      <text class='bold'>详细地址：</text>
+      <text>{{ item.shippingAddress }}</text>
+    </view>
+    <view class='btn'>
+      <view class="examine {{ item.statusName=='已通过'?'green':'red'&& item.statusName=='待审批'?'blue':'red' }}">{{ item.statusName }}</view>
+      <view class='details' data-index='{{ item.addressId }}' bindtap='detailsTap'>查看详情</view>
+    </view>
+  </view>
+</view>
