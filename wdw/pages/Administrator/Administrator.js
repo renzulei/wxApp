@@ -41,8 +41,12 @@ Page({
     this.setData({
       tradePartyId: tradePartyId,
       contactId: contactId
-    },this.getShipmentList)
-    
+    })
+    this.fetchShipmentList({
+      page: 1,
+      pageSize: 10,
+      shipmentStatusCodes: this.data.shipmentStatusCodes
+    }) //进入页面请求数据
     wx.getSystemInfo({
       success: (res) => {
         this.setData({
