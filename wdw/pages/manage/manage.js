@@ -173,7 +173,6 @@ Page({
         if (json.code == "S") {
           var dataSource = this.data.dataSource || [];          
           if (json.saleOrderList.length < 10) {
-            console.log(json.saleOrderList)
             this.setData({
               is_loading_done: true
             })
