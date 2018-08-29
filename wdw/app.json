@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/concern/concern",
+    "pages/index/index",
+    "pages/home/home",
     "pages/manage/manage",
     "pages/site/site",
     "pages/enterprises/enterprises",
@@ -15,7 +16,6 @@
     "pages/receiveDetail/receiveDetail",
     "pages/particulars/particulars",
     "pages/specification/specification",
-    "pages/index/index",
     "pages/affirm/affirm",
     "pages/supplement/supplement",
     "pages/succeed/succeed",

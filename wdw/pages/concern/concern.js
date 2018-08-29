@@ -23,7 +23,7 @@ Page({
     categoryID: "", //商品大类
     loading: false, //加载动画的显示
     is_loading: false,
-    total: '', //总条数
+    total: '', //数据总条数
   },
 
   /**
@@ -299,53 +299,49 @@ Page({
     var total = this.data.total;
     var that = this;
 
-    wx.showLoading({
-      title: '正在加载中',
-    })
-
-    this.getData({
-      page: page + 1,
-      pageSize: 10,
-      data: {}
-    });
-
-    that.setData({
-      page: page + 1,
-    })
-
-    // page = page + 1,
-    //   wx.request({
-    //     url: `${authService}/resourceBill/queryMyFollowResBill?page=${page}&pageSize=${pageSize}`,
-    //     data: {},
-    //     method: 'POST',
-    //     // 请求头部
-    //     header: {
-    //       'content-type': 'application/json',
-    //       'cookie': this.data.authorizedCookie
-    //     },
-    //     success: (res) => {
-    //       var json = res.data.content;
-    //       var arr = [];
-    //       json.map((item, i) => {
-    //         arr.push(JSON.parse(item));
-    //       })
-    //       this.setData({
-    //         page: page,
-    //         data: info.concat(arr),
-    //       })
-    //       console.log(total);
-    //     }
-    //   })
-
-    if (is_loading = true) {
-      setTimeout(function() {
-        wx.hideLoading()
-      }, 1000)
-    } else {
-      return;
+    if (is_loading == false) {
+      wx.showLoading({
+        title: '正在加载中',
+      })
     }
 
+    //  var add =  this.getData({
+    //     page: page + 1,
+    //     pageSize: 10,
+    //     data: {}
+    //   });
 
+    page = page + 1,
+      wx.request({
+        url: `${authService}/resourceBill/queryMyFollowResBill?page=${page}&pageSize=${pageSize}`,
+        data: {},
+        method: 'POST',
+        // 请求头部
+        header: {
+          'content-type': 'application/json',
+          'cookie': this.data.authorizedCookie
+        },
+        success: (res) => {
+          var json = res.data.content;
+          if (json.length < 10) {
+            this.setData({
+              is_loading: true
+            })
+          }
+          var arr = [];
+          json.map((item, i) => {
+            arr.push(JSON.parse(item));
+          })
+          this.setData({
+            page: page,
+            data: info.concat(arr),
+          })
+        }
+      })
+
+    setTimeout(function() {
+      wx.hideLoading()
+    }, 1000)
   },
 
   /**
